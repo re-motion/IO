@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Copyright (C) 2005 - 2008 rubicon informationstechnologie gmbh
+ !
+ ! This program is free software: you can redistribute it and/or modify it under 
+ ! the terms of the re:motion license agreement in license.txt. If you did not 
+ ! receive it, please visit http://www.re-motion.org/licensing.
+ ! 
+ ! Unless otherwise provided, this software is distributed on an "AS IS" basis, 
+ ! WITHOUT WARRANTY OF ANY KIND, either express or implied. 
+-->
+
+<!--EXTERNAL_PROPERTIES: build.outputdir;build.test.outputdir;project.output;project.extension;project.doc;build.debug;build.csc.define-->
+<project xmlns="nant-schema" name="Remotion.Dms.UnitTests">  
+
+  <target name="build" description="perform a build">
+
+    <csc  target="library" 
+          output="${build.test.outputdir}/${project.output}.${project.extension}" 
+          debug="${build.debug}"
+          define="${build.csc.define}"
+          ><!--keyfile="${solution.key-file}"-->
+      <nowarn>
+        <!--  unused member warning  -->
+        <warning number="0067" />
+      </nowarn>
+      <sources failonempty="true">
+        <include name="**/*.cs" />
+        <exclude name="bin/**" />
+        <exclude name="Properties/AssemblyInfoTemplate.cs" />
+      </sources>
+      <references failonempty="true">
+        <include name="${build.test.outputdir}/Rhino.Mocks.dll" />
+        <include name="${build.test.outputdir}/nunit.framework.dll" />
+        <include name="${build.test.outputdir}/Remotion.dll" />
+        <include name="${build.test.outputdir}/Remotion.Development.dll" />
+        <include name="${build.test.outputdir}/DmsTray.exe" />
+        <include name="${build.test.outputdir}/Remotion.Dms.Tray.dll" />
+        <include name="${build.test.outputdir}/Remotion.Interfaces.dll" />
+        <include asis="true" name="System.dll"/>
+        <include asis="true" name="System.Core.dll"/>
+        <include asis="true" name="System.Windows.Forms.dll"/>
+      </references>
+    </csc>
+
+    <copy todir="${build.test.outputdir}" overwrite="true">
+      <fileset>
+        <include name="Reflection/TestAssemblies/**/*.cs" />
+        <include name="Reflection/TestAssemblies/**/*.snk" />
+      </fileset>
+    </copy>
+
+    <copy todir="${build.test.outputdir}" overwrite="true">
+      <fileset>
+        <include name="Mixins/MixerTool/SampleAssembly/*.cs" />
+      </fileset>
+    </copy>
+  </target>
+
+</project>
