@@ -49,6 +49,7 @@
     <Compile Include="Clients.Windows.Tray\Forms\HiddenMainFormTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Clients.Windows.Tray\Controllers\HiddenMainFormControllerTest.cs" />
+    <Compile Include="Tray\ControlThreadInvokerTest.cs" />
     <None Include="Properties\AssemblyInfoTemplate.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -67,9 +68,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Dms.UnitTests.build" />
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Tray\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
