@@ -29,7 +29,7 @@
         <exclude name="Properties/AssemblyInfoTemplate.cs" />
       </sources>
       <references failonempty="true">
-        <include name="${build.test.outputdir}/Rhino.Mocks.dll" />
+        <include name="${build.test.outputdir}/Rhino.Mocks35.dll" />
         <include name="${build.test.outputdir}/nunit.framework.dll" />
         <include name="${build.test.outputdir}/Remotion.dll" />
         <include name="${build.test.outputdir}/Remotion.Development.dll" />
