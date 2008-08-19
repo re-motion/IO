@@ -58,8 +58,8 @@
     <Compile Include="Clients.Windows.Tray\ProgramTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Clients.Windows.Tray\Controllers\HiddenMainFormControllerTest.cs" />
-    <Compile Include="Tray\MiniWebServerTest.cs" />
-    <Compile Include="Tray\UIThreadInvokerTest.cs" />
+    <Compile Include="Tray\Net\MiniWebServerTest.cs" />
+    <Compile Include="Tray\UI\UIThreadInvokerTest.cs" />
     <Compile Include="Tray\Utilities\ArgumentUtilityTest.cs" />
     <None Include="Properties\AssemblyInfoTemplate.cs" />
   </ItemGroup>
