@@ -54,6 +54,7 @@
     <Compile Include="Clients.Windows.Tray\Controllers\DownloadedFilesFormControllerTest.cs" />
     <Compile Include="Clients.Windows.Tray\FileHandling\DownloadFileCollectionTest.cs" />
     <Compile Include="Clients.Windows.Tray\Forms\DownloadedFilesFormTest.cs" />
+    <Compile Include="Clients.Windows.Tray\Forms\DownloadFormBrowserInteractionTest.cs" />
     <Compile Include="Clients.Windows.Tray\Forms\HiddenMainFormMock.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -84,6 +85,10 @@
     <ProjectReference Include="..\Clients.Windows.Tray\Dms.Clients.Windows.Tray.csproj">
       <Project>{B5CBF254-BC60-4018-A772-DAD5DE4C96EE}</Project>
       <Name>Dms.Clients.Windows.Tray</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Clients.Windows.WebBrowserControl\Dms.Clients.Windows.WebBrowserControl.csproj">
+      <Project>{70725EB2-AEBD-4167-9D6B-608EFEAAA032}</Project>
+      <Name>Dms.Clients.Windows.WebBrowserControl</Name>
     </ProjectReference>
     <ProjectReference Include="..\Tray\Dms.Tray.csproj">
       <Project>{F3AB6F46-3776-4562-8BB2-FFFDE7E62BE0}</Project>

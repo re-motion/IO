@@ -34,6 +34,7 @@
         <include name="${build.test.outputdir}/Remotion.dll" />
         <include name="${build.test.outputdir}/Remotion.Development.dll" />
         <include name="${build.test.outputdir}/DmsTray.exe" />
+        <include name="${build.test.outputdir}/Remotion.Dms.Clients.Windows.WebBrowserControl.dll" />
         <include name="${build.test.outputdir}/Remotion.Dms.Tray.dll" />
         <include name="${build.test.outputdir}/Remotion.Interfaces.dll" />
         <include name="${build.test.outputdir}/log4net.dll" />
