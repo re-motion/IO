@@ -63,8 +63,9 @@
     <Compile Include="MiniWebServerTestHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Clients.Windows.Tray\Controllers\HiddenMainFormControllerTest.cs" />
+    <Compile Include="Tray\Download\BrowserBasedDownloadHandlerTest.cs" />
     <Compile Include="Tray\Net\DocumentRequestHandlerTest.cs" />
-    <Compile Include="Tray\Net\DownloadInfoTest.cs" />
+    <Compile Include="Tray\Download\DownloadInfoTest.cs" />
     <Compile Include="Tray\Net\MiniWebServerTest.cs" />
     <Compile Include="Tray\UI\UIThreadInvokerTest.cs" />
     <Compile Include="Tray\Utilities\ArgumentUtilityTest.cs" />
