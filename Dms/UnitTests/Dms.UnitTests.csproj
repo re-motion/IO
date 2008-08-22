@@ -73,6 +73,7 @@
     <Compile Include="Tray\UI\UIThreadInvokerTest.cs" />
     <Compile Include="Tray\Utilities\ArgumentUtilityTest.cs" />
     <Compile Include="Tray\Utilities\UriUtilityTest.cs" />
+    <Compile Include="WebBrowserControl\ComInterfaces\HResultValuesTest.cs" />
     <None Include="Properties\AssemblyInfoTemplate.cs" />
   </ItemGroup>
   <ItemGroup>
