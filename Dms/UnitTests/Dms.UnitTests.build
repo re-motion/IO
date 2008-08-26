@@ -29,7 +29,7 @@
         <exclude name="Properties/AssemblyInfoTemplate.cs" />
       </sources>
       <references failonempty="true">
-        <include name="${build.test.outputdir}/Rhino.Mocks35.dll" />
+        <include name="${build.test.outputdir}/Rhino.Mocks.dll" />
         <include name="${build.test.outputdir}/nunit.framework.dll" />
         <include name="${build.test.outputdir}/Remotion.dll" />
         <include name="${build.test.outputdir}/Remotion.Development.dll" />
@@ -45,18 +45,7 @@
       </references>
     </csc>
 
-    <copy todir="${build.test.outputdir}" overwrite="true">
-      <fileset>
-        <include name="Reflection/TestAssemblies/**/*.cs" />
-        <include name="Reflection/TestAssemblies/**/*.snk" />
-      </fileset>
-    </copy>
-
-    <copy todir="${build.test.outputdir}" overwrite="true">
-      <fileset>
-        <include name="Mixins/MixerTool/SampleAssembly/*.cs" />
-      </fileset>
-    </copy>
+    <copy file="App.config" tofile="${build.test.outputdir}/${project.output}.${project.extension}.config" overwrite="true"/>
   </target>
 
 </project>

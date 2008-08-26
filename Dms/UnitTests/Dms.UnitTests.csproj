@@ -3,7 +3,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>9.0.21022</ProductVersion>
+    <ProductVersion>9.0.30729</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{1763F21F-531C-4E86-ACFC-9A8BF903F945}</ProjectGuid>
     <OutputType>Library</OutputType>
@@ -39,16 +39,18 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\prereq\Assemblies\nunit.framework.dll</HintPath>
     </Reference>
-    <Reference Include="Rhino.Mocks35, Version=3.5.0.2, Culture=neutral, PublicKeyToken=0b3305902db7183f, processorArchitecture=MSIL">
+    <Reference Include="Rhino.Mocks, Version=3.5.0.2, Culture=neutral, PublicKeyToken=0b3305902db7183f, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\prereq\Assemblies\Rhino.Mocks35.dll</HintPath>
+      <HintPath>..\..\prereq\Assemblies\Rhino.Mocks.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.configuration" />
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
+    <Reference Include="System.Data" />
     <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Clients.Windows.Tray\Controllers\DownloadedFilesFormControllerTest.cs" />
@@ -99,6 +101,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <None Include="App.config" />
     <None Include="Dms.UnitTests.build" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
