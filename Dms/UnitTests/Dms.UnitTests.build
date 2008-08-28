@@ -25,6 +25,7 @@
       </nowarn>
       <sources failonempty="true">
         <include name="**/*.cs" />
+        <include name="Properties/**/*.cs" />
         <exclude name="bin/**" />
         <exclude name="Properties/AssemblyInfoTemplate.cs" />
       </sources>
