@@ -56,6 +56,7 @@
     <Compile Include="Clients.Windows.Tray\Controllers\DownloadedFilesFormControllerTest.cs" />
     <Compile Include="Clients.Windows.Tray\Controllers\DownloadFormControllerTest.cs" />
     <Compile Include="Clients.Windows.Tray\Controllers\DownloadManagerTest.cs" />
+    <Compile Include="Tray\FileHandling\FileEventManagerTest.cs" />
     <Compile Include="Tray\FileHandling\DownloadedFileCollectionTest.cs" />
     <Compile Include="Tray\FileHandling\DownloadedFileStates\BeingCommittedStateTest.cs" />
     <Compile Include="Tray\FileHandling\DownloadedFileStates\BeingEditedStateTest.cs" />
@@ -66,7 +67,7 @@
     <Compile Include="Tray\FileHandling\DownloadedFileStates\DownloadedFileStateTestBase.cs" />
     <Compile Include="Tray\FileHandling\DownloadedFileTest.cs" />
     <Compile Include="Tray\FileHandling\FileDeleterTest.cs" />
-    <Compile Include="Tray\FileHandling\FileManagerTest.cs" />
+    <Compile Include="Tray\FileHandling\FileOperationsManagerTest.cs" />
     <Compile Include="Tray\FileHandling\FileOpenerTest.cs" />
     <Compile Include="Clients.Windows.Tray\Forms\DownloadedFilesFormTest.cs" />
     <Compile Include="Clients.Windows.Tray\Forms\DownloadFormBrowserInteractionTest.cs" />
