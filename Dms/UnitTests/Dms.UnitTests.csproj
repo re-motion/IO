@@ -60,7 +60,8 @@
     <Compile Include="Tray\FileHandling\DownloadedFileStates\BeingCommittedStateTest.cs" />
     <Compile Include="Tray\FileHandling\DownloadedFileStates\BeingEditedStateTest.cs" />
     <Compile Include="Tray\FileHandling\DownloadedFileStates\BeingUploadedStateTest.cs" />
-    <Compile Include="Tray\FileHandling\DownloadedFileStates\FinishedStateTest.cs" />
+    <Compile Include="Tray\FileHandling\DownloadedFileStates\CommittedStateTest.cs" />
+    <Compile Include="Tray\FileHandling\DownloadedFileStates\DiscardedStateTest.cs" />
     <Compile Include="Tray\FileHandling\DownloadedFileStates\DownloadedStateTest.cs" />
     <Compile Include="Tray\FileHandling\DownloadedFileStates\DownloadedFileStateTestBase.cs" />
     <Compile Include="Tray\FileHandling\DownloadedFileTest.cs" />
