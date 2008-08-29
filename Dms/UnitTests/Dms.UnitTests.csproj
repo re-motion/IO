@@ -58,6 +58,7 @@
     <Compile Include="Clients.Windows.Tray\Controllers\DownloadManagerTest.cs" />
     <Compile Include="Tray\FileHandling\DownloadedFileCollectionTest.cs" />
     <Compile Include="Tray\FileHandling\DownloadedFileStates\BeingEditedStateTest.cs" />
+    <Compile Include="Tray\FileHandling\DownloadedFileStates\FinishedStateTest.cs" />
     <Compile Include="Tray\FileHandling\DownloadedFileStates\DownloadedStateTest.cs" />
     <Compile Include="Tray\FileHandling\DownloadedFileStates\StateTestBase.cs" />
     <Compile Include="Tray\FileHandling\DownloadedFileTest.cs" />
