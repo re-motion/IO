@@ -82,6 +82,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Clients.Windows.Tray\Controllers\HiddenMainFormControllerTest.cs" />
     <Compile Include="Tray\Download\BrowserBasedDownloadHandlerTest.cs" />
+    <Compile Include="Tray\FileHandling\PersistenceManagerTest.cs" />
     <Compile Include="Tray\Net\DocumentRequestHandlerTest.cs" />
     <Compile Include="Tray\Download\DownloadInfoTest.cs" />
     <Compile Include="Tray\Net\ImageRequestHandlerTest.cs" />
