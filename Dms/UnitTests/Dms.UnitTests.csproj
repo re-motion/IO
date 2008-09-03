@@ -84,13 +84,14 @@
     <Compile Include="Tray\Download\BrowserBasedDownloadHandlerTest.cs" />
     <Compile Include="Tray\FileHandling\PersistenceManagerTest.cs" />
     <Compile Include="Tray\Net\DocumentRequestHandlerTest.cs" />
-    <Compile Include="Tray\Download\DownloadInfoTest.cs" />
+    <Compile Include="Tray\Download\FileInfoTest.cs" />
     <Compile Include="Tray\Net\ImageRequestHandlerTest.cs" />
     <Compile Include="Tray\Net\MiniWebServerTest.cs" />
     <Compile Include="Tray\UI\UIThreadInvokerTest.cs" />
     <Compile Include="Tray\Upload\FileUploaderTest.cs" />
     <Compile Include="Tray\Upload\UploadHandlerMock.cs" />
     <Compile Include="Tray\Utilities\ArgumentUtilityTest.cs" />
+    <Compile Include="Tray\Utilities\DownloadedFileObjectMother.cs" />
     <Compile Include="Tray\Utilities\StreamUtilityTest.cs" />
     <Compile Include="Tray\Utilities\UriUtilityTest.cs" />
     <Compile Include="WebBrowserControl\ComInterfaces\HResultValuesTest.cs" />
