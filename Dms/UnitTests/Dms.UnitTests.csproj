@@ -55,7 +55,7 @@
   <ItemGroup>
     <Compile Include="Clients.Windows.Tray\Controllers\DownloadedFilesFormControllerTest.cs" />
     <Compile Include="Clients.Windows.Tray\Controllers\DownloadFormControllerTest.cs" />
-    <Compile Include="Clients.Windows.Tray\Controllers\DownloadManagerTest.cs" />
+    <Compile Include="Clients.Windows.Tray\Controllers\FileManagerTest.cs" />
     <Compile Include="Tray\FileHandling\FileStatusInfoTest.cs" />
     <Compile Include="Tray\FileHandling\FileEventManagerTest.cs" />
     <Compile Include="Tray\FileHandling\DownloadedFileCollectionTest.cs" />
@@ -82,6 +82,8 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Clients.Windows.Tray\Controllers\HiddenMainFormControllerTest.cs" />
     <Compile Include="Tray\Download\BrowserBasedDownloadHandlerTest.cs" />
+    <Compile Include="Tray\FileHandling\LockHandlerMock.cs" />
+    <Compile Include="Tray\FileHandling\LockManagerTest.cs" />
     <Compile Include="Tray\FileHandling\PersistenceManagerTest.cs" />
     <Compile Include="Tray\Net\DocumentRequestHandlerTest.cs" />
     <Compile Include="Tray\Download\FileInfoTest.cs" />
