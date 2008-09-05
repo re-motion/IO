@@ -116,9 +116,9 @@
       <Project>{70725EB2-AEBD-4167-9D6B-608EFEAAA032}</Project>
       <Name>Dms.Clients.Windows.WebBrowserControl</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Tray\Dms.Tray.csproj">
+    <ProjectReference Include="..\DesktopConnector\Dms.DesktopConnector.csproj">
       <Project>{F3AB6F46-3776-4562-8BB2-FFFDE7E62BE0}</Project>
-      <Name>Dms.Tray</Name>
+      <Name>Dms.DesktopConnector</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
