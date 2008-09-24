@@ -57,6 +57,7 @@
     <Compile Include="Clients.Windows.Tray\Controllers\DownloadFormControllerTest.cs" />
     <Compile Include="Clients.Windows.Tray\Controllers\DownloadManagerTest.cs" />
     <Compile Include="Clients.Windows.Tray\Controllers\ProgressBarFormControllerTest.cs" />
+    <Compile Include="Clients.Windows.Tray\Forms\ProgressBarFormInteractionTest.cs" />
     <Compile Include="Clients.Windows.Tray\Forms\ProgressBarFormTest.cs" />
     <Compile Include="Clients.Windows.Tray\ProgramRunnerTest.cs" />
     <Compile Include="DesktopConnector\Download\DownloadHandlerMock.cs" />
