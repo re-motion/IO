@@ -101,7 +101,7 @@
     <Compile Include="DesktopConnector\Upload\UploadHandlerMock.cs" />
     <Compile Include="DesktopConnector\Utilities\ArgumentUtilityTest.cs" />
     <Compile Include="DesktopConnector\Utilities\DownloadedFileObjectMother.cs" />
-    <Compile Include="DesktopConnector\Utilities\StreamUtilityTest.cs" />
+    <Compile Include="DesktopConnector\Utilities\StreamCopierTest.cs" />
     <Compile Include="DesktopConnector\Utilities\UriUtilityTest.cs" />
     <Compile Include="WebBrowserControl\ComInterfaces\HResultValuesTest.cs" />
     <None Include="Properties\AssemblyInfoTemplate.cs" />
