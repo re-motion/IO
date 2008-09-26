@@ -85,6 +85,7 @@
     <Compile Include="Clients.Windows.Tray\Forms\HiddenMainFormTest.cs" />
     <Compile Include="Clients.Windows.Tray\Forms\HiddenMainFormUserInteractionTest.cs" />
     <Compile Include="Clients.Windows.Tray\ProgramTest.cs" />
+    <Compile Include="DesktopConnector\FileHandling\QueueManagerTest.cs" />
     <Compile Include="DesktopConnector\Utilities\FileDataObjectMother.cs" />
     <Compile Include="MiniWebServerTestHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
