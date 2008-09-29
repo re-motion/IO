@@ -63,6 +63,8 @@
     <Compile Include="DesktopConnector\Download\DownloadHandlerMock.cs" />
     <Compile Include="DesktopConnector\Download\FileDownloaderTest.cs" />
     <Compile Include="DesktopConnector\FileHandling\DownloadedFileStates\BeingOpenedStateTest.cs" />
+    <Compile Include="DesktopConnector\FileHandling\DownloadedFileStates\CommitRequestedStateTest.cs" />
+    <Compile Include="DesktopConnector\FileHandling\DownloadedFileStates\UploadRequestedStateTest.cs" />
     <Compile Include="DesktopConnector\FileHandling\FileStatusInfoTest.cs" />
     <Compile Include="DesktopConnector\FileHandling\FileEventManagerTest.cs" />
     <Compile Include="DesktopConnector\FileHandling\DownloadedFileCollectionTest.cs" />
