@@ -67,6 +67,7 @@
     <Compile Include="DesktopConnector\FileHandling\DownloadedFileStates\CommitRequestedStateTest.cs" />
     <Compile Include="DesktopConnector\FileHandling\DownloadedFileStates\CreatedStateTest.cs" />
     <Compile Include="DesktopConnector\FileHandling\DownloadedFileStates\BeingDownloadedStateTest.cs" />
+    <Compile Include="DesktopConnector\FileHandling\DownloadedFileStates\LostSyncStateTest.cs" />
     <Compile Include="DesktopConnector\FileHandling\DownloadedFileStates\UploadRequestedStateTest.cs" />
     <Compile Include="DesktopConnector\FileHandling\FileStatusInfoTest.cs" />
     <Compile Include="DesktopConnector\FileHandling\FileEventManagerTest.cs" />
