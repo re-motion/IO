@@ -57,6 +57,7 @@
     <Compile Include="Clients.Windows.Tray\Controllers\DownloadFormControllerTest.cs" />
     <Compile Include="Clients.Windows.Tray\Controllers\DownloadManagerTest.cs" />
     <Compile Include="Clients.Windows.Tray\Controllers\ProgressBarFormControllerTest.cs" />
+    <Compile Include="Clients.Windows.Tray\Forms\DownloadFormTest.cs" />
     <Compile Include="Clients.Windows.Tray\Forms\ProgressBarFormInteractionTest.cs" />
     <Compile Include="Clients.Windows.Tray\Forms\ProgressBarFormTest.cs" />
     <Compile Include="Clients.Windows.Tray\ProgramRunnerTest.cs" />
@@ -70,7 +71,6 @@
     <Compile Include="DesktopConnector\FileHandling\DownloadedFileStates\LostSyncStateTest.cs" />
     <Compile Include="DesktopConnector\FileHandling\DownloadedFileStates\UploadRequestedStateTest.cs" />
     <Compile Include="DesktopConnector\FileHandling\FileStatusInfoTest.cs" />
-    <Compile Include="DesktopConnector\FileHandling\FileEventManagerTest.cs" />
     <Compile Include="DesktopConnector\FileHandling\DownloadedFileCollectionTest.cs" />
     <Compile Include="DesktopConnector\FileHandling\DownloadedFileStates\BeingCommittedStateTest.cs" />
     <Compile Include="DesktopConnector\FileHandling\DownloadedFileStates\BeingEditedStateTest.cs" />
