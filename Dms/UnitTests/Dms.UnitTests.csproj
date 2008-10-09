@@ -64,6 +64,9 @@
     <Compile Include="DesktopConnector\Download\DownloadHandlerMock.cs" />
     <Compile Include="DesktopConnector\Download\AlternateDownloadManagerTest.cs" />
     <Compile Include="DesktopConnector\Download\FileDownloaderTest.cs" />
+    <Compile Include="DesktopConnector\FileHandling\ApplicationWatcher\FileLockTesterTest.cs" />
+    <Compile Include="DesktopConnector\FileHandling\ApplicationWatcher\LockWatcherTest.cs" />
+    <Compile Include="DesktopConnector\FileHandling\ApplicationWatcher\TimerBasedApplicationWatcherTest.cs" />
     <Compile Include="DesktopConnector\FileHandling\DownloadedFileStates\BeingOpenedStateTest.cs" />
     <Compile Include="DesktopConnector\FileHandling\DownloadedFileStates\CommitRequestedStateTest.cs" />
     <Compile Include="DesktopConnector\FileHandling\DownloadedFileStates\CreatedStateTest.cs" />
@@ -91,6 +94,7 @@
     <Compile Include="Clients.Windows.Tray\Forms\HiddenMainFormTest.cs" />
     <Compile Include="Clients.Windows.Tray\Forms\HiddenMainFormUserInteractionTest.cs" />
     <Compile Include="Clients.Windows.Tray\ProgramTest.cs" />
+    <Compile Include="DesktopConnector\FileHandling\FileWatcherTest.cs" />
     <Compile Include="DesktopConnector\FileHandling\QueueManagerTest.cs" />
     <Compile Include="DesktopConnector\Utilities\FileDataObjectMother.cs" />
     <Compile Include="MiniWebServerTestHelper.cs" />
