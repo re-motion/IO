@@ -64,6 +64,7 @@
     <Compile Include="Clients.Windows.Tray\Forms\ProgressBarFormInteractionTest.cs" />
     <Compile Include="Clients.Windows.Tray\Forms\ProgressBarFormTest.cs" />
     <Compile Include="Clients.Windows.Tray\ProgramRunnerTest.cs" />
+    <Compile Include="DesktopConnector\Configuration\AppHandlerConfigTest.cs" />
     <Compile Include="DesktopConnector\Download\DownloadHandlerMock.cs" />
     <Compile Include="DesktopConnector\Download\AlternateDownloadManagerTest.cs" />
     <Compile Include="DesktopConnector\Download\FileDownloaderTest.cs" />
@@ -101,6 +102,7 @@
     <Compile Include="Clients.Windows.Tray\ProgramTest.cs" />
     <Compile Include="DesktopConnector\FileHandling\FileWatcherTest.cs" />
     <Compile Include="DesktopConnector\FileHandling\QueueManagerTest.cs" />
+    <Compile Include="DesktopConnector\Utilities\AssociatedProgramFinderTest.cs" />
     <Compile Include="DesktopConnector\Utilities\FileDataObjectMother.cs" />
     <Compile Include="MiniWebServerTestHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
