@@ -81,6 +81,7 @@
     <Compile Include="DesktopConnector\FileHandling\DownloadedFileStates\BeingDownloadedStateTest.cs" />
     <Compile Include="DesktopConnector\FileHandling\DownloadedFileStates\DeserializedStateTest.cs" />
     <Compile Include="DesktopConnector\FileHandling\DownloadedFileStates\DirtyStateTest.cs" />
+    <Compile Include="DesktopConnector\FileHandling\DownloadedFileStates\DiscardRequestedStateTest.cs" />
     <Compile Include="DesktopConnector\FileHandling\DownloadedFileStates\LostSyncClosedStateTest.cs" />
     <Compile Include="DesktopConnector\FileHandling\DownloadedFileStates\LostSyncDirtyClosedStateTest.cs" />
     <Compile Include="DesktopConnector\FileHandling\DownloadedFileStates\LostSyncDirtyStateTest.cs" />
