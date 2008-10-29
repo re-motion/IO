@@ -108,6 +108,7 @@
     <Compile Include="Clients.Windows.Tray\Forms\HiddenMainFormUserInteractionTest.cs" />
     <Compile Include="Clients.Windows.Tray\ProgramTest.cs" />
     <Compile Include="DesktopConnector\FileHandling\QueueManagerTest.cs" />
+    <Compile Include="DesktopConnector\Upload\UploadStreamTest.cs" />
     <Compile Include="DesktopConnector\Utilities\ApplicationWatchFinderTest.cs" />
     <Compile Include="DesktopConnector\Utilities\AssociatedProgramFinderTest.cs" />
     <Compile Include="DesktopConnector\Utilities\FileDataObjectMother.cs" />
