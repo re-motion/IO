@@ -120,7 +120,6 @@
     <Compile Include="Clients.Windows.Tray\Controllers\HiddenMainFormControllerTest.cs" />
     <Compile Include="DesktopConnector\Download\BrowserBasedDownloadHandlerTest.cs" />
     <Compile Include="DesktopConnector\FileHandling\LockHandlerMock.cs" />
-    <Compile Include="DesktopConnector\FileHandling\FileLockerTest.cs" />
     <Compile Include="DesktopConnector\FileHandling\PersistenceManagerTest.cs" />
     <Compile Include="DesktopConnector\Net\DocumentRequestHandlerTest.cs" />
     <Compile Include="DesktopConnector\Download\FileDataTest.cs" />
