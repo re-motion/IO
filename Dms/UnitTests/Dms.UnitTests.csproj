@@ -91,6 +91,7 @@
     <Compile Include="DesktopConnector\FileHandling\FileLocking\FileLockerTest.cs" />
     <Compile Include="DesktopConnector\FileHandling\FileLocking\FileRelockerTest.cs" />
     <Compile Include="DesktopConnector\FileHandling\FileLocking\FileUnlockerTest.cs" />
+    <Compile Include="DesktopConnector\FileHandling\FileOperationEventManagerTest.cs" />
     <Compile Include="DesktopConnector\FileHandling\FileStatusInfoTest.cs" />
     <Compile Include="DesktopConnector\FileHandling\DownloadedFileCollectionTest.cs" />
     <Compile Include="DesktopConnector\FileHandling\DownloadedFileStates\BeingEditedStateTest.cs" />
