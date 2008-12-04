@@ -49,6 +49,7 @@
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
     <Reference Include="System.Data" />
+    <Reference Include="System.Runtime.Remoting" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
   </ItemGroup>
@@ -127,10 +128,7 @@
     <Compile Include="DesktopConnector\Download\BrowserBasedDownloadHandlerTest.cs" />
     <Compile Include="DesktopConnector\FileHandling\LockHandlerMock.cs" />
     <Compile Include="DesktopConnector\FileHandling\PersistenceManagerTest.cs" />
-    <Compile Include="DesktopConnector\Net\DocumentRequestHandlerTest.cs" />
     <Compile Include="DesktopConnector\Download\FileDataTest.cs" />
-    <Compile Include="DesktopConnector\Net\ImageRequestHandlerTest.cs" />
-    <Compile Include="DesktopConnector\Net\MiniWebServerTest.cs" />
     <Compile Include="DesktopConnector\UI\UIThreadInvokerTest.cs" />
     <Compile Include="DesktopConnector\Upload\FileUploaderTest.cs" />
     <Compile Include="DesktopConnector\Upload\UploadHandlerMock.cs" />
@@ -139,6 +137,12 @@
     <Compile Include="DesktopConnector\Utilities\StreamCopierTest.cs" />
     <Compile Include="DesktopConnector\Utilities\UriUtilityTest.cs" />
     <Compile Include="WebBrowserControl\ComInterfaces\HResultValuesTest.cs" />
+    <Compile Include="WebServer\DocumentRequestHandler.cs" />
+    <Compile Include="WebServer\ImageRequestHandler.cs" />
+    <Compile Include="WebServer\IMiniWebServer.cs" />
+    <Compile Include="WebServer\IRequestHandler.cs" />
+    <Compile Include="WebServer\MiniWebServer.cs" />
+    <Compile Include="WebServer\PingHandler.cs" />
     <None Include="Properties\AssemblyInfoTemplate.cs" />
   </ItemGroup>
   <ItemGroup>
