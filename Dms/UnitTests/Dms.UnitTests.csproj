@@ -69,6 +69,7 @@
     <Compile Include="DesktopConnector\Download\DownloadHandlerMock.cs" />
     <Compile Include="DesktopConnector\Download\AlternateDownloadManagerTest.cs" />
     <Compile Include="DesktopConnector\Download\FileDownloaderTest.cs" />
+    <Compile Include="DesktopConnector\Download\FileDownloadManagerTest.cs" />
     <Compile Include="DesktopConnector\FileHandling\ApplicationWatcher\ApplicationWatcherTest.cs" />
     <Compile Include="DesktopConnector\FileHandling\ApplicationWatcher\DefaultWatcherTest.cs" />
     <Compile Include="DesktopConnector\FileHandling\ApplicationWatcher\FileLockTesterTest.cs" />
