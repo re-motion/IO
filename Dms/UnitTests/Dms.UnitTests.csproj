@@ -128,10 +128,13 @@
     <Compile Include="DesktopConnector\UI\UIThreadInvokerTest.cs" />
     <Compile Include="DesktopConnector\Upload\FileUploaderTest.cs" />
     <Compile Include="DesktopConnector\Upload\UploadHandlerMock.cs" />
-    <Compile Include="DesktopConnector\Utilities\ArgumentUtilityTest.cs" />
+    <Compile Include="Shared\Messages\UnlockingTest.cs" />
+    <Compile Include="Shared\Messages\RelockingTest.cs" />
+    <Compile Include="Shared\Utilities\ArgumentUtilityTest.cs" />
     <Compile Include="DesktopConnector\Utilities\DownloadedFileObjectMother.cs" />
     <Compile Include="DesktopConnector\Utilities\StreamCopierTest.cs" />
     <Compile Include="DesktopConnector\Utilities\UriUtilityTest.cs" />
+    <Compile Include="Shared\Messages\LockingTest.cs" />
     <Compile Include="WebServer\ImageRequestHandler.cs" />
     <Compile Include="WebServer\IMiniWebServer.cs" />
     <Compile Include="WebServer\IRequestHandler.cs" />
@@ -171,9 +174,6 @@
       <LastGenOutput>NotificationResourcesTest.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Shared\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

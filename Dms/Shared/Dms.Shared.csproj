@@ -36,9 +36,27 @@
       <HintPath>..\..\prereq\Assemblies\log4net.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.XML" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Messages\Locking\ILockResultVisitor.cs" />
+    <Compile Include="Messages\Locking\LockFailedResult.cs" />
+    <Compile Include="Messages\Locking\LockResult.cs" />
+    <Compile Include="Messages\Locking\LockStolenResult.cs" />
+    <Compile Include="Messages\Locking\LockSuccessResult.cs" />
+    <Compile Include="Messages\Relocking\IRelockResultVisitor.cs" />
+    <Compile Include="Messages\Relocking\RelockFailedResult.cs" />
+    <Compile Include="Messages\Relocking\RelockResult.cs" />
+    <Compile Include="Messages\Relocking\RelockStolenResult.cs" />
+    <Compile Include="Messages\Relocking\RelockSuccessResult.cs" />
+    <Compile Include="Messages\Unlocking\IUnlockResultVisitor.cs" />
+    <Compile Include="Messages\Unlocking\UnlockFailedResult.cs" />
+    <Compile Include="Messages\Unlocking\UnlockResult.cs" />
+    <Compile Include="Messages\Unlocking\UnlockStolenResult.cs" />
+    <Compile Include="Messages\Unlocking\UnlockSuccessResult.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Utilities\ArgumentEmptyException.cs" />
+    <Compile Include="Utilities\ArgumentUtility.cs" />
     <None Include="Properties\AssemblyInfoTemplate.cs" />
   </ItemGroup>
   <ItemGroup>
