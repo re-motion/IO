@@ -156,6 +156,10 @@
       <Project>{F3AB6F46-3776-4562-8BB2-FFFDE7E62BE0}</Project>
       <Name>Dms.DesktopConnector</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Shared\Dms.Shared.csproj">
+      <Project>{B79940B8-1949-406D-9CCA-E6349898E11A}</Project>
+      <Name>Dms.Shared</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -167,6 +171,9 @@
       <LastGenOutput>NotificationResourcesTest.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Shared\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
