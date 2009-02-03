@@ -112,7 +112,6 @@
     <Compile Include="DesktopConnector\Utilities\ApplicationWatchFinderTest.cs" />
     <Compile Include="DesktopConnector\Utilities\AssociatedProgramFinderTest.cs" />
     <Compile Include="DesktopConnector\FileHandling\FileTransfer\BaseFileTransferHandlerTest.cs" />
-    <Compile Include="DesktopConnector\Utilities\BaseRequestHandlerTest.cs" />
     <Compile Include="DesktopConnector\Utilities\FileDataObjectMother.cs" />
     <Compile Include="DesktopConnector\Utilities\WebRequestWrapperTest.cs" />
     <Compile Include="Globalization\NotificationResourcesTest.Designer.cs">
