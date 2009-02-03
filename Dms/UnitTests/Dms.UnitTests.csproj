@@ -71,6 +71,8 @@
     <Compile Include="DesktopConnector\FileHandling\ApplicationWatcher\LockWatcherTest.cs" />
     <Compile Include="DesktopConnector\FileHandling\ApplicationWatcher\TimerBasedApplicationWatcherMock.cs" />
     <Compile Include="DesktopConnector\FileHandling\ApplicationWatcher\TimerBasedApplicationWatcherTest.cs" />
+    <Compile Include="DesktopConnector\FileHandling\UnlockHandlerMock.cs" />
+    <Compile Include="DesktopConnector\FileHandling\RelockHandlerMock.cs" />
     <Compile Include="DesktopConnector\FileHandling\DownloadedFileStates\BeingOpenedStateTest.cs" />
     <Compile Include="DesktopConnector\FileHandling\DownloadedFileStates\CommitPendingStateTest.cs" />
     <Compile Include="DesktopConnector\FileHandling\DownloadedFileStates\CommitRequestedStateTest.cs" />
