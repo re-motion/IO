@@ -56,19 +56,14 @@
   <ItemGroup>
     <Compile Include="Clients.Windows.Tray\Controllers\ApplicationWatcherFormControllerTest.cs" />
     <Compile Include="Clients.Windows.Tray\Controllers\DownloadedFilesFormControllerTest.cs" />
-    <Compile Include="Clients.Windows.Tray\Controllers\DownloadFormControllerTest.cs" />
-    <Compile Include="Clients.Windows.Tray\Controllers\DownloadManagerTest.cs" />
     <Compile Include="Clients.Windows.Tray\Controllers\ProgressBarFormControllerTest.cs" />
     <Compile Include="Clients.Windows.Tray\Forms\ApplicationWatcherFormTest.cs" />
     <Compile Include="Clients.Windows.Tray\Forms\DefaultWatcherInteractionTest.cs" />
-    <Compile Include="Clients.Windows.Tray\Forms\DownloadFormTest.cs" />
     <Compile Include="Clients.Windows.Tray\Forms\ProgressBarFormInteractionTest.cs" />
     <Compile Include="Clients.Windows.Tray\Forms\ProgressBarFormTest.cs" />
     <Compile Include="Clients.Windows.Tray\ProgramRunnerTest.cs" />
     <Compile Include="DesktopConnector\Configuration\AppHandlerConfigTest.cs" />
     <Compile Include="DesktopConnector\Download\DownloadHandlerMock.cs" />
-    <Compile Include="DesktopConnector\Download\AlternateDownloadManagerTest.cs" />
-    <Compile Include="DesktopConnector\Download\FileDownloaderTest.cs" />
     <Compile Include="DesktopConnector\Download\FileDownloadManagerTest.cs" />
     <Compile Include="DesktopConnector\FileHandling\ApplicationWatcher\ApplicationWatcherTest.cs" />
     <Compile Include="DesktopConnector\FileHandling\ApplicationWatcher\DefaultWatcherTest.cs" />
@@ -106,7 +101,6 @@
     <Compile Include="DesktopConnector\FileHandling\FileOperationExecutorTest.cs" />
     <Compile Include="DesktopConnector\FileHandling\FileOpenerTest.cs" />
     <Compile Include="Clients.Windows.Tray\Forms\DownloadedFilesFormTest.cs" />
-    <Compile Include="Clients.Windows.Tray\Forms\DownloadFormBrowserInteractionTest.cs" />
     <Compile Include="Clients.Windows.Tray\Forms\HiddenMainFormMock.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -129,7 +123,6 @@
     <Compile Include="MiniWebServerTestHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Clients.Windows.Tray\Controllers\HiddenMainFormControllerTest.cs" />
-    <Compile Include="DesktopConnector\Download\BrowserBasedDownloadHandlerTest.cs" />
     <Compile Include="DesktopConnector\FileHandling\LockHandlerMock.cs" />
     <Compile Include="DesktopConnector\FileHandling\PersistenceManagerTest.cs" />
     <Compile Include="DesktopConnector\Download\FileDataTest.cs" />
@@ -140,8 +133,6 @@
     <Compile Include="DesktopConnector\Utilities\DownloadedFileObjectMother.cs" />
     <Compile Include="DesktopConnector\Utilities\StreamCopierTest.cs" />
     <Compile Include="DesktopConnector\Utilities\UriUtilityTest.cs" />
-    <Compile Include="WebBrowserControl\ComInterfaces\HResultValuesTest.cs" />
-    <Compile Include="WebServer\DocumentRequestHandler.cs" />
     <Compile Include="WebServer\ImageRequestHandler.cs" />
     <Compile Include="WebServer\IMiniWebServer.cs" />
     <Compile Include="WebServer\IRequestHandler.cs" />
@@ -161,10 +152,6 @@
     <ProjectReference Include="..\Clients.Windows.Tray\Dms.Clients.Windows.Tray.csproj">
       <Project>{B5CBF254-BC60-4018-A772-DAD5DE4C96EE}</Project>
       <Name>Dms.Clients.Windows.Tray</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Clients.Windows.WebBrowserControl\Dms.Clients.Windows.WebBrowserControl.csproj">
-      <Project>{70725EB2-AEBD-4167-9D6B-608EFEAAA032}</Project>
-      <Name>Dms.Clients.Windows.WebBrowserControl</Name>
     </ProjectReference>
     <ProjectReference Include="..\DesktopConnector\Dms.DesktopConnector.csproj">
       <Project>{F3AB6F46-3776-4562-8BB2-FFFDE7E62BE0}</Project>
