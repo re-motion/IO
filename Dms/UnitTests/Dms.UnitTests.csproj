@@ -55,9 +55,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Clients.Windows.Tray\Controllers\ApplicationWatcherFormControllerTest.cs" />
+    <Compile Include="Clients.Windows.Tray\Controllers\AuthenticateUserFormControllerTest.cs" />
     <Compile Include="Clients.Windows.Tray\Controllers\DownloadedFilesFormControllerTest.cs" />
     <Compile Include="Clients.Windows.Tray\Controllers\ProgressBarFormControllerTest.cs" />
     <Compile Include="Clients.Windows.Tray\Forms\ApplicationWatcherFormTest.cs" />
+    <Compile Include="Clients.Windows.Tray\Forms\AuthenticateUserInteractionTest.cs" />
     <Compile Include="Clients.Windows.Tray\Forms\DefaultWatcherInteractionTest.cs" />
     <Compile Include="Clients.Windows.Tray\Forms\ProgressBarFormInteractionTest.cs" />
     <Compile Include="Clients.Windows.Tray\Forms\ProgressBarFormTest.cs" />
