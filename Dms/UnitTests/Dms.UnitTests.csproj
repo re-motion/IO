@@ -106,6 +106,7 @@
     <Compile Include="DesktopConnector\FileHandling\FileOpenerTest.cs" />
     <Compile Include="Clients.Windows.Tray\Forms\DownloadedFilesFormTest.cs" />
     <Compile Include="Clients.Windows.Tray\Forms\HiddenMainFormMock.cs">
+      <SubType>Form</SubType>
     </Compile>
     <Compile Include="Clients.Windows.Tray\Forms\HiddenMainFormTest.cs" />
     <Compile Include="Clients.Windows.Tray\Forms\HiddenMainFormUserInteractionTest.cs" />
