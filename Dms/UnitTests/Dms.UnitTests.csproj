@@ -3,7 +3,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>9.0.30729</ProductVersion>
+    <ProductVersion>9.0.21022</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{1763F21F-531C-4E86-ACFC-9A8BF903F945}</ProjectGuid>
     <OutputType>Library</OutputType>
@@ -117,6 +117,7 @@
     <Compile Include="DesktopConnector\Utilities\AssociatedProgramFinderTest.cs" />
     <Compile Include="DesktopConnector\FileHandling\FileTransfer\BaseFileTransferHandlerTest.cs" />
     <Compile Include="DesktopConnector\Utilities\FileDataObjectMother.cs" />
+    <Compile Include="DesktopConnector\Utilities\UploadRequestWrapperTest.cs" />
     <Compile Include="DesktopConnector\Utilities\WebRequestWrapperTest.cs" />
     <Compile Include="Globalization\NotificationResourcesTest.Designer.cs">
       <AutoGen>True</AutoGen>
