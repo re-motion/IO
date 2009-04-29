@@ -64,9 +64,11 @@
     <Compile Include="Clients.Windows.Tray\Forms\ProgressBarFormInteractionTest.cs" />
     <Compile Include="Clients.Windows.Tray\Forms\ProgressBarFormTest.cs" />
     <Compile Include="Clients.Windows.Tray\ProgramRunnerTest.cs" />
-    <Compile Include="DesktopConnector\Configuration\AppHandlerConfigElementTest.cs" />
-    <Compile Include="DesktopConnector\Configuration\AppHandlerConfigurationTest.cs" />
-    <Compile Include="DesktopConnector\Configuration\FileWatcherStub.cs" />
+    <Compile Include="DesktopConnector\Configuration\ApplicationWatcherElementTest.cs" />
+    <Compile Include="DesktopConnector\Configuration\DeskTopConnectorConfigurationTest.cs" />
+    <Compile Include="DesktopConnector\Configuration\ApplicationCriteriaElementTest.cs" />
+    <Compile Include="DesktopConnector\Configuration\ApplicationWatcherStub.cs" />
+    <Compile Include="DesktopConnector\Configuration\XmlCriteriaElementTest.cs" />
     <Compile Include="DesktopConnector\Download\DownloadHandlerMock.cs" />
     <Compile Include="DesktopConnector\Download\FileDownloaderTest.cs" />
     <Compile Include="DesktopConnector\FileHandling\ApplicationWatcher\ApplicationWatcherTest.cs" />
@@ -74,8 +76,8 @@
     <Compile Include="DesktopConnector\FileHandling\ApplicationWatcher\FormBasedWatcherTest.cs" />
     <Compile Include="DesktopConnector\FileHandling\ApplicationWatcher\FileLockTesterTest.cs" />
     <Compile Include="DesktopConnector\FileHandling\ApplicationWatcher\LockWatcherTest.cs" />
-    <Compile Include="DesktopConnector\FileHandling\ApplicationWatcher\TimerBasedApplicationWatcherMock.cs" />
-    <Compile Include="DesktopConnector\FileHandling\ApplicationWatcher\TimerBasedApplicationWatcherTest.cs" />
+    <Compile Include="DesktopConnector\FileHandling\ApplicationWatcher\PollingFileWatcherMock.cs" />
+    <Compile Include="DesktopConnector\FileHandling\ApplicationWatcher\PollingFileWatcherBaseTest.cs" />
     <Compile Include="DesktopConnector\FileHandling\UnlockHandlerMock.cs" />
     <Compile Include="DesktopConnector\FileHandling\RelockHandlerMock.cs" />
     <Compile Include="DesktopConnector\FileHandling\DownloadedFileStates\BeingOpenedStateTest.cs" />
