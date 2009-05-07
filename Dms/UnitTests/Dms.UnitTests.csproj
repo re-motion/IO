@@ -127,6 +127,7 @@
     <Compile Include="DesktopConnector\Utilities\FileVersionProviderTest.cs" />
     <Compile Include="DesktopConnector\Utilities\RegistryAccessorTest.cs" />
     <Compile Include="DesktopConnector\Utilities\UploadRequestHandlerTest.cs" />
+    <Compile Include="DesktopConnector\Utilities\WebRequestFactoryTest.cs" />
     <Compile Include="DesktopConnector\Utilities\WebRequestHandlerTest.cs" />
     <Compile Include="GlobalizationIndependentTestBase.cs" />
     <Compile Include="Globalization\NotificationResourcesTest.Designer.cs">
