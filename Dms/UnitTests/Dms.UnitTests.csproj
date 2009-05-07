@@ -56,6 +56,7 @@
   <ItemGroup>
     <Compile Include="Clients.Windows.Tray\Controllers\ApplicationWatcherFormControllerTest.cs" />
     <Compile Include="Clients.Windows.Tray\Controllers\AuthenticateUserFormControllerTest.cs" />
+    <Compile Include="Clients.Windows.Tray\Controllers\DiagnosticFormControllerTest.cs" />
     <Compile Include="Clients.Windows.Tray\Controllers\DownloadedFilesFormControllerTest.cs" />
     <Compile Include="Clients.Windows.Tray\Controllers\ProgressBarFormControllerTest.cs" />
     <Compile Include="Clients.Windows.Tray\Forms\ApplicationWatcherFormTest.cs" />
