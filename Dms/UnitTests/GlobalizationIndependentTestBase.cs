@@ -10,7 +10,6 @@ namespace Remotion.Dms.UnitTests
 {
   public abstract class GlobalizationIndependentTestBase
   {
-
     [TestFixtureSetUp]
     public void TestFixtureSetUp()
     {
