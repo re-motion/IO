@@ -79,6 +79,8 @@
     <Compile Include="DesktopConnector\FileHandling\ApplicationWatcher\LockWatcherTest.cs" />
     <Compile Include="DesktopConnector\FileHandling\ApplicationWatcher\PollingFileWatcherMock.cs" />
     <Compile Include="DesktopConnector\FileHandling\ApplicationWatcher\PollingFileWatcherBaseTest.cs" />
+    <Compile Include="DesktopConnector\FileHandling\DownloadedFileStates\NewFileCompletedStateTest.cs" />
+    <Compile Include="DesktopConnector\FileHandling\DownloadedFileStates\NewFileDiscardedStateTest.cs" />
     <Compile Include="DesktopConnector\FileHandling\DownloadedFileStates\NewFileStateTest.cs" />
     <Compile Include="DesktopConnector\FileHandling\UIStates\UIStateTest.cs" />
     <Compile Include="DesktopConnector\FileHandling\UnlockHandlerMock.cs" />
