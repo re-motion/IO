@@ -3,7 +3,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>9.0.30729</ProductVersion>
+    <ProductVersion>9.0.21022</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{1763F21F-531C-4E86-ACFC-9A8BF903F945}</ProjectGuid>
     <OutputType>Library</OutputType>
@@ -79,6 +79,7 @@
     <Compile Include="DesktopConnector\FileHandling\ApplicationWatcher\LockWatcherTest.cs" />
     <Compile Include="DesktopConnector\FileHandling\ApplicationWatcher\PollingFileWatcherMock.cs" />
     <Compile Include="DesktopConnector\FileHandling\ApplicationWatcher\PollingFileWatcherBaseTest.cs" />
+    <Compile Include="DesktopConnector\FileHandling\DownloadedFileStates\NewFileStateTest.cs" />
     <Compile Include="DesktopConnector\FileHandling\UIStates\UIStateTest.cs" />
     <Compile Include="DesktopConnector\FileHandling\UnlockHandlerMock.cs" />
     <Compile Include="DesktopConnector\FileHandling\RelockHandlerMock.cs" />
