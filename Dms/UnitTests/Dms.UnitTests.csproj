@@ -183,6 +183,10 @@
       <Project>{B79940B8-1949-406D-9CCA-E6349898E11A}</Project>
       <Name>Dms.Shared</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Web\Dms.Web.csproj">
+      <Project>{F47CE8AE-22DA-4666-8371-01E7A32D539B}</Project>
+      <Name>Dms.Web</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
