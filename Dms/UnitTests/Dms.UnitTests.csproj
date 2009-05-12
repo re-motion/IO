@@ -3,7 +3,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>9.0.21022</ProductVersion>
+    <ProductVersion>9.0.30729</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{1763F21F-531C-4E86-ACFC-9A8BF903F945}</ProjectGuid>
     <OutputType>Library</OutputType>
@@ -70,6 +70,7 @@
     <Compile Include="DesktopConnector\Configuration\ApplicationWatcherStub.cs" />
     <Compile Include="DesktopConnector\Configuration\DesktopConnectorConfigurationTest.cs" />
     <Compile Include="DesktopConnector\Configuration\XmlCriteriaElementTest.cs" />
+    <Compile Include="DesktopConnector\DmsUrlTest.cs" />
     <Compile Include="DesktopConnector\Download\DownloadHandlerMock.cs" />
     <Compile Include="DesktopConnector\Download\FileDownloaderTest.cs" />
     <Compile Include="DesktopConnector\FileHandling\ApplicationWatcher\ApplicationWatcherTest.cs" />
@@ -129,7 +130,6 @@
     <Compile Include="DesktopConnector\Utilities\FileDataObjectMother.cs" />
     <Compile Include="DesktopConnector\Utilities\FileVersionProviderTest.cs" />
     <Compile Include="DesktopConnector\Utilities\RegistryAccessorTest.cs" />
-    <Compile Include="DesktopConnector\Utilities\UploadRequestHandlerTest.cs" />
     <Compile Include="DesktopConnector\Utilities\WebRequestFactoryTest.cs" />
     <Compile Include="DesktopConnector\Utilities\WebRequestHandlerTest.cs" />
     <Compile Include="GlobalizationIndependentTestBase.cs" />
@@ -154,6 +154,7 @@
     <Compile Include="DesktopConnector\Utilities\StreamCopierTest.cs" />
     <Compile Include="DesktopConnector\Utilities\UriUtilityTest.cs" />
     <Compile Include="Shared\Messages\LockingTest.cs" />
+    <Compile Include="UrlHandlerTest.cs" />
     <Compile Include="WebServer\ImageRequestHandler.cs" />
     <Compile Include="WebServer\IMiniWebServer.cs" />
     <Compile Include="WebServer\IRequestHandler.cs" />
