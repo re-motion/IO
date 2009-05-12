@@ -160,6 +160,7 @@
     <Compile Include="WebServer\IRequestHandler.cs" />
     <Compile Include="WebServer\MiniWebServer.cs" />
     <Compile Include="WebServer\PingHandler.cs" />
+    <Compile Include="Web\DmsServiceTest.cs" />
     <None Include="Properties\AssemblyInfoTemplate.cs" />
   </ItemGroup>
   <ItemGroup>
