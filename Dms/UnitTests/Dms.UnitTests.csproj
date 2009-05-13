@@ -112,7 +112,7 @@
     <Compile Include="DesktopConnector\FileHandling\DownloadedFileStates\CommittedStateTest.cs" />
     <Compile Include="DesktopConnector\FileHandling\DownloadedFileStates\DiscardedStateTest.cs" />
     <Compile Include="DesktopConnector\FileHandling\DownloadedFileStates\DownloadedFileStateTestBase.cs" />
-    <Compile Include="DesktopConnector\FileHandling\DownloadedFileTest.cs" />
+    <Compile Include="DesktopConnector\FileHandling\ManagedFileTest.cs" />
     <Compile Include="DesktopConnector\FileHandling\FileDeleterTest.cs" />
     <Compile Include="DesktopConnector\FileHandling\FileOperationExecutorTest.cs" />
     <Compile Include="DesktopConnector\FileHandling\FileOpenerTest.cs" />
