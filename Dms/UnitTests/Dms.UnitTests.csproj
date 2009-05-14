@@ -71,7 +71,7 @@
     <Compile Include="DesktopConnector\Configuration\ApplicationWatcherStub.cs" />
     <Compile Include="DesktopConnector\Configuration\DesktopConnectorConfigurationTest.cs" />
     <Compile Include="DesktopConnector\Configuration\XmlCriteriaElementTest.cs" />
-    <Compile Include="DesktopConnector\DmsUrlTest.cs" />
+    <Compile Include="Shared\DmsUrlTest.cs" />
     <Compile Include="DesktopConnector\Download\DownloadHandlerMock.cs" />
     <Compile Include="DesktopConnector\Download\FileDownloaderTest.cs" />
     <Compile Include="DesktopConnector\FileHandling\ApplicationWatcher\ApplicationWatcherTest.cs" />
@@ -133,7 +133,6 @@
     <Compile Include="DesktopConnector\Utilities\RegistryAccessorTest.cs" />
     <Compile Include="DesktopConnector\Utilities\WebRequestFactoryTest.cs" />
     <Compile Include="DesktopConnector\Utilities\WebRequestHandlerTest.cs" />
-    <Compile Include="GlobalizationIndependentTestBase.cs" />
     <Compile Include="Globalization\NotificationResourcesTest.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -153,9 +152,9 @@
     <Compile Include="Shared\Utilities\ArgumentUtilityTest.cs" />
     <Compile Include="DesktopConnector\Utilities\DownloadedFileObjectMother.cs" />
     <Compile Include="DesktopConnector\Utilities\StreamCopierTest.cs" />
-    <Compile Include="DesktopConnector\Utilities\UriUtilityTest.cs" />
+    <Compile Include="Shared\Utilities\UriUtilityTest.cs" />
     <Compile Include="Shared\Messages\LockingTest.cs" />
-    <Compile Include="UrlHandlerTest.cs" />
+    <Compile Include="DesktopConnector\UrlHandlerTest.cs" />
     <Compile Include="WebServer\ImageRequestHandler.cs" />
     <Compile Include="WebServer\IMiniWebServer.cs" />
     <Compile Include="WebServer\IRequestHandler.cs" />

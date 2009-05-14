@@ -41,6 +41,7 @@
         <include name="${build.outputdir}/log4net.dll" />
         <include asis="true" name="System.dll"/>
         <include asis="true" name="System.Xml.dll"/>
+        <include asis="true" name="System.Web.dll"/>
       </references>
     </csc>
   </target>
