@@ -152,6 +152,7 @@
     <Compile Include="Shared\Messages\RelockingTest.cs" />
     <Compile Include="Shared\Utilities\ArgumentUtilityTest.cs" />
     <Compile Include="DesktopConnector\Utilities\DownloadedFileObjectMother.cs" />
+    <Compile Include="Shared\Utilities\Base64SerializationHelperTest.cs" />
     <Compile Include="Shared\Utilities\StreamCopierTest.cs" />
     <Compile Include="Shared\Utilities\UriUtilityTest.cs" />
     <Compile Include="Shared\Messages\LockingTest.cs" />
@@ -161,7 +162,9 @@
     <Compile Include="WebServer\IRequestHandler.cs" />
     <Compile Include="WebServer\MiniWebServer.cs" />
     <Compile Include="WebServer\PingHandler.cs" />
+    <Compile Include="Web\AuthenticationContextTest.cs" />
     <Compile Include="Web\DmsServiceImplementationTest.cs" />
+    <Compile Include="Shared\LockTokenTest.cs" />
     <Compile Include="Web\UI\DmsHandlerTest.cs" />
     <None Include="Properties\AssemblyInfoTemplate.cs" />
   </ItemGroup>
