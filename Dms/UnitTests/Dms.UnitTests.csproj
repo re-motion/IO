@@ -50,6 +50,7 @@
     </Reference>
     <Reference Include="System.Data" />
     <Reference Include="System.Runtime.Remoting" />
+    <Reference Include="System.Web" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
   </ItemGroup>
@@ -161,6 +162,7 @@
     <Compile Include="WebServer\MiniWebServer.cs" />
     <Compile Include="WebServer\PingHandler.cs" />
     <Compile Include="Web\DmsServiceImplementationTest.cs" />
+    <Compile Include="Web\UI\DmsHandlerTest.cs" />
     <None Include="Properties\AssemblyInfoTemplate.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -179,6 +181,10 @@
     <ProjectReference Include="..\..\Remotion\Security\Interfaces\Security.Interfaces.csproj">
       <Project>{6B243694-318E-4C20-A2EA-B910EFE5F2F6}</Project>
       <Name>Security.Interfaces</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Remotion\Web\Core\Web.Core.csproj">
+      <Project>{DF8BA786-9679-4879-8757-16AE2709D83A}</Project>
+      <Name>Web.Core</Name>
     </ProjectReference>
     <ProjectReference Include="..\Clients.Windows.Tray\Dms.Clients.Windows.Tray.csproj">
       <Project>{B5CBF254-BC60-4018-A772-DAD5DE4C96EE}</Project>
@@ -207,9 +213,6 @@
       <LastGenOutput>NotificationResourcesTest.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Web\UI\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
