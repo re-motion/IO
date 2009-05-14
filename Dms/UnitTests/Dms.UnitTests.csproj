@@ -59,6 +59,7 @@
     <Compile Include="Clients.Windows.Tray\Controllers\AuthenticateUserFormControllerTest.cs" />
     <Compile Include="Clients.Windows.Tray\Controllers\DiagnosticFormControllerTest.cs" />
     <Compile Include="Clients.Windows.Tray\Controllers\DownloadedFilesFormControllerTest.cs" />
+    <Compile Include="Clients.Windows.Tray\Controllers\DropTargetFormControllerTest.cs" />
     <Compile Include="Clients.Windows.Tray\Controllers\ProgressBarFormControllerTest.cs" />
     <Compile Include="Clients.Windows.Tray\Forms\ApplicationWatcherFormTest.cs" />
     <Compile Include="Clients.Windows.Tray\Forms\AuthenticateUserInteractionTest.cs" />
@@ -67,6 +68,7 @@
     <Compile Include="Clients.Windows.Tray\Forms\ProgressBarFormTest.cs" />
     <Compile Include="Clients.Windows.Tray\ProgramRunnerTest.cs" />
     <Compile Include="DesktopConnector\ActionHandler\DownloadActionHandlerTest.cs" />
+    <Compile Include="DesktopConnector\ActionHandler\DropActionHandlerTest.cs" />
     <Compile Include="DesktopConnector\Configuration\ApplicationWatcherElementTest.cs" />
     <Compile Include="DesktopConnector\Configuration\ApplicationCriteriaElementTest.cs" />
     <Compile Include="DesktopConnector\Configuration\ApplicationWatcherStub.cs" />
