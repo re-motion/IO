@@ -45,7 +45,6 @@
   <ItemGroup>
     <Compile Include="DmsAction.cs" />
     <Compile Include="DmsUrl.cs" />
-    <Compile Include="LockToken.cs" />
     <Compile Include="Messages\Locking\ILockResultVisitor.cs" />
     <Compile Include="Messages\Locking\LockFailedResult.cs" />
     <Compile Include="Messages\Locking\LockResult.cs" />
