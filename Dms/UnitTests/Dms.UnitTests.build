@@ -42,6 +42,7 @@
         <include name="${build.test.outputdir}/Remotion.dll" />
         <include name="${build.test.outputdir}/Remotion.Development.dll" />
         <include name="${build.test.outputdir}/DmsTray.exe" />
+        <include name="${build.test.outputdir}/Remotion.Dms.dll" />
         <include name="${build.test.outputdir}/Remotion.Dms.Clients.Windows.WebBrowserControl.dll" />
         <include name="${build.test.outputdir}/Remotion.Dms.DesktopConnector.dll" />
         <include name="${build.test.outputdir}/Remotion.Dms.Shared.dll" />
