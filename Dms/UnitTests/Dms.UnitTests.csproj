@@ -12,6 +12,8 @@
     <AssemblyName>Remotion.Dms.UnitTests</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <SignAssembly>true</SignAssembly>
+    <AssemblyOriginatorKeyFile>..\..\remotion.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -199,6 +201,10 @@
       <Project>{B5CBF254-BC60-4018-A772-DAD5DE4C96EE}</Project>
       <Name>Dms.Clients.Windows.Tray</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Core\Dms.Core.csproj">
+      <Project>{7ACCED5E-6AE7-477D-8D15-ED33DEAB0FD9}</Project>
+      <Name>Dms.Core</Name>
+    </ProjectReference>
     <ProjectReference Include="..\DesktopConnector\Dms.DesktopConnector.csproj">
       <Project>{F3AB6F46-3776-4562-8BB2-FFFDE7E62BE0}</Project>
       <Name>Dms.DesktopConnector</Name>
@@ -213,6 +219,9 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <None Include="..\..\remotion.snk">
+      <Link>remotion.snk</Link>
+    </None>
     <None Include="App.config" />
     <None Include="Dms.UnitTests.build" />
   </ItemGroup>
