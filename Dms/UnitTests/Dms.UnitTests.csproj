@@ -70,9 +70,8 @@
     <Compile Include="Clients.Windows.Tray\Forms\ProgressBarFormInteractionTest.cs" />
     <Compile Include="Clients.Windows.Tray\Forms\ProgressBarFormTest.cs" />
     <Compile Include="Clients.Windows.Tray\ProgramRunnerTest.cs" />
-    <Compile Include="DesktopConnector\ActionHandler\AddActionHandlerFileProviderBaseTest.cs" />
     <Compile Include="DesktopConnector\ActionHandler\DownloadActionHandlerTest.cs" />
-    <Compile Include="DesktopConnector\ActionHandler\AddActionHandlerTest.cs" />
+    <Compile Include="DesktopConnector\ActionHandler\NewFileActionHandlerTest.cs" />
     <Compile Include="DesktopConnector\Configuration\ApplicationWatcherElementTest.cs" />
     <Compile Include="DesktopConnector\Configuration\ApplicationCriteriaElementTest.cs" />
     <Compile Include="DesktopConnector\Configuration\ApplicationWatcherStub.cs" />
