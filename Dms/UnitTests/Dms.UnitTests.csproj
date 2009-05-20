@@ -66,10 +66,12 @@
     <Compile Include="Clients.Windows.Tray\Controllers\ProgressBarFormControllerTest.cs" />
     <Compile Include="Clients.Windows.Tray\Forms\ApplicationWatcherFormTest.cs" />
     <Compile Include="Clients.Windows.Tray\Forms\AuthenticateUserInteractionTest.cs" />
+    <Compile Include="Clients.Windows.Tray\Forms\BrowseUserInteractionTest.cs" />
     <Compile Include="Clients.Windows.Tray\Forms\DefaultWatcherInteractionTest.cs" />
     <Compile Include="Clients.Windows.Tray\Forms\ProgressBarFormInteractionTest.cs" />
     <Compile Include="Clients.Windows.Tray\Forms\ProgressBarFormTest.cs" />
     <Compile Include="Clients.Windows.Tray\ProgramRunnerTest.cs" />
+    <Compile Include="DesktopConnector\ActionHandler\BrowseStrategyTest.cs" />
     <Compile Include="DesktopConnector\ActionHandler\DownloadActionHandlerTest.cs" />
     <Compile Include="DesktopConnector\ActionHandler\NewFileActionHandlerTest.cs" />
     <Compile Include="DesktopConnector\Configuration\ApplicationWatcherElementTest.cs" />
