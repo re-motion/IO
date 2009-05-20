@@ -17,7 +17,6 @@
 // 
 using System;
 using System.IO;
-using System.Threading;
 
 namespace Remotion.Dms.Shared.Utilities
 {
