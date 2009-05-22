@@ -68,6 +68,7 @@
     <Compile Include="Clients.Windows.Tray\Forms\AuthenticateUserInteractionTest.cs" />
     <Compile Include="Clients.Windows.Tray\Forms\BrowseUserInteractionTest.cs" />
     <Compile Include="Clients.Windows.Tray\Forms\DefaultWatcherInteractionTest.cs" />
+    <Compile Include="Clients.Windows.Tray\Forms\DropUserInteractionTest.cs" />
     <Compile Include="Clients.Windows.Tray\Forms\ProgressBarFormInteractionTest.cs" />
     <Compile Include="Clients.Windows.Tray\Forms\ProgressBarFormTest.cs" />
     <Compile Include="Clients.Windows.Tray\ProgramRunnerTest.cs" />
