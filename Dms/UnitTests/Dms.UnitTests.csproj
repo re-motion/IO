@@ -87,13 +87,11 @@
     <Compile Include="Shared\DmsUrlTest.cs" />
     <Compile Include="DesktopConnector\Download\DownloadHandlerMock.cs" />
     <Compile Include="DesktopConnector\Download\FileDownloaderTest.cs" />
-    <Compile Include="DesktopConnector\FileHandling\ApplicationWatcher\ApplicationWatcherTest.cs" />
+    <Compile Include="DesktopConnector\FileHandling\ApplicationWatcher\ApplicationWatcherBaseTest.cs" />
     <Compile Include="DesktopConnector\FileHandling\ApplicationWatcher\AttributeChangedWatcherTest.cs" />
     <Compile Include="DesktopConnector\FileHandling\ApplicationWatcher\FormBasedWatcherTest.cs" />
     <Compile Include="DesktopConnector\FileHandling\ApplicationWatcher\FileLockTesterTest.cs" />
-    <Compile Include="DesktopConnector\FileHandling\ApplicationWatcher\PollingLockWatcherTest.cs" />
-    <Compile Include="DesktopConnector\FileHandling\ApplicationWatcher\PollingFileWatcherMock.cs" />
-    <Compile Include="DesktopConnector\FileHandling\ApplicationWatcher\PollingFileWatcherBaseTest.cs" />
+    <Compile Include="DesktopConnector\FileHandling\ApplicationWatcher\PollingFileLockWatcherTest.cs" />
     <Compile Include="DesktopConnector\FileHandling\DownloadedFileStates\NewFileCompletedStateTest.cs" />
     <Compile Include="DesktopConnector\FileHandling\DownloadedFileStates\NewFileDiscardedStateTest.cs" />
     <Compile Include="DesktopConnector\FileHandling\DownloadedFileStates\NewFileStateTest.cs" />
