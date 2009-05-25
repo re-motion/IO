@@ -163,7 +163,7 @@
     <Compile Include="Shared\Messages\RelockingTest.cs" />
     <Compile Include="Shared\Utilities\ArgumentUtilityTest.cs" />
     <Compile Include="DesktopConnector\Utilities\DownloadedFileObjectMother.cs" />
-    <Compile Include="Web\LosSerializationHelperTest.cs" />
+    <Compile Include="Web\Base64SerializationHelperTest.cs" />
     <Compile Include="Shared\Utilities\StreamCopierTest.cs" />
     <Compile Include="Shared\Utilities\UriUtilityTest.cs" />
     <Compile Include="Shared\Messages\LockingTest.cs" />
