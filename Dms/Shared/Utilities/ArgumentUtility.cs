@@ -16,7 +16,6 @@
 // Additional permissions are listed in the file re-motion_exceptions.txt.
 // 
 using System;
-using Remotion.Dms.Shared.Utilities;
 
 namespace Remotion.Dms.Shared.Utilities
 {
@@ -24,7 +23,9 @@ namespace Remotion.Dms.Shared.Utilities
   {
     public static T CheckNotNull<T> (string argumentName, T actualValue)
     {
+// ReSharper disable CompareNonConstrainedGenericWithNull
       if (actualValue == null)
+// ReSharper restore CompareNonConstrainedGenericWithNull
         throw new ArgumentNullException (argumentName);
 
       return actualValue;
