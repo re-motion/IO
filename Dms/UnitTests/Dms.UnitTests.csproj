@@ -61,7 +61,7 @@
     <Compile Include="Clients.Windows.Tray\Controllers\ApplicationWatcherFormControllerTest.cs" />
     <Compile Include="Clients.Windows.Tray\Controllers\AuthenticateUserFormControllerTest.cs" />
     <Compile Include="Clients.Windows.Tray\Controllers\DiagnosticFormControllerTest.cs" />
-    <Compile Include="Clients.Windows.Tray\Controllers\DownloadedFilesFormControllerTest.cs" />
+    <Compile Include="Clients.Windows.Tray\Controllers\ManagedFilesFormControllerTest.cs" />
     <Compile Include="Clients.Windows.Tray\Controllers\DropTargetFormControllerTest.cs" />
     <Compile Include="Clients.Windows.Tray\Controllers\ProgressBarFormControllerTest.cs" />
     <Compile Include="Clients.Windows.Tray\Forms\ApplicationWatcherFormTest.cs" />
@@ -116,17 +116,17 @@
     <Compile Include="DesktopConnector\FileHandling\FileLocking\FileRelockerTest.cs" />
     <Compile Include="DesktopConnector\FileHandling\FileLocking\FileUnlockerTest.cs" />
     <Compile Include="DesktopConnector\FileHandling\FileOperationEventManagerTest.cs" />
-    <Compile Include="DesktopConnector\FileHandling\DownloadedFileCollectionTest.cs" />
+    <Compile Include="DesktopConnector\FileHandling\ManagedFileCollectionTest.cs" />
     <Compile Include="DesktopConnector\FileHandling\DownloadedFileStates\BeingEditedStateTest.cs" />
     <Compile Include="DesktopConnector\FileHandling\DownloadedFileStates\BeingUploadedStateTest.cs" />
     <Compile Include="DesktopConnector\FileHandling\DownloadedFileStates\CommittedStateTest.cs" />
     <Compile Include="DesktopConnector\FileHandling\DownloadedFileStates\DiscardedStateTest.cs" />
-    <Compile Include="DesktopConnector\FileHandling\DownloadedFileStates\DownloadedFileStateTestBase.cs" />
+    <Compile Include="DesktopConnector\FileHandling\DownloadedFileStates\ManagedFileStateTestBase.cs" />
     <Compile Include="DesktopConnector\FileHandling\ManagedFileTest.cs" />
     <Compile Include="DesktopConnector\FileHandling\FileDeleterTest.cs" />
     <Compile Include="DesktopConnector\FileHandling\FileOperationExecutorTest.cs" />
     <Compile Include="DesktopConnector\FileHandling\FileOpenerTest.cs" />
-    <Compile Include="Clients.Windows.Tray\Forms\DownloadedFilesFormTest.cs" />
+    <Compile Include="Clients.Windows.Tray\Forms\ManagedFilesFormTest.cs" />
     <Compile Include="Clients.Windows.Tray\Forms\HiddenMainFormMock.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -160,7 +160,7 @@
     <Compile Include="Shared\Messages\UnlockingTest.cs" />
     <Compile Include="Shared\Messages\RelockingTest.cs" />
     <Compile Include="Shared\Utilities\ArgumentUtilityTest.cs" />
-    <Compile Include="DesktopConnector\Utilities\DownloadedFileObjectMother.cs" />
+    <Compile Include="DesktopConnector\Utilities\ManagedFileObjectMother.cs" />
     <Compile Include="Web\Base64SerializationHelperTest.cs" />
     <Compile Include="Shared\Utilities\StreamCopierTest.cs" />
     <Compile Include="Shared\Utilities\UriUtilityTest.cs" />
