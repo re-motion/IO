@@ -48,6 +48,8 @@ namespace Remotion.Dms.Shared.Utilities
     {
       ArgumentUtility.CheckNotNull ("input", input);
       ArgumentUtility.CheckNotNull ("output", output);
+      ArgumentUtility.CheckNotNull ("shouldAbort", shouldAbort);
+
       long bytesTransferred = 0;
       byte[] buffer = new byte[BufferSize];
       int bytesRead;
