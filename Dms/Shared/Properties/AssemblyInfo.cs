@@ -24,11 +24,11 @@ using System.Reflection;
 // associated with an assembly.
 //
 [assembly: AssemblyTitle ("Remotion Dms Shared Library")]
-[assembly: AssemblyDescription ("Classes and utilities used by Dms clients and server.")]
+[assembly: AssemblyDescription("Classes and utilities used by Dms clients and server.")]
 [assembly: AssemblyConfiguration(".NET Framework: net-3.5, build type: debug")]
 [assembly: AssemblyCompany("rubicon informationstechnologie gmbh")]
 [assembly: AssemblyProduct("re-vision (www.re-motion.org)")]
-[assembly: AssemblyCopyright("(c) 2005 - 2008 rubicon informationstechnologie gmbh, www.rubicon.eu")]
+[assembly: AssemblyCopyright("(c) 2005 - 2009 rubicon informationstechnologie gmbh, www.rubicon.eu")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]		
 [assembly: CLSCompliant(true)]
@@ -43,4 +43,4 @@ using System.Reflection;
 // You can specify all the values or you can default the Revision and Build Numbers 
 // by using the '*' as shown below:
 
-[assembly: AssemblyVersion("1.11.19.2")]
+[assembly: AssemblyVersion("1.13.9.2")]
