@@ -140,11 +140,10 @@
     <Compile Include="DesktopConnector\Utilities\ApplicationWatchFinderTest.cs" />
     <Compile Include="DesktopConnector\Utilities\AssociatedProgramFinderTest.cs" />
     <Compile Include="DesktopConnector\FileHandling\FileTransfer\BaseFileTransferHandlerTest.cs" />
-    <Compile Include="DesktopConnector\Utilities\FileDataObjectMother.cs" />
+    <Compile Include="DesktopConnector\Utilities\DocumentInfoObjectMother.cs" />
     <Compile Include="DesktopConnector\Utilities\FileVersionProviderTest.cs" />
     <Compile Include="DesktopConnector\Utilities\RegistryAccessorTest.cs" />
     <Compile Include="DesktopConnector\Utilities\WebRequestFactoryTest.cs" />
-    <Compile Include="DesktopConnector\Utilities\WebRequestHandlerTest.cs" />
     <Compile Include="Globalization\NotificationResourcesTest.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -155,7 +154,6 @@
     <Compile Include="Clients.Windows.Tray\Controllers\HiddenMainFormControllerTest.cs" />
     <Compile Include="DesktopConnector\FileHandling\LockHandlerMock.cs" />
     <Compile Include="DesktopConnector\FileHandling\PersistenceManagerTest.cs" />
-    <Compile Include="DesktopConnector\Download\FileDataTest.cs" />
     <Compile Include="DesktopConnector\UI\UIThreadInvokerTest.cs" />
     <Compile Include="DesktopConnector\Upload\FileUploaderTest.cs" />
     <Compile Include="DesktopConnector\Upload\UploadHandlerMock.cs" />
