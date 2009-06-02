@@ -73,9 +73,9 @@
     <Compile Include="Clients.Windows.Tray\Forms\ProgressBarFormTest.cs" />
     <Compile Include="Clients.Windows.Tray\OutlookAccess\OutlookAccessHelperTest.cs" />
     <Compile Include="Clients.Windows.Tray\ProgramRunnerTest.cs" />
-    <Compile Include="DesktopConnector\ActionHandler\BrowseStrategyTest.cs" />
+    <Compile Include="DesktopConnector\ActionHandler\FileBrowserStrategyTest.cs" />
     <Compile Include="DesktopConnector\ActionHandler\ClipboardStrategyTest.cs" />
-    <Compile Include="DesktopConnector\ActionHandler\DropStrategyTest.cs" />
+    <Compile Include="DesktopConnector\ActionHandler\DropTargetStrategyTest.cs" />
     <Compile Include="DesktopConnector\ActionHandler\DownloadActionHandlerTest.cs" />
     <Compile Include="DesktopConnector\ActionHandler\NewFileActionHandlerTest.cs" />
     <Compile Include="DesktopConnector\Configuration\ApplicationWatcherElementTest.cs" />
