@@ -59,16 +59,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Clients.Windows.Tray\Controllers\ApplicationWatcherFormControllerTest.cs" />
     <Compile Include="Clients.Windows.Tray\Controllers\AuthenticateUserFormControllerTest.cs" />
     <Compile Include="Clients.Windows.Tray\Controllers\DiagnosticFormControllerTest.cs" />
     <Compile Include="Clients.Windows.Tray\Controllers\ManagedFilesFormControllerTest.cs" />
     <Compile Include="Clients.Windows.Tray\Controllers\DropTargetFormControllerTest.cs" />
     <Compile Include="Clients.Windows.Tray\Controllers\ProgressBarFormControllerTest.cs" />
-    <Compile Include="Clients.Windows.Tray\Forms\ApplicationWatcherFormTest.cs" />
     <Compile Include="Clients.Windows.Tray\Forms\AuthenticateUserInteractionTest.cs" />
     <Compile Include="Clients.Windows.Tray\Forms\BrowseUserInteractionTest.cs" />
-    <Compile Include="Clients.Windows.Tray\Forms\DefaultWatcherInteractionTest.cs" />
     <Compile Include="Clients.Windows.Tray\Forms\DropUserInteractionTest.cs" />
     <Compile Include="Clients.Windows.Tray\Forms\ProgressBarFormInteractionTest.cs" />
     <Compile Include="Clients.Windows.Tray\Forms\ProgressBarFormTest.cs" />
@@ -93,7 +90,6 @@
     <Compile Include="DesktopConnector\Download\FileDownloaderTest.cs" />
     <Compile Include="DesktopConnector\FileHandling\ApplicationWatcher\ApplicationWatcherBaseTest.cs" />
     <Compile Include="DesktopConnector\FileHandling\ApplicationWatcher\AttributeChangedWatcherTest.cs" />
-    <Compile Include="DesktopConnector\FileHandling\ApplicationWatcher\FormBasedWatcherTest.cs" />
     <Compile Include="DesktopConnector\FileHandling\ApplicationWatcher\FileLockTesterTest.cs" />
     <Compile Include="DesktopConnector\FileHandling\ApplicationWatcher\PollingFileLockWatcherTest.cs" />
     <Compile Include="DesktopConnector\FileHandling\DownloadedFileStates\NewFileCompletedStateTest.cs" />
