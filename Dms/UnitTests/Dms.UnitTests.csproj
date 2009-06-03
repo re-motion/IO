@@ -3,7 +3,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>9.0.30729</ProductVersion>
+    <ProductVersion>9.0.21022</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{1763F21F-531C-4E86-ACFC-9A8BF903F945}</ProjectGuid>
     <OutputType>Library</OutputType>
@@ -131,7 +131,6 @@
     <Compile Include="DesktopConnector\FileHandling\FileOpenerTest.cs" />
     <Compile Include="Clients.Windows.Tray\Forms\ManagedFilesFormTest.cs" />
     <Compile Include="Clients.Windows.Tray\Forms\HiddenMainFormMock.cs">
-      <SubType>Form</SubType>
     </Compile>
     <Compile Include="Clients.Windows.Tray\Forms\HiddenMainFormTest.cs" />
     <Compile Include="Clients.Windows.Tray\Forms\HiddenMainFormUserInteractionTest.cs" />
