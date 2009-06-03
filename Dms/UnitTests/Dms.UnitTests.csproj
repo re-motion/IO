@@ -86,7 +86,7 @@
     <Compile Include="Shared\Utilities\Base64SerializationHelperTest.cs" />
     <Compile Include="Shared\DmsUrlTest.cs" />
     <Compile Include="DesktopConnector\Download\DownloadHandlerMock.cs" />
-    <Compile Include="DesktopConnector\Download\FileDownloaderTest.cs" />
+    <Compile Include="DesktopConnector\Download\FileDownloadAgentTest.cs" />
     <Compile Include="DesktopConnector\FileHandling\ApplicationWatcher\ApplicationWatcherBaseTest.cs" />
     <Compile Include="DesktopConnector\FileHandling\ApplicationWatcher\AttributeChangedWatcherTest.cs" />
     <Compile Include="DesktopConnector\FileHandling\ApplicationWatcher\FileLockTesterTest.cs" />
@@ -111,7 +111,7 @@
     <Compile Include="DesktopConnector\FileHandling\DownloadedFileStates\LostSyncStateTest.cs" />
     <Compile Include="DesktopConnector\FileHandling\DownloadedFileStates\UploadCommitRequestedStateTest.cs" />
     <Compile Include="DesktopConnector\FileHandling\DownloadedFileStates\UploadRequestedStateTest.cs" />
-    <Compile Include="DesktopConnector\FileHandling\FileLocking\LockManagerTest.cs" />
+    <Compile Include="DesktopConnector\FileHandling\FileLocking\FileLockAgentTest.cs" />
     <Compile Include="DesktopConnector\FileHandling\FileLocking\FileRelockerTest.cs" />
     <Compile Include="DesktopConnector\FileHandling\FileLocking\FileUnlockerTest.cs" />
     <Compile Include="DesktopConnector\FileHandling\FileOperationEventManagerTest.cs" />
@@ -152,7 +152,7 @@
     <Compile Include="DesktopConnector\FileHandling\LockHandlerMock.cs" />
     <Compile Include="DesktopConnector\FileHandling\PersistenceManagerTest.cs" />
     <Compile Include="DesktopConnector\UI\UIThreadInvokerTest.cs" />
-    <Compile Include="DesktopConnector\Upload\FileUploaderTest.cs" />
+    <Compile Include="DesktopConnector\Upload\FileUploadAgentTest.cs" />
     <Compile Include="DesktopConnector\Upload\UploadHandlerMock.cs" />
     <Compile Include="Shared\Messages\UnlockingTest.cs" />
     <Compile Include="Shared\Messages\RelockingTest.cs" />
