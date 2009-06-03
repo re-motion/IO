@@ -111,7 +111,7 @@
     <Compile Include="DesktopConnector\FileHandling\DownloadedFileStates\LostSyncStateTest.cs" />
     <Compile Include="DesktopConnector\FileHandling\DownloadedFileStates\UploadCommitRequestedStateTest.cs" />
     <Compile Include="DesktopConnector\FileHandling\DownloadedFileStates\UploadRequestedStateTest.cs" />
-    <Compile Include="DesktopConnector\FileHandling\FileLocking\FileLockerTest.cs" />
+    <Compile Include="DesktopConnector\FileHandling\FileLocking\LockManagerTest.cs" />
     <Compile Include="DesktopConnector\FileHandling\FileLocking\FileRelockerTest.cs" />
     <Compile Include="DesktopConnector\FileHandling\FileLocking\FileUnlockerTest.cs" />
     <Compile Include="DesktopConnector\FileHandling\FileOperationEventManagerTest.cs" />
