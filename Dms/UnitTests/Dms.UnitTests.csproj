@@ -86,6 +86,7 @@
     <Compile Include="DesktopConnector\FileHandling\ApplicationWatcher\ProcessWatcherTest.cs" />
     <Compile Include="DesktopConnector\FileHandling\DownloadedFileStates\RecoveredStateTest.cs" />
     <Compile Include="DesktopConnector\Services\DmsServiceAgentTest.cs" />
+    <Compile Include="Shared\Utilities\Base64SerializationHelperTest.cs" />
     <Compile Include="Shared\DmsUrlTest.cs" />
     <Compile Include="DesktopConnector\Download\DownloadHandlerMock.cs" />
     <Compile Include="DesktopConnector\Download\FileDownloaderTest.cs" />
@@ -161,7 +162,6 @@
     <Compile Include="Shared\Messages\RelockingTest.cs" />
     <Compile Include="Shared\Utilities\ArgumentUtilityTest.cs" />
     <Compile Include="DesktopConnector\Utilities\ManagedFileObjectMother.cs" />
-    <Compile Include="Web\Base64SerializationHelperTest.cs" />
     <Compile Include="Shared\Utilities\StreamCopierTest.cs" />
     <Compile Include="Shared\Utilities\UriUtilityTest.cs" />
     <Compile Include="Shared\Messages\LockingTest.cs" />

@@ -33,6 +33,7 @@
       <warnaserror refid="doc-warn-as-error"/>
       <sources failonempty="true">
         <include name="*.cs" />
+        <include name="Exceptions/**/*.cs" />
         <include name="Messages/**/*.cs" />
         <include name="Utilities/**/*.cs" />
         <include name="Properties/**/*.cs" />
