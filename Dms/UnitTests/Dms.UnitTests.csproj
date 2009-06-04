@@ -83,6 +83,8 @@
     <Compile Include="DesktopConnector\FileHandling\ApplicationWatcher\ProcessWatcherTest.cs" />
     <Compile Include="DesktopConnector\FileHandling\DownloadedFileStates\RecoveredStateTest.cs" />
     <Compile Include="DesktopConnector\Services\DmsServiceAgentTest.cs" />
+    <Compile Include="DesktopConnector\Upload\DownloadedFileUploadAgentTest.cs" />
+    <Compile Include="DesktopConnector\Upload\NewFileUploadAgentTest.cs" />
     <Compile Include="Shared\Utilities\Base64SerializationHelperTest.cs" />
     <Compile Include="Shared\DmsUrlTest.cs" />
     <Compile Include="DesktopConnector\Download\DownloadHandlerMock.cs" />
@@ -95,8 +97,6 @@
     <Compile Include="DesktopConnector\FileHandling\DownloadedFileStates\NewFileDiscardedStateTest.cs" />
     <Compile Include="DesktopConnector\FileHandling\DownloadedFileStates\NewFileStateTest.cs" />
     <Compile Include="DesktopConnector\FileHandling\UIStates\UIStateTest.cs" />
-    <Compile Include="DesktopConnector\FileHandling\UnlockHandlerMock.cs" />
-    <Compile Include="DesktopConnector\FileHandling\RelockHandlerMock.cs" />
     <Compile Include="DesktopConnector\FileHandling\DownloadedFileStates\BeingOpenedStateTest.cs" />
     <Compile Include="DesktopConnector\FileHandling\DownloadedFileStates\CommitPendingStateTest.cs" />
     <Compile Include="DesktopConnector\FileHandling\DownloadedFileStates\CommitRequestedStateTest.cs" />
@@ -137,7 +137,6 @@
     <Compile Include="DesktopConnector\Utilities\DocumentInfoObjectMother.cs" />
     <Compile Include="DesktopConnector\Utilities\FileVersionProviderTest.cs" />
     <Compile Include="DesktopConnector\Utilities\RegistryAccessorTest.cs" />
-    <Compile Include="DesktopConnector\Utilities\WebRequestFactoryTest.cs" />
     <Compile Include="Globalization\NotificationResourcesTest.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -146,10 +145,9 @@
     <Compile Include="MiniWebServerTestHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Clients.Windows.Tray\Controllers\HiddenMainFormControllerTest.cs" />
-    <Compile Include="DesktopConnector\FileHandling\LockHandlerMock.cs" />
     <Compile Include="DesktopConnector\FileHandling\PersistenceManagerTest.cs" />
     <Compile Include="DesktopConnector\UI\UIThreadInvokerTest.cs" />
-    <Compile Include="DesktopConnector\Upload\FileUploadAgentTest.cs" />
+    <Compile Include="DesktopConnector\Upload\FileUploadAgentBaseTest.cs" />
     <Compile Include="DesktopConnector\Upload\UploadHandlerMock.cs" />
     <Compile Include="Shared\Messages\UnlockingTest.cs" />
     <Compile Include="Shared\Messages\RelockingTest.cs" />
