@@ -64,10 +64,10 @@
     <Compile Include="Clients.Windows.Tray\Controllers\ManagedFilesFormControllerTest.cs" />
     <Compile Include="Clients.Windows.Tray\Controllers\DropTargetFormControllerTest.cs" />
     <Compile Include="Clients.Windows.Tray\Controllers\ProgressBarFormControllerTest.cs" />
-    <Compile Include="Clients.Windows.Tray\Forms\AuthenticateUserInteractionTest.cs" />
-    <Compile Include="Clients.Windows.Tray\Forms\FileBrowserInteractionTest.cs" />
-    <Compile Include="Clients.Windows.Tray\Forms\DropTargetInteractionTest.cs" />
-    <Compile Include="Clients.Windows.Tray\Forms\ProgressBarFormInteractionTest.cs" />
+    <Compile Include="Clients.Windows.Tray\Interactions\AuthenticateUserInteractionTest.cs" />
+    <Compile Include="Clients.Windows.Tray\Interactions\FileBrowserInteractionTest.cs" />
+    <Compile Include="Clients.Windows.Tray\Interactions\DropTargetInteractionTest.cs" />
+    <Compile Include="Clients.Windows.Tray\Interactions\ProgressBarFormInteractionTest.cs" />
     <Compile Include="Clients.Windows.Tray\OutlookAccess\OutlookAccessHelperTest.cs" />
     <Compile Include="Clients.Windows.Tray\ProgramRunnerTest.cs" />
     <Compile Include="DesktopConnector\ActionHandler\FileBrowserStrategyTest.cs" />
@@ -130,7 +130,7 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Clients.Windows.Tray\Forms\HiddenMainFormTest.cs" />
-    <Compile Include="Clients.Windows.Tray\Forms\HiddenMainFormUserInteractionTest.cs" />
+    <Compile Include="Clients.Windows.Tray\Interactions\HiddenMainFormUserInteractionTest.cs" />
     <Compile Include="Clients.Windows.Tray\ProgramTest.cs" />
     <Compile Include="DesktopConnector\FileHandling\QueueManagerTest.cs" />
     <Compile Include="DesktopConnector\Upload\UploadStreamTest.cs" />
