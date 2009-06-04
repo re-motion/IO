@@ -65,8 +65,8 @@
     <Compile Include="Clients.Windows.Tray\Controllers\DropTargetFormControllerTest.cs" />
     <Compile Include="Clients.Windows.Tray\Controllers\ProgressBarFormControllerTest.cs" />
     <Compile Include="Clients.Windows.Tray\Forms\AuthenticateUserInteractionTest.cs" />
-    <Compile Include="Clients.Windows.Tray\Forms\BrowseUserInteractionTest.cs" />
-    <Compile Include="Clients.Windows.Tray\Forms\DropUserInteractionTest.cs" />
+    <Compile Include="Clients.Windows.Tray\Forms\FileBrowserInteractionTest.cs" />
+    <Compile Include="Clients.Windows.Tray\Forms\DropTargetInteractionTest.cs" />
     <Compile Include="Clients.Windows.Tray\Forms\ProgressBarFormInteractionTest.cs" />
     <Compile Include="Clients.Windows.Tray\OutlookAccess\OutlookAccessHelperTest.cs" />
     <Compile Include="Clients.Windows.Tray\ProgramRunnerTest.cs" />
