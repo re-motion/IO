@@ -111,8 +111,6 @@
     <Compile Include="DesktopConnector\FileHandling\DownloadedFileStates\UploadCommitRequestedStateTest.cs" />
     <Compile Include="DesktopConnector\FileHandling\DownloadedFileStates\UploadRequestedStateTest.cs" />
     <Compile Include="DesktopConnector\FileHandling\FileLocking\FileLockAgentTest.cs" />
-    <Compile Include="DesktopConnector\FileHandling\FileLocking\FileRelockerTest.cs" />
-    <Compile Include="DesktopConnector\FileHandling\FileLocking\FileUnlockerTest.cs" />
     <Compile Include="DesktopConnector\FileHandling\FileOperationEventManagerTest.cs" />
     <Compile Include="DesktopConnector\FileHandling\ManagedFileCollectionTest.cs" />
     <Compile Include="DesktopConnector\FileHandling\DownloadedFileStates\BeingEditedStateTest.cs" />
@@ -135,7 +133,6 @@
     <Compile Include="DesktopConnector\Upload\UploadStreamTest.cs" />
     <Compile Include="DesktopConnector\Utilities\ApplicationWatchFinderTest.cs" />
     <Compile Include="DesktopConnector\Utilities\AssociatedProgramFinderTest.cs" />
-    <Compile Include="DesktopConnector\FileHandling\FileTransfer\BaseFileTransferHandlerTest.cs" />
     <Compile Include="DesktopConnector\Utilities\DocumentInfoObjectMother.cs" />
     <Compile Include="DesktopConnector\Utilities\FileVersionProviderTest.cs" />
     <Compile Include="DesktopConnector\Utilities\RegistryAccessorTest.cs" />
