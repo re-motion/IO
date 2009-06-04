@@ -61,6 +61,7 @@
   <ItemGroup>
     <Compile Include="Clients.Windows.Tray\Controllers\DiagnosticFormControllerTest.cs" />
     <Compile Include="Clients.Windows.Tray\Controllers\FormControllerFactoryTest.cs" />
+    <Compile Include="Clients.Windows.Tray\Controllers\HiddenMainFormControllerTest.cs" />
     <Compile Include="Clients.Windows.Tray\Controllers\ManagedFilesFormControllerTest.cs" />
     <Compile Include="Clients.Windows.Tray\Controllers\DropTargetFormControllerTest.cs" />
     <Compile Include="Clients.Windows.Tray\Controllers\ProgressBarFormControllerTest.cs" />
@@ -124,11 +125,7 @@
     <Compile Include="DesktopConnector\FileHandling\FileOperationExecutorTest.cs" />
     <Compile Include="DesktopConnector\FileHandling\FileOpenerTest.cs" />
     <Compile Include="Clients.Windows.Tray\Forms\ManagedFilesFormTest.cs" />
-    <Compile Include="Clients.Windows.Tray\Forms\HiddenMainFormMock.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Clients.Windows.Tray\Forms\HiddenMainFormTest.cs" />
-    <Compile Include="Clients.Windows.Tray\Interactions\HiddenMainFormUserInteractionTest.cs" />
+    <Compile Include="Clients.Windows.Tray\Interactions\MainFormUserInteractionTest.cs" />
     <Compile Include="Clients.Windows.Tray\ProgramTest.cs" />
     <Compile Include="DesktopConnector\FileHandling\QueueManagerTest.cs" />
     <Compile Include="DesktopConnector\Upload\UploadStreamTest.cs" />
@@ -144,7 +141,6 @@
     </Compile>
     <Compile Include="MiniWebServerTestHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Clients.Windows.Tray\Controllers\HiddenMainFormControllerTest.cs" />
     <Compile Include="DesktopConnector\FileHandling\PersistenceManagerTest.cs" />
     <Compile Include="DesktopConnector\UI\UIThreadInvokerTest.cs" />
     <Compile Include="DesktopConnector\Upload\FileUploadAgentBaseTest.cs" />
