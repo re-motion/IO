@@ -66,6 +66,7 @@
     <Compile Include="Clients.Windows.Tray\Interactions\FileBrowserInteractionTest.cs" />
     <Compile Include="Clients.Windows.Tray\Interactions\DropTargetInteractionTest.cs" />
     <Compile Include="Clients.Windows.Tray\Interactions\ProgressBarFormInteractionTest.cs" />
+    <Compile Include="Clients.Windows.Tray\Interactions\UserInteractionFactoryTest.cs" />
     <Compile Include="Clients.Windows.Tray\OutlookAccess\OutlookAccessHelperTest.cs" />
     <Compile Include="Clients.Windows.Tray\ProgramRunnerTest.cs" />
     <Compile Include="DesktopConnector\ActionHandler\FileBrowserStrategyTest.cs" />
