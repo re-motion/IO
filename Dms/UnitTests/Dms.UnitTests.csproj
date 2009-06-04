@@ -60,6 +60,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Clients.Windows.Tray\Controllers\DiagnosticFormControllerTest.cs" />
+    <Compile Include="Clients.Windows.Tray\Controllers\FormControllerFactoryTest.cs" />
     <Compile Include="Clients.Windows.Tray\Controllers\ManagedFilesFormControllerTest.cs" />
     <Compile Include="Clients.Windows.Tray\Controllers\DropTargetFormControllerTest.cs" />
     <Compile Include="Clients.Windows.Tray\Controllers\ProgressBarFormControllerTest.cs" />
