@@ -84,12 +84,12 @@
     <Compile Include="DesktopConnector\FileHandling\ApplicationWatcher\ProcessWatcherTest.cs" />
     <Compile Include="DesktopConnector\FileHandling\DownloadedFileStates\RecoveredStateTest.cs" />
     <Compile Include="DesktopConnector\Services\DmsServiceAgentTest.cs" />
-    <Compile Include="DesktopConnector\Upload\DownloadedFileUploadAgentTest.cs" />
-    <Compile Include="DesktopConnector\Upload\NewFileUploadAgentTest.cs" />
+    <Compile Include="DesktopConnector\FileHandling\FileTransfer\DownloadedFileUploadAgentTest.cs" />
+    <Compile Include="DesktopConnector\FileHandling\FileTransfer\NewFileUploadAgentTest.cs" />
     <Compile Include="Shared\Utilities\Base64SerializationHelperTest.cs" />
     <Compile Include="Shared\DmsUrlTest.cs" />
-    <Compile Include="DesktopConnector\Download\DownloadHandlerMock.cs" />
-    <Compile Include="DesktopConnector\Download\FileDownloadAgentTest.cs" />
+    <Compile Include="DesktopConnector\FileHandling\FileTransfer\DownloadHandlerMock.cs" />
+    <Compile Include="DesktopConnector\FileHandling\FileTransfer\FileDownloadAgentTest.cs" />
     <Compile Include="DesktopConnector\FileHandling\ApplicationWatcher\ApplicationWatcherBaseTest.cs" />
     <Compile Include="DesktopConnector\FileHandling\ApplicationWatcher\AttributeChangedWatcherTest.cs" />
     <Compile Include="DesktopConnector\FileHandling\ApplicationWatcher\FileLockTesterTest.cs" />
@@ -128,7 +128,7 @@
     <Compile Include="Clients.Windows.Tray\Interactions\MainFormUserInteractionTest.cs" />
     <Compile Include="Clients.Windows.Tray\ProgramTest.cs" />
     <Compile Include="DesktopConnector\FileHandling\QueueManagerTest.cs" />
-    <Compile Include="DesktopConnector\Upload\UploadStreamTest.cs" />
+    <Compile Include="DesktopConnector\FileHandling\FileTransfer\UploadStreamTest.cs" />
     <Compile Include="DesktopConnector\Utilities\ApplicationWatchFinderTest.cs" />
     <Compile Include="DesktopConnector\Utilities\AssociatedProgramFinderTest.cs" />
     <Compile Include="DesktopConnector\Utilities\DocumentInfoObjectMother.cs" />
@@ -143,8 +143,8 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="DesktopConnector\FileHandling\PersistenceManagerTest.cs" />
     <Compile Include="DesktopConnector\UI\UIThreadInvokerTest.cs" />
-    <Compile Include="DesktopConnector\Upload\FileUploadAgentBaseTest.cs" />
-    <Compile Include="DesktopConnector\Upload\UploadHandlerMock.cs" />
+    <Compile Include="DesktopConnector\FileHandling\FileTransfer\FileUploadAgentBaseTest.cs" />
+    <Compile Include="DesktopConnector\FileHandling\FileTransfer\UploadHandlerMock.cs" />
     <Compile Include="Shared\Messages\UnlockingTest.cs" />
     <Compile Include="Shared\Messages\RelockingTest.cs" />
     <Compile Include="Shared\Utilities\ArgumentUtilityTest.cs" />
