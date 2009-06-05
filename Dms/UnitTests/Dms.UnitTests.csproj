@@ -60,7 +60,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Clients.Windows.Tray\Controllers\FormControllerFactoryTest.cs" />
-    <Compile Include="Clients.Windows.Tray\Controllers\HiddenMainFormControllerTest.cs" />
     <Compile Include="Clients.Windows.Tray\Controllers\ManagedFilesFormControllerTest.cs" />
     <Compile Include="Clients.Windows.Tray\Controllers\ProgressBarFormControllerTest.cs" />
     <Compile Include="Clients.Windows.Tray\Interactions\ClipboardInteractionFactoryTest.cs" />
@@ -70,6 +69,7 @@
     <Compile Include="Clients.Windows.Tray\Interactions\FileBrowserInteractionTest.cs" />
     <Compile Include="Clients.Windows.Tray\Interactions\ProgressBarFormInteractionTest.cs" />
     <Compile Include="Clients.Windows.Tray\Interactions\UserInteractionFactoryTest.cs" />
+    <Compile Include="Clients.Windows.Tray\Interactions\UserInteractionTest.cs" />
     <Compile Include="Clients.Windows.Tray\OutlookAccess\OutlookAccessHelperTest.cs" />
     <Compile Include="Clients.Windows.Tray\ProgramRunnerTest.cs" />
     <Compile Include="DesktopConnector\ActionHandler\FileSelectionStrategyTest.cs" />
@@ -125,7 +125,6 @@
     <Compile Include="DesktopConnector\FileHandling\FileOperationExecutorTest.cs" />
     <Compile Include="DesktopConnector\FileHandling\FileOpenerTest.cs" />
     <Compile Include="Clients.Windows.Tray\Forms\ManagedFilesFormTest.cs" />
-    <Compile Include="Clients.Windows.Tray\Interactions\MainFormUserInteractionTest.cs" />
     <Compile Include="Clients.Windows.Tray\ProgramTest.cs" />
     <Compile Include="DesktopConnector\FileHandling\QueueManagerTest.cs" />
     <Compile Include="DesktopConnector\FileHandling\FileTransfer\UploadStreamTest.cs" />
