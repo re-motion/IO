@@ -59,8 +59,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Clients.Windows.Tray\Controllers\FormControllerFactoryTest.cs" />
-    <Compile Include="Clients.Windows.Tray\Controllers\ManagedFilesFormControllerTest.cs" />
+    <Compile Include="Clients.Windows.Tray\Forms\FormFactoryTest.cs" />
     <Compile Include="Clients.Windows.Tray\Interactions\ClipboardInteractionFactoryTest.cs" />
     <Compile Include="Clients.Windows.Tray\Interactions\DropTargetFormInteractionTest.cs" />
     <Compile Include="Clients.Windows.Tray\Interactions\DropTargetInteractionFactoryTest.cs" />
