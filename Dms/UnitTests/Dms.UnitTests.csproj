@@ -61,13 +61,12 @@
   <ItemGroup>
     <Compile Include="Clients.Windows.Tray\Controllers\FormControllerFactoryTest.cs" />
     <Compile Include="Clients.Windows.Tray\Controllers\ManagedFilesFormControllerTest.cs" />
-    <Compile Include="Clients.Windows.Tray\Controllers\ProgressBarFormControllerTest.cs" />
     <Compile Include="Clients.Windows.Tray\Interactions\ClipboardInteractionFactoryTest.cs" />
     <Compile Include="Clients.Windows.Tray\Interactions\DropTargetFormInteractionTest.cs" />
     <Compile Include="Clients.Windows.Tray\Interactions\DropTargetInteractionFactoryTest.cs" />
     <Compile Include="Clients.Windows.Tray\Interactions\FileBrowserInteractionFactoryTest.cs" />
     <Compile Include="Clients.Windows.Tray\Interactions\FileBrowserInteractionTest.cs" />
-    <Compile Include="Clients.Windows.Tray\Interactions\ProgressBarFormInteractionTest.cs" />
+    <Compile Include="Clients.Windows.Tray\Interactions\ProgressReporterInteractionTest.cs" />
     <Compile Include="Clients.Windows.Tray\Interactions\UserInteractionFactoryTest.cs" />
     <Compile Include="Clients.Windows.Tray\Interactions\UserInteractionTest.cs" />
     <Compile Include="Clients.Windows.Tray\OutlookAccess\OutlookAccessHelperTest.cs" />
