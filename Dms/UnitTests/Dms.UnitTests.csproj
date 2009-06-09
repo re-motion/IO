@@ -61,7 +61,8 @@
   <ItemGroup>
     <Compile Include="Clients.Windows.Tray\ArgumentHandlerTest.cs" />
     <Compile Include="Clients.Windows.Tray\Forms\FormFactoryTest.cs" />
-    <Compile Include="Clients.Windows.Tray\Interactions\DropTargetFormInteractionTest.cs" />
+    <Compile Include="Clients.Windows.Tray\Interactions\ClipboardInteractionTest.cs" />
+    <Compile Include="Clients.Windows.Tray\Interactions\DropTargetInteractionTest.cs" />
     <Compile Include="Clients.Windows.Tray\Interactions\FileBrowserInteractionTest.cs" />
     <Compile Include="Clients.Windows.Tray\Interactions\ProgressReporterInteractionTest.cs" />
     <Compile Include="Clients.Windows.Tray\Interactions\UserInteractionFactoryTest.cs" />
