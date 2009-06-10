@@ -77,6 +77,8 @@
     <Compile Include="DesktopConnector\Configuration\ApplicationWatcherStub.cs" />
     <Compile Include="DesktopConnector\Configuration\DesktopConnectorConfigurationTest.cs" />
     <Compile Include="DesktopConnector\Configuration\XmlCriteriaElementTest.cs" />
+    <Compile Include="DesktopConnector\FileHandling\ApplicationWatcher\FileLockBasedApplicationWatcherTest.cs" />
+    <Compile Include="DesktopConnector\FileHandling\ApplicationWatcher\ProcessBasedApplicationWatcherTest.cs" />
     <Compile Include="DesktopConnector\FileHandling\ApplicationWatcher\ProcessWatcherTest.cs" />
     <Compile Include="DesktopConnector\FileHandling\DownloadedFileStates\RecoveredStateTest.cs" />
     <Compile Include="DesktopConnector\FileHandling\FileOperationExecutorBuilderTest.cs" />
