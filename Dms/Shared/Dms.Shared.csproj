@@ -67,7 +67,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Utilities\ArgumentEmptyException.cs" />
     <Compile Include="Utilities\ArgumentUtility.cs" />
-    <Compile Include="Utilities\CustomBase64SerializationHelper.cs" />
+    <Compile Include="Utilities\BrowserBase64SerializationHelper.cs" />
     <Compile Include="Utilities\StreamCopier.cs">
       <SubType>Code</SubType>
     </Compile>
