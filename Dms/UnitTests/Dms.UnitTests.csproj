@@ -85,6 +85,8 @@
     <Compile Include="DesktopConnector\Services\DmsServiceAgentTest.cs" />
     <Compile Include="DesktopConnector\FileHandling\FileTransfer\DownloadedFileUploadAgentTest.cs" />
     <Compile Include="DesktopConnector\FileHandling\FileTransfer\NewFileUploadAgentTest.cs" />
+    <Compile Include="DesktopConnector\Utilities\BackgroundThreadInvokerTest.cs" />
+    <Compile Include="DesktopConnector\Utilities\StubThreadInvoker.cs" />
     <Compile Include="Shared\Utilities\CustomBase64SerializationHelperTest.cs" />
     <Compile Include="Shared\DmsUrlTest.cs" />
     <Compile Include="DesktopConnector\FileHandling\FileTransfer\DownloadHandlerMock.cs" />
