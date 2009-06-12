@@ -45,7 +45,8 @@
     <Reference Include="System.XML" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DmsAction.cs" />
+    <Compile Include="DmsClientAction.cs" />
+    <Compile Include="DmsServerAction.cs" />
     <Compile Include="DmsUrl.cs" />
     <Compile Include="Exceptions\DmsLockFailedException.cs" />
     <Compile Include="Exceptions\DmsLockStolenException.cs" />
