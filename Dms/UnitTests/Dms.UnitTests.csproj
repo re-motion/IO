@@ -161,9 +161,10 @@
     <Compile Include="WebServer\PingHandler.cs" />
     <Compile Include="Core\AuthenticationContextStub.cs" />
     <Compile Include="Core\AuthenticationContextTest.cs" />
-    <Compile Include="Core\DmsServiceImplementationTest.cs" />
+    <Compile Include="Web\DmsServiceImplementationTest.cs" />
     <Compile Include="Web\UI\DmsHandlerTest.cs" />
     <Compile Include="Web\UI\DmsServiceTest.cs" />
+    <Compile Include="Web\UI\LoginServiceTest.cs" />
     <None Include="Properties\AssemblyInfoTemplate.cs" />
   </ItemGroup>
   <ItemGroup>
