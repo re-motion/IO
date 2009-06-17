@@ -83,12 +83,12 @@
     <Compile Include="DesktopConnector\FileHandling\ApplicationWatcher\ProcessBasedApplicationWatcherTest.cs" />
     <Compile Include="DesktopConnector\FileHandling\ApplicationWatcher\ProcessWatcherTest.cs" />
     <Compile Include="DesktopConnector\FileHandling\DownloadedFileStates\RecoveredStateTest.cs" />
-    <Compile Include="DesktopConnector\FileHandling\FileOperationExecutorBuilderTest.cs" />
     <Compile Include="DesktopConnector\FileHandling\FileTransfer\FileDownloadAgentTest.cs" />
     <Compile Include="DesktopConnector\FileHandling\FileTransfer\ReadOnlyFileDownloadAgentTest.cs" />
     <Compile Include="DesktopConnector\Services\DmsServiceAgentTest.cs" />
     <Compile Include="DesktopConnector\FileHandling\FileTransfer\DownloadedFileUploadAgentTest.cs" />
     <Compile Include="DesktopConnector\FileHandling\FileTransfer\NewFileUploadAgentTest.cs" />
+    <Compile Include="DesktopConnector\Utilities\ApplicationInfoObjectMother.cs" />
     <Compile Include="DesktopConnector\Utilities\BackgroundThreadInvokerTest.cs" />
     <Compile Include="DesktopConnector\Utilities\StubThreadInvoker.cs" />
     <Compile Include="Shared\Utilities\BrowserBase64SerializationHelperTest.cs" />
