@@ -165,6 +165,7 @@
     <Compile Include="Core\AuthenticationContextStub.cs" />
     <Compile Include="Core\AuthenticationContextTest.cs" />
     <Compile Include="Web\Classes\DmsServiceImplementationTest.cs" />
+    <Compile Include="Web\Classes\WebConfigurationAdapterTest.cs" />
     <Compile Include="Web\UI\DmsHandlerTest.cs" />
     <Compile Include="Web\UI\DmsServiceTest.cs" />
     <Compile Include="Web\UI\LoginServiceTest.cs" />
