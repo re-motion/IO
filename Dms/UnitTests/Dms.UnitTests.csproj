@@ -70,7 +70,7 @@
     <Compile Include="Clients.Windows.Tray\OutlookAccess\OutlookAccessHelperTest.cs" />
     <Compile Include="Clients.Windows.Tray\ProgramRunnerTest.cs" />
     <Compile Include="DesktopConnector\ActionHandler\DownloadActionHandlerTest.cs" />
-    <Compile Include="DesktopConnector\ActionHandler\LoginHandlerTest.cs" />
+    <Compile Include="DesktopConnector\ActionHandler\LoginActionHandlerTest.cs" />
     <Compile Include="DesktopConnector\ActionHandler\NewFileActionHandlerTest.cs" />
     <Compile Include="DesktopConnector\Configuration\ApplicationWatcherElementTest.cs" />
     <Compile Include="DesktopConnector\Configuration\ApplicationCriteriaElementTest.cs" />
