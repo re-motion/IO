@@ -87,6 +87,7 @@
     <Compile Include="DesktopConnector\FileHandling\FileTransfer\FileDownloadAgentTest.cs" />
     <Compile Include="DesktopConnector\FileHandling\FileTransfer\FileTransferAgentBaseTest.cs" />
     <Compile Include="DesktopConnector\FileHandling\FileTransfer\ReadOnlyFileDownloadAgentTest.cs" />
+    <Compile Include="DesktopConnector\FileHandling\ManagedFileFactoryTest.cs" />
     <Compile Include="DesktopConnector\Services\DmsServiceAgentTest.cs" />
     <Compile Include="DesktopConnector\FileHandling\FileTransfer\DownloadedFileUploadAgentTest.cs" />
     <Compile Include="DesktopConnector\FileHandling\FileTransfer\NewFileUploadAgentTest.cs" />
