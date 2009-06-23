@@ -73,6 +73,7 @@
     <Compile Include="DesktopConnector\ActionHandler\LoginActionHandlerTest.cs" />
     <Compile Include="DesktopConnector\ActionHandler\NewFileActionHandlerTest.cs" />
     <Compile Include="DesktopConnector\ActionHandler\ReloginActionHandlerTest.cs" />
+    <Compile Include="DesktopConnector\ActionHandler\ReplaceActionHandlerTest.cs" />
     <Compile Include="DesktopConnector\Configuration\ApplicationWatcherElementTest.cs" />
     <Compile Include="DesktopConnector\Configuration\ApplicationCriteriaElementTest.cs" />
     <Compile Include="DesktopConnector\Configuration\ApplicationWatcherStub.cs" />
@@ -84,6 +85,7 @@
     <Compile Include="DesktopConnector\FileHandling\ApplicationWatcher\ProcessBasedApplicationWatcherTest.cs" />
     <Compile Include="DesktopConnector\FileHandling\ApplicationWatcher\ProcessWatcherTest.cs" />
     <Compile Include="DesktopConnector\FileHandling\DownloadedFileStates\RecoveredStateTest.cs" />
+    <Compile Include="DesktopConnector\FileHandling\DownloadedFileStates\ReplacementRequestedStateTest.cs" />
     <Compile Include="DesktopConnector\FileHandling\FileTransfer\FileDownloadAgentTest.cs" />
     <Compile Include="DesktopConnector\FileHandling\FileTransfer\FileTransferAgentBaseTest.cs" />
     <Compile Include="DesktopConnector\FileHandling\FileTransfer\ReadOnlyFileDownloadAgentTest.cs" />
