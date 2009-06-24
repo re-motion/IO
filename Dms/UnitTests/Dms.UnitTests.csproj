@@ -84,11 +84,14 @@
     <Compile Include="DesktopConnector\FileHandling\ApplicationWatcher\FileLockBasedApplicationWatcherTest.cs" />
     <Compile Include="DesktopConnector\FileHandling\ApplicationWatcher\ProcessBasedApplicationWatcherTest.cs" />
     <Compile Include="DesktopConnector\FileHandling\ApplicationWatcher\ProcessWatcherTest.cs" />
+    <Compile Include="DesktopConnector\FileHandling\DownloadedFileStates\ManagedFileStateBaseTest.cs" />
     <Compile Include="DesktopConnector\FileHandling\DownloadedFileStates\RecoveredStateTest.cs" />
     <Compile Include="DesktopConnector\FileHandling\DownloadedFileStates\ReplacementRequestedStateTest.cs" />
     <Compile Include="DesktopConnector\FileHandling\FileTransfer\FileDownloadAgentTest.cs" />
     <Compile Include="DesktopConnector\FileHandling\FileTransfer\FileTransferAgentBaseTest.cs" />
     <Compile Include="DesktopConnector\FileHandling\FileTransfer\ReadOnlyFileDownloadAgentTest.cs" />
+    <Compile Include="DesktopConnector\FileHandling\FileTransfer\TemporaryUploadStreamTest.cs" />
+    <Compile Include="DesktopConnector\FileHandling\FileTransfer\PermanentUploadStreamTest.cs" />
     <Compile Include="DesktopConnector\FileHandling\ManagedFileFactoryTest.cs" />
     <Compile Include="DesktopConnector\Services\DmsServiceAgentTest.cs" />
     <Compile Include="DesktopConnector\FileHandling\FileTransfer\DownloadedFileUploadAgentTest.cs" />
@@ -104,10 +107,7 @@
     <Compile Include="DesktopConnector\FileHandling\FileTransfer\FileDownloadAgentBaseTest.cs" />
     <Compile Include="DesktopConnector\FileHandling\ApplicationWatcher\ApplicationWatcherBaseTest.cs" />
     <Compile Include="DesktopConnector\FileHandling\ApplicationWatcher\AttributeChangedWatcherTest.cs" />
-    <Compile Include="DesktopConnector\FileHandling\ApplicationWatcher\FileLockTesterTest.cs" />
     <Compile Include="DesktopConnector\FileHandling\ApplicationWatcher\PollingFileLockWatcherTest.cs" />
-    <Compile Include="DesktopConnector\FileHandling\DownloadedFileStates\NewFileCompletedStateTest.cs" />
-    <Compile Include="DesktopConnector\FileHandling\DownloadedFileStates\NewFileDiscardedStateTest.cs" />
     <Compile Include="DesktopConnector\FileHandling\DownloadedFileStates\NewFileStateTest.cs" />
     <Compile Include="DesktopConnector\FileHandling\UIStates\UIStateTest.cs" />
     <Compile Include="DesktopConnector\FileHandling\DownloadedFileStates\BeingOpenedStateTest.cs" />
@@ -139,7 +139,7 @@
     <Compile Include="Clients.Windows.Tray\Forms\ManagedFilesFormTest.cs" />
     <Compile Include="Clients.Windows.Tray\ProgramTest.cs" />
     <Compile Include="DesktopConnector\FileHandling\QueueManagerTest.cs" />
-    <Compile Include="DesktopConnector\FileHandling\FileTransfer\UploadStreamTest.cs" />
+    <Compile Include="DesktopConnector\FileHandling\FileTransfer\UploadStreamBaseTest.cs" />
     <Compile Include="DesktopConnector\Utilities\ApplicationWatchFinderTest.cs" />
     <Compile Include="DesktopConnector\Utilities\AssociatedProgramFinderTest.cs" />
     <Compile Include="DesktopConnector\Utilities\DocumentInfoObjectMother.cs" />
