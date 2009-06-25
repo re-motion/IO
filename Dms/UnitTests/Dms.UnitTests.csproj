@@ -102,7 +102,7 @@
     <Compile Include="DesktopConnector\Utilities\BackgroundThreadInvokerTest.cs" />
     <Compile Include="DesktopConnector\Utilities\StubThreadInvoker.cs" />
     <Compile Include="Shared\Utilities\BrowserBase64SerializationHelperTest.cs" />
-    <Compile Include="Shared\DmsUrlTest.cs" />
+    <Compile Include="DesktopConnector\DmsUrlTest.cs" />
     <Compile Include="DesktopConnector\FileHandling\FileTransfer\DownloadHandlerMock.cs" />
     <Compile Include="DesktopConnector\FileHandling\FileTransfer\FileDownloadAgentBaseTest.cs" />
     <Compile Include="DesktopConnector\FileHandling\ApplicationWatcher\ApplicationWatcherBaseTest.cs" />
@@ -161,7 +161,7 @@
     <Compile Include="Shared\Utilities\ArgumentUtilityTest.cs" />
     <Compile Include="DesktopConnector\Utilities\ManagedFileObjectMother.cs" />
     <Compile Include="Shared\Utilities\StreamCopierTest.cs" />
-    <Compile Include="Shared\Utilities\UriUtilityTest.cs" />
+    <Compile Include="DesktopConnector\Utilities\UriUtilityTest.cs" />
     <Compile Include="Shared\Messages\LockingTest.cs" />
     <Compile Include="DesktopConnector\UrlHandlerTest.cs" />
     <Compile Include="WebServer\ImageRequestHandler.cs" />
