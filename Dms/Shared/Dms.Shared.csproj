@@ -46,7 +46,7 @@
   <ItemGroup>
     <Compile Include="DmsClientAction.cs" />
     <Compile Include="DmsServerAction.cs" />
-    <Compile Include="DmsUrlParameters.cs" />
+    <Compile Include="DmsParameters.cs" />
     <Compile Include="Exceptions\DmsLockFailedException.cs" />
     <Compile Include="Exceptions\DmsLockStolenException.cs" />
     <Compile Include="Exceptions\NotAuthenticatedException.cs" />
