@@ -49,7 +49,7 @@
     <Compile Include="DmsParameters.cs" />
     <Compile Include="Exceptions\DmsLockFailedException.cs" />
     <Compile Include="Exceptions\DmsLockStolenException.cs" />
-    <Compile Include="Exceptions\DmsUnauthenticatedException.cs" />
+    <Compile Include="Exceptions\DmsUnauthorizedException.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Utilities\ArgumentEmptyException.cs" />
     <Compile Include="Utilities\ArgumentUtility.cs" />
