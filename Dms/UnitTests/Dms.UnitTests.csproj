@@ -69,7 +69,7 @@
     <Compile Include="Clients.Windows.Tray\Interactions\UserInteractionTest.cs" />
     <Compile Include="Clients.Windows.Tray\OutlookAccess\DataObjectContentInspectorTest.cs" />
     <Compile Include="Clients.Windows.Tray\OutlookAccess\DataObjectStub.cs" />
-    <Compile Include="Clients.Windows.Tray\OutlookAccess\OutlookAccessHelperTest.cs" />
+    <Compile Include="Clients.Windows.Tray\OutlookAccess\ComEmailExtractionStrategyTest.cs" />
     <Compile Include="Clients.Windows.Tray\OutlookAccess\DataObjectContentsExtractionStrategyTest.cs" />
     <Compile Include="Clients.Windows.Tray\ProgramRunnerTest.cs" />
     <Compile Include="DesktopConnector\ActionHandler\DownloadActionHandlerTest.cs" />
