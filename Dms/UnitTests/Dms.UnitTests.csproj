@@ -81,6 +81,7 @@
     <Compile Include="DesktopConnector\Configuration\ApplicationCriteriaElementTest.cs" />
     <Compile Include="DesktopConnector\Configuration\ApplicationWatcherStub.cs" />
     <Compile Include="DesktopConnector\Configuration\DesktopConnectorConfigurationTest.cs" />
+    <Compile Include="DesktopConnector\Configuration\ScannerConfigurationElementTest.cs" />
     <Compile Include="DesktopConnector\Configuration\XmlCriteriaElementTest.cs" />
     <Compile Include="DesktopConnector\FileHandling\ApplicationInfoCollectionTest.cs" />
     <Compile Include="DesktopConnector\FileHandling\ApplicationInfoTest.cs" />
