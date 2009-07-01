@@ -178,7 +178,6 @@
     <Compile Include="Web\Classes\WebConfigurationAdapterTest.cs" />
     <Compile Include="Web\UI\DmsHandlerTest.cs" />
     <Compile Include="Web\UI\DmsServiceTest.cs" />
-    <Compile Include="Web\UI\LoginFormTest.cs" />
     <Compile Include="Web\UI\LoginServiceTest.cs" />
     <Compile Include="Web\UI\WebServiceBaseTest.cs" />
     <None Include="Properties\AssemblyInfoTemplate.cs" />
