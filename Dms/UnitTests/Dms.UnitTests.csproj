@@ -75,7 +75,6 @@
     <Compile Include="DesktopConnector\ActionHandler\DownloadActionHandlerTest.cs" />
     <Compile Include="DesktopConnector\ActionHandler\LoginActionHandlerTest.cs" />
     <Compile Include="DesktopConnector\ActionHandler\NewFileActionHandlerTest.cs" />
-    <Compile Include="DesktopConnector\ActionHandler\ReloginActionHandlerTest.cs" />
     <Compile Include="DesktopConnector\ActionHandler\ReplaceActionHandlerTest.cs" />
     <Compile Include="DesktopConnector\Configuration\ApplicationWatcherElementTest.cs" />
     <Compile Include="DesktopConnector\Configuration\ApplicationCriteriaElementTest.cs" />
