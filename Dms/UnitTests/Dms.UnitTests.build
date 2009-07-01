@@ -31,9 +31,9 @@
         <warning number="0067" />
       </nowarn>
       <sources failonempty="true">
-        <include name="**/*.cs" />
-        <include name="Properties/**/*.cs" />
+        <include name="/**/*.cs" />
         <exclude name="bin/**" />
+        <exclude name="obj/**" />
         <exclude name="Properties/AssemblyInfoTemplate.cs" />
       </sources>
       <references failonempty="true">
@@ -48,8 +48,9 @@
         <include name="${build.test.outputdir}/Remotion.Dms.Shared.dll" />
         <include name="${build.test.outputdir}/Remotion.Dms.Web.dll" />
         <include name="${build.test.outputdir}/Remotion.Interfaces.dll" />
-        <include name="${build.test.outputdir}/Remotion.Web.dll" />
+        <include name="${build.test.outputdir}/Remotion.ObjectBinding.Interfaces.dll" />
         <include name="${build.test.outputdir}/Remotion.Security.Interfaces.dll" />
+        <include name="${build.test.outputdir}/Remotion.Web.dll" />
         <include name="${build.test.outputdir}/log4net.dll" />
         <include asis="true" name="System.dll"/>
         <include asis="true" name="System.Configuration.dll"/>
