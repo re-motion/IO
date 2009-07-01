@@ -81,6 +81,7 @@
     <Compile Include="DesktopConnector\Configuration\ApplicationWatcherStub.cs" />
     <Compile Include="DesktopConnector\Configuration\DesktopConnectorConfigurationTest.cs" />
     <Compile Include="DesktopConnector\Configuration\ScannerConfigurationElementTest.cs" />
+    <Compile Include="DesktopConnector\Configuration\SingleScanConfigurationElementTest.cs" />
     <Compile Include="DesktopConnector\Configuration\XmlCriteriaElementTest.cs" />
     <Compile Include="DesktopConnector\FileHandling\ApplicationInfoCollectionTest.cs" />
     <Compile Include="DesktopConnector\FileHandling\ApplicationInfoTest.cs" />
@@ -102,6 +103,7 @@
     <Compile Include="DesktopConnector\FileHandling\FileTransfer\NewFileUploadAgentTest.cs" />
     <Compile Include="DesktopConnector\Services\LoginServiceAgentTest.cs" />
     <Compile Include="DesktopConnector\Services\WebServiceAgentBaseTest.cs" />
+    <Compile Include="DesktopConnector\UI\ScannerFileSelectionInteractionTest.cs" />
     <Compile Include="DesktopConnector\Utilities\ApplicationInfoObjectMother.cs" />
     <Compile Include="DesktopConnector\Utilities\BackgroundThreadInvokerTest.cs" />
     <Compile Include="DesktopConnector\Utilities\StubThreadInvoker.cs" />
