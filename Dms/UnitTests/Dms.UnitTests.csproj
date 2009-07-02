@@ -75,7 +75,7 @@
     <Compile Include="Core\ObjectBinding\DmsPropertyReflectorMixinTest.cs" />
     <Compile Include="Core\ObjectBinding\DocumentPropertyTest.cs" />
     <Compile Include="Core\ObjectBinding\TestDomain\ClassWithDocumentMixin.cs" />
-    <Compile Include="Core\ObjectBinding\TestDomain\ClassWithDocumentProperty.cs" />
+    <Compile Include="Core\ObjectBinding\TestDomain\ClassWithReferenceProperty.cs" />
     <Compile Include="Core\ObjectBinding\TestDomain\ConcreteDocument.cs" />
     <Compile Include="Core\ObjectBinding\TestDomain\DocumentMixin.cs" />
     <Compile Include="Core\ObjectBinding\TestDomain\SimpleReferenceType.cs" />
@@ -185,6 +185,7 @@
     <Compile Include="Web\Classes\DmsUrlBuilderTest.cs" />
     <Compile Include="Web\Classes\SessionManagerTest.cs" />
     <Compile Include="Web\Classes\WebConfigurationAdapterTest.cs" />
+    <Compile Include="Web\UI\Controls\BocDocumentValueTest.cs" />
     <Compile Include="Web\UI\DmsHandlerTest.cs" />
     <Compile Include="Web\UI\DmsServiceTest.cs" />
     <Compile Include="Web\UI\LoginServiceTest.cs" />
@@ -211,6 +212,10 @@
     <ProjectReference Include="..\..\Remotion\ObjectBinding\Interfaces\ObjectBinding.Interfaces.csproj">
       <Project>{A1FCDC69-E8E3-4DC0-8EE7-A8FEA772EF5B}</Project>
       <Name>ObjectBinding.Interfaces</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Remotion\ObjectBinding\Web\ObjectBinding.Web.csproj">
+      <Project>{390FBB93-A757-47A7-B769-A64A7465FF84}</Project>
+      <Name>ObjectBinding.Web</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Remotion\Security\Interfaces\Security.Interfaces.csproj">
       <Project>{6B243694-318E-4C20-A2EA-B910EFE5F2F6}</Project>
