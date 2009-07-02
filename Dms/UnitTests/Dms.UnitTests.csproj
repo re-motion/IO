@@ -185,7 +185,9 @@
     <Compile Include="Web\Classes\DmsUrlBuilderTest.cs" />
     <Compile Include="Web\Classes\SessionManagerTest.cs" />
     <Compile Include="Web\Classes\WebConfigurationAdapterTest.cs" />
-    <Compile Include="Web\UI\Controls\BocDocumentValueTest.cs" />
+    <Compile Include="Web\UI\Controls\BocDocumentValueTests\Common.cs" />
+    <Compile Include="Web\UI\Controls\BocDocumentValueTests\LoadUnboundValue.cs" />
+    <Compile Include="Web\UI\Controls\BocDocumentValueTests\LoadValue.cs" />
     <Compile Include="Web\UI\DmsHandlerTest.cs" />
     <Compile Include="Web\UI\DmsServiceTest.cs" />
     <Compile Include="Web\UI\LoginServiceTest.cs" />
