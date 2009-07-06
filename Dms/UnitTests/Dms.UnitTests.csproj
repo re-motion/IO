@@ -33,9 +33,29 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Castle.Core, Version=1.1.0.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\prereq\Assemblies\Castle.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Castle.MicroKernel, Version=2.0.0.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\prereq\Assemblies\Castle.MicroKernel.dll</HintPath>
+    </Reference>
+    <Reference Include="Castle.Windsor, Version=2.0.0.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\prereq\Assemblies\Castle.Windsor.dll</HintPath>
+    </Reference>
+    <Reference Include="CommonServiceLocator.WindsorAdapter, Version=1.0.0.1, Culture=neutral, PublicKeyToken=5f888aefae8667bf, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\prereq\Assemblies\CommonServiceLocator.WindsorAdapter.dll</HintPath>
+    </Reference>
     <Reference Include="log4net, Version=1.2.10.0, Culture=neutral, PublicKeyToken=1b44e1d426115821, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\prereq\Assemblies\log4net.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.ServiceLocation, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\prereq\Assemblies\Microsoft.Practices.ServiceLocation.dll</HintPath>
     </Reference>
     <Reference Include="nunit.framework, Version=2.4.0.2, Culture=neutral, PublicKeyToken=96d09a1eb7f44a77, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -73,11 +93,11 @@
     <Compile Include="Clients.Windows.Tray\OutlookAccess\DataObjectContentsExtractionStrategyTest.cs" />
     <Compile Include="Clients.Windows.Tray\ProgramRunnerTest.cs" />
     <Compile Include="Core\ObjectBinding\DmsPropertyReflectorMixinTest.cs" />
-    <Compile Include="Core\ObjectBinding\DocumentPropertyTest.cs" />
-    <Compile Include="Core\ObjectBinding\TestDomain\ClassWithDocumentMixin.cs" />
+    <Compile Include="Core\ObjectBinding\ContentPropertyTest.cs" />
+    <Compile Include="Core\ObjectBinding\TestDomain\ClassContentMixin.cs" />
     <Compile Include="Core\ObjectBinding\TestDomain\ClassWithReferenceProperty.cs" />
-    <Compile Include="Core\ObjectBinding\TestDomain\ConcreteDocument.cs" />
-    <Compile Include="Core\ObjectBinding\TestDomain\DocumentMixin.cs" />
+    <Compile Include="Core\ObjectBinding\TestDomain\ConcreteContent.cs" />
+    <Compile Include="Core\ObjectBinding\TestDomain\ContentMixin.cs" />
     <Compile Include="Core\ObjectBinding\TestDomain\SimpleReferenceType.cs" />
     <Compile Include="DesktopConnector\ActionHandler\DownloadActionHandlerTest.cs" />
     <Compile Include="DesktopConnector\ActionHandler\LoginActionHandlerTest.cs" />
@@ -186,9 +206,10 @@
     <Compile Include="Web\Classes\DmsUrlBuilderTest.cs" />
     <Compile Include="Web\Classes\SessionManagerTest.cs" />
     <Compile Include="Web\Classes\WebConfigurationAdapterTest.cs" />
-    <Compile Include="Web\UI\Controls\BocDocumentValueTests\Common.cs" />
-    <Compile Include="Web\UI\Controls\BocDocumentValueTests\LoadUnboundValue.cs" />
-    <Compile Include="Web\UI\Controls\BocDocumentValueTests\LoadValue.cs" />
+    <Compile Include="Web\UI\Controls\BocContentValueTests\Common.cs" />
+    <Compile Include="Web\UI\Controls\BocContentValueTests\LoadUnboundValue.cs" />
+    <Compile Include="Web\UI\Controls\BocContentValueTests\LoadValue.cs" />
+    <Compile Include="Web\UI\Controls\BocContentValueTests\MenuLifeCycle.cs" />
     <Compile Include="Web\UI\DmsHandlerTest.cs" />
     <Compile Include="Web\UI\DmsServiceTest.cs" />
     <Compile Include="Web\UI\LoginServiceTest.cs" />
@@ -207,6 +228,10 @@
     <ProjectReference Include="..\..\Remotion\Development\Core\Development.Core.csproj">
       <Project>{B719A305-0493-4C72-88FE-9A2FC6964578}</Project>
       <Name>Development.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Remotion\Development\Web\Development.Web.csproj">
+      <Project>{44924ED6-8C12-416D-972F-F1F10417E7EF}</Project>
+      <Name>Development.Web</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Remotion\ObjectBinding\Core\ObjectBinding.Core.csproj">
       <Project>{FDCCDB1E-0962-41DA-99A1-2DB390C48748}</Project>
