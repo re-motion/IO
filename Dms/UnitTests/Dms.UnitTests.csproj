@@ -99,9 +99,11 @@
     <Compile Include="Core\ObjectBinding\TestDomain\ConcreteContent.cs" />
     <Compile Include="Core\ObjectBinding\TestDomain\ContentMixin.cs" />
     <Compile Include="Core\ObjectBinding\TestDomain\SimpleReferenceType.cs" />
+    <Compile Include="DesktopConnector\ActionHandler\DownloadActionHandlerBaseTest.cs" />
     <Compile Include="DesktopConnector\ActionHandler\DownloadActionHandlerTest.cs" />
     <Compile Include="DesktopConnector\ActionHandler\LoginActionHandlerTest.cs" />
     <Compile Include="DesktopConnector\ActionHandler\NewFileActionHandlerTest.cs" />
+    <Compile Include="DesktopConnector\ActionHandler\ReadOnlyDownloadActionHandlerTest.cs" />
     <Compile Include="DesktopConnector\ActionHandler\ReplaceActionHandlerTest.cs" />
     <Compile Include="DesktopConnector\Configuration\ApplicationWatcherElementTest.cs" />
     <Compile Include="DesktopConnector\Configuration\ApplicationCriteriaElementTest.cs" />
@@ -116,6 +118,7 @@
     <Compile Include="DesktopConnector\FileHandling\ApplicationWatcher\ProcessBasedApplicationWatcherTest.cs" />
     <Compile Include="DesktopConnector\FileHandling\ApplicationWatcher\ProcessWatcherTest.cs" />
     <Compile Include="DesktopConnector\FileHandling\DownloadedFileStates\ManagedFileStateBaseTest.cs" />
+    <Compile Include="DesktopConnector\FileHandling\DownloadedFileStates\ReadOnlyBeingDownloadedStateTest.cs" />
     <Compile Include="DesktopConnector\FileHandling\DownloadedFileStates\RecoveredStateTest.cs" />
     <Compile Include="DesktopConnector\FileHandling\DownloadedFileStates\RecoveryFailedStateTest.cs" />
     <Compile Include="DesktopConnector\FileHandling\DownloadedFileStates\ReplacementRequestedStateTest.cs" />
