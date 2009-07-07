@@ -119,6 +119,8 @@
     <Compile Include="DesktopConnector\FileHandling\ApplicationWatcher\ProcessWatcherTest.cs" />
     <Compile Include="DesktopConnector\FileHandling\DownloadedFileStates\ManagedFileStateBaseTest.cs" />
     <Compile Include="DesktopConnector\FileHandling\DownloadedFileStates\ReadOnlyBeingDownloadedStateTest.cs" />
+    <Compile Include="DesktopConnector\FileHandling\DownloadedFileStates\ReadOnlyBeingOpenedStateTest.cs" />
+    <Compile Include="DesktopConnector\FileHandling\DownloadedFileStates\ReadOnlyBeingWatchedStateTest.cs" />
     <Compile Include="DesktopConnector\FileHandling\DownloadedFileStates\RecoveredStateTest.cs" />
     <Compile Include="DesktopConnector\FileHandling\DownloadedFileStates\RecoveryFailedStateTest.cs" />
     <Compile Include="DesktopConnector\FileHandling\DownloadedFileStates\ReplacementRequestedStateTest.cs" />
