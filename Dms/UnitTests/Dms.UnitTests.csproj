@@ -136,6 +136,7 @@
     <Compile Include="DesktopConnector\FileHandling\FileTransfer\NewFileUploadAgentTest.cs" />
     <Compile Include="DesktopConnector\Services\LoginServiceAgentTest.cs" />
     <Compile Include="DesktopConnector\Services\ServiceAgentFactoryTest.cs" />
+    <Compile Include="DesktopConnector\Services\VersionMatcherTest.cs" />
     <Compile Include="DesktopConnector\Services\WebServiceAgentBaseTest.cs" />
     <Compile Include="DesktopConnector\UI\ScannerFileSelectionInteractionTest.cs" />
     <Compile Include="DesktopConnector\Utilities\ApplicationInfoObjectMother.cs" />
