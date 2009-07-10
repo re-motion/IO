@@ -218,6 +218,8 @@
     <Compile Include="Web\UI\Controls\BocContentValueTests\LoadUnboundValue.cs" />
     <Compile Include="Web\UI\Controls\BocContentValueTests\LoadValue.cs" />
     <Compile Include="Web\UI\Controls\BocContentValueTests\MenuLifeCycle.cs" />
+    <Compile Include="Web\UI\Controls\Infrastructure\DmsEditableRowControlFactoryMixinTest.cs" />
+    <Compile Include="Web\UI\Controls\SetUpFixture.cs" />
     <Compile Include="Web\UI\DmsHandlerTest.cs" />
     <Compile Include="Web\UI\DmsServiceTest.cs" />
     <Compile Include="Web\UI\LoginServiceTest.cs" />

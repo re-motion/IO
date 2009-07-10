@@ -52,7 +52,7 @@
         <include name="${build.test.outputdir}/Remotion.Security.Interfaces.dll" />
         <include name="${build.test.outputdir}/Remotion.Web.dll" />
         <include name="${build.test.outputdir}/Castle.Core.dll" />
-        <include name="${build.test.outputdir}/Castle.KicroKernel.dll" />
+        <include name="${build.test.outputdir}/Castle.MicroKernel.dll" />
         <include name="${build.test.outputdir}/Castle.Windsor.dll" />
         <include name="${build.test.outputdir}/CommonServiceLocator.WindsorAdapter.dll" />
         <include name="${build.test.outputdir}/log4net.dll" />
