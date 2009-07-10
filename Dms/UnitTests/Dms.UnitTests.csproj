@@ -142,6 +142,7 @@
     <Compile Include="DesktopConnector\Utilities\ApplicationInfoObjectMother.cs" />
     <Compile Include="DesktopConnector\Utilities\BackgroundThreadInvokerTest.cs" />
     <Compile Include="DesktopConnector\Utilities\StubThreadInvoker.cs" />
+    <Compile Include="Shared\Exceptions\DmsLockStolenExceptionTest.cs" />
     <Compile Include="Shared\Utilities\BrowserBase64SerializationHelperTest.cs" />
     <Compile Include="DesktopConnector\DmsUrlTest.cs" />
     <Compile Include="DesktopConnector\FileHandling\FileTransfer\DownloadHandlerMock.cs" />
