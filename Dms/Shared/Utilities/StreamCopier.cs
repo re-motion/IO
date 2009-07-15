@@ -25,6 +25,7 @@ namespace Remotion.Dms.Shared.Utilities
     private readonly int _bufferSize;
     public const int DefaultCopyBufferSize = 1024 * 4;
 
+    //Use a sensible name
     public delegate bool ShouldAbort ();
 
     public event EventHandler<StreamCopyProgressEventArgs> TransferProgress;
@@ -44,6 +45,7 @@ namespace Remotion.Dms.Shared.Utilities
       get { return _bufferSize; }
     }
 
+    //TODO: refactor to move shouldAbort into eventArgs
     public bool CopyStream (Stream input, Stream output, long inputLength, ShouldAbort shouldAbort)
     {
       ArgumentUtility.CheckNotNull ("input", input);
