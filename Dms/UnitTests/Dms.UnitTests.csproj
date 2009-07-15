@@ -167,7 +167,6 @@
     <Compile Include="DesktopConnector\FileHandling\DownloadedFileStates\UploadCommitRequestedStateTest.cs" />
     <Compile Include="DesktopConnector\FileHandling\DownloadedFileStates\UploadRequestedStateTest.cs" />
     <Compile Include="DesktopConnector\FileHandling\FileLocking\FileLockAgentTest.cs" />
-    <Compile Include="DesktopConnector\FileHandling\FileOperationEventManagerTest.cs" />
     <Compile Include="DesktopConnector\FileHandling\ManagedFileCollectionTest.cs" />
     <Compile Include="DesktopConnector\FileHandling\DownloadedFileStates\BeingEditedStateTest.cs" />
     <Compile Include="DesktopConnector\FileHandling\DownloadedFileStates\BeingUploadedStateTest.cs" />
