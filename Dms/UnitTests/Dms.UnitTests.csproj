@@ -131,6 +131,7 @@
     <Compile Include="DesktopConnector\FileHandling\FileTransfer\TemporaryUploadStreamTest.cs" />
     <Compile Include="DesktopConnector\FileHandling\FileTransfer\PermanentUploadStreamTest.cs" />
     <Compile Include="DesktopConnector\FileHandling\ManagedFileFactoryTest.cs" />
+    <Compile Include="DesktopConnector\FileHandling\PeriodicTimerTest.cs" />
     <Compile Include="DesktopConnector\Services\DmsServiceAgentTest.cs" />
     <Compile Include="DesktopConnector\FileHandling\FileTransfer\DownloadedFileUploadAgentTest.cs" />
     <Compile Include="DesktopConnector\FileHandling\FileTransfer\NewFileUploadAgentTest.cs" />
