@@ -112,8 +112,8 @@
     <Compile Include="DesktopConnector\Configuration\ScannerConfigurationElementTest.cs" />
     <Compile Include="DesktopConnector\Configuration\SingleScanConfigurationElementTest.cs" />
     <Compile Include="DesktopConnector\Configuration\XmlCriteriaElementTest.cs" />
-    <Compile Include="DesktopConnector\FileHandling\ApplicationInfoCollectionTest.cs" />
-    <Compile Include="DesktopConnector\FileHandling\ApplicationInfoTest.cs" />
+    <Compile Include="DesktopConnector\FileHandling\SessionInfoCollectionTest.cs" />
+    <Compile Include="DesktopConnector\FileHandling\SessionInfoTest.cs" />
     <Compile Include="DesktopConnector\FileHandling\ApplicationWatcher\FileLockBasedApplicationWatcherTest.cs" />
     <Compile Include="DesktopConnector\FileHandling\ApplicationWatcher\ProcessBasedApplicationWatcherTest.cs" />
     <Compile Include="DesktopConnector\FileHandling\ApplicationWatcher\ProcessWatcherTest.cs" />
@@ -140,7 +140,7 @@
     <Compile Include="DesktopConnector\Services\VersionMatcherTest.cs" />
     <Compile Include="DesktopConnector\Services\WebServiceAgentBaseTest.cs" />
     <Compile Include="DesktopConnector\UI\ScannerFileSelectionInteractionTest.cs" />
-    <Compile Include="DesktopConnector\Utilities\ApplicationInfoObjectMother.cs" />
+    <Compile Include="DesktopConnector\Utilities\SessionInfoObjectMother.cs" />
     <Compile Include="DesktopConnector\Utilities\BackgroundThreadInvokerTest.cs" />
     <Compile Include="DesktopConnector\Utilities\StubThreadInvoker.cs" />
     <Compile Include="Shared\Exceptions\DmsLockStolenExceptionTest.cs" />
