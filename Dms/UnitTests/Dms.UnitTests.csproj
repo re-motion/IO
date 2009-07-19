@@ -112,6 +112,7 @@
     <Compile Include="DesktopConnector\Configuration\ScannerConfigurationElementTest.cs" />
     <Compile Include="DesktopConnector\Configuration\SingleScanConfigurationElementTest.cs" />
     <Compile Include="DesktopConnector\Configuration\XmlCriteriaElementTest.cs" />
+    <Compile Include="DesktopConnector\FileHandling\DownloadedFileStates\LostSyncDirtyCommitRequestedStateTest.cs" />
     <Compile Include="DesktopConnector\FileHandling\DownloadedFileStates\LostSyncDirtyUploadRequestedStateTest.cs" />
     <Compile Include="DesktopConnector\FileHandling\SessionInfoCollectionTest.cs" />
     <Compile Include="DesktopConnector\FileHandling\SessionInfoTest.cs" />
