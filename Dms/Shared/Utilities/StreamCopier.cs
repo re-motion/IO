@@ -60,14 +60,14 @@ namespace Remotion.Dms.Shared.Utilities
         bytesRead = input.Read (buffer, 0, buffer.Length);
         output.Write (buffer, 0, bytesRead);
         bytesTransferred += bytesRead;
-        OnTransferProgress ((int) bytesTransferred, inputLength);
+        OnTransferProgress (bytesTransferred, inputLength);
         if (shouldAbort())
           return false;
       } while (bytesRead != 0);
       return true;
     }
 
-    private void OnTransferProgress (int bytesRead, long streamLength)
+    private void OnTransferProgress (long bytesRead, long streamLength)
     {
       if (TransferProgress != null)
         TransferProgress (this, new StreamCopyProgressEventArgs (bytesRead, streamLength));

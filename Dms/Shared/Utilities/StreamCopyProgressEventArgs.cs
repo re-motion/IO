@@ -21,16 +21,16 @@ namespace Remotion.Dms.Shared.Utilities
 {
   public class StreamCopyProgressEventArgs : EventArgs
   {
-    private readonly int _currentValue;
+    private readonly long _currentValue;
     private readonly long _fileLength;
 
-    public StreamCopyProgressEventArgs(int currentValue, long fileLength)
+    public StreamCopyProgressEventArgs (long currentValue, long fileLength)
     {
       _currentValue = currentValue;
       _fileLength = fileLength;
     }
-    
-    public int CurrentValue
+
+    public long CurrentValue
     {
       get { return _currentValue; }
     }
