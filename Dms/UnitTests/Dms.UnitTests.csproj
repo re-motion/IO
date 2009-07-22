@@ -112,8 +112,10 @@
     <Compile Include="DesktopConnector\Configuration\ScannerConfigurationElementTest.cs" />
     <Compile Include="DesktopConnector\Configuration\SingleScanConfigurationElementTest.cs" />
     <Compile Include="DesktopConnector\Configuration\XmlCriteriaElementTest.cs" />
+    <Compile Include="DesktopConnector\FileHandling\DownloadedFileStates\DownloadedReadOnlyManagedFileStateTestBase.cs" />
     <Compile Include="DesktopConnector\FileHandling\DownloadedFileStates\LostSyncDirtyCommitRequestedStateTest.cs" />
     <Compile Include="DesktopConnector\FileHandling\DownloadedFileStates\LostSyncDirtyUploadRequestedStateTest.cs" />
+    <Compile Include="DesktopConnector\FileHandling\DownloadedFileStates\ReplacementManagedFileStateTestBase.cs" />
     <Compile Include="DesktopConnector\FileHandling\SessionInfoCollectionTest.cs" />
     <Compile Include="DesktopConnector\FileHandling\SessionInfoTest.cs" />
     <Compile Include="DesktopConnector\FileHandling\ApplicationWatcher\FileLockBasedApplicationWatcherTest.cs" />
@@ -182,7 +184,7 @@
     <Compile Include="DesktopConnector\FileHandling\DownloadedFileStates\BeingUploadedStateTest.cs" />
     <Compile Include="DesktopConnector\FileHandling\DownloadedFileStates\CommittedStateTest.cs" />
     <Compile Include="DesktopConnector\FileHandling\DownloadedFileStates\DiscardedStateTest.cs" />
-    <Compile Include="DesktopConnector\FileHandling\DownloadedFileStates\ManagedFileStateTestBase.cs" />
+    <Compile Include="DesktopConnector\FileHandling\DownloadedFileStates\DownloadedManagedFileStateTestBase.cs" />
     <Compile Include="DesktopConnector\FileHandling\ManagedFileTest.cs" />
     <Compile Include="DesktopConnector\FileHandling\FileDeleterTest.cs" />
     <Compile Include="DesktopConnector\FileHandling\FileOperationExecutorTest.cs" />
