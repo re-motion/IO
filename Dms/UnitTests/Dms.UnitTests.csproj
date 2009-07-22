@@ -118,6 +118,10 @@
     <Compile Include="DesktopConnector\FileHandling\DownloadedFileStates\ReplacementManagedFileStateTestBase.cs" />
     <Compile Include="DesktopConnector\FileHandling\DownloadedManagedFileBaseTest.cs" />
     <Compile Include="DesktopConnector\FileHandling\DownloadedManagedFileTest.cs" />
+    <Compile Include="DesktopConnector\FileHandling\DownloadedReadOnlyManagedFileTest.cs" />
+    <Compile Include="DesktopConnector\FileHandling\ManagedFileLockingStrategyTest.cs" />
+    <Compile Include="DesktopConnector\FileHandling\NewManagedFileTest.cs" />
+    <Compile Include="DesktopConnector\FileHandling\ReplacementManagedFileTest.cs" />
     <Compile Include="DesktopConnector\FileHandling\SessionInfoCollectionTest.cs" />
     <Compile Include="DesktopConnector\FileHandling\SessionInfoTest.cs" />
     <Compile Include="DesktopConnector\FileHandling\ApplicationWatcher\FileLockBasedApplicationWatcherTest.cs" />
