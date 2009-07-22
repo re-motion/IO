@@ -84,7 +84,7 @@
     <Compile Include="Clients.Windows.Tray\Interactions\ClipboardInteractionTest.cs" />
     <Compile Include="Clients.Windows.Tray\Interactions\DropTargetInteractionTest.cs" />
     <Compile Include="Clients.Windows.Tray\Interactions\FileBrowserInteractionTest.cs" />
-    <Compile Include="Clients.Windows.Tray\Interactions\ProgressReporterInteractionTest.cs" />
+    <Compile Include="Clients.Windows.Tray\Interactions\PollingBasedProgressReporterInteractionTest.cs" />
     <Compile Include="Clients.Windows.Tray\Interactions\UserInteractionFactoryTest.cs" />
     <Compile Include="Clients.Windows.Tray\Interactions\UserInteractionTest.cs" />
     <Compile Include="Clients.Windows.Tray\OutlookAccess\DataObjectContentInspectorTest.cs" />
