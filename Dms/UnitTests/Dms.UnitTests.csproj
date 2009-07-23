@@ -237,7 +237,6 @@
     <Compile Include="Web\UI\Controls\BocContentValueTests\MenuLifeCycle.cs" />
     <Compile Include="Web\UI\Controls\ContentDownloadMenuItemTest.cs" />
     <Compile Include="Web\UI\Controls\Infrastructure\DmsEditableRowControlFactoryMixinTest.cs" />
-    <Compile Include="Web\UI\Controls\SetUpFixture.cs" />
     <Compile Include="Web\UI\DmsHandlerTest.cs" />
     <Compile Include="Web\UI\DmsServiceTest.cs" />
     <Compile Include="Web\UI\LoginServiceTest.cs" />
