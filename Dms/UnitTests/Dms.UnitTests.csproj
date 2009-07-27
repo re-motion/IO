@@ -235,8 +235,8 @@
     <Compile Include="Web\UI\Controls\BocContentValueTests\LoadUnboundValue.cs" />
     <Compile Include="Web\UI\Controls\BocContentValueTests\LoadValue.cs" />
     <Compile Include="Web\UI\Controls\BocContentValueTests\MenuLifeCycle.cs" />
-    <Compile Include="Web\UI\Controls\ContentDownloadCommandTest.cs" />
-    <Compile Include="Web\UI\Controls\ContentDownloadMenuItemTest.cs" />
+    <Compile Include="Web\UI\Controls\ContentCommands\ContentDownloadCommandTest.cs" />
+    <Compile Include="Web\UI\Controls\ContentMenuItems\ContentDownloadMenuItemTest.cs" />
     <Compile Include="Web\UI\Controls\BocListExtensions\DmsEditableRowControlFactoryMixinTest.cs" />
     <Compile Include="Web\UI\DmsHandlerTest.cs" />
     <Compile Include="Web\UI\DmsServiceTest.cs" />
