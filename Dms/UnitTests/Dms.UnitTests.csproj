@@ -119,6 +119,8 @@
     <Compile Include="DesktopConnector\FileHandling\DownloadedManagedFileBaseTest.cs" />
     <Compile Include="DesktopConnector\FileHandling\DownloadedManagedFileTest.cs" />
     <Compile Include="DesktopConnector\FileHandling\DownloadedReadOnlyManagedFileTest.cs" />
+    <Compile Include="DesktopConnector\FileHandling\FileTransfer\FileTransferAgentFactoryTests\V1_0.cs" />
+    <Compile Include="DesktopConnector\FileHandling\FileTransfer\FileTransferAgentFactoryTests\UnknownVersion.cs" />
     <Compile Include="DesktopConnector\FileHandling\ManagedFileLockingStrategyTest.cs" />
     <Compile Include="DesktopConnector\FileHandling\NewManagedFileTest.cs" />
     <Compile Include="DesktopConnector\FileHandling\ReplacementManagedFileTest.cs" />
