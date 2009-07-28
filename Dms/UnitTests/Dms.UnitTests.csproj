@@ -137,9 +137,9 @@
     <Compile Include="DesktopConnector\FileHandling\DownloadedFileStates\RecoveryFailedStateTest.cs" />
     <Compile Include="DesktopConnector\FileHandling\DownloadedFileStates\ReplacementRequestedStateTest.cs" />
     <Compile Include="DesktopConnector\FileHandling\FileSystemHelperTest.cs" />
-    <Compile Include="DesktopConnector\FileHandling\FileTransfer\FileDownloadAgentTest.cs" />
+    <Compile Include="DesktopConnector\FileHandling\FileTransfer\V1_0\FileDownloadAgentTest.cs" />
     <Compile Include="DesktopConnector\FileHandling\FileTransfer\FileTransferAgentBaseTest.cs" />
-    <Compile Include="DesktopConnector\FileHandling\FileTransfer\ReadOnlyFileDownloadAgentTest.cs" />
+    <Compile Include="DesktopConnector\FileHandling\FileTransfer\V1_0\ReadOnlyFileDownloadAgentTest.cs" />
     <Compile Include="DesktopConnector\FileHandling\FileTransfer\TemporaryUploadStreamTest.cs" />
     <Compile Include="DesktopConnector\FileHandling\FileTransfer\PermanentUploadStreamTest.cs" />
     <Compile Include="DesktopConnector\FileHandling\ManagedFileFactoryTest.cs" />
@@ -153,8 +153,8 @@
     <Compile Include="DesktopConnector\FileHandling\UIStates\RecoveryFailedUIStateTest.cs" />
     <Compile Include="DesktopConnector\FileHandling\UIStates\UploadUIStateTest.cs" />
     <Compile Include="DesktopConnector\Services\DmsServiceAgentTest.cs" />
-    <Compile Include="DesktopConnector\FileHandling\FileTransfer\DownloadedFileUploadAgentTest.cs" />
-    <Compile Include="DesktopConnector\FileHandling\FileTransfer\NewFileUploadAgentTest.cs" />
+    <Compile Include="DesktopConnector\FileHandling\FileTransfer\V1_0\DownloadedFileUploadAgentTest.cs" />
+    <Compile Include="DesktopConnector\FileHandling\FileTransfer\V1_0\NewFileUploadAgentTest.cs" />
     <Compile Include="DesktopConnector\Services\LoginServiceAgentTest.cs" />
     <Compile Include="DesktopConnector\Services\ServiceAgentFactoryTest.cs" />
     <Compile Include="DesktopConnector\Services\VersionMatcherTest.cs" />
