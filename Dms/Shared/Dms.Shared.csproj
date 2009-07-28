@@ -51,6 +51,7 @@
     <Compile Include="Exceptions\DmsLockStolenException.cs" />
     <Compile Include="Exceptions\DmsUnauthorizedException.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="DmsVersion.cs" />
     <Compile Include="Utilities\ArgumentEmptyException.cs" />
     <Compile Include="Utilities\ArgumentUtility.cs" />
     <Compile Include="Utilities\BrowserBase64SerializationHelper.cs" />
