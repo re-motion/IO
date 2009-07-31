@@ -115,6 +115,7 @@
     <Compile Include="DesktopConnector\FileHandling\DownloadedFileStates\DownloadedReadOnlyManagedFileStateTestBase.cs" />
     <Compile Include="DesktopConnector\FileHandling\DownloadedFileStates\LostSyncDirtyCommitRequestedStateTest.cs" />
     <Compile Include="DesktopConnector\FileHandling\DownloadedFileStates\LostSyncDirtyUploadRequestedStateTest.cs" />
+    <Compile Include="DesktopConnector\FileHandling\DownloadedFileStates\NewManagedFileStateTestBase.cs" />
     <Compile Include="DesktopConnector\FileHandling\DownloadedFileStates\ReplacementManagedFileStateTestBase.cs" />
     <Compile Include="DesktopConnector\FileHandling\DownloadedManagedFileBaseTest.cs" />
     <Compile Include="DesktopConnector\FileHandling\DownloadedManagedFileTest.cs" />
