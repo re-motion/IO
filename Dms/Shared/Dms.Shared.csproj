@@ -45,6 +45,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DmsClientAction.cs" />
+    <Compile Include="DmsFileSelection.cs" />
     <Compile Include="DmsServerAction.cs" />
     <Compile Include="DmsParameters.cs" />
     <Compile Include="Exceptions\DmsLockFailedException.cs" />
