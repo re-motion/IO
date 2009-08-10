@@ -91,6 +91,7 @@
     <Compile Include="Clients.Windows.Tray\OutlookAccess\DataObjectStub.cs" />
     <Compile Include="Clients.Windows.Tray\OutlookAccess\ComEmailExtractionStrategyTest.cs" />
     <Compile Include="Clients.Windows.Tray\OutlookAccess\DataObjectContentsExtractionStrategyTest.cs" />
+    <Compile Include="Clients.Windows.Tray\OutlookAccess\SimpleDragDropInteractionTest.cs" />
     <Compile Include="Clients.Windows.Tray\ProgramRunnerTest.cs" />
     <Compile Include="Core\ObjectBinding\DmsPropertyReflectorMixinTest.cs" />
     <Compile Include="Core\ObjectBinding\ContentPropertyTest.cs" />
