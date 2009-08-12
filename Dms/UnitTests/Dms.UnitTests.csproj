@@ -103,7 +103,6 @@
     <Compile Include="Core\ObjectBinding\TestDomain\SimpleReferenceType.cs" />
     <Compile Include="DesktopConnector\ActionHandler\DownloadActionHandlerBaseTest.cs" />
     <Compile Include="DesktopConnector\ActionHandler\DownloadActionHandlerTest.cs" />
-    <Compile Include="DesktopConnector\ActionHandler\LoginActionHandlerExceptionTest.cs" />
     <Compile Include="DesktopConnector\ActionHandler\LoginActionHandlerTest.cs" />
     <Compile Include="DesktopConnector\ActionHandler\NewFileActionHandlerTest.cs" />
     <Compile Include="DesktopConnector\ActionHandler\ReadOnlyDownloadActionHandlerTest.cs" />
