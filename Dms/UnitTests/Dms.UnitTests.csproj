@@ -246,6 +246,7 @@
     <Compile Include="Web\UI\Controls\ContentMenuItems\ContentClipboardReplacementMenuItemTest.cs" />
     <Compile Include="Web\UI\Controls\ContentMenuItems\ContentDownloadMenuItemTest.cs" />
     <Compile Include="Web\UI\Controls\BocListExtensions\DmsEditableRowControlFactoryMixinTest.cs" />
+    <Compile Include="Web\UI\Controls\ContentMenuItems\ContentDragAndDropReplacementMenuItemTest.cs" />
     <Compile Include="Web\UI\Controls\ContentMenuItems\ContentReplacementMenuItemBaseTest.cs" />
     <Compile Include="Web\UI\Controls\ContentMenuItems\ContentBrowseReplacementMenuItemTest.cs" />
     <Compile Include="Web\UI\Controls\VersionServiceTest.cs" />
