@@ -245,10 +245,12 @@
     <Compile Include="Web\UI\Controls\BocContentValueTests\LoadValue.cs" />
     <Compile Include="Web\UI\Controls\BocContentValueTests\MenuLifeCycle.cs" />
     <Compile Include="Web\UI\Controls\ContentCommands\ContentDownloadCommandTest.cs" />
+    <Compile Include="Web\UI\Controls\ContentCommands\ContentDownloadReadOnlyCommandTest.cs" />
     <Compile Include="Web\UI\Controls\ContentCommands\ContentReplacementCommandTest.cs" />
     <Compile Include="Web\UI\Controls\ContentMenuItems\ContentClipboardReplacementMenuItemTest.cs" />
     <Compile Include="Web\UI\Controls\ContentMenuItems\ContentDownloadMenuItemTest.cs" />
     <Compile Include="Web\UI\Controls\BocListExtensions\DmsEditableRowControlFactoryMixinTest.cs" />
+    <Compile Include="Web\UI\Controls\ContentMenuItems\ContentDownloadReadOnlyMenuItemTest.cs" />
     <Compile Include="Web\UI\Controls\ContentMenuItems\ContentDragAndDropReplacementMenuItemTest.cs" />
     <Compile Include="Web\UI\Controls\ContentMenuItems\ContentReplacementMenuItemBaseTest.cs" />
     <Compile Include="Web\UI\Controls\ContentMenuItems\ContentBrowseReplacementMenuItemTest.cs" />
