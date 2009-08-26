@@ -231,6 +231,7 @@
     <Compile Include="DesktopConnector\FileHandling\FileTransfer\UploadHandlerMock.cs" />
     <Compile Include="Shared\Utilities\ArgumentUtilityTest.cs" />
     <Compile Include="DesktopConnector\Utilities\ManagedFileObjectMother.cs" />
+    <Compile Include="Shared\Utilities\FileSizeTest.cs" />
     <Compile Include="Shared\Utilities\StreamCopierTest.cs" />
     <Compile Include="DesktopConnector\Utilities\UriUtilityTest.cs" />
     <Compile Include="DesktopConnector\UrlHandlerTest.cs" />
