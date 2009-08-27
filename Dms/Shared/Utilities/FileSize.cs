@@ -24,27 +24,32 @@ namespace Remotion.Dms.Shared.Utilities
   /// </summary>
   public class FileSize
   {
-    private const long terabyte = 1099511627776;
-    private const long gigabyte = 1073741824;
-    private const long megabyte = 1048576;
-    private const long kilobyte = 1024;
+    //TODO: add other calculation
 
-    private long _maximumFileSize;
+    private const long c_terabyte = c_gigabyte * c_kilobyte;
+    private const long c_gigabyte = c_megabyte * c_kilobyte;
+    private const long c_megabyte = c_kilobyte * c_kilobyte;
+    private const long c_kilobyte = 1024;
+
+    private long _value;
 
     [Obsolete ("For XmlSerialization only", true)]
     public FileSize ()
     {
     }
 
-    public FileSize (long maximumFileSize)
+    public FileSize (long value)
     {
-      _maximumFileSize = maximumFileSize;
+      //TODO: add check/test for < 0
+      if (value < 0)
+        throw new ArgumentOutOfRangeException ("value", "Value is smaller than 0.");
+      _value = value;
     }
 
-    public long MaximumFileSize
+    public long Value
     {
-      get { return _maximumFileSize; }
-      set { _maximumFileSize = value; }
+      get { return _value; }
+      set { _value = value; }
     }
 
     public override string ToString ()
@@ -52,26 +57,27 @@ namespace Remotion.Dms.Shared.Utilities
       return GetFileSizeFormatted();
     }
 
+    //add another test / add CultureInfo
     private string GetFileSizeFormatted ()
     {
-      if (_maximumFileSize >= terabyte)
+      if (_value >= c_terabyte)
       {
-        return ((decimal) _maximumFileSize / terabyte).ToString ("0.00 TB");
+        return ((decimal) _value / c_terabyte).ToString ("0.00 TB");
       }
-      else if ((decimal) _maximumFileSize >= gigabyte)
+      else if ((decimal) _value >= c_gigabyte)
       {
-        return ((decimal) _maximumFileSize / gigabyte).ToString ("0.00 GB");
+        return ((decimal) _value / c_gigabyte).ToString ("0.00 GB");
       }
-      else if (_maximumFileSize >= megabyte)
+      else if (_value >= c_megabyte)
       {
-        return((decimal)_maximumFileSize / megabyte).ToString ("0.00 MB");
+        return((decimal)_value / c_megabyte).ToString ("0.00 MB");
       }
-      else if (_maximumFileSize >= kilobyte)
+      else if (_value >= c_kilobyte)
       {
-        return (_maximumFileSize / kilobyte).ToString ("0 KB");
+        return ((decimal) _value / c_kilobyte).ToString ("0.00 kB");
       }
       else
-        return _maximumFileSize + " _maximumFileSize";
+        return _value + " B";
     }
   }
 }
