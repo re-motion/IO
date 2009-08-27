@@ -20,7 +20,7 @@ using System;
 namespace Remotion.Dms.Shared.Utilities
 {
   /// <summary>
-  /// Represents a custom file size type tp print the size in an human readable way.
+  /// Represents a custom file size type to print the size in an human readable way.
   /// </summary>
   public class FileSize
   {
@@ -29,7 +29,12 @@ namespace Remotion.Dms.Shared.Utilities
     private const long megabyte = 1048576;
     private const long kilobyte = 1024;
 
-    private readonly long _maximumFileSize;
+    private long _maximumFileSize;
+
+    [Obsolete ("For XmlSerialization only", true)]
+    public FileSize ()
+    {
+    }
 
     public FileSize (long maximumFileSize)
     {
@@ -39,6 +44,7 @@ namespace Remotion.Dms.Shared.Utilities
     public long MaximumFileSize
     {
       get { return _maximumFileSize; }
+      set { _maximumFileSize = value; }
     }
 
     public override string ToString ()
