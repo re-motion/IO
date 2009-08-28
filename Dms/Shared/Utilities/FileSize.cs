@@ -22,25 +22,18 @@ namespace Remotion.Dms.Shared.Utilities
   /// <summary>
   /// Represents a custom file size type to print the size in an human readable way.
   /// </summary>
-  public class FileSize
+  [Serializable]
+  public struct FileSize
   {
-    //TODO: add other calculation
-
     private const long c_terabyte = c_gigabyte * c_kilobyte;
     private const long c_gigabyte = c_megabyte * c_kilobyte;
     private const long c_megabyte = c_kilobyte * c_kilobyte;
     private const long c_kilobyte = 1024;
 
-    private long _value;
-
-    [Obsolete ("For XmlSerialization only", true)]
-    public FileSize ()
-    {
-    }
-
+    private readonly long _value;
+    
     public FileSize (long value)
     {
-      //TODO: add check/test for < 0
       if (value < 0)
         throw new ArgumentOutOfRangeException ("value", "Value is smaller than 0.");
       _value = value;
@@ -49,7 +42,6 @@ namespace Remotion.Dms.Shared.Utilities
     public long Value
     {
       get { return _value; }
-      set { _value = value; }
     }
 
     public override string ToString ()
@@ -57,7 +49,6 @@ namespace Remotion.Dms.Shared.Utilities
       return GetFileSizeFormatted();
     }
 
-    //add another test / add CultureInfo
     private string GetFileSizeFormatted ()
     {
       if (_value >= c_terabyte)

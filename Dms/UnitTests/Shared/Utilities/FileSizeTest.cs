@@ -50,16 +50,17 @@ namespace Remotion.Dms.UnitTests.Shared.Utilities
       Assert.That (new FileSize (1000).ToString (), Is.EqualTo ("1000 B"));
 
       Assert.That (new FileSize (10000).ToString (), Is.EqualTo ("9.77 kB"));
-      Assert.That (new FileSize (100000).ToString (), Is.EqualTo ("97.66 kB")); //should be: 97.7
-      Assert.That (new FileSize (1000000).ToString (), Is.EqualTo ("976.56 kB")); //should be: 976.6
+      Assert.That (new FileSize (100000).ToString (), Is.EqualTo ("97.66 kB")); 
+      Assert.That (new FileSize (1000000).ToString (), Is.EqualTo ("976.56 kB")); 
+      Assert.That (new FileSize (1023000).ToString (), Is.EqualTo ("999.02 kB")); //TODO: possible refacotr output to 1000 
 
       Assert.That (new FileSize (10000000).ToString (), Is.EqualTo ("9.54 MB"));
-      Assert.That (new FileSize (100000000).ToString (), Is.EqualTo ("95.37 MB")); //should be: 95.4
-      Assert.That (new FileSize (1000000000).ToString (), Is.EqualTo ("953.67 MB")); //sould be: 953.7
+      Assert.That (new FileSize (100000000).ToString (), Is.EqualTo ("95.37 MB"));
+      Assert.That (new FileSize (1000000000).ToString (), Is.EqualTo ("953.67 MB"));
 
       Assert.That (new FileSize (10000000000).ToString (), Is.EqualTo ("9.31 GB"));
-      Assert.That (new FileSize (100000000000).ToString (), Is.EqualTo ("93.13 GB")); //should be: 93.1
-      Assert.That (new FileSize (1000000000000).ToString (), Is.EqualTo ("931.32 GB"));   //should be: 931.3
+      Assert.That (new FileSize (100000000000).ToString (), Is.EqualTo ("93.13 GB"));
+      Assert.That (new FileSize (1000000000000).ToString (), Is.EqualTo ("931.32 GB"));
 
       Assert.That (new FileSize (10000000000000).ToString (), Is.EqualTo ("9.09 TB"));
     }
