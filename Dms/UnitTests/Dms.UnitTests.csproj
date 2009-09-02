@@ -116,9 +116,11 @@
     <Compile Include="DesktopConnector\Configuration\ApplicationWatcherElementTest.cs" />
     <Compile Include="DesktopConnector\Configuration\ApplicationCriteriaElementTest.cs" />
     <Compile Include="DesktopConnector\Configuration\ApplicationWatcherStub.cs" />
+    <Compile Include="DesktopConnector\Configuration\CleanupIntervalConfigurationElementTest.cs" />
     <Compile Include="DesktopConnector\Configuration\DesktopConnectorConfigurationTest.cs" />
     <Compile Include="DesktopConnector\Configuration\ScannerConfigurationElementTest.cs" />
     <Compile Include="DesktopConnector\Configuration\SingleScanConfigurationElementTest.cs" />
+    <Compile Include="DesktopConnector\Configuration\TempFileConfigurationElementTest.cs" />
     <Compile Include="DesktopConnector\Configuration\XmlCriteriaElementTest.cs" />
     <Compile Include="DesktopConnector\FileHandling\DownloadedFileStates\DeserializingStateTest.cs" />
     <Compile Include="DesktopConnector\FileHandling\DownloadedFileStates\ErrorStateTest.cs" />
