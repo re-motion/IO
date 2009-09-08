@@ -55,6 +55,7 @@
         <include name="${build.test.outputdir}/Castle.MicroKernel.dll" />
         <include name="${build.test.outputdir}/Castle.Windsor.dll" />
         <include name="${build.test.outputdir}/CommonServiceLocator.WindsorAdapter.dll" />
+        <include name="${build.test.outputdir}/ICSharpCode.SharpZipLib.dll" />
         <include name="${build.test.outputdir}/log4net.dll" />
         <include name="${build.test.outputdir}/Microsoft.Practices.ServiceLocation.dll" />
         <include name="${build.test.outputdir}/nunit.framework.dll" />
