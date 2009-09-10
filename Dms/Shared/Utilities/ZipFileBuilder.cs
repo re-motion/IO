@@ -44,13 +44,13 @@ namespace Remotion.Dms.Shared.Utilities
     {
       using (var zipOutputStream = new ZipOutputStream (File.Create (archiveFileName)))
       {
+        StreamCopier streamCopier = new StreamCopier (); 
         foreach (var file in _files)
         {
           using (var fileStreamIn = new FileStream (file, FileMode.Open, FileAccess.Read))
           {
             ZipEntry zipEntry = new ZipEntry (Path.GetFileName (file));
             zipOutputStream.PutNextEntry (zipEntry);
-            StreamCopier streamCopier = new StreamCopier(); //TODO outside of foreach
             streamCopier.CopyStream (fileStreamIn, zipOutputStream, fileStreamIn.Length, ()=>false);
           }
         }
