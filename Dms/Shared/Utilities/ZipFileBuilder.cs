@@ -40,8 +40,11 @@ namespace Remotion.Dms.Shared.Utilities
       _files.Add (fileName);
     }
 
-    public void Build (string archiveFileName)
+    public void Build (string archiveFileName, EventHandler<StreamCopyProgressEventArgs> progressHandler)
     {
+      ArgumentUtility.CheckNotNullOrEmpty ("archiveFileName", archiveFileName);
+      ArgumentUtility.CheckNotNull ("progressHandler", progressHandler);
+
       using (var zipOutputStream = new ZipOutputStream (File.Create (archiveFileName)))
       {
         StreamCopier streamCopier = new StreamCopier (); 
@@ -51,10 +54,12 @@ namespace Remotion.Dms.Shared.Utilities
           {
             ZipEntry zipEntry = new ZipEntry (Path.GetFileName (file));
             zipOutputStream.PutNextEntry (zipEntry);
+            streamCopier.TransferProgress += progressHandler;
             streamCopier.CopyStream (fileStreamIn, zipOutputStream, fileStreamIn.Length, ()=>false);
           }
         }
       }
     }
+
   }
 }
