@@ -31,14 +31,14 @@ namespace Remotion.Dms.UnitTests.Shared.Utilities
   [TestFixture]
   public class ZipFileBuilderTest
   {
-    private FileSystemHelper _helper;
+    private FileSystemHelperExtended _helperExtended;
     private TempFile _file1;
     private TempFile _file2;
 
     [SetUp]
     public void SetUp ()
     {
-      _helper = new FileSystemHelper();
+      _helperExtended = new FileSystemHelperExtended();
 
       _file1 = new TempFile();
       _file2 = new TempFile();
@@ -60,7 +60,7 @@ namespace Remotion.Dms.UnitTests.Shared.Utilities
     [Test]
     public void AddFile ()
     {
-      var zipBuilder = _helper.CreateArchiveFileBuilder();
+      var zipBuilder = _helperExtended.CreateArchiveFileBuilder();
       zipBuilder.AddFile (_file1.FileName);
       Assert.That (zipBuilder.Files.Count, Is.EqualTo (1));
     }
@@ -68,7 +68,7 @@ namespace Remotion.Dms.UnitTests.Shared.Utilities
     [Test]
     public void AddSeveralFiles ()
     {
-      var zipBuilder = _helper.CreateArchiveFileBuilder();
+      var zipBuilder = _helperExtended.CreateArchiveFileBuilder();
       zipBuilder.AddFile (_file1.FileName);
       zipBuilder.AddFile (_file2.FileName);
       Assert.That (zipBuilder.Files.Count, Is.EqualTo (2));
@@ -77,13 +77,13 @@ namespace Remotion.Dms.UnitTests.Shared.Utilities
     [Test]
     public void BuildReturnsZipFile ()
     {
-      var zipBuilder = _helper.CreateArchiveFileBuilder();
+      var zipBuilder = _helperExtended.CreateArchiveFileBuilder();
       zipBuilder.AddFile (_file1.FileName);
       zipBuilder.AddFile (_file2.FileName);
 
       var eventHandlerMock = MockRepository.GenerateMock<EventHandler<StreamCopyProgressEventArgs>>();
 
-      var zipFileName = _helper.MakeUniqueAndValidFileName (_helper.GetOrCreateAppDataPath (), Guid.NewGuid () + ".zip");
+      var zipFileName = _helperExtended.MakeUniqueAndValidFileName (_helperExtended.GetOrCreateAppDataPath (), Guid.NewGuid () + ".zip");
       zipBuilder.Build (zipFileName, eventHandlerMock);
 
       var expectedFiles = UnZipFile (zipFileName);
@@ -91,14 +91,14 @@ namespace Remotion.Dms.UnitTests.Shared.Utilities
       Assert.That (Path.GetFileName (_file1.FileName), Is.EqualTo (Path.GetFileName(expectedFiles[0])));
       Assert.That (Path.GetFileName (_file2.FileName), Is.EqualTo (Path.GetFileName(expectedFiles[1])));
 
-      _helper.Delete (expectedFiles[0]);
-      _helper.Delete (expectedFiles[1]);
-      _helper.Delete (zipFileName);
+      _helperExtended.Delete (expectedFiles[0]);
+      _helperExtended.Delete (expectedFiles[1]);
+      _helperExtended.Delete (zipFileName);
     }
 
     private List<string> UnZipFile (string zipFile)
     {
-      var dstPath = _helper.GetOrCreateAppDataPath ();
+      var dstPath = _helperExtended.GetOrCreateAppDataPath ();
       FileStream fileStreamIn = new FileStream (zipFile, FileMode.Open, FileAccess.Read);
       ZipInputStream zipInStream = new ZipInputStream (fileStreamIn);
 

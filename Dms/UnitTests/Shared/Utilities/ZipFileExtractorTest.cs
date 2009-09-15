@@ -30,14 +30,14 @@ namespace Remotion.Dms.UnitTests.Shared.Utilities
   [TestFixture]
   public class ZipFileExtractorTest
   {
-    private FileSystemHelper _helper;
+    private FileSystemHelperExtended _helperExtended;
     private TempFile _file1;
     private TempFile _file2;
 
     [SetUp]
     public void SetUp ()
     {
-      _helper = new FileSystemHelper ();
+      _helperExtended = new FileSystemHelperExtended ();
 
       _file1 = new TempFile ();
       _file2 = new TempFile ();
@@ -59,17 +59,17 @@ namespace Remotion.Dms.UnitTests.Shared.Utilities
     [Test]
     public void ExtractZipFile ()
     {
-      var zipBuilder = _helper.CreateArchiveFileBuilder();
+      var zipBuilder = _helperExtended.CreateArchiveFileBuilder();
       zipBuilder.AddFile (_file1.FileName);
       zipBuilder.AddFile (_file2.FileName);
 
       var eventHandlerMock = MockRepository.GenerateMock<EventHandler<StreamCopyProgressEventArgs>>();
 
-      var zipFileName = _helper.MakeUniqueAndValidFileName (_helper.GetOrCreateAppDataPath(), Guid.NewGuid() + ".zip");
+      var zipFileName = _helperExtended.MakeUniqueAndValidFileName (_helperExtended.GetOrCreateAppDataPath(), Guid.NewGuid() + ".zip");
       zipBuilder.Build (zipFileName, eventHandlerMock);
 
       var zipUnpacker = new ZipFileExtractor();
-      var destinationPath = Path.Combine (_helper.GetOrCreateAppDataPath(), Guid.NewGuid().ToString());
+      var destinationPath = Path.Combine (_helperExtended.GetOrCreateAppDataPath(), Guid.NewGuid().ToString());
       zipUnpacker.Extract (zipFileName, destinationPath);
 
       List<string> files = new List<string>();
@@ -81,9 +81,9 @@ namespace Remotion.Dms.UnitTests.Shared.Utilities
       Assert.That (Path.GetFileName (_file1.FileName), Is.EqualTo (Path.GetFileName (files[0])));
       Assert.That (Path.GetFileName (_file2.FileName), Is.EqualTo (Path.GetFileName (files[1])));
       
-      _helper.Delete (files[0]);
-      _helper.Delete (files[1]);
-      _helper.Delete (zipFileName);
+      _helperExtended.Delete (files[0]);
+      _helperExtended.Delete (files[1]);
+      _helperExtended.Delete (zipFileName);
     }
   }
 }

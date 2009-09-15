@@ -60,9 +60,11 @@
     <Compile Include="Utilities\ArgumentEmptyException.cs" />
     <Compile Include="Utilities\ArgumentUtility.cs" />
     <Compile Include="Utilities\BrowserBase64SerializationHelper.cs" />
+    <Compile Include="Utilities\FileInfoWrapper.cs" />
     <Compile Include="Utilities\FileSize.cs" />
     <Compile Include="Utilities\IArchiveBuilder.cs" />
     <Compile Include="Utilities\IArchiveExtractor.cs" />
+    <Compile Include="Utilities\IFileInfo.cs" />
     <Compile Include="Utilities\StreamCopier.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -70,6 +72,7 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Utilities\ZipFileBuilder.cs" />
+    <Compile Include="Utilities\ZipFileBuildEventArgs.cs" />
     <Compile Include="Utilities\ZipFileExtractor.cs" />
     <None Include="..\..\remotion.snk">
       <Link>remotion.snk</Link>
