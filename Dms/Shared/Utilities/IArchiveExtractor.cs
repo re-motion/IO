@@ -25,6 +25,6 @@ namespace Remotion.Dms.Shared.Utilities
   /// </summary>
   public interface IArchiveExtractor
   {
-    List<string> Extract (string archiveFile, string dstPath);
+    void Extract (string archiveFile, string destinationPath);
   }
 }

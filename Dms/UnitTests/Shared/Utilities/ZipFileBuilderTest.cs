@@ -60,7 +60,7 @@ namespace Remotion.Dms.UnitTests.Shared.Utilities
     [Test]
     public void AddFile ()
     {
-      var zipBuilder = _helper.CreateZipFileBuilder();
+      var zipBuilder = _helper.CreateArchiveFileBuilder();
       zipBuilder.AddFile (_file1.FileName);
       Assert.That (zipBuilder.Files.Count, Is.EqualTo (1));
     }
@@ -68,7 +68,7 @@ namespace Remotion.Dms.UnitTests.Shared.Utilities
     [Test]
     public void AddSeveralFiles ()
     {
-      var zipBuilder = _helper.CreateZipFileBuilder();
+      var zipBuilder = _helper.CreateArchiveFileBuilder();
       zipBuilder.AddFile (_file1.FileName);
       zipBuilder.AddFile (_file2.FileName);
       Assert.That (zipBuilder.Files.Count, Is.EqualTo (2));
@@ -77,7 +77,7 @@ namespace Remotion.Dms.UnitTests.Shared.Utilities
     [Test]
     public void BuildReturnsZipFile ()
     {
-      var zipBuilder = _helper.CreateZipFileBuilder();
+      var zipBuilder = _helper.CreateArchiveFileBuilder();
       zipBuilder.AddFile (_file1.FileName);
       zipBuilder.AddFile (_file2.FileName);
 

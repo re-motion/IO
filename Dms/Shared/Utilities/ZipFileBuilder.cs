@@ -34,12 +34,17 @@ namespace Remotion.Dms.Shared.Utilities
       get { return _files; }
     }
 
+    public ZipFileBuilder ()
+    {
+    }
+
     public void AddFile (string fileName)
     {
       ArgumentUtility.CheckNotNullOrEmpty ("fileName", fileName);
       _files.Add (fileName);
     }
 
+    //TODO: add error handler
     public void Build (string archiveFileName, EventHandler<StreamCopyProgressEventArgs> progressHandler)
     {
       ArgumentUtility.CheckNotNullOrEmpty ("archiveFileName", archiveFileName);

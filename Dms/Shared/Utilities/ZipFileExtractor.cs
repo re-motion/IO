@@ -27,32 +27,17 @@ namespace Remotion.Dms.Shared.Utilities
   /// </summary>
   public class ZipFileExtractor : IArchiveExtractor
   {
-    public List<string> Extract (string archiveFile, string dstPath)
+    public ZipFileExtractor ()
     {
-      var files = new List<string> ();
-      using (FileStream fileStreamIn = new FileStream (archiveFile, FileMode.Open, FileAccess.Read))
-      {
-        using (ZipInputStream zipInStream = new ZipInputStream (fileStreamIn))
-        {
-          ZipEntry entry;
-          while ((entry = zipInStream.GetNextEntry ()) != null)
-          {
-            var filePath = dstPath + @"\" + entry.Name;
-            using (FileStream fileStreamOut = new FileStream (filePath, FileMode.Create, FileAccess.Write))
-            {
-              files.Add (filePath);
-              int size;
-              byte[] buffer = new byte[4096];
-              do
-              {
-                size = zipInStream.Read (buffer, 0, buffer.Length);
-                fileStreamOut.Write (buffer, 0, size);
-              } while (size > 0);
-            }
-          }
-        }
-      }
-      return files;
+    }
+
+    public void Extract (string archiveFile, string destinationPath)
+    {
+      ArgumentUtility.CheckNotNullOrEmpty ("archiveFile", archiveFile);
+      ArgumentUtility.CheckNotNullOrEmpty ("destinationPath", destinationPath);
+      
+      FastZip fastZip = new FastZip();
+      fastZip.ExtractZip (archiveFile, destinationPath, FastZip.Overwrite.Always, null, null, null, false);     
     }
   }
 }

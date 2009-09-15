@@ -28,7 +28,7 @@ using Rhino.Mocks;
 namespace Remotion.Dms.UnitTests.Shared.Utilities
 {
   [TestFixture]
-  public class ZipFileUnpackerTest
+  public class ZipFileExtractorTest
   {
     private FileSystemHelper _helper;
     private TempFile _file1;
@@ -57,24 +57,30 @@ namespace Remotion.Dms.UnitTests.Shared.Utilities
     }
 
     [Test]
-    public void ExtractFile ()
+    public void ExtractZipFile ()
     {
-      var zipBuilder = _helper.CreateZipFileBuilder ();
+      var zipBuilder = _helper.CreateArchiveFileBuilder();
       zipBuilder.AddFile (_file1.FileName);
       zipBuilder.AddFile (_file2.FileName);
 
-      var eventHandlerMock = MockRepository.GenerateMock<EventHandler<StreamCopyProgressEventArgs>> ();
+      var eventHandlerMock = MockRepository.GenerateMock<EventHandler<StreamCopyProgressEventArgs>>();
 
-      var zipFileName = _helper.MakeUniqueAndValidFileName (_helper.GetOrCreateAppDataPath (), Guid.NewGuid () + ".zip");
+      var zipFileName = _helper.MakeUniqueAndValidFileName (_helper.GetOrCreateAppDataPath(), Guid.NewGuid() + ".zip");
       zipBuilder.Build (zipFileName, eventHandlerMock);
 
       var zipUnpacker = new ZipFileExtractor();
-      var dstPath = _helper.GetOrCreateAppDataPath ();
-      List<string> files = zipUnpacker.Extract (zipFileName, dstPath);
+      var destinationPath = Path.Combine (_helper.GetOrCreateAppDataPath(), Guid.NewGuid().ToString());
+      zipUnpacker.Extract (zipFileName, destinationPath);
+
+      List<string> files = new List<string>();
+      foreach (var file in Directory.GetFiles (destinationPath))
+      {
+        files.Add (file);
+      }
 
       Assert.That (Path.GetFileName (_file1.FileName), Is.EqualTo (Path.GetFileName (files[0])));
       Assert.That (Path.GetFileName (_file2.FileName), Is.EqualTo (Path.GetFileName (files[1])));
-
+      
       _helper.Delete (files[0]);
       _helper.Delete (files[1]);
       _helper.Delete (zipFileName);

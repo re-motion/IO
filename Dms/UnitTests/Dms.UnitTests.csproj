@@ -243,7 +243,7 @@
     <Compile Include="Shared\Utilities\StreamCopierTest.cs" />
     <Compile Include="DesktopConnector\Utilities\UriUtilityTest.cs" />
     <Compile Include="DesktopConnector\UrlHandlerTest.cs" />
-    <Compile Include="Shared\Utilities\ZipFileUnpackerTest.cs" />
+    <Compile Include="Shared\Utilities\ZipFileExtractorTest.cs" />
     <Compile Include="WebServer\ImageRequestHandler.cs" />
     <Compile Include="WebServer\IMiniWebServer.cs" />
     <Compile Include="WebServer\IRequestHandler.cs" />
