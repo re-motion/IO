@@ -143,27 +143,27 @@ namespace Remotion.Dms.Shared.Utilities
       _wrappedInstance.Encrypt();
     }
 
-    public FileStream Open (FileMode mode)
+    public Stream Open (FileMode mode)
     {
       return _wrappedInstance.Open (mode);
     }
 
-    public FileStream Open (FileMode mode, FileAccess access)
+    public Stream Open (FileMode mode, FileAccess access)
     {
       return _wrappedInstance.Open (mode, access);
     }
 
-    public FileStream Open (FileMode mode, FileAccess access, FileShare share)
+    public Stream Open (FileMode mode, FileAccess access, FileShare share)
     {
       return _wrappedInstance.Open (mode, access, share);
     }
 
-    public FileStream OpenRead ()
+    public Stream OpenRead ()
     {
       return _wrappedInstance.OpenRead();
     }
 
-    public FileStream OpenWrite ()
+    public Stream OpenWrite ()
     {
       return _wrappedInstance.OpenWrite();
     }

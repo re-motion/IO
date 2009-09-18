@@ -29,16 +29,11 @@ namespace Remotion.Dms.Shared.Utilities
   {
     private readonly List<string> _files = new List<string>();
 
-    public List<string> Files
-    {
-      get { return _files; }
-    }
-
     public ZipFileBuilder ()
     {
     }
 
-    public void AddFile (string fileName)
+    public void AddFile (string fileName) //Add (IFileInfo)
     {
       ArgumentUtility.CheckNotNullOrEmpty ("fileName", fileName);
       _files.Add (fileName);
@@ -48,14 +43,13 @@ namespace Remotion.Dms.Shared.Utilities
     public void Build (string archiveFileName, EventHandler<StreamCopyProgressEventArgs> progressHandler)
     {
       ArgumentUtility.CheckNotNullOrEmpty ("archiveFileName", archiveFileName);
-      ArgumentUtility.CheckNotNull ("progressHandler", progressHandler);
-
+      
       using (var zipOutputStream = new ZipOutputStream (File.Create (archiveFileName)))
       {
         StreamCopier streamCopier = new StreamCopier (); 
         foreach (var file in _files)
         {
-          using (var fileStreamIn = new FileStream (file, FileMode.Open, FileAccess.Read))
+          using (var fileStreamIn = new FileStream (file, FileMode.Open, FileAccess.Read)) //work with IFIleInfo (InMemoryFileInfo) fileInfo.Open <- returns memory stream
           {
             ZipEntry zipEntry = new ZipEntry (Path.GetFileName (file));
             zipOutputStream.PutNextEntry (zipEntry);
@@ -64,6 +58,7 @@ namespace Remotion.Dms.Shared.Utilities
           }
         }
       }
+      _files.Clear();
     }
 
   }

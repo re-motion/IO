@@ -27,6 +27,5 @@ namespace Remotion.Dms.Shared.Utilities
   {
     void AddFile (string fileName);
     void Build (string archiveFileName, EventHandler<StreamCopyProgressEventArgs> progressHandler);
-    List<string> Files { get; }
   }
 }

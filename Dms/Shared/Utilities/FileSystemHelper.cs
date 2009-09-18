@@ -138,5 +138,15 @@ namespace Remotion.Dms.Shared.Utilities
     {
       Directory.Delete (path, recursive);
     }
+
+    public string Combine (string path1, string path2)
+    {
+      return Path.Combine (path1, path2);
+    }
+
+    public DirectoryInfo CreateDirectory (string path)
+    {
+      return Directory.CreateDirectory (path);
+    }
   }
 }

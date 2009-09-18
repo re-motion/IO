@@ -58,23 +58,6 @@ namespace Remotion.Dms.UnitTests.Shared.Utilities
     }
 
     [Test]
-    public void AddFile ()
-    {
-      var zipBuilder = _helperExtended.CreateArchiveFileBuilder();
-      zipBuilder.AddFile (_file1.FileName);
-      Assert.That (zipBuilder.Files.Count, Is.EqualTo (1));
-    }
-
-    [Test]
-    public void AddSeveralFiles ()
-    {
-      var zipBuilder = _helperExtended.CreateArchiveFileBuilder();
-      zipBuilder.AddFile (_file1.FileName);
-      zipBuilder.AddFile (_file2.FileName);
-      Assert.That (zipBuilder.Files.Count, Is.EqualTo (2));
-    }
-
-    [Test]
     public void BuildReturnsZipFile ()
     {
       var zipBuilder = _helperExtended.CreateArchiveFileBuilder();
