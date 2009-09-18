@@ -97,11 +97,6 @@
     <Compile Include="Clients.Windows.Tray\Interactions\UserInteractionFactoryTest.cs" />
     <Compile Include="Clients.Windows.Tray\Interactions\UserInteractionTest.cs" />
     <Compile Include="Clients.Windows.Tray\OleAccess\OleClipboardStrategyTest.cs" />
-    <Compile Include="Clients.Windows.Tray\OutlookAccess\DataObjectContentInspectorTest.cs" />
-    <Compile Include="Clients.Windows.Tray\OutlookAccess\DataObjectStub.cs" />
-    <Compile Include="Clients.Windows.Tray\OutlookAccess\ComEmailExtractionStrategyTest.cs" />
-    <Compile Include="Clients.Windows.Tray\OutlookAccess\DataObjectContentsExtractionStrategyTest.cs" />
-    <Compile Include="Clients.Windows.Tray\OutlookAccess\SimpleDragDropStrategyTest.cs" />
     <Compile Include="Clients.Windows.Tray\ProgramRunnerTest.cs" />
     <Compile Include="Core\ObjectBinding\DmsPropertyReflectorMixinTest.cs" />
     <Compile Include="Core\ObjectBinding\ContentPropertyTest.cs" />
