@@ -43,23 +43,23 @@ namespace Remotion.Dms.Shared.Utilities
     public void Build (string archiveFileName, EventHandler<StreamCopyProgressEventArgs> progressHandler)
     {
       ArgumentUtility.CheckNotNullOrEmpty ("archiveFileName", archiveFileName);
-      
+
       using (var zipOutputStream = new ZipOutputStream (File.Create (archiveFileName)))
       {
-        StreamCopier streamCopier = new StreamCopier (); 
+        StreamCopier streamCopier = new StreamCopier();
         foreach (var file in _files)
         {
-          using (var fileStreamIn = new FileStream (file, FileMode.Open, FileAccess.Read)) //work with IFIleInfo (InMemoryFileInfo) fileInfo.Open <- returns memory stream
+          using (var fileStreamIn = new FileStream (file, FileMode.Open, FileAccess.Read))
+              //work with IFIleInfo (InMemoryFileInfo) fileInfo.Open <- returns memory stream
           {
             ZipEntry zipEntry = new ZipEntry (Path.GetFileName (file));
             zipOutputStream.PutNextEntry (zipEntry);
             streamCopier.TransferProgress += progressHandler;
-            streamCopier.CopyStream (fileStreamIn, zipOutputStream, fileStreamIn.Length, ()=>false);
+            streamCopier.CopyStream (fileStreamIn, zipOutputStream, fileStreamIn.Length, () => false);
           }
         }
       }
       _files.Clear();
     }
-
   }
 }
