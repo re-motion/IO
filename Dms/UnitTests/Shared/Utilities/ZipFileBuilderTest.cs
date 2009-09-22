@@ -61,8 +61,8 @@ namespace Remotion.Dms.UnitTests.Shared.Utilities
     public void BuildReturnsZipFile ()
     {
       var zipBuilder = _helperExtended.CreateArchiveFileBuilder();
-      zipBuilder.AddFile (_file1.FileName);
-      zipBuilder.AddFile (_file2.FileName);
+      zipBuilder.AddFile (new FileInfoWrapper(new FileInfo(_file1.FileName)));
+      zipBuilder.AddFile (new FileInfoWrapper(new FileInfo(_file2.FileName)));
 
       var eventHandlerMock = MockRepository.GenerateMock<EventHandler<StreamCopyProgressEventArgs>>();
 
@@ -81,28 +81,13 @@ namespace Remotion.Dms.UnitTests.Shared.Utilities
 
     private List<string> UnZipFile (string zipFile)
     {
-      var dstPath = _helperExtended.GetOrCreateAppDataPath ();
-      FileStream fileStreamIn = new FileStream (zipFile, FileMode.Open, FileAccess.Read);
-      ZipInputStream zipInStream = new ZipInputStream (fileStreamIn);
+      FastZip fastZip = new FastZip();
+      var destinationPath = Path.Combine(_helperExtended.GetOrCreateAppDataPath (),"tmp");
 
-      var files = new List<string>();
-      ZipEntry entry;
-      while ((entry = zipInStream.GetNextEntry ()) != null)
-      {
-        var filePath = dstPath + @"\" + entry.Name;
-        FileStream fileStreamOut = new FileStream (filePath, FileMode.Create, FileAccess.Write);
-        files.Add (filePath);
-        int size;
-        byte[] buffer = new byte[4096];
-        do
-        {
-          size = zipInStream.Read (buffer, 0, buffer.Length);
-          fileStreamOut.Write (buffer, 0, size);
-        } while (size > 0);
-        fileStreamOut.Close ();
-      }
-      zipInStream.Close ();
-      fileStreamIn.Close ();
+      fastZip.ExtractZip (zipFile, destinationPath, FastZip.Overwrite.Always, null, null, null, false);
+
+      List<string> files = new List<string>();
+      files.AddRange (Directory.GetFiles (destinationPath));
       return files;
     }
   }

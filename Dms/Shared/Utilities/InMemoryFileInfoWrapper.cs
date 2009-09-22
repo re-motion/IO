@@ -24,9 +24,9 @@ namespace Remotion.Dms.Shared.Utilities
   {
     private readonly string _fileName;
     private readonly Stream _stream;
-    private DateTime _creationTime;
-    private DateTime _lastAccessTime;
-    private DateTime _lastWriteTime;
+    private readonly DateTime _creationTime;
+    private readonly DateTime _lastAccessTime;
+    private readonly DateTime _lastWriteTime;
 
     public InMemoryFileInfoWrapper (string fileName, Stream stream, DateTime creationTime, DateTime lastAccessTime, DateTime lastWriteTime)
     {

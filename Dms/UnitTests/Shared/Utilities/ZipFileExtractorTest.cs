@@ -60,8 +60,8 @@ namespace Remotion.Dms.UnitTests.Shared.Utilities
     public void ExtractZipFile ()
     {
       var zipBuilder = _helperExtended.CreateArchiveFileBuilder();
-      zipBuilder.AddFile (_file1.FileName);
-      zipBuilder.AddFile (_file2.FileName);
+      zipBuilder.AddFile (new FileInfoWrapper(new FileInfo(_file1.FileName)));
+      zipBuilder.AddFile (new FileInfoWrapper(new FileInfo(_file2.FileName)));
 
       var eventHandlerMock = MockRepository.GenerateMock<EventHandler<StreamCopyProgressEventArgs>>();
 

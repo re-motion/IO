@@ -27,16 +27,16 @@ namespace Remotion.Dms.Shared.Utilities
   /// </summary>
   public class ZipFileBuilder : IArchiveBuilder
   {
-    private readonly List<string> _files = new List<string>();
+    private readonly List<IFileInfo> _files = new List<IFileInfo>();
 
     public ZipFileBuilder ()
     {
     }
 
-    public void AddFile (string fileName) //Add (IFileInfo)
+    public void AddFile (IFileInfo fileInfo)
     {
-      ArgumentUtility.CheckNotNullOrEmpty ("fileName", fileName);
-      _files.Add (fileName);
+      ArgumentUtility.CheckNotNull ("fileInfo", fileInfo);
+      _files.Add (fileInfo);
     }
 
     public void Build (string archiveFileName, EventHandler<StreamCopyProgressEventArgs> progressHandler)
@@ -47,15 +47,18 @@ namespace Remotion.Dms.Shared.Utilities
       using (var zipOutputStream = new ZipOutputStream (File.Create (archiveFileName)))
       {
         StreamCopier streamCopier = new StreamCopier();
-        foreach (var file in _files)
+        foreach (var fileInfo in _files)
         {
-          using (var fileStreamIn = new FileStream (file, FileMode.Open, FileAccess.Read))
-              //work with IFIleInfo (InMemoryFileInfo) fileInfo.Open <- returns memory stream
+          using (var fileStream = fileInfo.Open (FileMode.Open, FileAccess.Read, FileShare.Read))
           {
-            ZipEntry zipEntry = new ZipEntry (Path.GetFileName (file));
+            ZipEntry zipEntry = new ZipEntry (fileInfo.Name);
             zipOutputStream.PutNextEntry (zipEntry);
             streamCopier.TransferProgress += progressHandler;
-            streamCopier.CopyStream (fileStreamIn, zipOutputStream, fileStreamIn.Length, () => false);
+            streamCopier.CopyStream (
+                fileStream,
+                zipOutputStream,
+                fileStream.Length,
+                () => false);
           }
         }
       }

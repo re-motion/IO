@@ -24,7 +24,8 @@ namespace Remotion.Dms.Shared.Utilities
   /// </summary>
   public interface IArchiveBuilder
   {
-    void AddFile (string fileName);
+    //void AddFile (string fileName);
+    void AddFile (IFileInfo fileInfo);
     void Build (string archiveFileName, EventHandler<StreamCopyProgressEventArgs> progressHandler);
   }
 }
