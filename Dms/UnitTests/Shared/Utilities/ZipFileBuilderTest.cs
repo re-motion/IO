@@ -34,6 +34,7 @@ namespace Remotion.Dms.UnitTests.Shared.Utilities
     private FileSystemHelperExtended _helperExtended;
     private TempFile _file1;
     private TempFile _file2;
+    private string _destinationPath;
 
     [SetUp]
     public void SetUp ()
@@ -55,6 +56,7 @@ namespace Remotion.Dms.UnitTests.Shared.Utilities
     {
       _file1.Dispose();
       _file2.Dispose();
+      Directory.Delete (_destinationPath);
     }
 
     [Test]
@@ -82,12 +84,12 @@ namespace Remotion.Dms.UnitTests.Shared.Utilities
     private List<string> UnZipFile (string zipFile)
     {
       FastZip fastZip = new FastZip();
-      var destinationPath = Path.Combine(_helperExtended.GetOrCreateAppDataPath (),"tmp");
+      _destinationPath = Path.Combine(_helperExtended.GetOrCreateAppDataPath (),"tmp");
 
-      fastZip.ExtractZip (zipFile, destinationPath, FastZip.Overwrite.Always, null, null, null, false);
+      fastZip.ExtractZip (zipFile, _destinationPath, FastZip.Overwrite.Always, null, null, null, false);
 
       List<string> files = new List<string>();
-      files.AddRange (Directory.GetFiles (destinationPath));
+      files.AddRange (Directory.GetFiles (_destinationPath));
       return files;
     }
   }

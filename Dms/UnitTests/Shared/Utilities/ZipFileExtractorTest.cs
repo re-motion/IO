@@ -33,6 +33,7 @@ namespace Remotion.Dms.UnitTests.Shared.Utilities
     private FileSystemHelperExtended _helperExtended;
     private TempFile _file1;
     private TempFile _file2;
+    private string _destinationPath;
 
     [SetUp]
     public void SetUp ()
@@ -54,6 +55,7 @@ namespace Remotion.Dms.UnitTests.Shared.Utilities
     {
       _file1.Dispose ();
       _file2.Dispose ();
+      Directory.Delete (_destinationPath);
     }
 
     [Test]
@@ -69,11 +71,11 @@ namespace Remotion.Dms.UnitTests.Shared.Utilities
       zipBuilder.Build (zipFileName, eventHandlerMock);
 
       var zipUnpacker = new ZipFileExtractor();
-      var destinationPath = Path.Combine (_helperExtended.GetOrCreateAppDataPath(), Guid.NewGuid().ToString());
-      zipUnpacker.Extract (zipFileName, destinationPath);
+      _destinationPath = Path.Combine (_helperExtended.GetOrCreateAppDataPath(), Guid.NewGuid().ToString());
+      zipUnpacker.Extract (zipFileName, _destinationPath);
 
       List<string> files = new List<string>();
-      foreach (var file in Directory.GetFiles (destinationPath))
+      foreach (var file in Directory.GetFiles (_destinationPath))
       {
         files.Add (file);
       }
