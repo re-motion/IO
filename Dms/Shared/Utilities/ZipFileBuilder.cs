@@ -39,10 +39,10 @@ namespace Remotion.Dms.Shared.Utilities
       _files.Add (fileName);
     }
 
-    //TODO: add error handler
     public void Build (string archiveFileName, EventHandler<StreamCopyProgressEventArgs> progressHandler)
     {
       ArgumentUtility.CheckNotNullOrEmpty ("archiveFileName", archiveFileName);
+      ArgumentUtility.CheckNotNull ("progressHandler", progressHandler);
 
       using (var zipOutputStream = new ZipOutputStream (File.Create (archiveFileName)))
       {
