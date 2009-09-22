@@ -20,77 +20,84 @@ using System.IO;
 
 namespace Remotion.Dms.Shared.Utilities
 {
-  public class FileInfoWrapper : IFileInfo
+  public class InMemoryFileInfoWrapper : IFileInfo
   {
-    private readonly FileInfo _wrappedInstance;
+    private readonly string _fileName;
+    private readonly Stream _stream;
+    private DateTime _creationTime;
+    private DateTime _lastAccessTime;
+    private DateTime _lastWriteTime;
 
-    public FileInfoWrapper (FileInfo fileInfo)
+    public InMemoryFileInfoWrapper (string fileName, Stream stream, DateTime creationTime, DateTime lastAccessTime, DateTime lastWriteTime)
     {
-      ArgumentUtility.CheckNotNull ("fileInfo", fileInfo);
-      _wrappedInstance = fileInfo;
+      ArgumentUtility.CheckNotNullOrEmpty ("fileName", fileName);
+      ArgumentUtility.CheckNotNull ("stream", stream);
+      
+      _fileName = fileName;
+      _stream = stream;
+      _creationTime = creationTime;
+      _lastAccessTime = lastAccessTime;
+      _lastWriteTime = lastWriteTime;
     }
 
     public string FullName
     {
-      get { return _wrappedInstance.FullName; }
+      get { return _fileName; }
     }
 
     public string Extension
     {
-      get { return _wrappedInstance.Extension; }
+      get { return Path.GetExtension (_fileName); }
     }
 
     public string Name
     {
-      get { return _wrappedInstance.Name; }
+      get { return Path.GetFileName (_fileName); }
     }
 
     public long Length
     {
-      get { return _wrappedInstance.Length; }
+      get { return _stream.Length; }
     }
 
     public string DirectoryName
     {
-      get { return _wrappedInstance.DirectoryName; }
+      get { return string.Empty; }
     }
 
     public DirectoryInfo Directory
     {
-      get { return _wrappedInstance.Directory; }
+      get { throw new NotImplementedException(); }
     }
 
     public bool IsReadOnly
     {
-      get { return _wrappedInstance.IsReadOnly; }
+      get { return true; }
     }
 
     public bool Exists
     {
-      get { return _wrappedInstance.Exists; }
+      get { return true; }
     }
 
-    public DateTime CreationTime
+    public DateTime CreationTime 
     {
-      get { return _wrappedInstance.CreationTime; }
-      set { _wrappedInstance.CreationTime = value; }
+      get { return _creationTime; }
     }
 
-    public DateTime LastAccessTime
+    public DateTime LastAccessTime 
     {
-      get { return _wrappedInstance.LastAccessTime; }
-      set { _wrappedInstance.LastAccessTime = value; }
+      get { return _lastAccessTime; }
     }
 
     public DateTime LastWriteTime
     {
-      get { return _wrappedInstance.LastWriteTime; }
-      set { _wrappedInstance.LastWriteTime = value; }
+      get { return _lastWriteTime; }
     }
 
     public Stream Open (FileMode mode, FileAccess access, FileShare share)
     {
-      return _wrappedInstance.Open (mode, access, share);
+      return _stream;
     }
 
   }

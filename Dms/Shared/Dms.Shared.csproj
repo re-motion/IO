@@ -72,6 +72,7 @@
     <Compile Include="Utilities\IArchiveExtractor.cs" />
     <Compile Include="Utilities\IFileInfo.cs" />
     <Compile Include="Utilities\IFileSystemHelper.cs" />
+    <Compile Include="Utilities\InMemoryFileInfoWrapper.cs" />
     <Compile Include="Utilities\StreamCopier.cs">
       <SubType>Code</SubType>
     </Compile>

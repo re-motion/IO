@@ -1,3 +1,20 @@
+// This file is part of re-vision (www.re-motion.org)
+// Copyright (C) 2005-2009 rubicon informationstechnologie gmbh, www.rubicon.eu
+// 
+// This program is free software; you can redistribute it and/or modify
+// it under the terms of the GNU Affero General Public License version 3.0 
+// as published by the Free Software Foundation.
+// 
+// This program is distributed in the hope that it will be useful, 
+// but WITHOUT ANY WARRANTY; without even the implied warranty of 
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the 
+// GNU Affero General Public License for more details.
+// 
+// You should have received a copy of the GNU Affero General Public License
+// along with this program; if not, see http://www.gnu.org/licenses.
+// 
+// Additional permissions are listed in the file re-motion_exceptions.txt.
+// 
 using System;
 using System.IO;
 using System.Security.AccessControl;
@@ -12,36 +29,12 @@ namespace Remotion.Dms.Shared.Utilities
     long Length { get; }
     string DirectoryName { get; }
     DirectoryInfo Directory { get; }
-    bool IsReadOnly { get; set; }
+    bool IsReadOnly { get; }
     bool Exists { get; }
-    DateTime CreationTime { get; set; }
-    DateTime LastAccessTime { get; set; }
-    DateTime LastWriteTime { get; set; }
+    DateTime CreationTime { get; }
+    DateTime LastAccessTime { get; }
+    DateTime LastWriteTime { get; }
     Stream Open (FileMode mode, FileAccess access, FileShare share);
     
-    DateTime CreationTimeUtc { get; set; }
-    DateTime LastAccessTimeUtc { get; set; }
-    DateTime LastWriteTimeUtc { get; set; }
-    FileAttributes Attributes { get; set; }
-    FileSecurity GetAccessControl ();
-    FileSecurity GetAccessControl (AccessControlSections includeSections);
-    void SetAccessControl (FileSecurity fileSecurity);
-    StreamReader OpenText ();
-    StreamWriter CreateText ();
-    StreamWriter AppendText ();
-    FileInfo CopyTo (string destFileName);
-    FileInfo CopyTo (string destFileName, bool overwrite);
-    FileStream Create ();
-    void Delete ();
-    void Decrypt ();
-    void Encrypt ();
-    Stream Open (FileMode mode);
-    Stream Open (FileMode mode, FileAccess access);
-    Stream OpenRead ();
-    Stream OpenWrite ();
-    void MoveTo (string destFileName);
-    FileInfo Replace (string destinationFileName, string destinationBackupFileName);
-    FileInfo Replace (string destinationFileName, string destinationBackupFileName, bool ignoreMetadataErrors);
-    void Refresh ();
   }
 }
