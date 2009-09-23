@@ -68,7 +68,10 @@ namespace Remotion.Dms.UnitTests.Shared.Utilities
       var eventHandlerMock = MockRepository.GenerateMock<EventHandler<StreamCopyProgressEventArgs>>();
 
       var zipFileName = _helperExtended.MakeUniqueAndValidFileName (_helperExtended.GetOrCreateAppDataPath(), Guid.NewGuid() + ".zip");
-      zipBuilder.Build (zipFileName, eventHandlerMock);
+
+      using (var stream = zipBuilder.Build (zipFileName, eventHandlerMock))
+      {
+      }
 
       var zipUnpacker = new ZipFileExtractor();
       _destinationPath = Path.Combine (_helperExtended.GetOrCreateAppDataPath(), Guid.NewGuid().ToString());

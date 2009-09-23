@@ -16,6 +16,7 @@
 // Additional permissions are listed in the file re-motion_exceptions.txt.
 // 
 using System;
+using System.IO;
 
 namespace Remotion.Dms.Shared.Utilities
 {
@@ -24,8 +25,7 @@ namespace Remotion.Dms.Shared.Utilities
   /// </summary>
   public interface IArchiveBuilder
   {
-    //void AddFile (string fileName);
     void AddFile (IFileInfo fileInfo);
-    void Build (string archiveFileName, EventHandler<StreamCopyProgressEventArgs> progressHandler);
+    Stream Build (string archiveFileName, EventHandler<StreamCopyProgressEventArgs> progressHandler);
   }
 }

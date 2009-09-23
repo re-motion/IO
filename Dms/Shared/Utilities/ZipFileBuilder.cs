@@ -39,7 +39,7 @@ namespace Remotion.Dms.Shared.Utilities
       _files.Add (fileInfo);
     }
 
-    public void Build (string archiveFileName, EventHandler<StreamCopyProgressEventArgs> progressHandler)
+    public Stream Build (string archiveFileName, EventHandler<StreamCopyProgressEventArgs> progressHandler)
     {
       ArgumentUtility.CheckNotNullOrEmpty ("archiveFileName", archiveFileName);
       ArgumentUtility.CheckNotNull ("progressHandler", progressHandler);
@@ -63,6 +63,7 @@ namespace Remotion.Dms.Shared.Utilities
         }
       }
       _files.Clear();
+      return File.Open (archiveFileName, FileMode.Open, FileAccess.Read, FileShare.None);
     }
   }
 }

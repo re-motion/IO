@@ -17,7 +17,9 @@
 // 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
+using ICSharpCode.SharpZipLib.Core;
 using ICSharpCode.SharpZipLib.Zip;
 using NUnit.Framework;
 using NUnit.Framework.SyntaxHelpers;
@@ -69,9 +71,12 @@ namespace Remotion.Dms.UnitTests.Shared.Utilities
       var eventHandlerMock = MockRepository.GenerateMock<EventHandler<StreamCopyProgressEventArgs>>();
 
       var zipFileName = _helperExtended.MakeUniqueAndValidFileName (_helperExtended.GetOrCreateAppDataPath (), Guid.NewGuid () + ".zip");
-      zipBuilder.Build (zipFileName, eventHandlerMock);
+      
+      using (var zipFileStream = zipBuilder.Build (zipFileName, eventHandlerMock))
+      {
+      }
 
-      var expectedFiles = UnZipFile (zipFileName);
+      var expectedFiles = UnZipFile (zipFileName); 
 
       Assert.That (Path.GetFileName (_file1.FileName), Is.EqualTo (Path.GetFileName(expectedFiles[0])));
       Assert.That (Path.GetFileName (_file2.FileName), Is.EqualTo (Path.GetFileName(expectedFiles[1])));
