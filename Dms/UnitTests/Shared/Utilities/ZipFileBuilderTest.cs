@@ -17,9 +17,7 @@
 // 
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.IO;
-using ICSharpCode.SharpZipLib.Core;
 using ICSharpCode.SharpZipLib.Zip;
 using NUnit.Framework;
 using NUnit.Framework.SyntaxHelpers;
