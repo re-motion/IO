@@ -79,6 +79,8 @@
     <Compile Include="Utilities\StreamCopyProgressEventArgs.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Utilities\ReadonlyStream.cs" />
+    <Compile Include="Utilities\TemporaryFileStream.cs" />
     <Compile Include="Utilities\ZipFileBuilder.cs" />
     <Compile Include="Utilities\ZipFileBuildEventArgs.cs" />
     <Compile Include="Utilities\ZipFileExtractor.cs" />
