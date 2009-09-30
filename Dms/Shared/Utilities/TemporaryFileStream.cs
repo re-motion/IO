@@ -26,24 +26,24 @@ namespace Remotion.Dms.Shared.Utilities
   public class TemporaryFileStream : ReadonlyStream
   {
     private readonly string _filePath;
-    private readonly IFileSystemHelper _fileSystemHelperExtended;
+    private readonly IFileSystemHelper _fileSystemHelper;
 
-    public TemporaryFileStream (Stream stream, string filePath, IFileSystemHelper fileSystemHelperExtended)
+    public TemporaryFileStream (Stream stream, string filePath, IFileSystemHelper fileSystemHelper)
         : base(stream)
     {
       ArgumentUtility.CheckNotNull ("stream", stream);
       ArgumentUtility.CheckNotNull ("filePath", filePath);
-      ArgumentUtility.CheckNotNull ("fileSystemHelper", fileSystemHelperExtended);
+      ArgumentUtility.CheckNotNull ("fileSystemHelper", fileSystemHelper);
 
       _filePath = filePath;
-      _fileSystemHelperExtended = fileSystemHelperExtended;
+      _fileSystemHelper = fileSystemHelper;
     }
 
     public override void Close ()
     {
       base.Close ();
       Stream.Close ();
-      _fileSystemHelperExtended.Delete (_filePath);
+      _fileSystemHelper.Delete (_filePath);
     }
   }
 }
