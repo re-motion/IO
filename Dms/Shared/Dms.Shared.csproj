@@ -73,13 +73,15 @@
     <Compile Include="Utilities\IFileInfo.cs" />
     <Compile Include="Utilities\IFileSystemHelper.cs" />
     <Compile Include="Utilities\InMemoryFileInfoWrapper.cs" />
+    <Compile Include="Utilities\ReadonlyStream.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Utilities\StreamCopier.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Utilities\StreamCopyProgressEventArgs.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Utilities\ReadonlyStream.cs" />
     <Compile Include="Utilities\TemporaryFileStream.cs" />
     <Compile Include="Utilities\ZipFileBuilder.cs" />
     <Compile Include="Utilities\ZipFileBuildEventArgs.cs" />

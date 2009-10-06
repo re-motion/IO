@@ -23,7 +23,7 @@ namespace Remotion.Dms.Shared.Utilities
   /// <summary>
   /// Wraps a <see cref="Stream"/> and deletes the underlying file on dispos
   /// </summary>
-  public class TemporaryFileStream : ReadonlyStream
+  public class TemporaryFileStream : ReadOnlyStream
   {
     private readonly string _filePath;
     private readonly IFileSystemHelper _fileSystemHelper;

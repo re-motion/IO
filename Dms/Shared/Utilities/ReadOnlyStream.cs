@@ -23,9 +23,9 @@ namespace Remotion.Dms.Shared.Utilities
   /// <summary>
   /// This class wraps around a <see cref="Stream"/> and exposes an interface to a readonly stream.
   /// </summary>
-  public abstract class ReadonlyStream : Stream
+  public abstract class ReadOnlyStream : Stream
   {
-    protected ReadonlyStream (Stream stream)
+    protected ReadOnlyStream (Stream stream)
     {
       ArgumentUtility.CheckNotNull ("stream", stream);
       _stream = stream;
@@ -80,12 +80,14 @@ namespace Remotion.Dms.Shared.Utilities
     public override long Position
     {
       get { return Stream.Position; }
-      set { throw new NotImplementedException(); }
+      set { Stream.Position = value; }
     }
 
     protected Stream Stream
     {
       get { return _stream; }
     }
+
+    
   }
 }

@@ -150,7 +150,7 @@
     <Compile Include="DesktopConnector\FileHandling\DownloadedFileStates\RecoveredStateTest.cs" />
     <Compile Include="DesktopConnector\FileHandling\DownloadedFileStates\RecoveryFailedStateTest.cs" />
     <Compile Include="DesktopConnector\FileHandling\DownloadedFileStates\ReplacementRequestedStateTest.cs" />
-    <Compile Include="DesktopConnector\FileHandling\FileSystemHelperTest.cs" />
+    <Compile Include="DesktopConnector\FileHandling\FileSystemHelperExtendedTest.cs" />
     <Compile Include="DesktopConnector\FileHandling\FileTransfer\V1_0\FileDownloadAgentTest.cs" />
     <Compile Include="DesktopConnector\FileHandling\FileTransfer\FileTransferAgentBaseTest.cs" />
     <Compile Include="DesktopConnector\FileHandling\FileTransfer\V1_0\ReadOnlyFileDownloadAgentTest.cs" />
