@@ -25,7 +25,6 @@ namespace Remotion.Dms.Shared.Utilities
     private readonly int _bufferSize;
     public const int DefaultCopyBufferSize = 1024 * 4;
 
-    //Use a sensible name
     public delegate bool ShouldAbort ();
 
     public event EventHandler<StreamCopyProgressEventArgs> TransferProgress;

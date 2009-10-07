@@ -23,9 +23,10 @@ namespace Remotion.Dms.Shared.Utilities
   /// <summary>
   /// The <see cref="IArchiveBuilder"/> declares an API for adding files to an archive and to return the archive as a stream.
   /// </summary>
+  public delegate bool ShouldAbort ();
   public interface IArchiveBuilder
   {
     void AddFile (IFileInfo fileInfo);
-    Stream Build (string archiveFileName, EventHandler<StreamCopyProgressEventArgs> progressHandler);
+    Stream Build (string archiveFileName, EventHandler<StreamCopyProgressEventArgs> progressHandler, StreamCopier.ShouldAbort shouldAbort);
   }
 }

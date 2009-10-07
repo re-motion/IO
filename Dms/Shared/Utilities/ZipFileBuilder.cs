@@ -28,7 +28,7 @@ namespace Remotion.Dms.Shared.Utilities
   public class ZipFileBuilder : IArchiveBuilder
   {
     private readonly List<IFileInfo> _files = new List<IFileInfo>();
-
+    
     public ZipFileBuilder ()
     {
     }
@@ -39,7 +39,7 @@ namespace Remotion.Dms.Shared.Utilities
       _files.Add (fileInfo);
     }
 
-    public Stream Build (string archiveFileName, EventHandler<StreamCopyProgressEventArgs> progressHandler)
+    public Stream Build (string archiveFileName, EventHandler<StreamCopyProgressEventArgs> progressHandler, StreamCopier.ShouldAbort shouldAbort)
     {
       ArgumentUtility.CheckNotNullOrEmpty ("archiveFileName", archiveFileName);
       ArgumentUtility.CheckNotNull ("progressHandler", progressHandler);
@@ -54,11 +54,12 @@ namespace Remotion.Dms.Shared.Utilities
             ZipEntry zipEntry = new ZipEntry (fileInfo.Name);
             zipOutputStream.PutNextEntry (zipEntry);
             streamCopier.TransferProgress += progressHandler;
+            
             streamCopier.CopyStream (
                 fileStream,
                 zipOutputStream,
                 fileStream.Length,
-                () => false);
+                shouldAbort);
           }
         }
       }

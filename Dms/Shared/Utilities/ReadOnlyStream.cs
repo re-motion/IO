@@ -57,6 +57,14 @@ namespace Remotion.Dms.Shared.Utilities
       throw new NotImplementedException();
     }
 
+    public override void Close ()
+    {
+      _stream.Close();
+      base.Close ();
+    }
+
+    
+
     public override bool CanRead
     {
       get { return Stream.CanRead; }

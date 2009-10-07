@@ -69,7 +69,7 @@ namespace Remotion.Dms.UnitTests.Shared.Utilities
 
       var zipFileName = _helperExtended.MakeUniqueAndValidFileName (_helperExtended.GetOrCreateAppDataPath(), Guid.NewGuid() + ".zip");
 
-      using (var stream = zipBuilder.Build (zipFileName, eventHandlerMock))
+      using (var stream = zipBuilder.Build (zipFileName, eventHandlerMock,() => false))
       {
       }
 

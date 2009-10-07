@@ -42,7 +42,6 @@ namespace Remotion.Dms.Shared.Utilities
     public override void Close ()
     {
       base.Close ();
-      Stream.Close ();
       _fileSystemHelper.Delete (_filePath);
     }
   }
