@@ -84,7 +84,6 @@
     </Compile>
     <Compile Include="Utilities\TemporaryFileStream.cs" />
     <Compile Include="Utilities\ZipFileBuilder.cs" />
-    <Compile Include="Utilities\ZipFileBuildEventArgs.cs" />
     <Compile Include="Utilities\ZipFileExtractor.cs" />
     <None Include="..\..\remotion.snk">
       <Link>remotion.snk</Link>

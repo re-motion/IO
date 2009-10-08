@@ -62,9 +62,7 @@ namespace Remotion.Dms.Shared.Utilities
       _stream.Close();
       base.Close ();
     }
-
     
-
     public override bool CanRead
     {
       get { return Stream.CanRead; }

@@ -38,5 +38,19 @@ namespace Remotion.Dms.UnitTests.Shared.Utilities
       int result = ArgumentUtility.CheckNotNull ("test", 5);
       Assert.That (result, Is.EqualTo (5));
     }
+
+    [Test]
+    [ExpectedException (typeof (ArgumentNullException))]
+    public void CheckNotNullOrEmpty ()
+    {
+      ArgumentUtility.CheckNotNullOrEmpty ("test", null);
+    }
+
+    [Test]
+    [ExpectedException(typeof(ArgumentEmptyException))]
+    public void CheckNotNullOrEmpty_EmptyActualValue_RaisesArgumentEmptyException ()
+    {
+      ArgumentUtility.CheckNotNullOrEmpty ("test", string.Empty);
+    }
   }
 }

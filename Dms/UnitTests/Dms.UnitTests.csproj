@@ -179,6 +179,8 @@
     <Compile Include="DesktopConnector\Utilities\SessionInfoObjectMother.cs" />
     <Compile Include="DesktopConnector\Utilities\BackgroundThreadInvokerTest.cs" />
     <Compile Include="DesktopConnector\Utilities\StubThreadInvoker.cs" />
+    <Compile Include="Shared\Utilities\FileInfoWrapperTest.cs" />
+    <Compile Include="Shared\Utilities\InMemoryFileInfoWrapperTest.cs" />
     <Compile Include="Shared\Utilities\ZipFileBuilderTest.cs" />
     <Compile Include="Shared\Exceptions\DmsLockStolenExceptionTest.cs" />
     <Compile Include="Shared\Utilities\BrowserBase64SerializationHelperTest.cs" />
