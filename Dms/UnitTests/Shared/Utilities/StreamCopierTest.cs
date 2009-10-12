@@ -71,7 +71,7 @@ namespace Remotion.Dms.UnitTests.Shared.Utilities
       MemoryStream outputStream = new MemoryStream();
       mockRepository.ReplayAll();
 
-      _streamCopier.CopyStream (inputMock, outputStream, inputMock.Length, null);
+      _streamCopier.CopyStream (inputMock, outputStream, inputMock.Length);
       Assert.That (outputStream.ToArray(), NUnit.Framework.SyntaxHelpers.Is.EqualTo (new byte[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 }));
 
       mockRepository.VerifyAll();
@@ -127,7 +127,7 @@ namespace Remotion.Dms.UnitTests.Shared.Utilities
       MemoryStream outputStream = new MemoryStream();
       mockRepository.ReplayAll();
 
-      _streamCopier.CopyStream (inputMock, outputStream, inputMock.Length, () => false);
+      _streamCopier.CopyStream (inputMock, outputStream, inputMock.Length);
       Assert.That (outputStream.ToArray(), NUnit.Framework.SyntaxHelpers.Is.EqualTo (new byte[] { 0, 1, 2, 3, 4, 0, 1, 2, 0, 1 }));
 
       mockRepository.VerifyAll();

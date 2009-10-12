@@ -23,11 +23,13 @@ namespace Remotion.Dms.Shared.Utilities
   {
     private readonly long _currentValue;
     private readonly long _fileLength;
+    private bool _cancel;
 
     public StreamCopyProgressEventArgs (long currentValue, long fileLength)
     {
       _currentValue = currentValue;
       _fileLength = fileLength;
+      _cancel = false;
     }
 
     public long CurrentValue
@@ -38,6 +40,12 @@ namespace Remotion.Dms.Shared.Utilities
     public long StreamLength
     {
       get { return _fileLength; }
+    }
+
+    public bool Cancel
+    {
+      get { return _cancel; }
+      set { _cancel = value; }
     }
   }
 }

@@ -25,8 +25,6 @@ namespace Remotion.Dms.Shared.Utilities
     private readonly int _bufferSize;
     public const int DefaultCopyBufferSize = 1024 * 4;
 
-    public delegate bool ShouldAbort ();
-
     public event EventHandler<StreamCopyProgressEventArgs> TransferProgress;
 
     public StreamCopier ()
@@ -44,12 +42,10 @@ namespace Remotion.Dms.Shared.Utilities
       get { return _bufferSize; }
     }
 
-    //TODO: refactor to move shouldAbort into eventArgs
-    public bool CopyStream (Stream input, Stream output, long inputLength, ShouldAbort shouldAbort)
+    public bool CopyStream (Stream input, Stream output, long inputLength)
     {
       ArgumentUtility.CheckNotNull ("input", input);
       ArgumentUtility.CheckNotNull ("output", output);
-      ArgumentUtility.CheckNotNull ("shouldAbort", shouldAbort);
 
       long bytesTransferred = 0;
       byte[] buffer = new byte[BufferSize];
@@ -59,17 +55,19 @@ namespace Remotion.Dms.Shared.Utilities
         bytesRead = input.Read (buffer, 0, buffer.Length);
         output.Write (buffer, 0, bytesRead);
         bytesTransferred += bytesRead;
-        OnTransferProgress (bytesTransferred, inputLength);
-        if (shouldAbort())
+
+        var args = new StreamCopyProgressEventArgs (bytesTransferred, inputLength);
+        OnTransferProgress (args);
+        if (args.Cancel)
           return false;
       } while (bytesRead != 0);
       return true;
     }
 
-    private void OnTransferProgress (long bytesRead, long streamLength)
+    private void OnTransferProgress (StreamCopyProgressEventArgs args)
     {
       if (TransferProgress != null)
-        TransferProgress (this, new StreamCopyProgressEventArgs (bytesRead, streamLength));
+        TransferProgress (this, args);
     }
   }
 }

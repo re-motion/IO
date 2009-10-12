@@ -39,7 +39,7 @@ namespace Remotion.Dms.Shared.Utilities
       _files.Add (fileInfo);
     }
 
-    public Stream Build (string archiveFileName, EventHandler<StreamCopyProgressEventArgs> progressHandler, StreamCopier.ShouldAbort shouldAbort)
+    public Stream Build (string archiveFileName, EventHandler<StreamCopyProgressEventArgs> progressHandler)
     {
       ArgumentUtility.CheckNotNullOrEmpty ("archiveFileName", archiveFileName);
       ArgumentUtility.CheckNotNull ("progressHandler", progressHandler);
@@ -58,8 +58,7 @@ namespace Remotion.Dms.Shared.Utilities
             streamCopier.CopyStream (
                 fileStream,
                 zipOutputStream,
-                fileStream.Length,
-                shouldAbort);
+                fileStream.Length);
           }
         }
       }
