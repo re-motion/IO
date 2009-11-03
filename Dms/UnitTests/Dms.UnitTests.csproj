@@ -177,6 +177,7 @@
     <Compile Include="DesktopConnector\Services\VersionMatcherTest.cs" />
     <Compile Include="DesktopConnector\Services\WebServiceAgentBaseTest.cs" />
     <Compile Include="DesktopConnector\UI\ScannerFileSelectionInteractionTest.cs" />
+    <Compile Include="DesktopConnector\Utilities\NullAssociatedProgramFinderTest.cs" />
     <Compile Include="DesktopConnector\Utilities\SessionInfoObjectMother.cs" />
     <Compile Include="DesktopConnector\Utilities\BackgroundThreadInvokerTest.cs" />
     <Compile Include="DesktopConnector\Utilities\StubThreadInvoker.cs" />
@@ -221,7 +222,7 @@
     <Compile Include="DesktopConnector\FileHandling\QueueManagerTest.cs" />
     <Compile Include="DesktopConnector\FileHandling\FileTransfer\UploadStreamBaseTest.cs" />
     <Compile Include="DesktopConnector\Utilities\ApplicationWatchFinderTest.cs" />
-    <Compile Include="DesktopConnector\Utilities\AssociatedProgramFinderTest.cs" />
+    <Compile Include="Clients.Windows.Tray\AssociatedProgramFinderTest.cs" />
     <Compile Include="DesktopConnector\Utilities\DocumentInfoObjectMother.cs" />
     <Compile Include="DesktopConnector\Utilities\FileVersionProviderTest.cs" />
     <Compile Include="DesktopConnector\Utilities\RegistryAccessorTest.cs" />
