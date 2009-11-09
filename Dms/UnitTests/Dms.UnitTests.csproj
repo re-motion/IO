@@ -124,7 +124,10 @@
     <Compile Include="DesktopConnector\Configuration\SingleScanConfigurationElementTest.cs" />
     <Compile Include="DesktopConnector\Configuration\TempFileConfigurationElementTest.cs" />
     <Compile Include="DesktopConnector\Configuration\XmlCriteriaElementTest.cs" />
-    <Compile Include="DesktopConnector\FileHandling\ApplicationProxyTest.cs" />
+    <Compile Include="DesktopConnector\FileHandling\ApplicationProxyTests\HandleFileDisposed.cs" />
+    <Compile Include="DesktopConnector\FileHandling\ApplicationProxyTests\HandleFileChanged.cs" />
+    <Compile Include="DesktopConnector\FileHandling\ApplicationProxyTests\OpenFile.cs" />
+    <Compile Include="DesktopConnector\FileHandling\ApplicationProxyTests\HandleFileClosed.cs" />
     <Compile Include="DesktopConnector\FileHandling\DownloadedFileStates\DeserializingStateTest.cs" />
     <Compile Include="DesktopConnector\FileHandling\DownloadedFileStates\ErrorStateTest.cs" />
     <Compile Include="DesktopConnector\FileHandling\DownloadedFileStates\LostSyncBeingOpenedStateTest.cs" />
