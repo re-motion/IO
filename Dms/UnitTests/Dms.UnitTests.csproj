@@ -125,11 +125,11 @@
     <Compile Include="DesktopConnector\Configuration\TempFileConfigurationElementTest.cs" />
     <Compile Include="DesktopConnector\Configuration\XmlCriteriaElementTest.cs" />
     <Compile Include="DesktopConnector\FileHandling\ApplicationProxyFactoryTest.cs" />
-    <Compile Include="DesktopConnector\FileHandling\ApplicationProxyTests\HandleFileDisposed.cs" />
-    <Compile Include="DesktopConnector\FileHandling\ApplicationProxyTests\HandleFileChanged.cs" />
-    <Compile Include="DesktopConnector\FileHandling\ApplicationProxyTests\Initialize.cs" />
-    <Compile Include="DesktopConnector\FileHandling\ApplicationProxyTests\OpenFile.cs" />
-    <Compile Include="DesktopConnector\FileHandling\ApplicationProxyTests\HandleFileClosed.cs" />
+    <Compile Include="DesktopConnector\FileHandling\WatchingApplicationProxyTests\HandleFileDisposed.cs" />
+    <Compile Include="DesktopConnector\FileHandling\WatchingApplicationProxyTests\HandleFileChanged.cs" />
+    <Compile Include="DesktopConnector\FileHandling\WatchingApplicationProxyTests\Initialize.cs" />
+    <Compile Include="DesktopConnector\FileHandling\WatchingApplicationProxyTests\OpenFile.cs" />
+    <Compile Include="DesktopConnector\FileHandling\WatchingApplicationProxyTests\HandleFileClosed.cs" />
     <Compile Include="DesktopConnector\FileHandling\DownloadedFileStates\DeserializingStateTest.cs" />
     <Compile Include="DesktopConnector\FileHandling\DownloadedFileStates\ErrorStateTest.cs" />
     <Compile Include="DesktopConnector\FileHandling\DownloadedFileStates\LostSyncBeingOpenedStateTest.cs" />
