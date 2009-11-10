@@ -124,8 +124,10 @@
     <Compile Include="DesktopConnector\Configuration\SingleScanConfigurationElementTest.cs" />
     <Compile Include="DesktopConnector\Configuration\TempFileConfigurationElementTest.cs" />
     <Compile Include="DesktopConnector\Configuration\XmlCriteriaElementTest.cs" />
+    <Compile Include="DesktopConnector\FileHandling\ApplicationProxyFactoryTest.cs" />
     <Compile Include="DesktopConnector\FileHandling\ApplicationProxyTests\HandleFileDisposed.cs" />
     <Compile Include="DesktopConnector\FileHandling\ApplicationProxyTests\HandleFileChanged.cs" />
+    <Compile Include="DesktopConnector\FileHandling\ApplicationProxyTests\Initialize.cs" />
     <Compile Include="DesktopConnector\FileHandling\ApplicationProxyTests\OpenFile.cs" />
     <Compile Include="DesktopConnector\FileHandling\ApplicationProxyTests\HandleFileClosed.cs" />
     <Compile Include="DesktopConnector\FileHandling\DownloadedFileStates\DeserializingStateTest.cs" />
@@ -165,6 +167,7 @@
     <Compile Include="DesktopConnector\FileHandling\FileTransfer\PermanentUploadStreamTest.cs" />
     <Compile Include="DesktopConnector\FileHandling\ManagedFileFactoryTest.cs" />
     <Compile Include="DesktopConnector\FileHandling\PeriodicTimerTest.cs" />
+    <Compile Include="DesktopConnector\FileHandling\SimpleApplicationProxyTest.cs" />
     <Compile Include="DesktopConnector\FileHandling\UIStates\ClosedUIStateTest.cs" />
     <Compile Include="DesktopConnector\FileHandling\UIStates\DeserializingUIStateTest.cs" />
     <Compile Include="DesktopConnector\FileHandling\UIStates\DownloadUIStateTest.cs" />
@@ -226,7 +229,7 @@
     <Compile Include="Clients.Windows.Tray\ProgramTest.cs" />
     <Compile Include="DesktopConnector\FileHandling\QueueManagerTest.cs" />
     <Compile Include="DesktopConnector\FileHandling\FileTransfer\UploadStreamBaseTest.cs" />
-    <Compile Include="DesktopConnector\Utilities\ApplicationWatchFinderTest.cs" />
+    <Compile Include="DesktopConnector\FileHandling\ApplicationWatchFinderTest.cs" />
     <Compile Include="Clients.Windows.Tray\AssociatedProgramFinderTest.cs" />
     <Compile Include="DesktopConnector\Utilities\DocumentInfoObjectMother.cs" />
     <Compile Include="DesktopConnector\Utilities\FileVersionProviderTest.cs" />
