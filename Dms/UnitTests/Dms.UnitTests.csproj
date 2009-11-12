@@ -229,7 +229,7 @@
     <Compile Include="Clients.Windows.Tray\ProgramTest.cs" />
     <Compile Include="DesktopConnector\FileHandling\QueueManagerTest.cs" />
     <Compile Include="DesktopConnector\FileHandling\FileTransfer\UploadStreamBaseTest.cs" />
-    <Compile Include="DesktopConnector\FileHandling\ApplicationWatchFinderTest.cs" />
+    <Compile Include="DesktopConnector\FileHandling\ApplicationWatcherFactoryTest.cs" />
     <Compile Include="Clients.Windows.Tray\AssociatedProgramFinderTest.cs" />
     <Compile Include="DesktopConnector\Utilities\DocumentInfoObjectMother.cs" />
     <Compile Include="DesktopConnector\Utilities\FileVersionProviderTest.cs" />
