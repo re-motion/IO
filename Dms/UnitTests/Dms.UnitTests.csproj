@@ -88,7 +88,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Clients.Windows.Tray\ArgumentHandlerTest.cs" />
-    <Compile Include="Clients.Windows.Tray\AssociatedProgramFinder2Test.cs" />
+    <Compile Include="Clients.Windows.Tray\AssociatedProgramFinderTest.cs" />
     <Compile Include="Clients.Windows.Tray\Forms\FormFactoryTest.cs" />
     <Compile Include="Clients.Windows.Tray\Interactions\ClipboardInteractionTest.cs" />
     <Compile Include="Clients.Windows.Tray\Interactions\DropTargetInteractionTest.cs" />
@@ -230,7 +230,6 @@
     <Compile Include="DesktopConnector\FileHandling\QueueManagerTest.cs" />
     <Compile Include="DesktopConnector\FileHandling\FileTransfer\UploadStreamBaseTest.cs" />
     <Compile Include="DesktopConnector\FileHandling\ApplicationWatcherFactoryTest.cs" />
-    <Compile Include="Clients.Windows.Tray\AssociatedProgramFinderTest.cs" />
     <Compile Include="DesktopConnector\Utilities\DocumentInfoObjectMother.cs" />
     <Compile Include="DesktopConnector\Utilities\FileVersionProviderTest.cs" />
     <Compile Include="DesktopConnector\Utilities\RegistryAccessorTest.cs" />
