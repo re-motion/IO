@@ -114,6 +114,7 @@
     <Compile Include="DesktopConnector\ActionHandler\ReadOnlyDownloadActionHandlerTest.cs" />
     <Compile Include="DesktopConnector\ActionHandler\ReplaceActionHandlerTest.cs" />
     <Compile Include="DesktopConnector\ActionHandler\UploadActionHandlerExceptionHandlingTest.cs" />
+    <Compile Include="DesktopConnector\Configuration\ApplicationWatcherArgumentsCriteriaElement2Test.cs" />
     <Compile Include="DesktopConnector\Configuration\ApplicationWatcherArgumentsCriteriaElementTest.cs" />
     <Compile Include="DesktopConnector\Configuration\ApplicationWatcherElementTest.cs" />
     <Compile Include="DesktopConnector\Configuration\ApplicationCriteriaElementTest.cs" />
