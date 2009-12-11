@@ -122,6 +122,7 @@
     <Compile Include="DesktopConnector\Configuration\ApplicationWatcherStub.cs" />
     <Compile Include="DesktopConnector\Configuration\CleanupIntervalConfigurationElementTest.cs" />
     <Compile Include="DesktopConnector\Configuration\DesktopConnectorConfigurationTest.cs" />
+    <Compile Include="DesktopConnector\Configuration\FileExtensionElementTest.cs" />
     <Compile Include="DesktopConnector\Configuration\ScannerConfigurationElementTest.cs" />
     <Compile Include="DesktopConnector\Configuration\SingleScanConfigurationElementTest.cs" />
     <Compile Include="DesktopConnector\Configuration\TempFileConfigurationElementTest.cs" />
