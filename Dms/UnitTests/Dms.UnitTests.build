@@ -64,6 +64,7 @@
         <include asis="true" name="System.Configuration.dll"/>
         <include asis="true" name="System.Core.dll"/>
         <include asis="true" name="System.Drawing.dll"/>
+        <include asis="true" name="System.Data.Linq.dll"/>
         <include asis="true" name="System.Runtime.Remoting.dll"/>
         <include asis="true" name="System.Windows.Forms.dll"/>
         <include asis="true" name="System.Web.dll"/>
