@@ -27,11 +27,16 @@ namespace Remotion.Dms.Shared.Utilities
   /// </summary>
   public class ZipFileBuilder : IArchiveBuilder
   {
-    private readonly List<IFileInfo> _files = new List<IFileInfo>();
+    //private readonly List<IFileSystemInfo> _files = new List<IFileSystemInfo> ();
+    private readonly List<IFileInfo> _files = new List<IFileInfo> ();
     
     public ZipFileBuilder ()
     {
     }
+
+    //public void AddDirectory (IDirectoryInfo directoryInfo)
+    //{
+    //}
 
     public void AddFile (IFileInfo fileInfo)
     {
