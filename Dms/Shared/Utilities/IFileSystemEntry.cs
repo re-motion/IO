@@ -16,14 +16,19 @@
 // Additional permissions are listed in the file re-motion_exceptions.txt.
 // 
 using System;
-using System.IO;
 
 namespace Remotion.Dms.Shared.Utilities
 {
-  public interface IFileInfo : IFileSystemEntry
+  public interface IFileSystemEntry
   {
-    string DirectoryName { get; }
-    DirectoryInfo Directory { get; }
-    Stream Open (FileMode mode, FileAccess access, FileShare share);
+    string FullName { get; }
+    string Extension { get; }
+    string Name { get; }
+    long Length { get; }
+    bool Exists { get; }
+    bool IsReadOnly { get; }
+    DateTime CreationTime { get; }
+    DateTime LastAccessTime { get; }
+    DateTime LastWriteTime { get; }
   }
 }
