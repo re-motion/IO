@@ -70,6 +70,7 @@
     <Compile Include="Utilities\FileSystemHelper.cs" />
     <Compile Include="Utilities\IArchiveBuilder.cs" />
     <Compile Include="Utilities\IArchiveExtractor.cs" />
+    <Compile Include="Utilities\IDirectoryInfo.cs" />
     <Compile Include="Utilities\IFileInfo.cs" />
     <Compile Include="Utilities\IFileSystemEntry.cs" />
     <Compile Include="Utilities\IFileSystemHelper.cs" />
