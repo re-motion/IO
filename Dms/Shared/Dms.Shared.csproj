@@ -65,6 +65,7 @@
     <Compile Include="Utilities\ArgumentEmptyException.cs" />
     <Compile Include="Utilities\ArgumentUtility.cs" />
     <Compile Include="Utilities\BrowserBase64SerializationHelper.cs" />
+    <Compile Include="Utilities\DirectoryInfoWrapper.cs" />
     <Compile Include="Utilities\FileInfoWrapper.cs" />
     <Compile Include="Utilities\FileSize.cs" />
     <Compile Include="Utilities\FileSystemHelper.cs" />
