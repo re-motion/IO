@@ -60,10 +60,7 @@ namespace Remotion.Dms.Shared.Utilities
             zipOutputStream.PutNextEntry (zipEntry);
             streamCopier.TransferProgress += progressHandler;
             
-            streamCopier.CopyStream (
-                fileStream,
-                zipOutputStream,
-                fileStream.Length);
+            streamCopier.CopyStream (fileStream, zipOutputStream, fileStream.Length);
           }
         }
       }

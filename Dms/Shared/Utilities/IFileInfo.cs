@@ -22,8 +22,7 @@ namespace Remotion.Dms.Shared.Utilities
 {
   public interface IFileInfo : IFileSystemEntry
   {
-    string DirectoryName { get; }
-    DirectoryInfo Directory { get; }
+    IDirectoryInfo Directory { get; }
     Stream Open (FileMode mode, FileAccess access, FileShare share);
   }
 }

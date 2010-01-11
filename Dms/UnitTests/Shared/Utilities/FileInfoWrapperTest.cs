@@ -71,7 +71,7 @@ namespace Remotion.Dms.UnitTests.Shared.Utilities
     [Test]
     public void DirectoryName ()
     {
-      Assert.That (_fileInfoWrapper.DirectoryName, Is.EqualTo (Path.GetDirectoryName(_tempFile.FileName)));
+      Assert.That (_fileInfoWrapper.Directory.FullName, Is.EqualTo (Path.GetDirectoryName(_tempFile.FileName)));
     }
 
     [Test]

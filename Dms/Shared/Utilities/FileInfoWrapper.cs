@@ -50,14 +50,9 @@ namespace Remotion.Dms.Shared.Utilities
       get { return _wrappedInstance.Length; }
     }
 
-    public string DirectoryName
+    public IDirectoryInfo Directory
     {
-      get { return _wrappedInstance.DirectoryName; }
-    }
-
-    public DirectoryInfo Directory
-    {
-      get { return _wrappedInstance.Directory; }
+      get { return new DirectoryInfoWrapper(_wrappedInstance.Directory); }
     }
 
     public bool IsReadOnly

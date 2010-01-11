@@ -65,7 +65,7 @@ namespace Remotion.Dms.Shared.Utilities
       get { return string.Empty; }
     }
 
-    public DirectoryInfo Directory
+    public IDirectoryInfo Directory
     {
       get { throw new NotImplementedException(); }
     }
