@@ -34,6 +34,8 @@ namespace Remotion.Dms.UnitTests.Shared.Utilities
     private FileSystemHelperExtended _helperExtended;
     private TempFile _file1;
     private TempFile _file2;
+    private string _folder;
+    private string _path;
     private string _destinationPath;
 
     [SetUp]
@@ -49,6 +51,13 @@ namespace Remotion.Dms.UnitTests.Shared.Utilities
 
       _file1.WriteAllBytes (bytes);
       _file2.WriteAllBytes (bytes);
+      
+      //_folder = Path.GetRandomFileName ();
+      //_path = Path.Combine (Path.GetTempPath (), _folder);
+      //var directory = Directory.CreateDirectory (_path);
+
+      //_helperExtended.CopyFile (_file1.FileName, Path.Combine (directory.FullName, Path.GetFileName(_file1.FileName)), true);
+      //_helperExtended.CopyFile (_file2.FileName, Path.Combine (directory.FullName, Path.GetFileName (_file2.FileName)), true);
     }
 
     [TearDown]
@@ -56,11 +65,11 @@ namespace Remotion.Dms.UnitTests.Shared.Utilities
     {
       _file1.Dispose();
       _file2.Dispose();
-      Directory.Delete (_destinationPath);
+      //Directory.Delete (_destinationPath);
     }
 
     [Test]
-    public void BuildReturnsZipFile ()
+    public void BuildReturnsZipFileWithFiles ()
     {
       var zipBuilder = _helperExtended.CreateArchiveFileBuilder();
       zipBuilder.AddFile (new FileInfoWrapper(new FileInfo(_file1.FileName)));
@@ -84,6 +93,25 @@ namespace Remotion.Dms.UnitTests.Shared.Utilities
       _helperExtended.Delete (zipFileName);
     }
 
+    [Test]
+    [Ignore]
+    public void BuildReturnsZipFileWithFolder ()
+    {
+      var zipBuilder = _helperExtended.CreateArchiveFileBuilder ();
+      zipBuilder.AddDirectory (new DirectoryInfoWrapper (new DirectoryInfo (_path)));
+
+      var eventHandlerMock = MockRepository.GenerateMock<EventHandler<StreamCopyProgressEventArgs>> ();
+      var zipFileName = _helperExtended.MakeUniqueAndValidFileName (_helperExtended.GetOrCreateAppDataPath (), Guid.NewGuid () + ".zip");
+
+      using (var zipFileStream = zipBuilder.Build (zipFileName, eventHandlerMock))
+      {
+      }
+
+      var expectedFolder = UnZipFile (zipFileName);
+      Directory.Delete (expectedFolder[0]); //should be done by filesystemhelper
+      _helperExtended.Delete (zipFileName);
+    }
+
     private List<string> UnZipFile (string zipFile)
     {
       FastZip fastZip = new FastZip();
@@ -95,5 +123,6 @@ namespace Remotion.Dms.UnitTests.Shared.Utilities
       files.AddRange (Directory.GetFiles (_destinationPath));
       return files;
     }
+
   }
 }

@@ -22,6 +22,6 @@ namespace Remotion.Dms.Shared.Utilities
 {
   public interface IDirectoryInfo : IFileSystemEntry
   {
-    FileInfo[] GetFiles ();
+    IFileInfo[] GetFiles ();
   }
 }
