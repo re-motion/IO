@@ -57,7 +57,7 @@ namespace Remotion.Dms.UnitTests.Shared.Utilities
     {
       _tempFile1.Dispose ();
       _tempFile2.Dispose ();
-      Directory.Delete (_path);
+      Directory.Delete (_path, true);
     }
 
     [Test]
@@ -121,6 +121,18 @@ namespace Remotion.Dms.UnitTests.Shared.Utilities
     {
       _directoryInfoWrapper.LastWriteTime = new DateTime (2009, 10, 10);
       Assert.That (_directoryInfoWrapper.LastWriteTime, Is.EqualTo (Directory.GetLastWriteTime (_path)));
+    }
+
+    [Test]
+    public void GetFiles ()
+    {
+      File.Copy (_tempFile1.FileName, Path.Combine (_path, Path.GetFileName (_tempFile1.FileName)), true);
+      File.Copy (_tempFile2.FileName, Path.Combine (_path, Path.GetFileName (_tempFile2.FileName)), true);
+
+      var files = _directoryInfoWrapper.GetFiles();
+
+      Assert.That (files[0].Name, Is.EqualTo (Path.GetFileName(_tempFile1.FileName)));
+      Assert.That (files[1].Name, Is.EqualTo (Path.GetFileName(_tempFile2.FileName)));
     }
 
     

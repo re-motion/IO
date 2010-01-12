@@ -87,5 +87,10 @@ namespace Remotion.Dms.Shared.Utilities
       get { return _wrappedInstance.LastWriteTime; }
       set { _wrappedInstance.LastWriteTime = value; }
     }
+
+    public FileInfo[] GetFiles ()
+    {
+      return _wrappedInstance.GetFiles();
+    }
   }
 }
