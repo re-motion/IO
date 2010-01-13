@@ -135,6 +135,13 @@ namespace Remotion.Dms.UnitTests.Shared.Utilities
       Assert.That (files[1].Name, Is.EqualTo (Path.GetFileName(_tempFile2.FileName)));
     }
 
+    [Test]
+    public void GetDirectories ()
+    {
+      var directories = _directoryInfoWrapper.GetDirectories();
+      Assert.That (directories.Length, Is.EqualTo (0));
+    }
+
     
   }
 }

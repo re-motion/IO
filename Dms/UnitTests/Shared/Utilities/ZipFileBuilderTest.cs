@@ -52,12 +52,12 @@ namespace Remotion.Dms.UnitTests.Shared.Utilities
       _file1.WriteAllBytes (bytes);
       _file2.WriteAllBytes (bytes);
       
-      //_folder = Path.GetRandomFileName ();
-      //_path = Path.Combine (Path.GetTempPath (), _folder);
-      //var directory = Directory.CreateDirectory (_path);
+      _folder = Path.GetRandomFileName ();
+      _path = Path.Combine (Path.GetTempPath (), _folder);
+      var directory = Directory.CreateDirectory (_path);
 
-      //_helperExtended.CopyFile (_file1.FileName, Path.Combine (directory.FullName, Path.GetFileName(_file1.FileName)), true);
-      //_helperExtended.CopyFile (_file2.FileName, Path.Combine (directory.FullName, Path.GetFileName (_file2.FileName)), true);
+      _helperExtended.CopyFile (_file1.FileName, Path.Combine (directory.FullName, Path.GetFileName(_file1.FileName)), true);
+      _helperExtended.CopyFile (_file2.FileName, Path.Combine (directory.FullName, Path.GetFileName (_file2.FileName)), true);
     }
 
     [TearDown]
@@ -65,7 +65,9 @@ namespace Remotion.Dms.UnitTests.Shared.Utilities
     {
       _file1.Dispose();
       _file2.Dispose();
-      //Directory.Delete (_destinationPath);
+      Directory.Delete (_path, true);
+      if (Directory.Exists (_destinationPath))
+        Directory.Delete (_destinationPath, true);
     }
 
     [Test]
@@ -94,7 +96,6 @@ namespace Remotion.Dms.UnitTests.Shared.Utilities
     }
 
     [Test]
-    [Ignore]
     public void BuildReturnsZipFileWithFolder ()
     {
       var zipBuilder = _helperExtended.CreateArchiveFileBuilder ();
@@ -107,20 +108,98 @@ namespace Remotion.Dms.UnitTests.Shared.Utilities
       {
       }
 
-      var expectedFolder = UnZipFile (zipFileName);
-      Directory.Delete (expectedFolder[0]); //should be done by filesystemhelper
+      var expectedFiles = UnZipFile (zipFileName);
+
+      Assert.That (Path.GetFileName (_file1.FileName), Is.EqualTo (Path.GetFileName (expectedFiles[0])));
+      Assert.That (Path.GetFileName (_file2.FileName), Is.EqualTo (Path.GetFileName (expectedFiles[1])));
+
+      _helperExtended.Delete (expectedFiles[0]);
+      _helperExtended.Delete (expectedFiles[1]);
       _helperExtended.Delete (zipFileName);
+    }
+
+    [Test]
+    public void BuildReturnsZipFilesWithFoldersAndFiles ()
+    {
+      //structure (from rootPath)
+      //complex
+      //-file1
+      //-Directory1
+      //--file2
+      //--file3
+      //-Directory2
+      //--Directory3
+      //---file4
+      //---file5
+      //--file6
+
+      var file1 = new TempFile();
+      var file2 = new TempFile();
+      var file3 = new TempFile ();
+      var file4 = new TempFile ();
+      var file5 = new TempFile ();
+      var file6 = new TempFile ();
+
+      var bytes = new byte[8191];
+      for (int i = 0; i < 8191; i++)
+        bytes[i] = (byte) i;
+
+      file1.WriteAllBytes (bytes);
+      file2.WriteAllBytes (bytes);
+      file3.WriteAllBytes (bytes);
+      file4.WriteAllBytes (bytes);
+      file5.WriteAllBytes (bytes);
+      file6.WriteAllBytes (bytes);
+
+      var rootPath = Path.Combine (_helperExtended.GetOrCreateAppDataPath(), "complex");
+
+      var directory1 = Directory.CreateDirectory (Path.Combine (rootPath, "Directory1"));
+      var directory2 = Directory.CreateDirectory (Path.Combine (rootPath, "Directory2"));
+      var directory3 = Directory.CreateDirectory (Path.Combine (directory2.FullName, "Directory3"));
+
+      File.Copy (file1.FileName, Path.Combine (rootPath, Path.GetFileName (file1.FileName)));
+      File.Copy (file2.FileName, Path.Combine (directory1.FullName, Path.GetFileName (file2.FileName)));
+      File.Copy (file3.FileName, Path.Combine (directory1.FullName, Path.GetFileName (file3.FileName)));
+      File.Copy (file4.FileName, Path.Combine (directory3.FullName, Path.GetFileName (file4.FileName)));
+      File.Copy (file5.FileName, Path.Combine (directory3.FullName, Path.GetFileName (file5.FileName)));
+      File.Copy (file6.FileName, Path.Combine (directory2.FullName, Path.GetFileName (file6.FileName)));
+
+      var zipBuilder = _helperExtended.CreateArchiveFileBuilder ();
+      zipBuilder.AddDirectory (new DirectoryInfoWrapper (new DirectoryInfo (rootPath)));
+
+      var eventHandlerMock = MockRepository.GenerateMock<EventHandler<StreamCopyProgressEventArgs>> ();
+      var zipFileName = _helperExtended.MakeUniqueAndValidFileName (_helperExtended.GetOrCreateAppDataPath (), Guid.NewGuid () + ".zip");
+
+      using (var zipFileStream = zipBuilder.Build (zipFileName, eventHandlerMock))
+      {
+      }
+
+      var expectedFiles = UnZipFile (zipFileName);
+
+      Assert.That (Path.GetFileName (file1.FileName), Is.EqualTo (Path.GetFileName (expectedFiles[0])));
+      Assert.That (Path.GetFileName (file2.FileName), Is.EqualTo (Path.GetFileName (expectedFiles[4])));
+      Assert.That (Path.GetFileName (file3.FileName), Is.EqualTo (Path.GetFileName (expectedFiles[5])));
+      Assert.That (Path.GetFileName (file4.FileName), Is.EqualTo (Path.GetFileName (expectedFiles[2])));
+      Assert.That (Path.GetFileName (file5.FileName), Is.EqualTo (Path.GetFileName (expectedFiles[3])));
+      Assert.That (Path.GetFileName (file6.FileName), Is.EqualTo (Path.GetFileName (expectedFiles[1])));
+
+      Directory.Delete (rootPath, true);
+      file1.Dispose();
+      file2.Dispose();
+      file3.Dispose();
+      file4.Dispose();
+      file5.Dispose();
+      file6.Dispose();
+      File.Delete (zipFileName);
     }
 
     private List<string> UnZipFile (string zipFile)
     {
       FastZip fastZip = new FastZip();
       _destinationPath = Path.Combine(_helperExtended.GetOrCreateAppDataPath (),"tmp");
-
       fastZip.ExtractZip (zipFile, _destinationPath, FastZip.Overwrite.Always, null, null, null, false);
-
       List<string> files = new List<string>();
-      files.AddRange (Directory.GetFiles (_destinationPath));
+      files.AddRange(Directory.GetFiles (_destinationPath, "*", SearchOption.AllDirectories));
       return files;
     }
 

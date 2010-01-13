@@ -56,38 +56,55 @@ namespace Remotion.Dms.Shared.Utilities
         foreach (var fileInfo in _files)
         {
           if ((fileInfo.GetType ().Equals (typeof (FileInfoWrapper))))
-            AddFilesToZipFile (progressHandler, (FileInfoWrapper) fileInfo, zipOutputStream, streamCopier);
+            AddFilesToZipFile (progressHandler, (FileInfoWrapper) fileInfo, ((FileInfoWrapper) fileInfo).Name, zipOutputStream, streamCopier);
+          else if ((fileInfo.GetType ().Equals (typeof (DirectoryInfoWrapper))))
+            AddDirectoryToZipFile (progressHandler, (DirectoryInfoWrapper) fileInfo, zipOutputStream, streamCopier, string.Empty, new List<string>());
         }
       }
       _files.Clear();
       return File.Open (archiveFileName, FileMode.Open, FileAccess.Read, FileShare.None);
     }
 
-    private void AddFilesToZipFile (EventHandler<StreamCopyProgressEventArgs> progressHandler, FileInfoWrapper fileInfo, ZipOutputStream zipOutputStream, StreamCopier streamCopier)
+    private void AddFilesToZipFile (EventHandler<StreamCopyProgressEventArgs> progressHandler, FileInfoWrapper fileInfo, string path, ZipOutputStream zipOutputStream, StreamCopier streamCopier)
     {
       using (var fileStream = fileInfo.Open (FileMode.Open, FileAccess.Read, FileShare.Read))
       {
-        ZipEntry zipEntry = new ZipEntry (fileInfo.Name);
+        ZipEntry zipEntry = new ZipEntry (path); 
         zipOutputStream.PutNextEntry (zipEntry);
         streamCopier.TransferProgress += progressHandler;
         streamCopier.CopyStream (fileStream, zipOutputStream, fileStream.Length);
       }
     }
 
-    //private void AddDirectoryToZipFile (EventHandler<StreamCopyProgressEventArgs> progressHandler, DirectoryInfoWrapper directoryInfo, ZipOutputStream zipOutputStream, StreamCopier streamCopier)
-    //{
-    //  //FastZip fastZip = new FastZip ();
-    //  //fastZip.CreateZip (zipFileName, directoryInfo.FullName, true, string.Empty, string.Empty);
-      
-    //  //create directory in zip file
-    //  foreach (var file in directoryInfo.GetFiles())
-    //  {
-    //    AddFilesToZipFile (progressHandler, file, zipOutputStream, streamCopier);
-    //  }
+    private void AddDirectoryToZipFile (EventHandler<StreamCopyProgressEventArgs> progressHandler, DirectoryInfoWrapper directoryInfo, ZipOutputStream zipOutputStream, StreamCopier streamCopier, string parentDirectory, List<string> visitedFiles)
+    {
+      parentDirectory += directoryInfo.Name + "\\";
+      if (directoryInfo.GetDirectories ().Length > 0)
+      {
+        foreach (var directory in directoryInfo.GetDirectories ())
+        {
+          AddFilesInDirectoriesToZipFile(parentDirectory, directoryInfo, visitedFiles, progressHandler, zipOutputStream, streamCopier);
+          AddDirectoryToZipFile (progressHandler, (DirectoryInfoWrapper) directory, zipOutputStream, streamCopier, parentDirectory, visitedFiles);
+        }
+      }
+      else
+      {
+         AddFilesInDirectoriesToZipFile (parentDirectory, directoryInfo, visitedFiles, progressHandler, zipOutputStream, streamCopier);
+      }
+    }
 
-      
-
-    //}
+    private void AddFilesInDirectoriesToZipFile (string parentDirectory, DirectoryInfoWrapper directoryInfo, List<string> visitedFiles, EventHandler<StreamCopyProgressEventArgs> progressHandler, ZipOutputStream zipOutputStream, StreamCopier streamCopier)
+    {
+      foreach (var file in directoryInfo.GetFiles ())
+      {
+        if (!visitedFiles.Contains (file.FullName))
+        {
+          visitedFiles.Add (file.FullName);
+          if ((file.GetType().Equals (typeof (FileInfoWrapper))))
+            AddFilesToZipFile (progressHandler, (FileInfoWrapper) file, Path.Combine (parentDirectory, file.Name), zipOutputStream, streamCopier);
+        }
+      }
+    }
 
   }
 }

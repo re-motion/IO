@@ -97,5 +97,16 @@ namespace Remotion.Dms.Shared.Utilities
       }
       return fileInfo;
     }
+
+    public IDirectoryInfo[] GetDirectories ()
+    {
+      DirectoryInfoWrapper[] directoryInfo = new DirectoryInfoWrapper[_wrappedInstance.GetDirectories().Length];
+
+      for (int i = 0; i < _wrappedInstance.GetDirectories ().Length; i++)
+      {
+        directoryInfo[i] = new DirectoryInfoWrapper (_wrappedInstance.GetDirectories ()[i]);
+      }
+      return directoryInfo;
+    }
   }
 }
