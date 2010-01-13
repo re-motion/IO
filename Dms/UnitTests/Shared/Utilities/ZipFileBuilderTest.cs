@@ -51,12 +51,12 @@ namespace Remotion.Dms.UnitTests.Shared.Utilities
 
       _file1.WriteAllBytes (bytes);
       _file2.WriteAllBytes (bytes);
-      
-      _folder = Path.GetRandomFileName ();
-      _path = Path.Combine (Path.GetTempPath (), _folder);
+
+      _folder = Path.GetRandomFileName();
+      _path = Path.Combine (Path.GetTempPath(), _folder);
       var directory = Directory.CreateDirectory (_path);
 
-      _helperExtended.CopyFile (_file1.FileName, Path.Combine (directory.FullName, Path.GetFileName(_file1.FileName)), true);
+      _helperExtended.CopyFile (_file1.FileName, Path.Combine (directory.FullName, Path.GetFileName (_file1.FileName)), true);
       _helperExtended.CopyFile (_file2.FileName, Path.Combine (directory.FullName, Path.GetFileName (_file2.FileName)), true);
     }
 
@@ -74,54 +74,75 @@ namespace Remotion.Dms.UnitTests.Shared.Utilities
     public void BuildReturnsZipFileWithFiles ()
     {
       var zipBuilder = _helperExtended.CreateArchiveFileBuilder();
-      zipBuilder.AddFile (new FileInfoWrapper(new FileInfo(_file1.FileName)));
-      zipBuilder.AddFile (new FileInfoWrapper(new FileInfo(_file2.FileName)));
+      zipBuilder.AddFile (new FileInfoWrapper (new FileInfo (_file1.FileName)));
+      zipBuilder.AddFile (new FileInfoWrapper (new FileInfo (_file2.FileName)));
 
       var eventHandlerMock = MockRepository.GenerateMock<EventHandler<StreamCopyProgressEventArgs>>();
 
-      var zipFileName = _helperExtended.MakeUniqueAndValidFileName (_helperExtended.GetOrCreateAppDataPath (), Guid.NewGuid () + ".zip");
-      
-      using (var zipFileStream = zipBuilder.Build (zipFileName, eventHandlerMock))
+      var zipFileName = _helperExtended.MakeUniqueAndValidFileName (_helperExtended.GetOrCreateAppDataPath(), Guid.NewGuid() + ".zip");
+
+      List<string> expectedFiles = null;
+      try
       {
+        using (zipBuilder.Build (zipFileName, eventHandlerMock))
+        {
+        }
+
+        expectedFiles = UnZipFile (zipFileName);
+
+        Assert.That (Path.GetFileName (_file1.FileName), Is.EqualTo (Path.GetFileName (expectedFiles[0])));
+        Assert.That (Path.GetFileName (_file2.FileName), Is.EqualTo (Path.GetFileName (expectedFiles[1])));
       }
-
-      var expectedFiles = UnZipFile (zipFileName); 
-
-      Assert.That (Path.GetFileName (_file1.FileName), Is.EqualTo (Path.GetFileName(expectedFiles[0])));
-      Assert.That (Path.GetFileName (_file2.FileName), Is.EqualTo (Path.GetFileName(expectedFiles[1])));
-
-      _helperExtended.Delete (expectedFiles[0]);
-      _helperExtended.Delete (expectedFiles[1]);
-      _helperExtended.Delete (zipFileName);
+      finally
+      {
+        if (expectedFiles != null)
+        {
+          if (_helperExtended.FileExists (expectedFiles[0]))
+            _helperExtended.Delete (expectedFiles[0]);
+          if (_helperExtended.FileExists (expectedFiles[1]))
+            _helperExtended.Delete (expectedFiles[1]);
+        }
+        _helperExtended.Delete (zipFileName);
+      }
     }
 
     [Test]
     public void BuildReturnsZipFileWithFolder ()
     {
-      var zipBuilder = _helperExtended.CreateArchiveFileBuilder ();
+      var zipBuilder = _helperExtended.CreateArchiveFileBuilder();
       zipBuilder.AddDirectory (new DirectoryInfoWrapper (new DirectoryInfo (_path)));
 
-      var eventHandlerMock = MockRepository.GenerateMock<EventHandler<StreamCopyProgressEventArgs>> ();
-      var zipFileName = _helperExtended.MakeUniqueAndValidFileName (_helperExtended.GetOrCreateAppDataPath (), Guid.NewGuid () + ".zip");
+      var eventHandlerMock = MockRepository.GenerateMock<EventHandler<StreamCopyProgressEventArgs>>();
+      var zipFileName = _helperExtended.MakeUniqueAndValidFileName (_helperExtended.GetOrCreateAppDataPath(), Guid.NewGuid() + ".zip");
 
-      using (var zipFileStream = zipBuilder.Build (zipFileName, eventHandlerMock))
+      List<string> expectedFiles = null;
+      try
       {
+        using (zipBuilder.Build (zipFileName, eventHandlerMock))
+        {
+        }
+
+        expectedFiles = UnZipFile (zipFileName);
+
+        Assert.That (Path.GetFileName (_file1.FileName), Is.EqualTo (Path.GetFileName (expectedFiles[0])));
+        Assert.That (Path.GetFileName (_file2.FileName), Is.EqualTo (Path.GetFileName (expectedFiles[1])));
       }
-
-      var expectedFiles = UnZipFile (zipFileName);
-
-      Assert.That (Path.GetFileName (_file1.FileName), Is.EqualTo (Path.GetFileName (expectedFiles[0])));
-      Assert.That (Path.GetFileName (_file2.FileName), Is.EqualTo (Path.GetFileName (expectedFiles[1])));
-
-      _helperExtended.Delete (expectedFiles[0]);
-      _helperExtended.Delete (expectedFiles[1]);
-      _helperExtended.Delete (zipFileName);
+      finally
+      {
+        if (expectedFiles != null)
+        {
+          if (_helperExtended.FileExists (expectedFiles[0]))
+            _helperExtended.Delete (expectedFiles[0]);
+          if (_helperExtended.FileExists (expectedFiles[1]))
+            _helperExtended.Delete (expectedFiles[1]);
+        }
+        _helperExtended.Delete (zipFileName);
+      }
     }
 
     [Test]
     public void BuildReturnsZipFilesWithFoldersAndFiles ()
     {
-      //structure (from rootPath)
       //complex
       //-file1
       //-Directory1
@@ -135,10 +156,10 @@ namespace Remotion.Dms.UnitTests.Shared.Utilities
 
       var file1 = new TempFile();
       var file2 = new TempFile();
-      var file3 = new TempFile ();
-      var file4 = new TempFile ();
-      var file5 = new TempFile ();
-      var file6 = new TempFile ();
+      var file3 = new TempFile();
+      var file4 = new TempFile();
+      var file5 = new TempFile();
+      var file6 = new TempFile();
 
       var bytes = new byte[8191];
       for (int i = 0; i < 8191; i++)
@@ -164,44 +185,48 @@ namespace Remotion.Dms.UnitTests.Shared.Utilities
       File.Copy (file5.FileName, Path.Combine (directory3.FullName, Path.GetFileName (file5.FileName)));
       File.Copy (file6.FileName, Path.Combine (directory2.FullName, Path.GetFileName (file6.FileName)));
 
-      var zipBuilder = _helperExtended.CreateArchiveFileBuilder ();
+      var eventHandlerMock = MockRepository.GenerateMock<EventHandler<StreamCopyProgressEventArgs>>();
+      var zipFileName = _helperExtended.MakeUniqueAndValidFileName (_helperExtended.GetOrCreateAppDataPath(), Guid.NewGuid() + ".zip");
+
+      var zipBuilder = _helperExtended.CreateArchiveFileBuilder();
       zipBuilder.AddDirectory (new DirectoryInfoWrapper (new DirectoryInfo (rootPath)));
 
-      var eventHandlerMock = MockRepository.GenerateMock<EventHandler<StreamCopyProgressEventArgs>> ();
-      var zipFileName = _helperExtended.MakeUniqueAndValidFileName (_helperExtended.GetOrCreateAppDataPath (), Guid.NewGuid () + ".zip");
-
-      using (var zipFileStream = zipBuilder.Build (zipFileName, eventHandlerMock))
+      try
       {
+        using (zipBuilder.Build (zipFileName, eventHandlerMock))
+        {
+        }
+
+        var expectedFiles = UnZipFile (zipFileName);
+
+        Assert.That (Path.GetFileName (file1.FileName), Is.EqualTo (Path.GetFileName (expectedFiles[0])));
+        Assert.That (Path.GetFileName (file2.FileName), Is.EqualTo (Path.GetFileName (expectedFiles[4])));
+        Assert.That (Path.GetFileName (file3.FileName), Is.EqualTo (Path.GetFileName (expectedFiles[5])));
+        Assert.That (Path.GetFileName (file4.FileName), Is.EqualTo (Path.GetFileName (expectedFiles[2])));
+        Assert.That (Path.GetFileName (file5.FileName), Is.EqualTo (Path.GetFileName (expectedFiles[3])));
+        Assert.That (Path.GetFileName (file6.FileName), Is.EqualTo (Path.GetFileName (expectedFiles[1])));
       }
-
-      var expectedFiles = UnZipFile (zipFileName);
-
-      Assert.That (Path.GetFileName (file1.FileName), Is.EqualTo (Path.GetFileName (expectedFiles[0])));
-      Assert.That (Path.GetFileName (file2.FileName), Is.EqualTo (Path.GetFileName (expectedFiles[4])));
-      Assert.That (Path.GetFileName (file3.FileName), Is.EqualTo (Path.GetFileName (expectedFiles[5])));
-      Assert.That (Path.GetFileName (file4.FileName), Is.EqualTo (Path.GetFileName (expectedFiles[2])));
-      Assert.That (Path.GetFileName (file5.FileName), Is.EqualTo (Path.GetFileName (expectedFiles[3])));
-      Assert.That (Path.GetFileName (file6.FileName), Is.EqualTo (Path.GetFileName (expectedFiles[1])));
-
-      Directory.Delete (rootPath, true);
-      file1.Dispose();
-      file2.Dispose();
-      file3.Dispose();
-      file4.Dispose();
-      file5.Dispose();
-      file6.Dispose();
-      File.Delete (zipFileName);
+      finally
+      {
+        Directory.Delete (rootPath, true);
+        file1.Dispose();
+        file2.Dispose();
+        file3.Dispose();
+        file4.Dispose();
+        file5.Dispose();
+        file6.Dispose();
+        File.Delete (zipFileName);
+      }
     }
 
     private List<string> UnZipFile (string zipFile)
     {
       FastZip fastZip = new FastZip();
-      _destinationPath = Path.Combine(_helperExtended.GetOrCreateAppDataPath (),"tmp");
+      _destinationPath = Path.Combine (_helperExtended.GetOrCreateAppDataPath(), "tmp");
       fastZip.ExtractZip (zipFile, _destinationPath, FastZip.Overwrite.Always, null, null, null, false);
       List<string> files = new List<string>();
-      files.AddRange(Directory.GetFiles (_destinationPath, "*", SearchOption.AllDirectories));
+      files.AddRange (Directory.GetFiles (_destinationPath, "*", SearchOption.AllDirectories));
       return files;
     }
-
   }
 }

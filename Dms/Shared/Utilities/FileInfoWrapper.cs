@@ -20,6 +20,10 @@ using System.IO;
 
 namespace Remotion.Dms.Shared.Utilities
 {
+  /// <summary>
+  /// The <see cref="FileInfoWrapper"/> implements <see cref="IFileInfo"/> and exposes methods for the creation, copying, deletion, moving, 
+  /// and opening of files via <see cref="FileInfo"/>.
+  /// </summary>
   public class FileInfoWrapper : IFileInfo
   {
     private readonly FileInfo _wrappedInstance;

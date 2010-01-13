@@ -19,6 +19,9 @@ using System;
 
 namespace Remotion.Dms.Shared.Utilities
 {
+  /// <summary>
+  /// The <see cref="IFileSystemEntry"/> interface declares members for file system interactions.
+  /// </summary>
   public interface IFileSystemEntry
   {
     string FullName { get; }
@@ -30,5 +33,6 @@ namespace Remotion.Dms.Shared.Utilities
     DateTime CreationTime { get; }
     DateTime LastAccessTime { get; }
     DateTime LastWriteTime { get; }
+    IDirectoryInfo Directory { get; }
   }
 }

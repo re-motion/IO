@@ -16,10 +16,12 @@
 // Additional permissions are listed in the file re-motion_exceptions.txt.
 // 
 using System;
-using System.IO;
 
 namespace Remotion.Dms.Shared.Utilities
 {
+  /// <summary>
+  /// The <see cref="IDirectoryInfo"/> declares methods for enumerating through directories and its files.
+  /// </summary>
   public interface IDirectoryInfo : IFileSystemEntry
   {
     IFileInfo[] GetFiles ();

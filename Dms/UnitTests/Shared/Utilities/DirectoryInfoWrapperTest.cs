@@ -142,6 +142,11 @@ namespace Remotion.Dms.UnitTests.Shared.Utilities
       Assert.That (directories.Length, Is.EqualTo (0));
     }
 
-    
+    [Test]
+    public void DirectoryMember ()
+    {
+      Assert.That (_directoryInfoWrapper.Directory, Is.InstanceOfType (typeof(DirectoryInfoWrapper)));
+      Assert.That (_directoryInfoWrapper.Directory.Name, Is.EqualTo (_folder));
+    }
   }
 }

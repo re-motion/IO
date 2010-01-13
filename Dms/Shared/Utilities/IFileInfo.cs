@@ -20,9 +20,11 @@ using System.IO;
 
 namespace Remotion.Dms.Shared.Utilities
 {
+  /// <summary>
+  /// The <see cref="IFileInfo"/> interfaces declares a method for opening a file.
+  /// </summary>
   public interface IFileInfo : IFileSystemEntry
   {
-    IDirectoryInfo Directory { get; }
     Stream Open (FileMode mode, FileAccess access, FileShare share);
   }
 }

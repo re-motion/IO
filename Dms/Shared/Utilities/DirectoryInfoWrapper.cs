@@ -20,6 +20,10 @@ using System.IO;
 
 namespace Remotion.Dms.Shared.Utilities
 {
+  /// <summary>
+  /// The <see cref="DirectoryInfoWrapper"/> implements <see cref="IDirectoryInfo"/> and exposes methods for creating, moving, and enumerating 
+  /// through directories via <see cref="DirectoryInfo"/>.
+  /// </summary>
   public class DirectoryInfoWrapper : IDirectoryInfo
   {
     private readonly DirectoryInfo _wrappedInstance;
@@ -86,6 +90,11 @@ namespace Remotion.Dms.Shared.Utilities
     {
       get { return _wrappedInstance.LastWriteTime; }
       set { _wrappedInstance.LastWriteTime = value; }
+    }
+
+    public IDirectoryInfo Directory
+    {
+      get { return this; }
     }
 
     public IFileInfo[] GetFiles ()
