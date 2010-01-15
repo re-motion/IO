@@ -42,7 +42,7 @@ namespace Remotion.Dms.Shared.Utilities
     public override void Close ()
     {
       base.Close ();
-      _fileSystemHelper.Delete (_filePath);
+      _fileSystemHelper.DeleteDirectory (Path.GetDirectoryName (_filePath), true);
     }
   }
 }
