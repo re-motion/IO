@@ -56,9 +56,12 @@ namespace Remotion.Dms.Shared.Utilities
         StreamCopier streamCopier = new StreamCopier();
         foreach (var fileInfo in _files)
         {
-          if (typeof (IFileInfo).IsAssignableFrom (fileInfo.GetType()))
+          if (fileInfo.GetType() == typeof (InMemoryFileInfoWrapper))
+            AddFilesToZipFile (
+                progressHandler, (InMemoryFileInfoWrapper) fileInfo, ((InMemoryFileInfoWrapper) fileInfo).Name, zipOutputStream, streamCopier);
+          else if (fileInfo.GetType() == typeof (FileInfoWrapper))
             AddFilesToZipFile (progressHandler, (FileInfoWrapper) fileInfo, ((FileInfoWrapper) fileInfo).Name, zipOutputStream, streamCopier);
-          else if (typeof (IDirectoryInfo).IsAssignableFrom (fileInfo.GetType()))
+          else if (fileInfo.GetType() == typeof (DirectoryInfoWrapper))
             AddDirectoryToZipFile (progressHandler, (DirectoryInfoWrapper) fileInfo, zipOutputStream, streamCopier, string.Empty);
         }
       }
@@ -68,7 +71,7 @@ namespace Remotion.Dms.Shared.Utilities
 
     private void AddFilesToZipFile (
         EventHandler<StreamCopyProgressEventArgs> progressHandler,
-        FileInfoWrapper fileInfo,
+        IFileInfo fileInfo,
         string path,
         ZipOutputStream zipOutputStream,
         StreamCopier streamCopier)
