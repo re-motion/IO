@@ -21,7 +21,7 @@ using System.IO;
 namespace Remotion.Dms.Shared.Utilities
 {
   /// <summary>
-  /// Wraps a <see cref="Stream"/> and deletes the underlying file on dispos
+  /// Wraps a <see cref="Stream"/> and deletes the underlying file on dispose
   /// </summary>
   public class TemporaryFileStream : ReadOnlyStream
   {
