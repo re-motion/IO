@@ -22,5 +22,6 @@ namespace Remotion.Dms.Shared.Utilities
     string Combine (string path1, string path2);
     DirectoryInfo CreateDirectory (string path);
     string GetFileName (string path);
+    string GetDirectoryName (string path);
   }
 }

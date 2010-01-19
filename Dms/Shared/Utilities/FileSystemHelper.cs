@@ -183,5 +183,10 @@ namespace Remotion.Dms.Shared.Utilities
     {
       return Path.GetFileName (path);
     }
+
+    public string GetDirectoryName (string path)
+    {
+      return Path.GetDirectoryName (path);
+    }
   }
 }
