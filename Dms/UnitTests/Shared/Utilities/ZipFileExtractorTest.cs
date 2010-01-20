@@ -23,7 +23,6 @@ using NUnit.Framework.SyntaxHelpers;
 using Remotion.Development.UnitTesting.IO;
 using Remotion.Dms.DesktopConnector.Utilities;
 using Remotion.Dms.Shared.Utilities;
-using Rhino.Mocks;
 
 namespace Remotion.Dms.UnitTests.Shared.Utilities
 {
@@ -62,14 +61,13 @@ namespace Remotion.Dms.UnitTests.Shared.Utilities
     public void ExtractZipFile ()
     {
       var zipBuilder = _helperExtended.CreateArchiveFileBuilder();
+      zipBuilder.ZipProgress += ((sender, e) => { });
       zipBuilder.AddFile (new FileInfoWrapper(new FileInfo(_file1.FileName)));
       zipBuilder.AddFile (new FileInfoWrapper(new FileInfo(_file2.FileName)));
 
-      var eventHandlerMock = MockRepository.GenerateMock<EventHandler<StreamCopyProgressEventArgs>>();
-
       var zipFileName = _helperExtended.MakeUniqueAndValidFileName (_helperExtended.GetOrCreateAppDataPath(), Guid.NewGuid() + ".zip");
 
-      using (var stream = zipBuilder.Build (zipFileName, eventHandlerMock))
+      using (zipBuilder.Build (zipFileName))
       {
       }
 

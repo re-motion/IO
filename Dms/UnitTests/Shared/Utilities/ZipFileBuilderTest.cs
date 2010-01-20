@@ -24,7 +24,6 @@ using NUnit.Framework.SyntaxHelpers;
 using Remotion.Development.UnitTesting.IO;
 using Remotion.Dms.DesktopConnector.Utilities;
 using Remotion.Dms.Shared.Utilities;
-using Rhino.Mocks;
 
 namespace Remotion.Dms.UnitTests.Shared.Utilities
 {
@@ -74,17 +73,16 @@ namespace Remotion.Dms.UnitTests.Shared.Utilities
     public void BuildReturnsZipFileWithFiles ()
     {
       var zipBuilder = _helperExtended.CreateArchiveFileBuilder();
+      zipBuilder.ZipProgress += ((sender, e) => { });
       zipBuilder.AddFile (new FileInfoWrapper (new FileInfo (_file1.FileName)));
       zipBuilder.AddFile (new FileInfoWrapper (new FileInfo (_file2.FileName)));
-
-      var eventHandlerMock = MockRepository.GenerateMock<EventHandler<StreamCopyProgressEventArgs>>();
 
       var zipFileName = _helperExtended.MakeUniqueAndValidFileName (_helperExtended.GetOrCreateAppDataPath(), Guid.NewGuid() + ".zip");
 
       List<string> expectedFiles = null;
       try
       {
-        using (zipBuilder.Build (zipFileName, eventHandlerMock))
+        using (zipBuilder.Build (zipFileName))
         {
         }
 
@@ -110,15 +108,15 @@ namespace Remotion.Dms.UnitTests.Shared.Utilities
     public void BuildReturnsZipFileWithFolder ()
     {
       var zipBuilder = _helperExtended.CreateArchiveFileBuilder();
+      zipBuilder.ZipProgress += ((sender, e) => { });
       zipBuilder.AddDirectory (new DirectoryInfoWrapper (new DirectoryInfo (_path)));
 
-      var eventHandlerMock = MockRepository.GenerateMock<EventHandler<StreamCopyProgressEventArgs>>();
       var zipFileName = _helperExtended.MakeUniqueAndValidFileName (_helperExtended.GetOrCreateAppDataPath(), Guid.NewGuid() + ".zip");
 
       List<string> expectedFiles = null;
       try
       {
-        using (zipBuilder.Build (zipFileName, eventHandlerMock))
+        using (zipBuilder.Build (zipFileName))
         {
         }
 
@@ -185,15 +183,15 @@ namespace Remotion.Dms.UnitTests.Shared.Utilities
       File.Copy (file5.FileName, Path.Combine (directory3.FullName, Path.GetFileName (file5.FileName)));
       File.Copy (file6.FileName, Path.Combine (directory2.FullName, Path.GetFileName (file6.FileName)));
 
-      var eventHandlerMock = MockRepository.GenerateMock<EventHandler<StreamCopyProgressEventArgs>>();
       var zipFileName = _helperExtended.MakeUniqueAndValidFileName (_helperExtended.GetOrCreateAppDataPath(), Guid.NewGuid() + ".zip");
 
       var zipBuilder = _helperExtended.CreateArchiveFileBuilder();
+      zipBuilder.ZipProgress += ((sender, e) => { });
       zipBuilder.AddDirectory (new DirectoryInfoWrapper (new DirectoryInfo (rootPath)));
 
       try
       {
-        using (zipBuilder.Build (zipFileName, eventHandlerMock))
+        using (zipBuilder.Build (zipFileName))
         {
         }
 
