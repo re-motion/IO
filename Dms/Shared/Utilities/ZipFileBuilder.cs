@@ -30,7 +30,7 @@ namespace Remotion.Dms.Shared.Utilities
   {
     private readonly List<IFileSystemEntry> _files = new List<IFileSystemEntry>();
 
-    public event EventHandler<StreamCopyProgressEventArgs> ZipProgress;
+    public event EventHandler<StreamCopyProgressEventArgs> ArchiveProgress;
 
     public ZipFileBuilder ()
     {
@@ -99,8 +99,8 @@ namespace Remotion.Dms.Shared.Utilities
 
     private void OnZippingProgress (object sender, StreamCopyProgressEventArgs args)
     {
-      if (ZipProgress != null)
-        ZipProgress (this, args);
+      if (ArchiveProgress != null)
+        ArchiveProgress (this, args);
     }
   }
 }

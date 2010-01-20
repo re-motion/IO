@@ -61,7 +61,7 @@ namespace Remotion.Dms.UnitTests.Shared.Utilities
     public void ExtractZipFile ()
     {
       var zipBuilder = _helperExtended.CreateArchiveFileBuilder();
-      zipBuilder.ZipProgress += ((sender, e) => { });
+      zipBuilder.ArchiveProgress += ((sender, e) => { });
       zipBuilder.AddFile (new FileInfoWrapper(new FileInfo(_file1.FileName)));
       zipBuilder.AddFile (new FileInfoWrapper(new FileInfo(_file2.FileName)));
 

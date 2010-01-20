@@ -73,7 +73,7 @@ namespace Remotion.Dms.UnitTests.Shared.Utilities
     public void BuildReturnsZipFileWithFiles ()
     {
       var zipBuilder = _helperExtended.CreateArchiveFileBuilder();
-      zipBuilder.ZipProgress += ((sender, e) => { });
+      zipBuilder.ArchiveProgress += ((sender, e) => { });
       zipBuilder.AddFile (new FileInfoWrapper (new FileInfo (_file1.FileName)));
       zipBuilder.AddFile (new FileInfoWrapper (new FileInfo (_file2.FileName)));
 
@@ -108,7 +108,7 @@ namespace Remotion.Dms.UnitTests.Shared.Utilities
     public void BuildReturnsZipFileWithFolder ()
     {
       var zipBuilder = _helperExtended.CreateArchiveFileBuilder();
-      zipBuilder.ZipProgress += ((sender, e) => { });
+      zipBuilder.ArchiveProgress += ((sender, e) => { });
       zipBuilder.AddDirectory (new DirectoryInfoWrapper (new DirectoryInfo (_path)));
 
       var zipFileName = _helperExtended.MakeUniqueAndValidFileName (_helperExtended.GetOrCreateAppDataPath(), Guid.NewGuid() + ".zip");
@@ -186,7 +186,7 @@ namespace Remotion.Dms.UnitTests.Shared.Utilities
       var zipFileName = _helperExtended.MakeUniqueAndValidFileName (_helperExtended.GetOrCreateAppDataPath(), Guid.NewGuid() + ".zip");
 
       var zipBuilder = _helperExtended.CreateArchiveFileBuilder();
-      zipBuilder.ZipProgress += ((sender, e) => { });
+      zipBuilder.ArchiveProgress += ((sender, e) => { });
       zipBuilder.AddDirectory (new DirectoryInfoWrapper (new DirectoryInfo (rootPath)));
 
       try

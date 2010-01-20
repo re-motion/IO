@@ -28,6 +28,6 @@ namespace Remotion.Dms.Shared.Utilities
     void AddFile (IFileInfo fileInfo);
     void AddDirectory (IDirectoryInfo directoryInfo);
     Stream Build (string archiveFileName);
-    event EventHandler<StreamCopyProgressEventArgs> ZipProgress;
+    event EventHandler<StreamCopyProgressEventArgs> ArchiveProgress;
   }
 }
