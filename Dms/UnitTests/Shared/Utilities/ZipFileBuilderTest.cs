@@ -24,6 +24,7 @@ using NUnit.Framework.SyntaxHelpers;
 using Remotion.Development.UnitTesting.IO;
 using Remotion.Dms.DesktopConnector.Utilities;
 using Remotion.Dms.Shared.Utilities;
+using Rhino.Mocks;
 
 namespace Remotion.Dms.UnitTests.Shared.Utilities
 {
@@ -88,6 +89,145 @@ namespace Remotion.Dms.UnitTests.Shared.Utilities
 
         expectedFiles = UnZipFile (zipFileName);
 
+        Assert.That (Path.GetFileName (_file1.FileName), Is.EqualTo (Path.GetFileName (expectedFiles[0])));
+        Assert.That (Path.GetFileName (_file2.FileName), Is.EqualTo (Path.GetFileName (expectedFiles[1])));
+      }
+      finally
+      {
+        if (expectedFiles != null)
+        {
+          if (_helperExtended.FileExists (expectedFiles[0]))
+            _helperExtended.Delete (expectedFiles[0]);
+          if (_helperExtended.FileExists (expectedFiles[1]))
+            _helperExtended.Delete (expectedFiles[1]);
+        }
+        _helperExtended.Delete (zipFileName);
+      }
+    }
+
+    [Test]
+    [ExpectedException (typeof (IOException))]
+    public void NoHandlerForArchiveError_ThrowsException ()
+    {
+      var zipBuilder = _helperExtended.CreateArchiveFileBuilder();
+      zipBuilder.ArchiveProgress += ((sender, e) => { });
+
+      var fileInfoMock = MockRepository.GenerateMock<IFileInfo>();
+      fileInfoMock.Expect (mock => mock.FullName).Return ("C:\fileName");
+      fileInfoMock.Expect (mock => mock.Open (FileMode.Open, FileAccess.Read, FileShare.Read)).Throw (new IOException ("ioexception"));
+
+      zipBuilder.AddFile (fileInfoMock);
+      var zipFileName = _helperExtended.MakeUniqueAndValidFileName (_helperExtended.GetOrCreateAppDataPath(), Guid.NewGuid() + ".zip");
+      try
+      {
+        using (zipBuilder.Build (zipFileName))
+        {
+        }
+      }
+      finally
+      {
+        _helperExtended.Delete (zipFileName);
+      }
+    }
+
+
+    [Test]
+    [ExpectedException (typeof (AbortException))]
+    public void SetFileProcessingRecoveryAction_Abort ()
+    {
+      var zipBuilder = _helperExtended.CreateArchiveFileBuilder();
+      zipBuilder.ArchiveProgress += ((sender, e) => { });
+
+      var fileInfoMock = MockRepository.GenerateMock<IFileInfo>();
+      fileInfoMock.Expect (mock => mock.FullName).Return ("C:\fileName");
+      fileInfoMock.Expect (mock => mock.Open (FileMode.Open, FileAccess.Read, FileShare.Read)).Throw (new IOException());
+
+      zipBuilder.AddFile (fileInfoMock);
+
+      zipBuilder.ArchiveError += ((sender, e) => zipBuilder.FileProcessingRecoveryAction = FileProcessingRecoveryAction.Abort);
+
+      var zipFileName = _helperExtended.MakeUniqueAndValidFileName (_helperExtended.GetOrCreateAppDataPath(), Guid.NewGuid() + ".zip");
+      try
+      {
+        using (zipBuilder.Build (zipFileName))
+        {
+        }
+      }
+      finally
+      {
+        _helperExtended.Delete (zipFileName);
+      }
+    }
+
+    [Test]
+    public void SetFileProcessingAction_Ignore ()
+    {
+      var zipBuilder = _helperExtended.CreateArchiveFileBuilder();
+      zipBuilder.ArchiveProgress += ((sender, e) => { });
+
+      var fileInfoMock = MockRepository.GenerateMock<IFileInfo>();
+
+      fileInfoMock.Expect (mock => mock.FullName).Return ("C:\fileName");
+      fileInfoMock.Expect (mock => mock.Open (FileMode.Open, FileAccess.Read, FileShare.Read)).Throw (new IOException());
+
+      zipBuilder.AddFile (new FileInfoWrapper (new FileInfo (_file1.FileName)));
+      zipBuilder.AddFile (fileInfoMock);
+
+      zipBuilder.ArchiveError += ((sender, e) => zipBuilder.FileProcessingRecoveryAction = FileProcessingRecoveryAction.Ignore);
+
+      var zipFileName = _helperExtended.MakeUniqueAndValidFileName (_helperExtended.GetOrCreateAppDataPath(), Guid.NewGuid() + ".zip");
+
+      List<string> expectedFiles = null;
+      try
+      {
+        using (zipBuilder.Build (zipFileName))
+        {
+        }
+        expectedFiles = UnZipFile (zipFileName);
+        Assert.That (expectedFiles.Count, Is.EqualTo (1));
+        Assert.That (Path.GetFileName (_file1.FileName), Is.EqualTo (Path.GetFileName (expectedFiles[0])));
+      }
+      finally
+      {
+        if (expectedFiles != null)
+        {
+          if (_helperExtended.FileExists (expectedFiles[0]))
+            _helperExtended.Delete (expectedFiles[0]);
+        }
+        _helperExtended.Delete (zipFileName);
+      }
+    }
+
+    [Test]
+    public void SetFileProcessingAction_Retry ()
+    {
+      var zipBuilder = _helperExtended.CreateArchiveFileBuilder();
+      zipBuilder.ArchiveProgress += ((sender, e) => { });
+      zipBuilder.ArchiveError += ((sender, e) => zipBuilder.FileProcessingRecoveryAction = FileProcessingRecoveryAction.Retry);
+
+      var fileInfoMock = MockRepository.GenerateMock<IFileInfo>();
+
+      zipBuilder.AddFile (new FileInfoWrapper (new FileInfo (_file1.FileName)));
+      fileInfoMock.Expect (mock => mock.FullName).Return (_file2.FileName);
+      fileInfoMock.Expect (mock => mock.Name).Return (Path.GetFileName (_file2.FileName));
+      zipBuilder.AddFile (fileInfoMock);
+
+      fileInfoMock.Expect (mock => mock.Open (FileMode.Open, FileAccess.Read, FileShare.Read)).Throw (new IOException()).Repeat.Once();
+
+      var fileInfo = new FileInfoWrapper (new FileInfo (_file2.FileName));
+      var stream = fileInfo.Open (FileMode.Open, FileAccess.Read, FileShare.Read);
+      fileInfoMock.Expect (mock => mock.Open (FileMode.Open, FileAccess.Read, FileShare.Read)).Return (stream);
+
+      var zipFileName = _helperExtended.MakeUniqueAndValidFileName (_helperExtended.GetOrCreateAppDataPath(), Guid.NewGuid() + ".zip");
+
+      List<string> expectedFiles = null;
+      try
+      {
+        using (zipBuilder.Build (zipFileName))
+        {
+        }
+        expectedFiles = UnZipFile (zipFileName);
+        Assert.That (expectedFiles.Count, Is.EqualTo (2));
         Assert.That (Path.GetFileName (_file1.FileName), Is.EqualTo (Path.GetFileName (expectedFiles[0])));
         Assert.That (Path.GetFileName (_file2.FileName), Is.EqualTo (Path.GetFileName (expectedFiles[1])));
       }

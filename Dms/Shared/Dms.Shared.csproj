@@ -62,11 +62,13 @@
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="DmsVersion.cs" />
+    <Compile Include="Utilities\AbortException.cs" />
     <Compile Include="Utilities\ArgumentEmptyException.cs" />
     <Compile Include="Utilities\ArgumentUtility.cs" />
     <Compile Include="Utilities\BrowserBase64SerializationHelper.cs" />
     <Compile Include="Utilities\DirectoryInfoWrapper.cs" />
     <Compile Include="Utilities\FileInfoWrapper.cs" />
+    <Compile Include="Utilities\FileOpenExceptionEventArgs.cs" />
     <Compile Include="Utilities\FileSize.cs" />
     <Compile Include="Utilities\FileSystemHelper.cs" />
     <Compile Include="Utilities\IArchiveBuilder.cs" />
@@ -79,6 +81,7 @@
     <Compile Include="Utilities\ReadonlyStream.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Utilities\FileProcessingRecoveryAction.cs" />
     <Compile Include="Utilities\StreamCopier.cs">
       <SubType>Code</SubType>
     </Compile>

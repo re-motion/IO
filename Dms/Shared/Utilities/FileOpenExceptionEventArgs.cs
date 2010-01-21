@@ -16,20 +16,28 @@
 // Additional permissions are listed in the file re-motion_exceptions.txt.
 // 
 using System;
-using System.IO;
 
 namespace Remotion.Dms.Shared.Utilities
 {
-  /// <summary>
-  /// The <see cref="IArchiveBuilder"/> declares an API for adding files and directories to an archive and to return the archive as a stream.
-  /// </summary>
-  public interface IArchiveBuilder
+  public class FileOpenExceptionEventArgs : EventArgs
   {
-    void AddFile (IFileInfo fileInfo);
-    void AddDirectory (IDirectoryInfo directoryInfo);
-    Stream Build (string archiveFileName);
-    event EventHandler<StreamCopyProgressEventArgs> ArchiveProgress;
-    event EventHandler<FileOpenExceptionEventArgs> ArchiveError;
-    FileProcessingRecoveryAction FileProcessingRecoveryAction { get; set; }
+    private readonly string _fileName;
+    private readonly Exception _exception;
+    
+    public FileOpenExceptionEventArgs (string fileName, Exception exception)
+    {
+      _fileName = fileName;
+      _exception = exception;
+    }
+
+    public string FileName
+    {
+      get { return _fileName; }
+    }
+
+    public Exception Exception
+    {
+      get { return _exception; }
+    }
   }
 }
