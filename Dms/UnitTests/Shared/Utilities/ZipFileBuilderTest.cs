@@ -74,7 +74,7 @@ namespace Remotion.Dms.UnitTests.Shared.Utilities
     public void BuildReturnsZipFileWithFiles ()
     {
       var zipBuilder = _helperExtended.CreateArchiveFileBuilder();
-      zipBuilder.ArchiveProgress += ((sender, e) => { });
+      zipBuilder.Progress += ((sender, e) => { });
       zipBuilder.AddFile (new FileInfoWrapper (new FileInfo (_file1.FileName)));
       zipBuilder.AddFile (new FileInfoWrapper (new FileInfo (_file2.FileName)));
 
@@ -110,7 +110,7 @@ namespace Remotion.Dms.UnitTests.Shared.Utilities
     public void NoHandlerForArchiveError_ThrowsException ()
     {
       var zipBuilder = _helperExtended.CreateArchiveFileBuilder();
-      zipBuilder.ArchiveProgress += ((sender, e) => { });
+      zipBuilder.Progress += ((sender, e) => { });
 
       var fileInfoMock = MockRepository.GenerateMock<IFileInfo>();
       fileInfoMock.Expect (mock => mock.FullName).Return ("C:\fileName");
@@ -136,7 +136,7 @@ namespace Remotion.Dms.UnitTests.Shared.Utilities
     public void SetFileProcessingRecoveryAction_Abort ()
     {
       var zipBuilder = _helperExtended.CreateArchiveFileBuilder();
-      zipBuilder.ArchiveProgress += ((sender, e) => { });
+      zipBuilder.Progress += ((sender, e) => { });
 
       var fileInfoMock = MockRepository.GenerateMock<IFileInfo>();
       fileInfoMock.Expect (mock => mock.FullName).Return ("C:\fileName");
@@ -144,7 +144,7 @@ namespace Remotion.Dms.UnitTests.Shared.Utilities
 
       zipBuilder.AddFile (fileInfoMock);
 
-      zipBuilder.ArchiveError += ((sender, e) => zipBuilder.FileProcessingRecoveryAction = FileProcessingRecoveryAction.Abort);
+      zipBuilder.Error += ((sender, e) => zipBuilder.FileProcessingRecoveryAction = FileProcessingRecoveryAction.Abort);
 
       var zipFileName = _helperExtended.MakeUniqueAndValidFileName (_helperExtended.GetOrCreateAppDataPath(), Guid.NewGuid() + ".zip");
       try
@@ -163,7 +163,7 @@ namespace Remotion.Dms.UnitTests.Shared.Utilities
     public void SetFileProcessingAction_Ignore ()
     {
       var zipBuilder = _helperExtended.CreateArchiveFileBuilder();
-      zipBuilder.ArchiveProgress += ((sender, e) => { });
+      zipBuilder.Progress += ((sender, e) => { });
 
       var fileInfoMock = MockRepository.GenerateMock<IFileInfo>();
 
@@ -173,7 +173,7 @@ namespace Remotion.Dms.UnitTests.Shared.Utilities
       zipBuilder.AddFile (new FileInfoWrapper (new FileInfo (_file1.FileName)));
       zipBuilder.AddFile (fileInfoMock);
 
-      zipBuilder.ArchiveError += ((sender, e) => zipBuilder.FileProcessingRecoveryAction = FileProcessingRecoveryAction.Ignore);
+      zipBuilder.Error += ((sender, e) => zipBuilder.FileProcessingRecoveryAction = FileProcessingRecoveryAction.Ignore);
 
       var zipFileName = _helperExtended.MakeUniqueAndValidFileName (_helperExtended.GetOrCreateAppDataPath(), Guid.NewGuid() + ".zip");
 
@@ -202,8 +202,8 @@ namespace Remotion.Dms.UnitTests.Shared.Utilities
     public void SetFileProcessingAction_Retry ()
     {
       var zipBuilder = _helperExtended.CreateArchiveFileBuilder();
-      zipBuilder.ArchiveProgress += ((sender, e) => { });
-      zipBuilder.ArchiveError += ((sender, e) => zipBuilder.FileProcessingRecoveryAction = FileProcessingRecoveryAction.Retry);
+      zipBuilder.Progress += ((sender, e) => { });
+      zipBuilder.Error += ((sender, e) => zipBuilder.FileProcessingRecoveryAction = FileProcessingRecoveryAction.Retry);
 
       var fileInfoMock = MockRepository.GenerateMock<IFileInfo>();
 
@@ -248,7 +248,7 @@ namespace Remotion.Dms.UnitTests.Shared.Utilities
     public void BuildReturnsZipFileWithFolder ()
     {
       var zipBuilder = _helperExtended.CreateArchiveFileBuilder();
-      zipBuilder.ArchiveProgress += ((sender, e) => { });
+      zipBuilder.Progress += ((sender, e) => { });
       zipBuilder.AddDirectory (new DirectoryInfoWrapper (new DirectoryInfo (_path)));
 
       var zipFileName = _helperExtended.MakeUniqueAndValidFileName (_helperExtended.GetOrCreateAppDataPath(), Guid.NewGuid() + ".zip");
@@ -326,7 +326,7 @@ namespace Remotion.Dms.UnitTests.Shared.Utilities
       var zipFileName = _helperExtended.MakeUniqueAndValidFileName (_helperExtended.GetOrCreateAppDataPath(), Guid.NewGuid() + ".zip");
 
       var zipBuilder = _helperExtended.CreateArchiveFileBuilder();
-      zipBuilder.ArchiveProgress += ((sender, e) => { });
+      zipBuilder.Progress += ((sender, e) => { });
       zipBuilder.AddDirectory (new DirectoryInfoWrapper (new DirectoryInfo (rootPath)));
 
       try

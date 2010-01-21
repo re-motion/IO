@@ -29,9 +29,8 @@ namespace Remotion.Dms.Shared.Utilities
   public class ZipFileBuilder : IArchiveBuilder
   {
     private readonly List<IFileSystemEntry> _files = new List<IFileSystemEntry>();
-    private bool _onErrorRetry;
-    public event EventHandler<StreamCopyProgressEventArgs> ArchiveProgress;
-    public event EventHandler<FileOpenExceptionEventArgs> ArchiveError;
+    public event EventHandler<StreamCopyProgressEventArgs> Progress;
+    public event EventHandler<FileOpenExceptionEventArgs> Error;
 
     private FileProcessingRecoveryAction _fileProcessingRecoveryAction;
 
@@ -69,7 +68,7 @@ namespace Remotion.Dms.Shared.Utilities
           if (fileInfo is IFileInfo)
             AddFileToZipFile ((IFileInfo) fileInfo, fileInfo.Name, zipOutputStream, streamCopier);
           else if (fileInfo is IDirectoryInfo)
-            AddDirectoryToZipFile ((DirectoryInfoWrapper) fileInfo, zipOutputStream, streamCopier, string.Empty);
+            AddDirectoryToZipFile ((IDirectoryInfo) fileInfo, zipOutputStream, streamCopier, string.Empty);
         }
       }
       _files.Clear();
@@ -79,30 +78,31 @@ namespace Remotion.Dms.Shared.Utilities
     private void AddFileToZipFile (IFileInfo fileInfo, string path, ZipOutputStream zipOutputStream, StreamCopier streamCopier)
     {
       Stream fileStream = null;
+      bool onErrorRetry;
       do
       {
         try
         {
-          _onErrorRetry = false;
+          onErrorRetry = false;
           fileStream = fileInfo.Open (FileMode.Open, FileAccess.Read, FileShare.Read);
         }
         catch (FileNotFoundException ex)
         {
-          OnFileOpenError (this, new FileOpenExceptionEventArgs (fileInfo.FullName, ex));
+          onErrorRetry = OnFileOpenError (this, new FileOpenExceptionEventArgs (fileInfo.FullName, ex));
         }
         catch (DirectoryNotFoundException ex)
         {
-          OnFileOpenError (this, new FileOpenExceptionEventArgs (fileInfo.FullName, ex));
+          onErrorRetry = OnFileOpenError (this, new FileOpenExceptionEventArgs (fileInfo.FullName, ex));
         }
         catch (IOException ex)
         {
-          OnFileOpenError (this, new FileOpenExceptionEventArgs (fileInfo.FullName, ex));
+          onErrorRetry = OnFileOpenError (this, new FileOpenExceptionEventArgs (fileInfo.FullName, ex));
         }
         catch (UnauthorizedAccessException ex)
         {
-          OnFileOpenError (this, new FileOpenExceptionEventArgs (fileInfo.FullName, ex));
+          onErrorRetry = OnFileOpenError (this, new FileOpenExceptionEventArgs (fileInfo.FullName, ex));
         }
-      } while (_onErrorRetry);
+      } while (onErrorRetry);
 
       if (fileStream != null)
       {
@@ -115,37 +115,38 @@ namespace Remotion.Dms.Shared.Utilities
     }
 
     private void AddDirectoryToZipFile (
-        DirectoryInfoWrapper directoryInfo,
+        IDirectoryInfo directoryInfo,
         ZipOutputStream zipOutputStream,
         StreamCopier streamCopier,
         string parentDirectory)
     {
       parentDirectory = Path.Combine (parentDirectory, directoryInfo.Name);
       foreach (var file in directoryInfo.GetFiles())
-        AddFileToZipFile ((FileInfoWrapper) file, Path.Combine (parentDirectory, file.Name), zipOutputStream, streamCopier);
+        AddFileToZipFile (file, Path.Combine (parentDirectory, file.Name), zipOutputStream, streamCopier);
       foreach (var directory in directoryInfo.GetDirectories())
-        AddDirectoryToZipFile ((DirectoryInfoWrapper) directory, zipOutputStream, streamCopier, parentDirectory);
+        AddDirectoryToZipFile (directory, zipOutputStream, streamCopier, parentDirectory);
     }
 
     private void OnZippingProgress (object sender, StreamCopyProgressEventArgs args)
     {
-      if (ArchiveProgress != null)
-        ArchiveProgress (this, args);
+      if (Progress != null)
+        Progress (this, args);
     }
 
-    private void OnFileOpenError (object sender, FileOpenExceptionEventArgs args)
+    private bool OnFileOpenError (object sender, FileOpenExceptionEventArgs args)
     {
-      if (ArchiveError != null)
-        ArchiveError (this, args);
+      if (Error != null)
+        Error (this, args);
       else
         throw args.Exception;
 
       if (_fileProcessingRecoveryAction == FileProcessingRecoveryAction.Abort)
         throw new AbortException();
       if (_fileProcessingRecoveryAction == FileProcessingRecoveryAction.Ignore)
-        return;
+        return false;
       if (_fileProcessingRecoveryAction == FileProcessingRecoveryAction.Retry)
-        _onErrorRetry = true;
+        return true;
+      return false;
     }
   }
 }

@@ -28,8 +28,8 @@ namespace Remotion.Dms.Shared.Utilities
     void AddFile (IFileInfo fileInfo);
     void AddDirectory (IDirectoryInfo directoryInfo);
     Stream Build (string archiveFileName);
-    event EventHandler<StreamCopyProgressEventArgs> ArchiveProgress;
-    event EventHandler<FileOpenExceptionEventArgs> ArchiveError;
+    event EventHandler<StreamCopyProgressEventArgs> Progress; 
+    event EventHandler<FileOpenExceptionEventArgs> Error; 
     FileProcessingRecoveryAction FileProcessingRecoveryAction { get; set; }
   }
 }
