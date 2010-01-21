@@ -110,6 +110,7 @@ namespace Remotion.Dms.Shared.Utilities
         zipOutputStream.PutNextEntry (zipEntry);
         streamCopier.TransferProgress += OnZippingProgress;
         streamCopier.CopyStream (fileStream, zipOutputStream, fileStream.Length);
+        fileStream.Close(); //TODO: check if needed
         fileStream.Dispose();
       }
     }
