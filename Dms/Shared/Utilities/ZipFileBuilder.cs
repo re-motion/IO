@@ -84,22 +84,30 @@ namespace Remotion.Dms.Shared.Utilities
         try
         {
           onErrorRetry = false;
-          fileStream = fileInfo.Open (FileMode.Open, FileAccess.Read, FileShare.Read);
+          fileStream = fileInfo.Open (FileMode.Open, FileAccess.Read, FileShare.Read); //Achtung: fileStream könnte offen bleiben
         }
         catch (FileNotFoundException ex)
         {
+          if (fileStream != null)
+            fileStream.Dispose();
           onErrorRetry = OnFileOpenError (this, new FileOpenExceptionEventArgs (fileInfo.FullName, ex));
         }
         catch (DirectoryNotFoundException ex)
         {
+          if (fileStream != null)
+            fileStream.Dispose ();
           onErrorRetry = OnFileOpenError (this, new FileOpenExceptionEventArgs (fileInfo.FullName, ex));
         }
         catch (IOException ex)
         {
+          if (fileStream != null)
+            fileStream.Dispose ();
           onErrorRetry = OnFileOpenError (this, new FileOpenExceptionEventArgs (fileInfo.FullName, ex));
         }
         catch (UnauthorizedAccessException ex)
         {
+          if (fileStream != null)
+            fileStream.Dispose ();
           onErrorRetry = OnFileOpenError (this, new FileOpenExceptionEventArgs (fileInfo.FullName, ex));
         }
       } while (onErrorRetry);
@@ -110,7 +118,6 @@ namespace Remotion.Dms.Shared.Utilities
         zipOutputStream.PutNextEntry (zipEntry);
         streamCopier.TransferProgress += OnZippingProgress;
         streamCopier.CopyStream (fileStream, zipOutputStream, fileStream.Length);
-        fileStream.Close(); //TODO: check if needed
         fileStream.Dispose();
       }
     }
