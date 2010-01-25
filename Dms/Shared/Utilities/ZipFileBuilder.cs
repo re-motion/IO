@@ -84,7 +84,7 @@ namespace Remotion.Dms.Shared.Utilities
         try
         {
           onErrorRetry = false;
-          fileStream = fileInfo.Open (FileMode.Open, FileAccess.Read, FileShare.Read); //Achtung: fileStream könnte offen bleiben
+          fileStream = fileInfo.Open (FileMode.Open, FileAccess.Read, FileShare.Read); 
         }
         catch (FileNotFoundException ex)
         {
