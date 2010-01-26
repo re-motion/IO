@@ -179,6 +179,7 @@
     <Compile Include="DesktopConnector\FileHandling\UIStates\RecoveringUIStateTest.cs" />
     <Compile Include="DesktopConnector\FileHandling\UIStates\RecoveryFailedUIStateTest.cs" />
     <Compile Include="DesktopConnector\FileHandling\UIStates\UploadUIStateTest.cs" />
+    <Compile Include="DesktopConnector\FileHandling\XmlProcessingInstructionFilterTest.cs" />
     <Compile Include="DesktopConnector\Services\DmsServiceAgentTest.cs" />
     <Compile Include="DesktopConnector\FileHandling\FileTransfer\V1_0\DownloadedFileUploadAgentTest.cs" />
     <Compile Include="DesktopConnector\FileHandling\FileTransfer\V1_0\NewFileUploadAgentTest.cs" />
