@@ -121,6 +121,7 @@
     <Compile Include="DesktopConnector\Configuration\DesktopConnectorConfigurationTest.cs" />
     <Compile Include="DesktopConnector\Configuration\FileExtensionElementTest.cs" />
     <Compile Include="DesktopConnector\Configuration\FileExtensionMappingCollectionTest.cs" />
+    <Compile Include="DesktopConnector\Configuration\OverrideApplicationCriteriaElementTest.cs" />
     <Compile Include="DesktopConnector\Configuration\ScannerConfigurationElementTest.cs" />
     <Compile Include="DesktopConnector\Configuration\SingleScanConfigurationElementTest.cs" />
     <Compile Include="DesktopConnector\Configuration\TempFileConfigurationElementTest.cs" />
