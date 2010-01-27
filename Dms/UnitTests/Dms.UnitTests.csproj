@@ -191,6 +191,7 @@
     <Compile Include="DesktopConnector\Services\WebServiceAgentBaseTest.cs" />
     <Compile Include="DesktopConnector\UI\ScannerFileSelectionInteractionTest.cs" />
     <Compile Include="DesktopConnector\Utilities\NullAssociatedProgramFinderTest.cs" />
+    <Compile Include="DesktopConnector\Utilities\RegistryHelperTest.cs" />
     <Compile Include="DesktopConnector\Utilities\SessionInfoObjectMother.cs" />
     <Compile Include="DesktopConnector\Utilities\BackgroundThreadInvokerTest.cs" />
     <Compile Include="DesktopConnector\Utilities\StubThreadInvoker.cs" />
