@@ -55,7 +55,7 @@ namespace Remotion.Dms.Shared.Utilities
 
     public bool FileExists (string path)
     {
-      ArgumentUtility.CheckNotNullOrEmpty ("path", path);
+      ArgumentUtility.CheckNotNullOrEmpty ("path", path); 
       return File.Exists (path);
     }
 
@@ -187,6 +187,11 @@ namespace Remotion.Dms.Shared.Utilities
     public string GetDirectoryName (string path)
     {
       return Path.GetDirectoryName (path);
+    }
+
+    public string GetPathWithEnvironmentVariable (string path)
+    {
+      return Environment.ExpandEnvironmentVariables (path);
     }
   }
 }
