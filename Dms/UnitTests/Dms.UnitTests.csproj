@@ -192,6 +192,8 @@
     <Compile Include="DesktopConnector\Services\VersionMatcherTest.cs" />
     <Compile Include="DesktopConnector\Services\WebServiceAgentBaseTest.cs" />
     <Compile Include="DesktopConnector\UI\ScannerFileSelectionInteractionTest.cs" />
+    <Compile Include="DesktopConnector\Utilities\CurrentUserRegistryAccessorTest.cs" />
+    <Compile Include="DesktopConnector\Utilities\LocalMachineRegistryAccessorTest.cs" />
     <Compile Include="DesktopConnector\Utilities\NullAssociatedProgramFinderTest.cs" />
     <Compile Include="DesktopConnector\Utilities\RegistryHelperTest.cs" />
     <Compile Include="DesktopConnector\Utilities\SessionInfoObjectMother.cs" />
@@ -242,7 +244,6 @@
     <Compile Include="DesktopConnector\FileHandling\ApplicationWatcherGeneration\ApplicationWatcherFactoryTest.cs" />
     <Compile Include="DesktopConnector\Utilities\DocumentInfoObjectMother.cs" />
     <Compile Include="DesktopConnector\Utilities\FileVersionProviderTest.cs" />
-    <Compile Include="DesktopConnector\Utilities\RegistryAccessorTest.cs" />
     <Compile Include="Globalization\NotificationResourcesTest.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
