@@ -41,8 +41,7 @@ namespace Remotion.Dms.UnitTests.Shared.Utilities
     {
       MockRepository mockRepository = new MockRepository();
       Stream inputMock = mockRepository.StrictMock<Stream>();
-      StreamCopier streamCopierMock = new StreamCopier();
-
+      
       Func<byte[], int, int, int> writeAllAtOnce = delegate (byte[] buffer, int offset, int count)
       {
         for (int i = 0; i < 10; ++i)
@@ -50,22 +49,16 @@ namespace Remotion.Dms.UnitTests.Shared.Utilities
         return 10;
       };
 
-      //streamCopierMock.UploadProgress += delegate (object sender, UploadProgressEventArgs args) { callbackSender = sender; callbackArgs = args; })
-
       using (mockRepository.Ordered())
       {
         Expect.Call (inputMock.Read (null, 0, 0))
             .IgnoreArguments()
             .Constraints (Is.Anything(), Is.Equal (0), Is.Equal (_streamCopier.BufferSize))
-            //.Raise()
             .Do (writeAllAtOnce);
         Expect.Call (inputMock.Read (null, 0, 0))
             .IgnoreArguments()
             .Constraints (Is.Anything(), Is.Equal (0), Is.Equal (_streamCopier.BufferSize))
-            //.Raise()
             .Return (0);
-
-        //Expect.Call(streamCopierMock.Raise (mock => mock.UploadProgress +=  delegate (object sender, UploadProgressEventArgs args) { callbackSender = sender; callbackArgs = args; }));
       }
 
       MemoryStream outputStream = new MemoryStream();
