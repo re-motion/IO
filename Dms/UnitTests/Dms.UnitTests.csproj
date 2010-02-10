@@ -127,7 +127,7 @@
     <Compile Include="DesktopConnector\Configuration\SingleScanConfigurationElementTest.cs" />
     <Compile Include="DesktopConnector\Configuration\TempFileConfigurationElementTest.cs" />
     <Compile Include="DesktopConnector\Configuration\XmlCriteriaElementTest.cs" />
-    <Compile Include="DesktopConnector\FileHandling\ApplicationWatcherGeneration\ApplicationFilterTest.cs" />
+    <Compile Include="DesktopConnector\FileHandling\ApplicationWatcherGeneration\VersionFilterTest.cs" />
     <Compile Include="DesktopConnector\FileHandling\ApplicationProxyFactoryTest.cs" />
     <Compile Include="DesktopConnector\FileHandling\ApplicationWatcherGeneration\ApplicationMergerTest.cs" />
     <Compile Include="DesktopConnector\FileHandling\ApplicationWatcherGeneration\ApplicationNameFilterTest.cs" />
