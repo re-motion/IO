@@ -195,6 +195,7 @@
     <Compile Include="DesktopConnector\Utilities\CurrentUserRegistryAccessorTest.cs" />
     <Compile Include="DesktopConnector\Utilities\LocalMachineRegistryAccessorTest.cs" />
     <Compile Include="DesktopConnector\Utilities\NullAssociatedProgramFinderTest.cs" />
+    <Compile Include="DesktopConnector\Utilities\RegistryAccessorTest.cs" />
     <Compile Include="DesktopConnector\Utilities\RegistryHelperTest.cs" />
     <Compile Include="DesktopConnector\Utilities\SessionInfoObjectMother.cs" />
     <Compile Include="DesktopConnector\Utilities\BackgroundThreadInvokerTest.cs" />
