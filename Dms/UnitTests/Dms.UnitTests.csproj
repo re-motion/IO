@@ -235,7 +235,7 @@
     <Compile Include="DesktopConnector\FileHandling\DownloadedFileStates\DownloadedManagedFileStateTestBase.cs" />
     <Compile Include="DesktopConnector\FileHandling\ManagedFileTest.cs" />
     <Compile Include="DesktopConnector\FileHandling\FileOperationExecutorTest.cs" />
-    <Compile Include="DesktopConnector\FileHandling\FileOpenerTest.cs" />
+    <Compile Include="DesktopConnector\FileHandling\FileOpenerUsingDefaultTest.cs" />
     <Compile Include="Clients.Windows.Tray\Forms\ManagedFilesFormTest.cs" />
     <Compile Include="Clients.Windows.Tray\ProgramTest.cs" />
     <Compile Include="DesktopConnector\FileHandling\QueueManagerTest.cs" />
