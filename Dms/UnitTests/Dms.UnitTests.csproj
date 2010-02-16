@@ -115,6 +115,7 @@
     <Compile Include="DesktopConnector\ActionHandler\ReplaceActionHandlerTest.cs" />
     <Compile Include="DesktopConnector\ActionHandler\UploadActionHandlerExceptionHandlingTest.cs" />
     <Compile Include="DesktopConnector\Configuration\ApplicationCriteriaElementTest.cs" />
+    <Compile Include="DesktopConnector\Configuration\ApplicationMappingConfigurationTest.cs" />
     <Compile Include="DesktopConnector\Configuration\ApplicationWatcherArgumentsCriteriaElementTest.cs" />
     <Compile Include="DesktopConnector\Configuration\ApplicationWatcherStub.cs" />
     <Compile Include="DesktopConnector\Configuration\CleanupIntervalConfigurationElementTest.cs" />
