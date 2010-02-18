@@ -67,6 +67,7 @@
         <include asis="true" name="System.Runtime.Remoting.dll"/>
         <include asis="true" name="System.Windows.Forms.dll"/>
         <include asis="true" name="System.Web.dll"/>
+        <include asis="true" name="System.Web.Abstractions.dll"/>
       </references>
     </csc>
 
