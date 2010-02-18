@@ -130,6 +130,7 @@
     <Compile Include="DesktopConnector\Configuration\TempFileConfigurationElementTest.cs" />
     <Compile Include="DesktopConnector\Configuration\XmlCriteriaElementTest.cs" />
     <Compile Include="DesktopConnector\FileHandling\ApplicationWatcherGeneration\ApplicationWatcherFactoryTests\DefaultTest.cs" />
+    <Compile Include="DesktopConnector\FileHandling\ApplicationWatcherGeneration\ApplicationWatcherFactoryTests\FallbackTest.cs" />
     <Compile Include="DesktopConnector\FileHandling\ApplicationWatcherGeneration\ApplicationWatcherFactoryTests\PreferredTest.cs" />
     <Compile Include="DesktopConnector\FileHandling\ApplicationWatcherGeneration\VersionFilterTest.cs" />
     <Compile Include="DesktopConnector\FileHandling\ApplicationProxyFactoryTest.cs" />
@@ -245,7 +246,6 @@
     <Compile Include="Clients.Windows.Tray\ProgramTest.cs" />
     <Compile Include="DesktopConnector\FileHandling\QueueManagerTest.cs" />
     <Compile Include="DesktopConnector\FileHandling\FileTransfer\UploadStreamBaseTest.cs" />
-    <Compile Include="DesktopConnector\FileHandling\ApplicationWatcherGeneration\ApplicationWatcherFactoryTests\ApplicationWatcherFactoryTest.cs" />
     <Compile Include="DesktopConnector\Utilities\DocumentInfoObjectMother.cs" />
     <Compile Include="DesktopConnector\Utilities\FileVersionProviderTest.cs" />
     <Compile Include="Globalization\NotificationResourcesTest.Designer.cs">
