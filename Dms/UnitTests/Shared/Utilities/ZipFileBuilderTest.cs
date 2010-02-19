@@ -87,7 +87,7 @@ namespace Remotion.Dms.UnitTests.Shared.Utilities
         {
         }
 
-        expectedFiles = UnZipFile (zipFileName);
+        expectedFiles = UnZipFile (zipFileName); //TODO: change to actual
 
         Assert.That (Path.GetFileName (_file1.FileName), Is.EqualTo (Path.GetFileName (expectedFiles[0])));
         Assert.That (Path.GetFileName (_file2.FileName), Is.EqualTo (Path.GetFileName (expectedFiles[1])));
@@ -363,7 +363,7 @@ namespace Remotion.Dms.UnitTests.Shared.Utilities
       _destinationPath = Path.Combine (_helperExtended.GetOrCreateAppDataPath(), "tmp");
       fastZip.ExtractZip (zipFile, _destinationPath, FastZip.Overwrite.Always, null, null, null, false);
       List<string> files = new List<string>();
-      files.AddRange (Directory.GetFiles (_destinationPath, "*", SearchOption.AllDirectories));
+      files.AddRange (Directory.GetFiles (_destinationPath, "*", SearchOption.AllDirectories)); //TODO: order of GetFiles is not defined, change tests (compare path not file)
       return files;
     }
   }
