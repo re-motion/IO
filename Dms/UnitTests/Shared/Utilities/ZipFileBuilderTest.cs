@@ -18,6 +18,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using ICSharpCode.SharpZipLib.Zip;
 using NUnit.Framework;
 using NUnit.Framework.SyntaxHelpers;
@@ -80,30 +81,14 @@ namespace Remotion.Dms.UnitTests.Shared.Utilities
 
       var zipFileName = _helperExtended.MakeUniqueAndValidFileName (_helperExtended.GetOrCreateAppDataPath(), Guid.NewGuid() + ".zip");
 
-      List<string> expectedFiles = null;
-      try
+      using (zipBuilder.Build (zipFileName))
       {
-        using (zipBuilder.Build (zipFileName))
-        {
-        }
-
-        expectedFiles = UnZipFile (zipFileName); //TODO: change to actual
-
-        Assert.That (Path.GetFileName (_file1.FileName), Is.EqualTo (Path.GetFileName (expectedFiles[0])));
-        Assert.That (Path.GetFileName (_file2.FileName), Is.EqualTo (Path.GetFileName (expectedFiles[1])));
       }
-      finally
-      {
-        if (expectedFiles != null)
-        {
-          if (_helperExtended.FileExists (expectedFiles[0]))
-            _helperExtended.Delete (expectedFiles[0]);
-          if (_helperExtended.FileExists (expectedFiles[1]))
-            _helperExtended.Delete (expectedFiles[1]);
-        }
-        _helperExtended.Delete (zipFileName);
-      }
+
+      var expectedFiles = new List<string> { Path.GetFileName (_file1.FileName), Path.GetFileName (_file2.FileName) };
+      CheckUnzippedFiles (zipFileName, expectedFiles);
     }
+
 
     [Test]
     [ExpectedException (typeof (IOException))]
@@ -174,28 +159,13 @@ namespace Remotion.Dms.UnitTests.Shared.Utilities
       zipBuilder.AddFile (fileInfoMock);
 
       zipBuilder.Error += ((sender, e) => zipBuilder.FileProcessingRecoveryAction = FileProcessingRecoveryAction.Ignore);
-
       var zipFileName = _helperExtended.MakeUniqueAndValidFileName (_helperExtended.GetOrCreateAppDataPath(), Guid.NewGuid() + ".zip");
+      using (zipBuilder.Build (zipFileName))
+      {
+      }
 
-      List<string> expectedFiles = null;
-      try
-      {
-        using (zipBuilder.Build (zipFileName))
-        {
-        }
-        expectedFiles = UnZipFile (zipFileName);
-        Assert.That (expectedFiles.Count, Is.EqualTo (1));
-        Assert.That (Path.GetFileName (_file1.FileName), Is.EqualTo (Path.GetFileName (expectedFiles[0])));
-      }
-      finally
-      {
-        if (expectedFiles != null)
-        {
-          if (_helperExtended.FileExists (expectedFiles[0]))
-            _helperExtended.Delete (expectedFiles[0]);
-        }
-        _helperExtended.Delete (zipFileName);
-      }
+      var expectedFiles = new List<string> { Path.GetFileName (_file1.FileName) };
+      CheckUnzippedFiles (zipFileName, expectedFiles);
     }
 
     [Test]
@@ -219,29 +189,11 @@ namespace Remotion.Dms.UnitTests.Shared.Utilities
       fileInfoMock.Expect (mock => mock.Open (FileMode.Open, FileAccess.Read, FileShare.Read)).Return (stream);
 
       var zipFileName = _helperExtended.MakeUniqueAndValidFileName (_helperExtended.GetOrCreateAppDataPath(), Guid.NewGuid() + ".zip");
-
-      List<string> expectedFiles = null;
-      try
+      using (zipBuilder.Build (zipFileName))
       {
-        using (zipBuilder.Build (zipFileName))
-        {
-        }
-        expectedFiles = UnZipFile (zipFileName);
-        Assert.That (expectedFiles.Count, Is.EqualTo (2));
-        Assert.That (Path.GetFileName (_file1.FileName), Is.EqualTo (Path.GetFileName (expectedFiles[0])));
-        Assert.That (Path.GetFileName (_file2.FileName), Is.EqualTo (Path.GetFileName (expectedFiles[1])));
       }
-      finally
-      {
-        if (expectedFiles != null)
-        {
-          if (_helperExtended.FileExists (expectedFiles[0]))
-            _helperExtended.Delete (expectedFiles[0]);
-          if (_helperExtended.FileExists (expectedFiles[1]))
-            _helperExtended.Delete (expectedFiles[1]);
-        }
-        _helperExtended.Delete (zipFileName);
-      }
+      var expectedFiles = new List<string> { Path.GetFileName (_file1.FileName), Path.GetFileName (_file2.FileName) };
+      CheckUnzippedFiles (zipFileName, expectedFiles);
     }
 
     [Test]
@@ -252,30 +204,12 @@ namespace Remotion.Dms.UnitTests.Shared.Utilities
       zipBuilder.AddDirectory (new DirectoryInfoWrapper (new DirectoryInfo (_path)));
 
       var zipFileName = _helperExtended.MakeUniqueAndValidFileName (_helperExtended.GetOrCreateAppDataPath(), Guid.NewGuid() + ".zip");
-
-      List<string> expectedFiles = null;
-      try
+      using (zipBuilder.Build (zipFileName))
       {
-        using (zipBuilder.Build (zipFileName))
-        {
-        }
-
-        expectedFiles = UnZipFile (zipFileName);
-
-        Assert.That (Path.GetFileName (_file1.FileName), Is.EqualTo (Path.GetFileName (expectedFiles[0])));
-        Assert.That (Path.GetFileName (_file2.FileName), Is.EqualTo (Path.GetFileName (expectedFiles[1])));
       }
-      finally
-      {
-        if (expectedFiles != null)
-        {
-          if (_helperExtended.FileExists (expectedFiles[0]))
-            _helperExtended.Delete (expectedFiles[0]);
-          if (_helperExtended.FileExists (expectedFiles[1]))
-            _helperExtended.Delete (expectedFiles[1]);
-        }
-        _helperExtended.Delete (zipFileName);
-      }
+
+      var expectedFiles = new List<string> { Path.GetFileName (_file1.FileName), Path.GetFileName (_file2.FileName) };
+      CheckUnzippedFiles (zipFileName, expectedFiles);
     }
 
     [Test]
@@ -329,42 +263,67 @@ namespace Remotion.Dms.UnitTests.Shared.Utilities
       zipBuilder.Progress += ((sender, e) => { });
       zipBuilder.AddDirectory (new DirectoryInfoWrapper (new DirectoryInfo (rootPath)));
 
+      using (zipBuilder.Build (zipFileName))
+      {
+      }
+      var expectedFiles = new List<string>
+                          {
+                              Path.GetFileName (file1.FileName),
+                              Path.GetFileName (file2.FileName),
+                              Path.GetFileName (file3.FileName),
+                              Path.GetFileName (file4.FileName),
+                              Path.GetFileName (file5.FileName),
+                              Path.GetFileName (file6.FileName)
+                          };
+
       try
       {
-        using (zipBuilder.Build (zipFileName))
-        {
-        }
-
-        var expectedFiles = UnZipFile (zipFileName);
-
-        Assert.That (Path.GetFileName (file1.FileName), Is.EqualTo (Path.GetFileName (expectedFiles[0])));
-        Assert.That (Path.GetFileName (file2.FileName), Is.EqualTo (Path.GetFileName (expectedFiles[4])));
-        Assert.That (Path.GetFileName (file3.FileName), Is.EqualTo (Path.GetFileName (expectedFiles[5])));
-        Assert.That (Path.GetFileName (file4.FileName), Is.EqualTo (Path.GetFileName (expectedFiles[2])));
-        Assert.That (Path.GetFileName (file5.FileName), Is.EqualTo (Path.GetFileName (expectedFiles[3])));
-        Assert.That (Path.GetFileName (file6.FileName), Is.EqualTo (Path.GetFileName (expectedFiles[1])));
+        CheckUnzippedFiles (zipFileName, expectedFiles);
       }
       finally
       {
-        Directory.Delete (rootPath, true);
-        file1.Dispose();
-        file2.Dispose();
-        file3.Dispose();
-        file4.Dispose();
-        file5.Dispose();
-        file6.Dispose();
-        File.Delete (zipFileName);
+        _helperExtended.DeleteDirectory (rootPath, true);
       }
     }
 
-    private List<string> UnZipFile (string zipFile)
+    private void CheckUnzippedFiles (string zipFileName, List<string> expectedFiles)
+    {
+      var files = UnZipFile (zipFileName);
+      try
+      {
+        Assert.That (files.Values.Count, Is.EqualTo (expectedFiles.Count));
+
+        for (int i = 0; i < files.Values.Count; i++)
+          Assert.That (files.Values.Contains (expectedFiles[i]));
+      }
+      finally
+      {
+        if (files != null)
+          CleanupTempFiles (files.Keys.ToList(), zipFileName);
+      }
+    }
+
+    private void CleanupTempFiles (List<string> files, string zipFileName)
+    {
+      foreach (var file in files)
+      {
+        if (_helperExtended.FileExists (file))
+          _helperExtended.Delete (file);
+      }
+      _helperExtended.Delete (zipFileName);
+    }
+
+    private Dictionary<string, string> UnZipFile (string zipFile)
     {
       FastZip fastZip = new FastZip();
       _destinationPath = Path.Combine (_helperExtended.GetOrCreateAppDataPath(), "tmp");
       fastZip.ExtractZip (zipFile, _destinationPath, FastZip.Overwrite.Always, null, null, null, false);
       List<string> files = new List<string>();
-      files.AddRange (Directory.GetFiles (_destinationPath, "*", SearchOption.AllDirectories)); //TODO: order of GetFiles is not defined, change tests (compare path not file)
-      return files;
+      files.AddRange (Directory.GetFiles (_destinationPath, "*", SearchOption.AllDirectories));
+      var reducedFile = new Dictionary<string, string>();
+      foreach (var file in files)
+        reducedFile.Add (file, Path.GetFileName (file));
+      return reducedFile; 
     }
   }
 }
