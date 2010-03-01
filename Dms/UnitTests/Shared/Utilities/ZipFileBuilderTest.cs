@@ -282,7 +282,7 @@ namespace Remotion.Dms.UnitTests.Shared.Utilities
       }
       finally
       {
-        _helperExtended.DeleteDirectory (rootPath, true);
+        Directory.Delete (rootPath, true);
       }
     }
 

@@ -166,7 +166,13 @@ namespace Remotion.Dms.Shared.Utilities
 
     public void DeleteDirectory (string path, bool recursive)
     {
-      Directory.Delete (path, recursive);
+      string rootDirectory = Path.Combine (Environment.GetFolderPath (Environment.SpecialFolder.LocalApplicationData), @"Remotion\Dms");
+      var parentDirectory = Directory.GetParent (path);
+      if (parentDirectory != null)
+      {
+        if (parentDirectory.FullName == rootDirectory)
+          Directory.Delete (path, recursive);
+      }
     }
 
     public string Combine (string path1, string path2)
