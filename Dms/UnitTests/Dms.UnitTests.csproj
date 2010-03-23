@@ -119,7 +119,7 @@
     <Compile Include="DesktopConnector\ActionHandler\UploadActionHandlerExceptionHandlingTest.cs" />
     <Compile Include="DesktopConnector\Configuration\ApplicationCriteriaElementTest.cs" />
     <Compile Include="DesktopConnector\Configuration\ApplicationMappingConfigurationTest.cs" />
-    <Compile Include="DesktopConnector\Configuration\ApplicationMappingCreatorTest.cs" />
+    <Compile Include="DesktopConnector\Configuration\LocalFileApplicationMappingProviderTest.cs" />
     <Compile Include="DesktopConnector\Configuration\ApplicationMappingElementTest.cs" />
     <Compile Include="DesktopConnector\Configuration\ApplicationMappingProviderTest.cs" />
     <Compile Include="DesktopConnector\Configuration\ApplicationWatcherArgumentsCriteriaElementTest.cs" />

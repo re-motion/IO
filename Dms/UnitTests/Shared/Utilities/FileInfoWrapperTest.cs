@@ -65,7 +65,7 @@ namespace Remotion.Dms.UnitTests.Shared.Utilities
     [Test]
     public void Length ()
     {
-      Assert.That (_fileInfoWrapper.Length, Is.EqualTo(_tempFile.Lenght));
+      Assert.That (_fileInfoWrapper.Length, Is.EqualTo(_tempFile.Length));
     }
 
     [Test]

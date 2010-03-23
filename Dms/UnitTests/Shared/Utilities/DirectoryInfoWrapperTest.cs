@@ -42,7 +42,7 @@ namespace Remotion.Dms.UnitTests.Shared.Utilities
       _tempFile2 = new TempFile ();
 
       _folderSize = 0;
-      _folderSize += _tempFile1.Lenght + _tempFile2.Lenght;
+      _folderSize += _tempFile1.Length + _tempFile2.Length;
       
       _folder = Path.GetRandomFileName ();
       _path = Path.Combine (Path.GetTempPath(), _folder);
