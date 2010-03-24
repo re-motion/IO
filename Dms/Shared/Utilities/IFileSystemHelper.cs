@@ -13,6 +13,7 @@ namespace Remotion.Dms.Shared.Utilities
     bool FileExists (string path);
     bool DirectoryExists (string path);
     string GetTempFileName ();
+    string GetTempFolder ();
     DateTime GetLastWriteTime(string path);
     void Delete (string path);
     void Move (string sourceFile, string destinationFile);

@@ -70,6 +70,11 @@ namespace Remotion.Dms.Shared.Utilities
       return Path.GetTempFileName();
     }
 
+    public string GetTempFolder ()
+    {
+      return Path.Combine (Path.GetTempPath(), Guid.NewGuid().ToString());
+    }
+
     public DateTime GetLastWriteTime (string path)
     {
       ArgumentUtility.CheckNotNullOrEmpty ("path", path);
@@ -166,13 +171,7 @@ namespace Remotion.Dms.Shared.Utilities
 
     public void DeleteDirectory (string path, bool recursive)
     {
-      string rootDirectory = Path.Combine (Environment.GetFolderPath (Environment.SpecialFolder.LocalApplicationData), @"Remotion\Dms");
-      var parentDirectory = Directory.GetParent (path);
-      if (parentDirectory != null)
-      {
-        if (parentDirectory.FullName == rootDirectory)
-          Directory.Delete (path, recursive);
-      }
+      Directory.Delete (path, recursive);
     }
 
     public string Combine (string path1, string path2)
