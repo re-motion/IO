@@ -19,12 +19,14 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Text;
 using ICSharpCode.SharpZipLib.Zip;
 using NUnit.Framework;
 using NUnit.Framework.SyntaxHelpers;
 using Remotion.Development.UnitTesting.IO;
 using Remotion.Dms.DesktopConnector.Utilities;
 using Remotion.Dms.Shared.Utilities;
+using Remotion.Utilities;
 using Rhino.Mocks;
 
 namespace Remotion.Dms.UnitTests.Shared.Utilities
@@ -61,12 +63,16 @@ namespace Remotion.Dms.UnitTests.Shared.Utilities
 
       File.Copy (_file1.FileName, Path.Combine (directory.FullName, Path.GetFileName (_file1.FileName)), true);
       File.Copy (_file2.FileName, Path.Combine (directory.FullName, Path.GetFileName (_file2.FileName)), true);
+
+      ZipConstants.DefaultCodePage = Encoding.ASCII.CodePage;
     }
 
     [TearDown]
     public void TearDown ()
     {
-      _file1.Dispose();
+      ZipConstants.DefaultCodePage = 0;
+
+      _file1.Dispose ();
       _file2.Dispose();
       _fileEmpty.Dispose();
       Directory.Delete (_path, true);
@@ -82,7 +88,7 @@ namespace Remotion.Dms.UnitTests.Shared.Utilities
       zipBuilder.AddFile (new FileInfoWrapper (new FileInfo (_file1.FileName)));
       zipBuilder.AddFile (new FileInfoWrapper (new FileInfo (_file2.FileName)));
 
-      var zipFileName = _helperExtended.MakeUniqueAndValidFileName (_helperExtended.GetOrCreateAppDataPath(), Guid.NewGuid() + ".zip");
+      var zipFileName = Path.GetTempFileName();
 
       using (zipBuilder.Build (zipFileName))
       {
@@ -99,7 +105,7 @@ namespace Remotion.Dms.UnitTests.Shared.Utilities
       zipBuilder.Progress += ((sender, e) => { });
       zipBuilder.AddFile (new FileInfoWrapper (new FileInfo (_fileEmpty.FileName)));
 
-      var zipFileName = _helperExtended.MakeUniqueAndValidFileName (_helperExtended.GetOrCreateAppDataPath(), Guid.NewGuid() + ".zip");
+      var zipFileName = Path.GetTempFileName ();
 
       using (zipBuilder.Build (zipFileName))
       {
@@ -107,6 +113,33 @@ namespace Remotion.Dms.UnitTests.Shared.Utilities
 
       var expectedFiles = new List<string> { Path.GetFileName (_fileEmpty.FileName) };
       CheckUnzippedFiles (zipFileName, expectedFiles);
+    }
+
+    [Test]
+    public void BuildReturnsZipFileWithFileWithUmlaut ()
+    {
+      string fileWithUmlautInName = Path.Combine (Path.GetTempPath(), "NameWithÄ.txt");
+      File.WriteAllText (fileWithUmlautInName, "Hello World!");
+
+      try
+      {
+        var zipBuilder = _helperExtended.CreateArchiveFileBuilder ();
+        zipBuilder.Progress += ((sender, e) => { });
+        zipBuilder.AddFile (new FileInfoWrapper (new FileInfo (fileWithUmlautInName)));
+
+        var zipFileName = Path.GetTempFileName ();
+
+        using (zipBuilder.Build (zipFileName))
+        {
+        }
+
+        var expectedFiles = new List<string> { Path.GetFileName (fileWithUmlautInName) };
+        CheckUnzippedFiles (zipFileName, expectedFiles);
+      }
+      finally
+      {
+        FileUtility.DeleteAndWaitForCompletion (fileWithUmlautInName);
+      }
     }
 
     [Test]
@@ -122,7 +155,7 @@ namespace Remotion.Dms.UnitTests.Shared.Utilities
       fileInfoMock.Stub (mock => mock.Directory).Return (new DirectoryInfoWrapper (new DirectoryInfo (@"C:\")));
 
       zipBuilder.AddFile (fileInfoMock);
-      var zipFileName = _helperExtended.MakeUniqueAndValidFileName (_helperExtended.GetOrCreateAppDataPath(), Guid.NewGuid() + ".zip");
+      var zipFileName = Path.GetTempFileName ();
       try
       {
         using (zipBuilder.Build (zipFileName))
@@ -131,7 +164,7 @@ namespace Remotion.Dms.UnitTests.Shared.Utilities
       }
       finally
       {
-        _helperExtended.Delete (zipFileName);
+        FileUtility.DeleteAndWaitForCompletion (zipFileName);
       }
     }
 
@@ -152,7 +185,7 @@ namespace Remotion.Dms.UnitTests.Shared.Utilities
 
       zipBuilder.Error += ((sender, e) => zipBuilder.FileProcessingRecoveryAction = FileProcessingRecoveryAction.Abort);
 
-      var zipFileName = _helperExtended.MakeUniqueAndValidFileName (_helperExtended.GetOrCreateAppDataPath(), Guid.NewGuid() + ".zip");
+      var zipFileName = Path.GetTempFileName ();
       try
       {
         using (zipBuilder.Build (zipFileName))
@@ -161,7 +194,7 @@ namespace Remotion.Dms.UnitTests.Shared.Utilities
       }
       finally
       {
-        _helperExtended.Delete (zipFileName);
+        FileUtility.DeleteAndWaitForCompletion (zipFileName);
       }
     }
 
@@ -181,7 +214,7 @@ namespace Remotion.Dms.UnitTests.Shared.Utilities
       zipBuilder.AddFile (fileInfoMock);
 
       zipBuilder.Error += ((sender, e) => zipBuilder.FileProcessingRecoveryAction = FileProcessingRecoveryAction.Ignore);
-      var zipFileName = _helperExtended.MakeUniqueAndValidFileName (_helperExtended.GetOrCreateAppDataPath(), Guid.NewGuid() + ".zip");
+      var zipFileName = Path.GetTempFileName ();
       using (zipBuilder.Build (zipFileName))
       {
       }
@@ -212,7 +245,7 @@ namespace Remotion.Dms.UnitTests.Shared.Utilities
 
       fileInfoMock.Stub (mock => mock.Directory).Return (new DirectoryInfoWrapper (new DirectoryInfo (Path.GetDirectoryName (_file2.FileName))));
 
-      var zipFileName = _helperExtended.MakeUniqueAndValidFileName (_helperExtended.GetOrCreateAppDataPath(), Guid.NewGuid() + ".zip");
+      var zipFileName = Path.GetTempFileName ();
       using (zipBuilder.Build (zipFileName))
       {
       }
@@ -227,7 +260,7 @@ namespace Remotion.Dms.UnitTests.Shared.Utilities
       zipBuilder.Progress += ((sender, e) => { });
       zipBuilder.AddDirectory (new DirectoryInfoWrapper (new DirectoryInfo (_path)));
 
-      var zipFileName = _helperExtended.MakeUniqueAndValidFileName (_helperExtended.GetOrCreateAppDataPath(), Guid.NewGuid() + ".zip");
+      var zipFileName = Path.GetTempFileName ();
       using (zipBuilder.Build (zipFileName))
       {
       }
@@ -245,7 +278,7 @@ namespace Remotion.Dms.UnitTests.Shared.Utilities
       //--file2
       //--file3
       //-Directory2
-      //--Directory3
+      //--Directory3 ü
       //---file4
       //---file5
       //--file6
@@ -272,7 +305,7 @@ namespace Remotion.Dms.UnitTests.Shared.Utilities
 
       var directory1 = Directory.CreateDirectory (Path.Combine (rootPath, "Directory1"));
       var directory2 = Directory.CreateDirectory (Path.Combine (rootPath, "Directory2"));
-      var directory3 = Directory.CreateDirectory (Path.Combine (directory2.FullName, "Directory3"));
+      var directory3 = Directory.CreateDirectory (Path.Combine (directory2.FullName, "Directory3 ü"));
 
       File.Copy (file1.FileName, Path.Combine (rootPath, Path.GetFileName (file1.FileName)));
       File.Copy (file2.FileName, Path.Combine (directory1.FullName, Path.GetFileName (file2.FileName)));
@@ -281,7 +314,7 @@ namespace Remotion.Dms.UnitTests.Shared.Utilities
       File.Copy (file5.FileName, Path.Combine (directory3.FullName, Path.GetFileName (file5.FileName)));
       File.Copy (file6.FileName, Path.Combine (directory2.FullName, Path.GetFileName (file6.FileName)));
 
-      var zipFileName = _helperExtended.MakeUniqueAndValidFileName (_helperExtended.GetOrCreateAppDataPath(), Guid.NewGuid() + ".zip");
+      var zipFileName = Path.GetTempFileName ();
 
       var zipBuilder = _helperExtended.CreateArchiveFileBuilder();
       zipBuilder.Progress += ((sender, e) => { });
@@ -330,11 +363,8 @@ namespace Remotion.Dms.UnitTests.Shared.Utilities
     private void CleanupTempFiles (List<string> files, string zipFileName)
     {
       foreach (var file in files)
-      {
-        if (_helperExtended.FileExists (file))
-          _helperExtended.Delete (file);
-      }
-      _helperExtended.Delete (zipFileName);
+        FileUtility.DeleteAndWaitForCompletion (file);
+      FileUtility.DeleteAndWaitForCompletion (zipFileName);
     }
 
     private Dictionary<string, string> UnZipFile (string zipFile)

@@ -37,7 +37,7 @@ namespace Remotion.Dms.Shared.Utilities
 
     public ZipFileBuilder ()
     {
-      _entryFactory = new ZipEntryFactory (ZipEntryFactory.TimeSetting.LastWriteTimeUtc);
+      _entryFactory = new ZipEntryFactory { Setting = ZipEntryFactory.TimeSetting.LastWriteTimeUtc, IsUnicodeText = true };
     }
 
     public FileProcessingRecoveryAction FileProcessingRecoveryAction
