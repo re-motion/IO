@@ -94,6 +94,7 @@
     <Compile Include="Clients.Windows.Tray\AssociatedProgramFinderTest.cs" />
     <Compile Include="Clients.Windows.Tray\Forms\FormFactoryTest.cs" />
     <Compile Include="Clients.Windows.Tray\Interactions\ClipboardInteractionTest.cs" />
+    <Compile Include="Clients.Windows.Tray\Interactions\FolderBrowserInteractionTest.cs" />
     <Compile Include="Clients.Windows.Tray\Interactions\DropTargetInteractionTest.cs" />
     <Compile Include="Clients.Windows.Tray\Interactions\FileBrowserInteractionTest.cs" />
     <Compile Include="Clients.Windows.Tray\Interactions\FileSelectionInteractionFactoryTest.cs" />
