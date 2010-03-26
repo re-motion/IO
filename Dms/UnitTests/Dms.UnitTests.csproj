@@ -195,6 +195,7 @@
     <Compile Include="DesktopConnector\FileHandling\UIStates\RecoveryFailedUIStateTest.cs" />
     <Compile Include="DesktopConnector\FileHandling\UIStates\UploadUIStateTest.cs" />
     <Compile Include="DesktopConnector\FileHandling\ApplicationWatcherGeneration\XmlProcessingInstructionFilterTest.cs" />
+    <Compile Include="DesktopConnector\ReplaceUrlTest.cs" />
     <Compile Include="DesktopConnector\Services\DmsServiceAgentTest.cs" />
     <Compile Include="DesktopConnector\FileHandling\FileTransfer\V1_0\DownloadedFileUploadAgentTest.cs" />
     <Compile Include="DesktopConnector\FileHandling\FileTransfer\V1_0\NewFileUploadAgentTest.cs" />
