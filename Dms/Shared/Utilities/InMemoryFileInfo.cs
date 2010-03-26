@@ -20,7 +20,7 @@ using System.IO;
 
 namespace Remotion.Dms.Shared.Utilities
 {
-  public class InMemoryFileInfoWrapper : IFileInfo
+  public class InMemoryFileInfo : IFileInfo
   {
     private readonly string _fileName;
     private readonly Stream _stream;
@@ -28,7 +28,7 @@ namespace Remotion.Dms.Shared.Utilities
     private readonly DateTime _lastAccessTime;
     private readonly DateTime _lastWriteTime;
 
-    public InMemoryFileInfoWrapper (string fileName, Stream stream, DateTime creationTime, DateTime lastAccessTime, DateTime lastWriteTime)
+    public InMemoryFileInfo (string fileName, Stream stream, DateTime creationTime, DateTime lastAccessTime, DateTime lastWriteTime)
     {
       ArgumentUtility.CheckNotNullOrEmpty ("fileName", fileName);
       ArgumentUtility.CheckNotNull ("stream", stream);
@@ -60,14 +60,9 @@ namespace Remotion.Dms.Shared.Utilities
       get { return _stream.Length; }
     }
 
-    public string DirectoryName
-    {
-      get { return string.Empty; }
-    }
-
     public IDirectoryInfo Directory
     {
-      get { throw new NotImplementedException(); }
+      get { return new NullDirectoryInfo(); }
     }
 
     public bool IsReadOnly
@@ -99,6 +94,5 @@ namespace Remotion.Dms.Shared.Utilities
     {
       return _stream;
     }
-
   }
 }

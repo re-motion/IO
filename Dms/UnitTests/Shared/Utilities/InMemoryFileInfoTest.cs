@@ -25,10 +25,10 @@ using Remotion.Dms.Shared.Utilities;
 namespace Remotion.Dms.UnitTests.Shared.Utilities
 {
   [TestFixture]
-  public class InMemoryFileInfoWrapperTest
+  public class InMemoryFileInfoTest
   {
     private TempFile _tempFile;
-    private InMemoryFileInfoWrapper _inMemoryFileInfoWrapper;
+    private InMemoryFileInfo _inMemoryFileInfo;
     private DateTime _lastWriteTime;
     private DateTime _lastAccessTime;
     private DateTime _creationTime;
@@ -41,7 +41,7 @@ namespace Remotion.Dms.UnitTests.Shared.Utilities
       _creationTime = new DateTime (2009, 10, 10);
       _lastAccessTime = new DateTime (2009, 10, 10);
       _lastWriteTime = new DateTime (2009, 10, 10);
-      _inMemoryFileInfoWrapper = new InMemoryFileInfoWrapper (_tempFile.FileName, stream, _creationTime, _lastAccessTime, _lastWriteTime);
+      _inMemoryFileInfo = new InMemoryFileInfo (_tempFile.FileName, stream, _creationTime, _lastAccessTime, _lastWriteTime);
     }
 
     [TearDown]
@@ -53,74 +53,67 @@ namespace Remotion.Dms.UnitTests.Shared.Utilities
     [Test]
     public void FullName ()
     {
-      Assert.That (_inMemoryFileInfoWrapper.FullName, Is.EqualTo (_tempFile.FileName));
+      Assert.That (_inMemoryFileInfo.FullName, Is.EqualTo (_tempFile.FileName));
     }
 
     [Test]
     public void Extension ()
     {
-      Assert.That (_inMemoryFileInfoWrapper.Extension, Is.EqualTo (Path.GetExtension (_tempFile.FileName)));
+      Assert.That (_inMemoryFileInfo.Extension, Is.EqualTo (Path.GetExtension (_tempFile.FileName)));
     }
 
     [Test]
     public void Name ()
     {
-      Assert.That (_inMemoryFileInfoWrapper.Name, Is.EqualTo (Path.GetFileName (_tempFile.FileName)));
+      Assert.That (_inMemoryFileInfo.Name, Is.EqualTo (Path.GetFileName (_tempFile.FileName)));
     }
 
     [Test]
     public void Length ()
     {
-      Assert.That (_inMemoryFileInfoWrapper.Length, Is.EqualTo (_tempFile.Length));
+      Assert.That (_inMemoryFileInfo.Length, Is.EqualTo (_tempFile.Length));
     }
 
     [Test]
-    public void DirectoryName ()
-    {
-      Assert.That (_inMemoryFileInfoWrapper.DirectoryName, Is.Empty);
-    }
-
-    [Test]
-    [ExpectedException (typeof (NotImplementedException))]
     public void Directory ()
     {
-      var directoryName = _inMemoryFileInfoWrapper.Directory.Name;
+      Assert.That(_inMemoryFileInfo.Directory, Is.InstanceOfType (typeof (NullDirectoryInfo)));
     }
 
     [Test]
     public void Exists ()
     {
-      Assert.That (_inMemoryFileInfoWrapper.Exists, Is.True);
+      Assert.That (_inMemoryFileInfo.Exists, Is.True);
     }
 
     [Test]
     public void IsReadOnly ()
     {
-      Assert.That (_inMemoryFileInfoWrapper.IsReadOnly, Is.EqualTo (true));
+      Assert.That (_inMemoryFileInfo.IsReadOnly, Is.EqualTo (true));
     }
 
     [Test]
     public void CreationTime ()
     {
-      Assert.That (_inMemoryFileInfoWrapper.CreationTime, Is.EqualTo (_creationTime));
+      Assert.That (_inMemoryFileInfo.CreationTime, Is.EqualTo (_creationTime));
     }
 
     [Test]
     public void LastAccessTime ()
     {
-      Assert.That (_inMemoryFileInfoWrapper.LastAccessTime, Is.EqualTo (_lastAccessTime));
+      Assert.That (_inMemoryFileInfo.LastAccessTime, Is.EqualTo (_lastAccessTime));
     }
 
     [Test]
     public void LastWriteTime ()
     {
-      Assert.That (_inMemoryFileInfoWrapper.LastWriteTime, Is.EqualTo (_lastWriteTime));
+      Assert.That (_inMemoryFileInfo.LastWriteTime, Is.EqualTo (_lastWriteTime));
     }
 
     [Test]
     public void Open ()
     {
-      var actualStream = _inMemoryFileInfoWrapper.Open (FileMode.Open, FileAccess.Read, FileShare.ReadWrite);
+      var actualStream = _inMemoryFileInfo.Open (FileMode.Open, FileAccess.Read, FileShare.ReadWrite);
       var constraintStream = File.Open (_tempFile.FileName, FileMode.Open, FileAccess.Read, FileShare.ReadWrite);
       Assert.That (actualStream, Is.EqualTo (constraintStream));
       actualStream.Dispose ();

@@ -79,12 +79,6 @@ namespace Remotion.Dms.UnitTests.Shared.Utilities
     }
 
     [Test]
-    public void Length ()
-    {
-      Assert.That (_directoryInfoWrapper.Length, Is.EqualTo (_folderSize));
-    }
-
-    [Test]
     public void Exists ()
     {
       Assert.That (_directoryInfoWrapper.Exists, Is.True);

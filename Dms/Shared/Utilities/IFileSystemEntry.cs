@@ -25,9 +25,8 @@ namespace Remotion.Dms.Shared.Utilities
   public interface IFileSystemEntry
   {
     string FullName { get; }
-    string Extension { get; }
     string Name { get; }
-    long Length { get; }
+    string Extension { get; }
     bool Exists { get; }
     bool IsReadOnly { get; }
     DateTime CreationTime { get; }

@@ -53,17 +53,6 @@ namespace Remotion.Dms.Shared.Utilities
       }
     }
 
-    public long Length
-    {
-      get
-      {
-        long size = 0;
-        foreach (var file in _wrappedInstance.GetFiles())
-          size += file.Length;
-        return size;
-      }
-    }
-
     public bool Exists
     {
       get { return _wrappedInstance.Exists; }

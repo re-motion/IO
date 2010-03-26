@@ -214,7 +214,8 @@
     <Compile Include="DesktopConnector\Utilities\TypeNameConverter2Test.cs" />
     <Compile Include="Shared\Utilities\DirectoryInfoWrapperTest.cs" />
     <Compile Include="Shared\Utilities\FileInfoWrapperTest.cs" />
-    <Compile Include="Shared\Utilities\InMemoryFileInfoWrapperTest.cs" />
+    <Compile Include="Shared\Utilities\InMemoryFileInfoTest.cs" />
+    <Compile Include="Shared\Utilities\NullDirectoryInfoTest.cs" />
     <Compile Include="Shared\Utilities\ZipFileBuilderTest.cs" />
     <Compile Include="Shared\Exceptions\DmsLockStolenExceptionTest.cs" />
     <Compile Include="Shared\Utilities\BrowserBase64SerializationHelperTest.cs" />

@@ -77,7 +77,8 @@
     <Compile Include="Utilities\IFileInfo.cs" />
     <Compile Include="Utilities\IFileSystemEntry.cs" />
     <Compile Include="Utilities\IFileSystemHelper.cs" />
-    <Compile Include="Utilities\InMemoryFileInfoWrapper.cs" />
+    <Compile Include="Utilities\InMemoryFileInfo.cs" />
+    <Compile Include="Utilities\NullDirectoryInfo.cs" />
     <Compile Include="Utilities\ReadonlyStream.cs">
       <SubType>Code</SubType>
     </Compile>
