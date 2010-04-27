@@ -72,19 +72,19 @@ namespace Remotion.Dms.UnitTests.Shared.Utilities
     [Test]
     public void CreationTime ()
     {
-      Assert.That (_directoryInfo.CreationTime, Is.EqualTo (DateTime.MinValue));
+      Assert.That (_directoryInfo.CreationTimeUtc, Is.EqualTo (DateTime.MinValue));
     }
 
     [Test]
     public void LastAccessTime ()
     {
-      Assert.That (_directoryInfo.LastAccessTime, Is.EqualTo (DateTime.MinValue));
+      Assert.That (_directoryInfo.LastAccessTimeUtc, Is.EqualTo (DateTime.MinValue));
     }
 
     [Test]
     public void LastWriteTime ()
     {
-      Assert.That (_directoryInfo.LastWriteTime, Is.EqualTo (DateTime.MinValue));
+      Assert.That (_directoryInfo.LastWriteTimeUtc, Is.EqualTo (DateTime.MinValue));
     }
 
     [Test]

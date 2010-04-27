@@ -93,42 +93,42 @@ namespace Remotion.Dms.UnitTests.Shared.Utilities
     }
 
     [Test]
-    public void CreationTime ()
+    public void CreationTimeUtc ()
     {
-      Assert.That (_fileInfoWrapper.CreationTime, Is.EqualTo (File.GetCreationTime (_tempFile.FileName)));
+      Assert.That (_fileInfoWrapper.CreationTimeUtc, Is.EqualTo (File.GetCreationTimeUtc(_tempFile.FileName)));
     }
 
     [Test]
-    public void SetCreationTime ()
+    public void SetCreationTimeUtc ()
     {
-      _fileInfoWrapper.CreationTime = new DateTime(2009,10,10);
-      Assert.That (_fileInfoWrapper.CreationTime, Is.EqualTo (File.GetCreationTime (_tempFile.FileName)));
+      _fileInfoWrapper.CreationTimeUtc = new DateTime (2009, 10, 10);
+      Assert.That (_fileInfoWrapper.CreationTimeUtc, Is.EqualTo (File.GetCreationTimeUtc (_tempFile.FileName)));
     }
 
     [Test]
-    public void LastAccessTime ()
+    public void LastAccessTimeUtc ()
     {
-      Assert.That (_fileInfoWrapper.LastAccessTime, Is.EqualTo (File.GetLastAccessTime (_tempFile.FileName)));
+      Assert.That (_fileInfoWrapper.LastAccessTimeUtc, Is.EqualTo (File.GetLastAccessTimeUtc (_tempFile.FileName)));
     }
 
     [Test]
-    public void SetLastAccessTime ()
+    public void SetLastAccessTimeUtc ()
     {
-      _fileInfoWrapper.LastAccessTime = new DateTime (2009, 10, 10);
-      Assert.That (_fileInfoWrapper.LastAccessTime, Is.EqualTo (File.GetLastAccessTime (_tempFile.FileName)));
+      _fileInfoWrapper.LastAccessTimeUtc = new DateTime (2009, 10, 10);
+      Assert.That (_fileInfoWrapper.LastAccessTimeUtc, Is.EqualTo (File.GetLastAccessTimeUtc (_tempFile.FileName)));
     }
 
     [Test]
-    public void LastWriteTime ()
+    public void LastWriteTimeUtc ()
     {
-      Assert.That (_fileInfoWrapper.LastWriteTime, Is.EqualTo (File.GetLastWriteTime (_tempFile.FileName)));
+      Assert.That (_fileInfoWrapper.LastWriteTimeUtc, Is.EqualTo (File.GetLastWriteTimeUtc (_tempFile.FileName)));
     }
 
     [Test]
-    public void SetLastWriteTime ()
+    public void SetLastWriteTimeUtc ()
     {
-      _fileInfoWrapper.LastWriteTime = new DateTime (2009, 10, 10);
-      Assert.That (_fileInfoWrapper.LastWriteTime, Is.EqualTo (File.GetLastWriteTime (_tempFile.FileName)));
+      _fileInfoWrapper.LastWriteTimeUtc = new DateTime (2009, 10, 10);
+      Assert.That (_fileInfoWrapper.LastWriteTimeUtc, Is.EqualTo (File.GetLastWriteTimeUtc (_tempFile.FileName)));
     }
 
     [Test]

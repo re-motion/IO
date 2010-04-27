@@ -91,30 +91,30 @@ namespace Remotion.Dms.UnitTests.Shared.Utilities
     }
 
     [Test]
-    public void CreationTime ()
+    public void CreationTimeUtc ()
     {
-      Assert.That (_directoryInfoWrapper.CreationTime, Is.EqualTo (Directory.GetCreationTime (_path)));
+      Assert.That (_directoryInfoWrapper.CreationTimeUtc, Is.EqualTo (Directory.GetCreationTime (_path)));
     }
 
     [Test]
-    public void SetCreationTime ()
+    public void SetCreationTimeUtc ()
     {
-      _directoryInfoWrapper.CreationTime = new DateTime (2009, 10, 10);
-      Assert.That (_directoryInfoWrapper.CreationTime, Is.EqualTo (Directory.GetCreationTime (_path)));
+      _directoryInfoWrapper.CreationTimeUtc = new DateTime (2009, 10, 10);
+      Assert.That (_directoryInfoWrapper.CreationTimeUtc, Is.EqualTo (Directory.GetCreationTime (_path)));
     }
 
     [Test]
-    public void LastAccessTime ()
+    public void LastAccessTimUtce ()
     {
-      _directoryInfoWrapper.LastAccessTime = new DateTime (2009, 10, 10);
-      Assert.That (_directoryInfoWrapper.LastAccessTime, Is.EqualTo (Directory.GetLastAccessTime (_path))); 
+      _directoryInfoWrapper.LastAccessTimeUtc = new DateTime (2009, 10, 10);
+      Assert.That (_directoryInfoWrapper.LastAccessTimeUtc, Is.EqualTo (Directory.GetLastAccessTime (_path))); 
     }
 
     [Test]
-    public void LastWriteTime ()
+    public void LastWriteTimeUtc ()
     {
-      _directoryInfoWrapper.LastWriteTime = new DateTime (2009, 10, 10);
-      Assert.That (_directoryInfoWrapper.LastWriteTime, Is.EqualTo (Directory.GetLastWriteTime (_path)));
+      _directoryInfoWrapper.LastWriteTimeUtc = new DateTime (2009, 10, 10);
+      Assert.That (_directoryInfoWrapper.LastWriteTimeUtc, Is.EqualTo (Directory.GetLastWriteTime (_path)));
     }
 
     [Test]

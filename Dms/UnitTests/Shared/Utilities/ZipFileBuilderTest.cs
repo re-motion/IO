@@ -96,7 +96,7 @@ namespace Remotion.Dms.UnitTests.Shared.Utilities
     }
 
     [Test]
-    public void BuildReturnsZipFileWithEmptyFile ()
+    public void BuildReturnsZipFileWithEmptyFile_WithDiskFile ()
     {
       var zipBuilder = new ZipFileBuilder();
       zipBuilder.Progress += ((sender, e) => { });
@@ -108,7 +108,24 @@ namespace Remotion.Dms.UnitTests.Shared.Utilities
       {
       }
 
-      var expectedFiles = new List<string> { Path.GetFileName (_fileEmpty.FileName) };
+      var expectedFiles = new[] { Path.GetFileName (_fileEmpty.FileName) };
+      CheckUnzippedFiles (zipFileName, expectedFiles);
+    }
+
+    [Test]
+    public void BuildReturnsZipFileWithEmptyFile_FromInMemoryFile ()
+    {
+      var zipBuilder = new ZipFileBuilder();
+      zipBuilder.Progress += ((sender, e) => { });
+      zipBuilder.AddFile (new InMemoryFileInfo ("TheFile", new MemoryStream (new byte[0]), DateTime.Today, DateTime.Today, DateTime.Today));
+
+      var zipFileName = Path.GetTempFileName();
+
+      using (zipBuilder.Build (zipFileName))
+      {
+      }
+
+      var expectedFiles = new[] { "TheFile" };
       CheckUnzippedFiles (zipFileName, expectedFiles);
     }
 
@@ -227,20 +244,21 @@ namespace Remotion.Dms.UnitTests.Shared.Utilities
       zipBuilder.Progress += ((sender, e) => { });
       zipBuilder.Error += ((sender, e) => zipBuilder.FileProcessingRecoveryAction = FileProcessingRecoveryAction.Retry);
 
-      var fileInfoMock = MockRepository.GenerateMock<IFileInfo>();
+      var fileInfoStub = MockRepository.GenerateStub<IFileInfo>();
 
       zipBuilder.AddFile (new FileInfoWrapper (new FileInfo (_file1.FileName)));
-      fileInfoMock.Expect (mock => mock.FullName).Return (_file2.FileName);
-      fileInfoMock.Expect (mock => mock.Name).Return (Path.GetFileName (_file2.FileName));
-      zipBuilder.AddFile (fileInfoMock);
+      fileInfoStub.Stub (stub => stub.FullName).Return (_file2.FileName);
+      fileInfoStub.Stub (stub => stub.Name).Return (Path.GetFileName (_file2.FileName));
+      fileInfoStub.Stub (stub => stub.Length).Return (_file2.Length);
+      zipBuilder.AddFile (fileInfoStub);
 
-      fileInfoMock.Expect (mock => mock.Open (FileMode.Open, FileAccess.Read, FileShare.Read)).Throw (new IOException()).Repeat.Once();
+      fileInfoStub.Expect (mock => mock.Open (FileMode.Open, FileAccess.Read, FileShare.Read)).Throw (new IOException()).Repeat.Once();
 
       var fileInfo = new FileInfoWrapper (new FileInfo (_file2.FileName));
       var stream = fileInfo.Open (FileMode.Open, FileAccess.Read, FileShare.Read);
-      fileInfoMock.Expect (mock => mock.Open (FileMode.Open, FileAccess.Read, FileShare.Read)).Return (stream);
+      fileInfoStub.Expect (mock => mock.Open (FileMode.Open, FileAccess.Read, FileShare.Read)).Return (stream);
 
-      fileInfoMock.Stub (mock => mock.Directory).Return (new DirectoryInfoWrapper (new DirectoryInfo (Path.GetDirectoryName (_file2.FileName))));
+      fileInfoStub.Stub (mock => mock.Directory).Return (new DirectoryInfoWrapper (new DirectoryInfo (Path.GetDirectoryName (_file2.FileName))));
 
       var zipFileName = Path.GetTempFileName();
       using (zipBuilder.Build (zipFileName))
@@ -355,7 +373,7 @@ namespace Remotion.Dms.UnitTests.Shared.Utilities
       }
     }
 
-    private void CheckUnzippedFiles (string zipFileName, List<string> expectedFiles)
+    private void CheckUnzippedFiles (string zipFileName, IList<string> expectedFiles)
     {
       var files = UnZipFile (zipFileName);
       try
@@ -372,7 +390,7 @@ namespace Remotion.Dms.UnitTests.Shared.Utilities
       }
     }
 
-    private void CleanupTempFiles (List<string> files, string zipFileName)
+    private void CleanupTempFiles (IEnumerable<string> files, string zipFileName)
     {
       foreach (var file in files)
         FileUtility.DeleteAndWaitForCompletion (file);

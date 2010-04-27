@@ -29,9 +29,9 @@ namespace Remotion.Dms.Shared.Utilities
     string Extension { get; }
     bool Exists { get; }
     bool IsReadOnly { get; }
-    DateTime CreationTime { get; }
-    DateTime LastAccessTime { get; }
-    DateTime LastWriteTime { get; }
+    DateTime CreationTimeUtc { get; }
+    DateTime LastAccessTimeUtc { get; }
+    DateTime LastWriteTimeUtc { get; }
     IDirectoryInfo Directory { get; }
   }
 }

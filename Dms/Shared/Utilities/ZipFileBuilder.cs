@@ -18,6 +18,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using ICSharpCode.SharpZipLib.Core;
 using ICSharpCode.SharpZipLib.Zip;
 
 namespace Remotion.Dms.Shared.Utilities
@@ -33,11 +34,9 @@ namespace Remotion.Dms.Shared.Utilities
     public event EventHandler<FileOpenExceptionEventArgs> Error;
 
     private FileProcessingRecoveryAction _fileProcessingRecoveryAction;
-    private readonly IEntryFactory _entryFactory;
 
     public ZipFileBuilder ()
     {
-      _entryFactory = new ZipEntryFactory { Setting = ZipEntryFactory.TimeSetting.LastWriteTimeUtc, IsUnicodeText = true };
     }
 
     public FileProcessingRecoveryAction FileProcessingRecoveryAction
@@ -66,28 +65,29 @@ namespace Remotion.Dms.Shared.Utilities
       {
         foreach (var fileInfo in _files)
         {
-          _entryFactory.NameTransform = new ZipNameTransform (fileInfo.Directory.FullName);
+          var nameTransform = new ZipNameTransform (fileInfo.Directory.FullName);
           if (fileInfo is IFileInfo)
-            AddFileToZipFile ((IFileInfo) fileInfo, zipOutputStream);
+            AddFileToZipFile ((IFileInfo) fileInfo, zipOutputStream, nameTransform);
           else if (fileInfo is IDirectoryInfo)
-            AddDirectoryToZipFile ((IDirectoryInfo) fileInfo, zipOutputStream);
+            AddDirectoryToZipFile ((IDirectoryInfo) fileInfo, zipOutputStream, nameTransform);
         }
       }
       _files.Clear();
       return File.Open (archiveFileName, FileMode.Open, FileAccess.Read, FileShare.None);
     }
 
-    private void AddFileToZipFile (IFileInfo fileInfo, ZipOutputStream zipOutputStream)
+    private void AddFileToZipFile (IFileInfo fileInfo, ZipOutputStream zipOutputStream, ZipNameTransform nameTransform)
     {
       var fileStream = GetFileStream (fileInfo);
 
       if (fileStream == null)
         return;
 
+      var zipEntry = CreateZipFileEntry (fileInfo, nameTransform);
+      zipOutputStream.PutNextEntry (zipEntry);
+
       using (fileStream)
       {
-        var zipEntry = _entryFactory.MakeFileEntry (fileInfo.FullName, true);
-        zipOutputStream.PutNextEntry (zipEntry);
 
         var streamCopier = new StreamCopier();
         streamCopier.TransferProgress += OnZippingProgress;
@@ -97,6 +97,14 @@ namespace Remotion.Dms.Shared.Utilities
           throw new AbortException();
         }
       }
+    }
+
+    private void AddDirectoryToZipFile (IDirectoryInfo directoryInfo, ZipOutputStream zipOutputStream, ZipNameTransform nameTransform)
+    {
+      foreach (var file in directoryInfo.GetFiles ())
+        AddFileToZipFile (file, zipOutputStream, nameTransform);
+      foreach (var directory in directoryInfo.GetDirectories ())
+        AddDirectoryToZipFile (directory, zipOutputStream, nameTransform);
     }
 
     private Stream GetFileStream (IFileInfo fileInfo)
@@ -129,12 +137,15 @@ namespace Remotion.Dms.Shared.Utilities
       return null;
     }
 
-    private void AddDirectoryToZipFile (IDirectoryInfo directoryInfo, ZipOutputStream zipOutputStream)
+    private ZipEntry CreateZipFileEntry (IFileInfo fileInfo, INameTransform nameTransform)
     {
-      foreach (var file in directoryInfo.GetFiles())
-        AddFileToZipFile (file, zipOutputStream);
-      foreach (var directory in directoryInfo.GetDirectories())
-        AddDirectoryToZipFile (directory, zipOutputStream);
+      return new ZipEntry (nameTransform.TransformFile (fileInfo.FullName))
+             {
+                 IsUnicodeText = true,
+                 Size = fileInfo.Length,
+                 DateTime = fileInfo.LastWriteTimeUtc
+
+             };
     }
 
     private void OnZippingProgress (object sender, StreamCopyProgressEventArgs args)

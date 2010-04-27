@@ -49,17 +49,17 @@ namespace Remotion.Dms.Shared.Utilities
       get { return false; }
     }
 
-    public DateTime CreationTime
+    public DateTime CreationTimeUtc
     {
       get { return DateTime.MinValue; }
     }
 
-    public DateTime LastAccessTime
+    public DateTime LastAccessTimeUtc
     {
       get { return DateTime.MinValue; }
     }
 
-    public DateTime LastWriteTime
+    public DateTime LastWriteTimeUtc
     {
       get { return DateTime.MinValue; }
     }

@@ -38,9 +38,9 @@ namespace Remotion.Dms.UnitTests.Shared.Utilities
     {
       _tempFile = new TempFile();
       var stream = new MemoryStream();
-      _creationTime = new DateTime (2009, 10, 10);
-      _lastAccessTime = new DateTime (2009, 10, 10);
-      _lastWriteTime = new DateTime (2009, 10, 10);
+      _creationTime = new DateTime (2009, 10, 1);
+      _lastAccessTime = new DateTime (2009, 10, 2);
+      _lastWriteTime = new DateTime (2009, 10, 3);
       _inMemoryFileInfo = new InMemoryFileInfo (_tempFile.FileName, stream, _creationTime, _lastAccessTime, _lastWriteTime);
     }
 
@@ -95,19 +95,19 @@ namespace Remotion.Dms.UnitTests.Shared.Utilities
     [Test]
     public void CreationTime ()
     {
-      Assert.That (_inMemoryFileInfo.CreationTime, Is.EqualTo (_creationTime));
+      Assert.That (_inMemoryFileInfo.CreationTimeUtc, Is.EqualTo (_creationTime));
     }
 
     [Test]
     public void LastAccessTime ()
     {
-      Assert.That (_inMemoryFileInfo.LastAccessTime, Is.EqualTo (_lastAccessTime));
+      Assert.That (_inMemoryFileInfo.LastAccessTimeUtc, Is.EqualTo (_lastAccessTime));
     }
 
     [Test]
     public void LastWriteTime ()
     {
-      Assert.That (_inMemoryFileInfo.LastWriteTime, Is.EqualTo (_lastWriteTime));
+      Assert.That (_inMemoryFileInfo.LastWriteTimeUtc, Is.EqualTo (_lastWriteTime));
     }
 
     [Test]

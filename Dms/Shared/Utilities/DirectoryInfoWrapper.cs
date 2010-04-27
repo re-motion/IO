@@ -63,22 +63,22 @@ namespace Remotion.Dms.Shared.Utilities
       get { return _wrappedInstance.Attributes.Equals (FileAttributes.ReadOnly); }
     }
 
-    public DateTime CreationTime
+    public DateTime CreationTimeUtc
     {
-      get { return _wrappedInstance.CreationTime; }
-      set { _wrappedInstance.CreationTime = value; }
+      get { return _wrappedInstance.CreationTimeUtc; }
+      set { _wrappedInstance.CreationTimeUtc = value; }
     }
 
-    public DateTime LastAccessTime
+    public DateTime LastAccessTimeUtc
     {
-      get { return _wrappedInstance.LastAccessTime; }
-      set { _wrappedInstance.LastAccessTime = value; }
+      get { return _wrappedInstance.LastAccessTimeUtc; }
+      set { _wrappedInstance.LastAccessTimeUtc = value; }
     }
 
-    public DateTime LastWriteTime
+    public DateTime LastWriteTimeUtc
     {
-      get { return _wrappedInstance.LastWriteTime; }
-      set { _wrappedInstance.LastWriteTime = value; }
+      get { return _wrappedInstance.LastWriteTimeUtc; }
+      set { _wrappedInstance.LastWriteTimeUtc = value; }
     }
 
     public IDirectoryInfo Directory
