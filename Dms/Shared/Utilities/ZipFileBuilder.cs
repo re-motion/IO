@@ -80,49 +80,48 @@ namespace Remotion.Dms.Shared.Utilities
 
     private void AddFileToZipFile (IFileInfo fileInfo, ZipOutputStream zipOutputStream, StreamCopier streamCopier)
     {
-      Stream fileStream = null;
-      bool onErrorRetry;
-      do
-      {
-        try
-        {
-          onErrorRetry = false;
-          fileStream = fileInfo.Open (FileMode.Open, FileAccess.Read, FileShare.Read); 
-        }
-        catch (FileNotFoundException ex)
-        {
-          if (fileStream != null)
-            fileStream.Dispose();
-          onErrorRetry = OnFileOpenError (this, new FileOpenExceptionEventArgs (fileInfo.FullName, ex));
-        }
-        catch (DirectoryNotFoundException ex)
-        {
-          if (fileStream != null)
-            fileStream.Dispose ();
-          onErrorRetry = OnFileOpenError (this, new FileOpenExceptionEventArgs (fileInfo.FullName, ex));
-        }
-        catch (IOException ex)
-        {
-          if (fileStream != null)
-            fileStream.Dispose ();
-          onErrorRetry = OnFileOpenError (this, new FileOpenExceptionEventArgs (fileInfo.FullName, ex));
-        }
-        catch (UnauthorizedAccessException ex)
-        {
-          if (fileStream != null)
-            fileStream.Dispose ();
-          onErrorRetry = OnFileOpenError (this, new FileOpenExceptionEventArgs (fileInfo.FullName, ex));
-        }
-      } while (onErrorRetry);
+      Stream fileStream = GetFileStream(fileInfo);
 
-      if (fileStream != null)
+      if (fileStream == null)
+        return;
+      
+      using (fileStream)
       {
         var zipEntry = _entryFactory.MakeFileEntry (fileInfo.FullName, true);
         zipOutputStream.PutNextEntry (zipEntry);
         streamCopier.TransferProgress += OnZippingProgress;
         streamCopier.CopyStream (fileStream, zipOutputStream, fileStream.Length);
-        fileStream.Dispose();
       }
+    }
+
+    private Stream GetFileStream (IFileInfo fileInfo)
+    {
+      bool onErrorRetry;
+      do
+      {
+        try
+        {
+          return fileInfo.Open (FileMode.Open, FileAccess.Read, FileShare.Read);
+        }
+        catch (FileNotFoundException ex)
+        {
+          onErrorRetry = OnFileOpenError (this, new FileOpenExceptionEventArgs (fileInfo.FullName, ex));
+        }
+        catch (DirectoryNotFoundException ex)
+        {
+          onErrorRetry = OnFileOpenError (this, new FileOpenExceptionEventArgs (fileInfo.FullName, ex));
+        }
+        catch (IOException ex)
+        {
+          onErrorRetry = OnFileOpenError (this, new FileOpenExceptionEventArgs (fileInfo.FullName, ex));
+        }
+        catch (UnauthorizedAccessException ex)
+        {
+          onErrorRetry = OnFileOpenError (this, new FileOpenExceptionEventArgs (fileInfo.FullName, ex));
+        }
+      } while (onErrorRetry);
+      
+      return null;
     }
 
     private void AddDirectoryToZipFile (IDirectoryInfo directoryInfo, ZipOutputStream zipOutputStream, StreamCopier streamCopier)
