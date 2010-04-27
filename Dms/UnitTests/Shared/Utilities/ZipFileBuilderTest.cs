@@ -340,6 +340,21 @@ namespace Remotion.Dms.UnitTests.Shared.Utilities
       }
     }
 
+    [Test]
+    [ExpectedException (typeof (AbortException))]
+    public void BuildThrowsAbortExceptionUponCancel ()
+    {
+      var zipBuilder = new ZipFileBuilder ();
+      zipBuilder.Progress += ((sender, e) => { e.Cancel = e.CurrentValue > 1000; });
+      zipBuilder.AddFile (new FileInfoWrapper (new FileInfo (_file1.FileName)));
+
+      var zipFileName = Path.GetTempFileName ();
+
+      using (zipBuilder.Build (zipFileName))
+      {
+      }
+    }
+
     private void CheckUnzippedFiles (string zipFileName, List<string> expectedFiles)
     {
       var files = UnZipFile (zipFileName);
