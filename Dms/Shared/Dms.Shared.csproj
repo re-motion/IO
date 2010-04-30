@@ -76,11 +76,6 @@
     <Compile Include="Exceptions\DmsLockFailedException.cs" />
     <Compile Include="Exceptions\DmsLockStolenException.cs" />
     <Compile Include="Exceptions\DmsUnauthorizedException.cs" />
-    <Compile Include="Globalization\FileSystemHelperResource.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>FileSystemHelperResource.resx</DependentUpon>
-    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="DmsVersion.cs" />
     <Compile Include="Utilities\AbortException.cs" />
@@ -120,12 +115,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Dms.Shared.build" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Globalization\FileSystemHelperResource.resx">
-      <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>FileSystemHelperResource.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
