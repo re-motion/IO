@@ -106,8 +106,9 @@ namespace Remotion.Dms.Shared.Utilities
       ArgumentUtility.CheckNotNullOrEmpty ("proposedFileName", proposedFileName);
 
       string rootedPath = Path.GetFullPath (path);
-      string fileNameWithoutExtension = RemoveInvalidChars (Path.GetFileNameWithoutExtension (proposedFileName));
-      string extension = RemoveInvalidChars (Path.GetExtension (proposedFileName));
+      string cleanedUpFileName = RemoveInvalidChars (proposedFileName);
+      string fileNameWithoutExtension = Path.GetFileNameWithoutExtension (cleanedUpFileName);
+      string extension = Path.GetExtension (cleanedUpFileName);
 
       int fileIndex = 0;
       string resultingFileName = BuildShortFileName (rootedPath, fileNameWithoutExtension, extension, "");
