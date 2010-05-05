@@ -17,7 +17,7 @@
 // 
 using System;
 
-namespace Remotion.Dms.Shared.Utilities
+namespace Remotion.Dms.Shared.IO
 {
   /// <summary>
   /// The <see cref="IArchiveExtractor"/> declares an API for extracting an archive to a defined path.

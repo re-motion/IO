@@ -17,8 +17,9 @@
 // 
 using System;
 using System.IO;
+using Remotion.Dms.Shared.Utilities;
 
-namespace Remotion.Dms.Shared.Utilities
+namespace Remotion.Dms.Shared.IO
 {
   /// <summary>
   /// This class wraps around a <see cref="Stream"/> and exposes an interface to a readonly stream.

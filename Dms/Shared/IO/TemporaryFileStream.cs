@@ -15,10 +15,10 @@
 // 
 // Additional permissions are listed in the file re-motion_exceptions.txt.
 // 
-using System;
 using System.IO;
+using Remotion.Dms.Shared.Utilities;
 
-namespace Remotion.Dms.Shared.Utilities
+namespace Remotion.Dms.Shared.IO
 {
   /// <summary>
   /// Wraps a <see cref="Stream"/> and deletes the underlying file on dispose

@@ -15,9 +15,7 @@
 // 
 // Additional permissions are listed in the file re-motion_exceptions.txt.
 // 
-using System;
-
-namespace Remotion.Dms.Shared.Utilities
+namespace Remotion.Dms.Shared.IO
 {
   /// <summary>
   /// The <see cref="IDirectoryInfo"/> declares methods for enumerating through directories and its files.

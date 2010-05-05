@@ -17,7 +17,7 @@
 // 
 using System;
 
-namespace Remotion.Dms.Shared.Utilities
+namespace Remotion.Dms.Shared.IO
 {
   /// <summary>
   /// Represents a custom file size type to print the size in an human readable way.

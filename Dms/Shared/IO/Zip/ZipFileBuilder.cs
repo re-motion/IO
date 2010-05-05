@@ -20,8 +20,9 @@ using System.Collections.Generic;
 using System.IO;
 using ICSharpCode.SharpZipLib.Core;
 using ICSharpCode.SharpZipLib.Zip;
+using Remotion.Dms.Shared.Utilities;
 
-namespace Remotion.Dms.Shared.Utilities.Zip
+namespace Remotion.Dms.Shared.IO.Zip
 {
   /// <summary>
   /// Implements <see cref="IArchiveBuilder"/>. 

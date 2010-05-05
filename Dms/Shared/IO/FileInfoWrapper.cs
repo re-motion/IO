@@ -17,8 +17,9 @@
 // 
 using System;
 using System.IO;
+using Remotion.Dms.Shared.Utilities;
 
-namespace Remotion.Dms.Shared.Utilities
+namespace Remotion.Dms.Shared.IO
 {
   /// <summary>
   /// The <see cref="FileInfoWrapper"/> implements <see cref="IFileInfo"/> and exposes methods for the creation, copying, deletion, moving, 

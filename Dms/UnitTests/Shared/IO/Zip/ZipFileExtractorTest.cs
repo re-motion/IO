@@ -22,10 +22,10 @@ using ICSharpCode.SharpZipLib.Zip;
 using NUnit.Framework;
 using NUnit.Framework.SyntaxHelpers;
 using Remotion.Dms.DesktopConnector.Utilities;
-using Remotion.Dms.Shared.Utilities;
-using Remotion.Dms.Shared.Utilities.Zip;
+using Remotion.Dms.Shared.IO;
+using Remotion.Dms.Shared.IO.Zip;
 
-namespace Remotion.Dms.UnitTests.Shared.Utilities.Zip
+namespace Remotion.Dms.UnitTests.Shared.IO.Zip
 {
   [TestFixture]
   public class ZipFileExtractorTest

@@ -17,7 +17,7 @@
 // 
 using System;
 
-namespace Remotion.Dms.Shared.Utilities
+namespace Remotion.Dms.Shared.IO
 {
   /// <summary>
   /// The <see cref="IFileSystemEntry"/> interface declares members for file system interactions.

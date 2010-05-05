@@ -17,8 +17,9 @@
 // 
 using System;
 using System.IO;
+using Remotion.Dms.Shared.Utilities;
 
-namespace Remotion.Dms.Shared.Utilities
+namespace Remotion.Dms.Shared.IO
 {
   /// <summary>
   /// The <see cref="DirectoryInfoWrapper"/> implements <see cref="IDirectoryInfo"/> and exposes methods for creating, moving, and enumerating 

@@ -18,11 +18,11 @@
 using System;
 using System.IO;
 using NUnit.Framework;
-using Remotion.Dms.Shared.Utilities;
+using Remotion.Dms.Shared.IO;
 using Rhino.Mocks;
 using Rhino.Mocks.Constraints;
 
-namespace Remotion.Dms.UnitTests.Shared.Utilities
+namespace Remotion.Dms.UnitTests.Shared.IO
 {
   [TestFixture]
   public class StreamCopierTest

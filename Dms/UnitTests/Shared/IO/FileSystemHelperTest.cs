@@ -20,9 +20,9 @@ using System.IO;
 using System.Text;
 using NUnit.Framework;
 using NUnit.Framework.SyntaxHelpers;
-using Remotion.Dms.Shared.Utilities;
+using Remotion.Dms.Shared.IO;
 
-namespace Remotion.Dms.UnitTests.Shared.Utilities
+namespace Remotion.Dms.UnitTests.Shared.IO
 {
   [TestFixture]
   public class FileSystemHelperTest

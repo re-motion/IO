@@ -18,8 +18,9 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using Remotion.Dms.Shared.Utilities;
 
-namespace Remotion.Dms.Shared.Utilities
+namespace Remotion.Dms.Shared.IO
 {
   public class InMemoryDirectoryInfo : IDirectoryInfo
   {

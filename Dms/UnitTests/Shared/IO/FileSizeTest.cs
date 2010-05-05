@@ -19,10 +19,10 @@ using System;
 using System.Globalization;
 using NUnit.Framework;
 using NUnit.Framework.SyntaxHelpers;
-using Remotion.Dms.Shared.Utilities;
+using Remotion.Dms.Shared.IO;
 using Remotion.Utilities;
 
-namespace Remotion.Dms.UnitTests.Shared.Utilities
+namespace Remotion.Dms.UnitTests.Shared.IO
 {
   [TestFixture]
   public class FileSizeTest

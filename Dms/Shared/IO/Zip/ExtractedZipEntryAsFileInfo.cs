@@ -18,8 +18,9 @@
 using System;
 using System.IO;
 using ICSharpCode.SharpZipLib.Zip;
+using Remotion.Dms.Shared.Utilities;
 
-namespace Remotion.Dms.Shared.Utilities.Zip
+namespace Remotion.Dms.Shared.IO.Zip
 {
   /// <summary>
   /// Wrapper type to represent a <see cref="ZipEntry"/> as an <see cref="IFileInfo"/>.

@@ -18,7 +18,7 @@
 using System;
 using System.IO;
 
-namespace Remotion.Dms.Shared.Utilities
+namespace Remotion.Dms.Shared.IO
 {
   /// <summary>
   /// The <see cref="IArchiveBuilder"/> declares an API for adding files and directories to an archive and to return the archive as a stream.

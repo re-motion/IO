@@ -17,7 +17,7 @@
 // 
 using System;
 
-namespace Remotion.Dms.Shared.Utilities
+namespace Remotion.Dms.Shared.IO
 {
   public class FileOpenExceptionEventArgs : EventArgs
   {

@@ -20,8 +20,9 @@ using System.Collections.Generic;
 using System.IO;
 using System.Text;
 using System.Threading;
+using Remotion.Dms.Shared.Utilities;
 
-namespace Remotion.Dms.Shared.Utilities
+namespace Remotion.Dms.Shared.IO
 {
   /// <summary>
   /// Implements <see cref="IFileSystemHelper"/>

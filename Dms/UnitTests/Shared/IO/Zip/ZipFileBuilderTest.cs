@@ -24,12 +24,12 @@ using ICSharpCode.SharpZipLib.Zip;
 using NUnit.Framework;
 using NUnit.Framework.SyntaxHelpers;
 using Remotion.Development.UnitTesting.IO;
-using Remotion.Dms.Shared.Utilities;
-using Remotion.Dms.Shared.Utilities.Zip;
+using Remotion.Dms.Shared.IO;
+using Remotion.Dms.Shared.IO.Zip;
 using Remotion.Utilities;
 using Rhino.Mocks;
 
-namespace Remotion.Dms.UnitTests.Shared.Utilities.Zip
+namespace Remotion.Dms.UnitTests.Shared.IO.Zip
 {
   [TestFixture]
   public class ZipFileBuilderTest
