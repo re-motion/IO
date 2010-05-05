@@ -36,7 +36,6 @@ namespace Remotion.Dms.UnitTests.Shared.Utilities
   {
     private TempFile _file1;
     private TempFile _file2;
-    private TempFile _fileEmpty;
     private string _folder;
     private string _path;
     private string _destinationPath;
@@ -46,7 +45,6 @@ namespace Remotion.Dms.UnitTests.Shared.Utilities
     {
       _file1 = new TempFile();
       _file2 = new TempFile();
-      _fileEmpty = new TempFile();
       var bytes = new byte[8191];
       for (int i = 0; i < 8191; i++)
         bytes[i] = (byte) i;
@@ -71,7 +69,6 @@ namespace Remotion.Dms.UnitTests.Shared.Utilities
 
       _file1.Dispose();
       _file2.Dispose();
-      _fileEmpty.Dispose();
       Directory.Delete (_path, true);
       if (Directory.Exists (_destinationPath))
         Directory.Delete (_destinationPath, true);
@@ -98,18 +95,21 @@ namespace Remotion.Dms.UnitTests.Shared.Utilities
     [Test]
     public void BuildReturnsZipFileWithEmptyFile_WithDiskFile ()
     {
-      var zipBuilder = new ZipFileBuilder();
-      zipBuilder.Progress += ((sender, e) => { });
-      zipBuilder.AddFile (new FileInfoWrapper (new FileInfo (_fileEmpty.FileName)));
-
-      var zipFileName = Path.GetTempFileName();
-
-      using (zipBuilder.Build (zipFileName))
+      using (var fileEmpty = new TempFile ())
       {
-      }
+        var zipBuilder = new ZipFileBuilder();
+        zipBuilder.Progress += ((sender, e) => { });
+        zipBuilder.AddFile (new FileInfoWrapper (new FileInfo (fileEmpty.FileName)));
 
-      var expectedFiles = new[] { Path.GetFileName (_fileEmpty.FileName) };
-      CheckUnzippedFiles (zipFileName, expectedFiles);
+        var zipFileName = Path.GetTempFileName();
+
+        using (zipBuilder.Build (zipFileName))
+        {
+        }
+
+        var expectedFiles = new[] { Path.GetFileName (fileEmpty.FileName) };
+        CheckUnzippedFiles (zipFileName, expectedFiles);
+      }
     }
 
     [Test]
