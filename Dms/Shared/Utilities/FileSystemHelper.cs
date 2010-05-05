@@ -41,17 +41,6 @@ namespace Remotion.Dms.Shared.Utilities
       return File.Open (path, mode, access, share);
     }
 
-    public void CopyFile (string sourceFileName, string destFileName, bool overwrite)
-    {
-      ArgumentUtility.CheckNotNull ("sourceFileName", sourceFileName);
-      ArgumentUtility.CheckNotNull ("destFileName", destFileName);
-
-      File.Copy (sourceFileName, destFileName, overwrite);
-
-      while (!File.Exists (destFileName))
-        Thread.Sleep (10);
-    }
-
     public bool FileExists (string path)
     {
       ArgumentUtility.CheckNotNullOrEmpty ("path", path); 
@@ -187,16 +176,6 @@ namespace Remotion.Dms.Shared.Utilities
     public DirectoryInfo CreateDirectory (string path)
     {
       return Directory.CreateDirectory (path);
-    }
-
-    public string GetFileName (string path)
-    {
-      return Path.GetFileName (path);
-    }
-
-    public string GetDirectoryName (string path)
-    {
-      return Path.GetDirectoryName (path);
     }
 
     public string GetPathWithEnvironmentVariable (string path)

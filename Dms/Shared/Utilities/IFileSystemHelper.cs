@@ -9,7 +9,6 @@ namespace Remotion.Dms.Shared.Utilities
   public interface IFileSystemHelper
   {
     FileStream OpenFile (string path, FileMode mode, FileAccess access, FileShare share);
-    void CopyFile(string sourceFileName, string destFileName, bool overwrite);
     bool FileExists (string path);
     bool DirectoryExists (string path);
     string GetTempFileName ();
@@ -22,8 +21,6 @@ namespace Remotion.Dms.Shared.Utilities
     void DeleteDirectory (string path, bool recursive);
     string Combine (string path1, string path2);
     DirectoryInfo CreateDirectory (string path);
-    string GetFileName (string path);
-    string GetDirectoryName (string path);
     string GetPathWithEnvironmentVariable (string path);
   }
 }
