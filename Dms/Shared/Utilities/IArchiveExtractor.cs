@@ -16,14 +16,13 @@
 // Additional permissions are listed in the file re-motion_exceptions.txt.
 // 
 using System;
-using System.Collections.Generic;
 
 namespace Remotion.Dms.Shared.Utilities
 {
   /// <summary>
   /// The <see cref="IArchiveExtractor"/> declares an API for extracting an archive to a defined path.
   /// </summary>
-  public interface IArchiveExtractor
+  public interface IArchiveExtractor : IDisposable
   {
     void Extract (string archiveFile, string destinationPath);
   }

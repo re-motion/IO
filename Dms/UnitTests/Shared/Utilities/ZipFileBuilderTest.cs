@@ -322,12 +322,12 @@ namespace Remotion.Dms.UnitTests.Shared.Utilities
       var directory2 = Directory.CreateDirectory (Path.Combine (rootPath, "Directory2"));
       var directory3 = Directory.CreateDirectory (Path.Combine (directory2.FullName, "Directory3 ü"));
 
-      File.Copy (file1.FileName, Path.Combine (rootPath, Path.GetFileName (file1.FileName)));
-      File.Copy (file2.FileName, Path.Combine (directory1.FullName, Path.GetFileName (file2.FileName)));
-      File.Copy (file3.FileName, Path.Combine (directory1.FullName, Path.GetFileName (file3.FileName)));
-      File.Copy (file4.FileName, Path.Combine (directory3.FullName, Path.GetFileName (file4.FileName)));
-      File.Copy (file5.FileName, Path.Combine (directory3.FullName, Path.GetFileName (file5.FileName)));
-      File.Copy (file6.FileName, Path.Combine (directory2.FullName, Path.GetFileName (file6.FileName)));
+      File.Move (file1.FileName, Path.Combine (rootPath, Path.GetFileName (file1.FileName)));
+      File.Move (file2.FileName, Path.Combine (directory1.FullName, Path.GetFileName (file2.FileName)));
+      File.Move (file3.FileName, Path.Combine (directory1.FullName, Path.GetFileName (file3.FileName)));
+      File.Move (file4.FileName, Path.Combine (directory3.FullName, Path.GetFileName (file4.FileName)));
+      File.Move (file5.FileName, Path.Combine (directory3.FullName, Path.GetFileName (file5.FileName)));
+      File.Move (file6.FileName, Path.Combine (directory2.FullName, Path.GetFileName (file6.FileName)));
 
       var zipFileName = Path.GetTempFileName();
 

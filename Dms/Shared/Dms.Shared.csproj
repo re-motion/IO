@@ -83,6 +83,7 @@
     <Compile Include="Utilities\ArgumentUtility.cs" />
     <Compile Include="Utilities\BrowserBase64SerializationHelper.cs" />
     <Compile Include="Utilities\DirectoryInfoWrapper.cs" />
+    <Compile Include="Utilities\ExtractedZipEntryAsFileInfo.cs" />
     <Compile Include="Utilities\FileInfoWrapper.cs" />
     <Compile Include="Utilities\FileOpenExceptionEventArgs.cs" />
     <Compile Include="Utilities\FileSize.cs" />
@@ -93,6 +94,7 @@
     <Compile Include="Utilities\IFileInfo.cs" />
     <Compile Include="Utilities\IFileSystemEntry.cs" />
     <Compile Include="Utilities\IFileSystemHelper.cs" />
+    <Compile Include="Utilities\InMemoryDirectoryInfo.cs" />
     <Compile Include="Utilities\InMemoryFileInfo.cs" />
     <Compile Include="Utilities\NullDirectoryInfo.cs" />
     <Compile Include="Utilities\ReadonlyStream.cs">
