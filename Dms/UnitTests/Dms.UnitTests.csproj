@@ -238,7 +238,7 @@
     <Compile Include="Shared\Utilities\FileInfoWrapperTest.cs" />
     <Compile Include="Shared\Utilities\FileSystemHelperTest.cs" />
     <Compile Include="Shared\Utilities\InMemoryFileInfoTest.cs" />
-    <Compile Include="Shared\Utilities\Zip\ZipFileBuilderTest.cs" />
+    <Compile Include="Shared\IO\Zip\ZipFileBuilderTest.cs" />
     <Compile Include="Shared\Exceptions\DmsLockStolenExceptionTest.cs" />
     <Compile Include="Shared\Utilities\BrowserBase64SerializationHelperTest.cs" />
     <Compile Include="DesktopConnector\DmsUrlTest.cs" />
@@ -295,7 +295,7 @@
     <Compile Include="Shared\Utilities\StreamCopierTest.cs" />
     <Compile Include="DesktopConnector\Utilities\UriUtilityTest.cs" />
     <Compile Include="DesktopConnector\UrlHandlerTest.cs" />
-    <Compile Include="Shared\Utilities\Zip\ZipFileExtractorTest.cs" />
+    <Compile Include="Shared\IO\Zip\ZipFileExtractorTest.cs" />
     <Compile Include="WebServer\ImageRequestHandler.cs" />
     <Compile Include="WebServer\IMiniWebServer.cs" />
     <Compile Include="WebServer\IRequestHandler.cs" />
