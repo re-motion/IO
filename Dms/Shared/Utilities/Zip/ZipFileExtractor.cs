@@ -20,7 +20,7 @@ using System.Collections.Generic;
 using System.IO;
 using ICSharpCode.SharpZipLib.Zip;
 
-namespace Remotion.Dms.Shared.Utilities
+namespace Remotion.Dms.Shared.Utilities.Zip
 {
   /// <summary>
   /// Implements <see cref="IArchiveExtractor"/>.

@@ -19,8 +19,11 @@ using System;
 using System.IO;
 using ICSharpCode.SharpZipLib.Zip;
 
-namespace Remotion.Dms.Shared.Utilities
+namespace Remotion.Dms.Shared.Utilities.Zip
 {
+  /// <summary>
+  /// Wrapper type to represent a <see cref="ZipEntry"/> as an <see cref="IFileInfo"/>.
+  /// </summary>
   public class ExtractedZipEntryAsFileInfo : IFileInfo
   {
     private readonly ZipFile _zipFile;

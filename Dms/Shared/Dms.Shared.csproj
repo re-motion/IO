@@ -83,7 +83,7 @@
     <Compile Include="Utilities\ArgumentUtility.cs" />
     <Compile Include="Utilities\BrowserBase64SerializationHelper.cs" />
     <Compile Include="Utilities\DirectoryInfoWrapper.cs" />
-    <Compile Include="Utilities\ExtractedZipEntryAsFileInfo.cs" />
+    <Compile Include="Utilities\Zip\ExtractedZipEntryAsFileInfo.cs" />
     <Compile Include="Utilities\FileInfoWrapper.cs" />
     <Compile Include="Utilities\FileOpenExceptionEventArgs.cs" />
     <Compile Include="Utilities\FileSize.cs" />
@@ -108,8 +108,8 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Utilities\TemporaryFileStream.cs" />
-    <Compile Include="Utilities\ZipFileBuilder.cs" />
-    <Compile Include="Utilities\ZipFileExtractor.cs" />
+    <Compile Include="Utilities\Zip\ZipFileBuilder.cs" />
+    <Compile Include="Utilities\Zip\ZipFileExtractor.cs" />
     <None Include="..\..\remotion.snk">
       <Link>remotion.snk</Link>
     </None>

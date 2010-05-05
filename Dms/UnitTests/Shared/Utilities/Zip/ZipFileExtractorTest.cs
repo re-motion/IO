@@ -18,14 +18,14 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using ICSharpCode.SharpZipLib.Zip;
 using NUnit.Framework;
 using NUnit.Framework.SyntaxHelpers;
 using Remotion.Dms.DesktopConnector.Utilities;
 using Remotion.Dms.Shared.Utilities;
+using Remotion.Dms.Shared.Utilities.Zip;
 
-namespace Remotion.Dms.UnitTests.Shared.Utilities
+namespace Remotion.Dms.UnitTests.Shared.Utilities.Zip
 {
   [TestFixture]
   public class ZipFileExtractorTest
