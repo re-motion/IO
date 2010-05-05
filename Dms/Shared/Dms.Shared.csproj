@@ -78,35 +78,35 @@
     <Compile Include="Exceptions\DmsUnauthorizedException.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="DmsVersion.cs" />
-    <Compile Include="Utilities\AbortException.cs" />
+    <Compile Include="IO\AbortException.cs" />
     <Compile Include="Utilities\ArgumentEmptyException.cs" />
     <Compile Include="Utilities\ArgumentUtility.cs" />
     <Compile Include="Utilities\BrowserBase64SerializationHelper.cs" />
-    <Compile Include="Utilities\DirectoryInfoWrapper.cs" />
+    <Compile Include="IO\DirectoryInfoWrapper.cs" />
     <Compile Include="IO\Zip\ExtractedZipEntryAsFileInfo.cs" />
-    <Compile Include="Utilities\FileInfoWrapper.cs" />
-    <Compile Include="Utilities\FileOpenExceptionEventArgs.cs" />
-    <Compile Include="Utilities\FileSize.cs" />
-    <Compile Include="Utilities\FileSystemHelper.cs" />
-    <Compile Include="Utilities\IArchiveBuilder.cs" />
-    <Compile Include="Utilities\IArchiveExtractor.cs" />
-    <Compile Include="Utilities\IDirectoryInfo.cs" />
-    <Compile Include="Utilities\IFileInfo.cs" />
-    <Compile Include="Utilities\IFileSystemEntry.cs" />
-    <Compile Include="Utilities\IFileSystemHelper.cs" />
-    <Compile Include="Utilities\InMemoryDirectoryInfo.cs" />
-    <Compile Include="Utilities\InMemoryFileInfo.cs" />
-    <Compile Include="Utilities\ReadonlyStream.cs">
+    <Compile Include="IO\FileInfoWrapper.cs" />
+    <Compile Include="IO\FileOpenExceptionEventArgs.cs" />
+    <Compile Include="IO\FileSize.cs" />
+    <Compile Include="IO\FileSystemHelper.cs" />
+    <Compile Include="IO\IArchiveBuilder.cs" />
+    <Compile Include="IO\IArchiveExtractor.cs" />
+    <Compile Include="IO\IDirectoryInfo.cs" />
+    <Compile Include="IO\IFileInfo.cs" />
+    <Compile Include="IO\IFileSystemEntry.cs" />
+    <Compile Include="IO\IFileSystemHelper.cs" />
+    <Compile Include="IO\InMemoryDirectoryInfo.cs" />
+    <Compile Include="IO\InMemoryFileInfo.cs" />
+    <Compile Include="IO\ReadonlyStream.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Utilities\FileProcessingRecoveryAction.cs" />
-    <Compile Include="Utilities\StreamCopier.cs">
+    <Compile Include="IO\FileProcessingRecoveryAction.cs" />
+    <Compile Include="IO\StreamCopier.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Utilities\StreamCopyProgressEventArgs.cs">
+    <Compile Include="IO\StreamCopyProgressEventArgs.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Utilities\TemporaryFileStream.cs" />
+    <Compile Include="IO\TemporaryFileStream.cs" />
     <Compile Include="IO\Zip\ZipFileBuilder.cs" />
     <Compile Include="IO\Zip\ZipFileExtractor.cs" />
     <None Include="..\..\remotion.snk">
