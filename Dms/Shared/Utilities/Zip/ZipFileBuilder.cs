@@ -65,7 +65,9 @@ namespace Remotion.Dms.Shared.Utilities.Zip
       {
         foreach (var fileInfo in _files)
         {
-          var nameTransform = new ZipNameTransform (fileInfo.Directory.FullName);
+          var directoryName = fileInfo.Directory == null ? string.Empty : fileInfo.Directory.FullName;
+          var nameTransform = new ZipNameTransform (directoryName);
+
           if (fileInfo is IFileInfo)
             AddFileToZipFile ((IFileInfo) fileInfo, zipOutputStream, nameTransform);
           else if (fileInfo is IDirectoryInfo)

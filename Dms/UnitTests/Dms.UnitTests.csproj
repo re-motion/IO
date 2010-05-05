@@ -238,7 +238,6 @@
     <Compile Include="Shared\Utilities\FileInfoWrapperTest.cs" />
     <Compile Include="Shared\Utilities\FileSystemHelperTest.cs" />
     <Compile Include="Shared\Utilities\InMemoryFileInfoTest.cs" />
-    <Compile Include="Shared\Utilities\NullDirectoryInfoTest.cs" />
     <Compile Include="Shared\Utilities\Zip\ZipFileBuilderTest.cs" />
     <Compile Include="Shared\Exceptions\DmsLockStolenExceptionTest.cs" />
     <Compile Include="Shared\Utilities\BrowserBase64SerializationHelperTest.cs" />

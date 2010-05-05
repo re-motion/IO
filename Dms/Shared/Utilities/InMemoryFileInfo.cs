@@ -62,7 +62,7 @@ namespace Remotion.Dms.Shared.Utilities
 
     public IDirectoryInfo Directory
     {
-      get { return new NullDirectoryInfo(); }
+      get { return null; }
     }
 
     public bool IsReadOnly

@@ -77,7 +77,7 @@ namespace Remotion.Dms.UnitTests.Shared.Utilities
     [Test]
     public void Directory ()
     {
-      Assert.That(_inMemoryFileInfo.Directory, Is.InstanceOfType (typeof (NullDirectoryInfo)));
+      Assert.That (_inMemoryFileInfo.Directory, Is.Null);
     }
 
     [Test]
@@ -116,8 +116,8 @@ namespace Remotion.Dms.UnitTests.Shared.Utilities
       var actualStream = _inMemoryFileInfo.Open (FileMode.Open, FileAccess.Read, FileShare.ReadWrite);
       var constraintStream = File.Open (_tempFile.FileName, FileMode.Open, FileAccess.Read, FileShare.ReadWrite);
       Assert.That (actualStream, Is.EqualTo (constraintStream));
-      actualStream.Dispose ();
-      constraintStream.Dispose ();
+      actualStream.Dispose();
+      constraintStream.Dispose();
     }
   }
 }

@@ -96,7 +96,6 @@
     <Compile Include="Utilities\IFileSystemHelper.cs" />
     <Compile Include="Utilities\InMemoryDirectoryInfo.cs" />
     <Compile Include="Utilities\InMemoryFileInfo.cs" />
-    <Compile Include="Utilities\NullDirectoryInfo.cs" />
     <Compile Include="Utilities\ReadonlyStream.cs">
       <SubType>Code</SubType>
     </Compile>
