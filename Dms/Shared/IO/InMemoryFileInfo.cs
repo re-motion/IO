@@ -28,17 +28,19 @@ namespace Remotion.Dms.Shared.IO
     private readonly DateTime _creationTimeUtc;
     private readonly DateTime _lastAccessTimeUtc;
     private readonly DateTime _lastWriteTimeUtc;
+    private readonly IDirectoryInfo _directory;
 
-    public InMemoryFileInfo (string fileName, Stream stream, DateTime creationTimeUtc, DateTime lastAccessTimeUtc, DateTime lastWriteTimeUtc)
+    public InMemoryFileInfo (string fileName, Stream stream, IDirectoryInfo directory, DateTime creationTimeUtc, DateTime lastAccessTimeUtc, DateTime lastWriteTimeUtc)
     {
       ArgumentUtility.CheckNotNullOrEmpty ("fileName", fileName);
       ArgumentUtility.CheckNotNull ("stream", stream);
-      
+
       _fileName = fileName;
       _stream = stream;
       _creationTimeUtc = creationTimeUtc;
       _lastAccessTimeUtc = lastAccessTimeUtc;
       _lastWriteTimeUtc = lastWriteTimeUtc;
+      _directory = directory;
     }
 
     public string FullName
@@ -63,7 +65,7 @@ namespace Remotion.Dms.Shared.IO
 
     public IDirectoryInfo Directory
     {
-      get { return null; }
+      get { return _directory; }
     }
 
     public bool IsReadOnly
@@ -76,12 +78,12 @@ namespace Remotion.Dms.Shared.IO
       get { return true; }
     }
 
-    public DateTime CreationTimeUtc 
+    public DateTime CreationTimeUtc
     {
       get { return _creationTimeUtc; }
     }
 
-    public DateTime LastAccessTimeUtc 
+    public DateTime LastAccessTimeUtc
     {
       get { return _lastAccessTimeUtc; }
     }
@@ -94,6 +96,11 @@ namespace Remotion.Dms.Shared.IO
     public Stream Open (FileMode mode, FileAccess access, FileShare share)
     {
       return _stream;
+    }
+
+    public override string ToString ()
+    {
+      return _fileName;
     }
   }
 }

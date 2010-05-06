@@ -76,6 +76,7 @@
     <Compile Include="Exceptions\DmsLockFailedException.cs" />
     <Compile Include="Exceptions\DmsLockStolenException.cs" />
     <Compile Include="Exceptions\DmsUnauthorizedException.cs" />
+    <Compile Include="IO\DirectoryTreeResolver.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="DmsVersion.cs" />
     <Compile Include="IO\AbortException.cs" />

@@ -113,6 +113,10 @@ namespace Remotion.Dms.Shared.IO
       get { return _directories; }
     }
 
+    public override string ToString ()
+    {
+      return _fullName;
+    }
     //public void AddDirectory (IDirectoryInfo directoryInfo)
     //{
     //  ArgumentUtility.CheckNotNull ("directoryInfo", directoryInfo);

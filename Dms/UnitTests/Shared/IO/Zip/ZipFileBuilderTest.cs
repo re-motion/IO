@@ -117,7 +117,7 @@ namespace Remotion.Dms.UnitTests.Shared.IO.Zip
     {
       var zipBuilder = new ZipFileBuilder();
       zipBuilder.Progress += ((sender, e) => { });
-      zipBuilder.AddFile (new InMemoryFileInfo ("TheFile", new MemoryStream (new byte[0]), DateTime.Today, DateTime.Today, DateTime.Today));
+      zipBuilder.AddFile (new InMemoryFileInfo ("TheFile", new MemoryStream (new byte[0]), null, DateTime.Today, DateTime.Today, DateTime.Today));
 
       var zipFileName = Path.GetTempFileName();
 

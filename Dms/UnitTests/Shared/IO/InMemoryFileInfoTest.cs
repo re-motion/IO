@@ -21,14 +21,17 @@ using NUnit.Framework;
 using NUnit.Framework.SyntaxHelpers;
 using Remotion.Development.UnitTesting.IO;
 using Remotion.Dms.Shared.IO;
+using Rhino.Mocks;
 
 namespace Remotion.Dms.UnitTests.Shared.IO
 {
   [TestFixture]
   public class InMemoryFileInfoTest
   {
-    private TempFile _tempFile;
     private InMemoryFileInfo _inMemoryFileInfo;
+    private string _fileName;
+    private MemoryStream _stream;
+    private IDirectoryInfo _directory;
     private DateTime _lastWriteTime;
     private DateTime _lastAccessTime;
     private DateTime _creationTime;
@@ -36,42 +39,37 @@ namespace Remotion.Dms.UnitTests.Shared.IO
     [SetUp]
     public void SetUp ()
     {
-      _tempFile = new TempFile();
-      var stream = new MemoryStream();
+      _fileName=  "Directory\\File.ext";
+      _stream = new MemoryStream(new byte[10]);
+      _directory = MockRepository.GenerateStub<IDirectoryInfo>();
       _creationTime = new DateTime (2009, 10, 1);
       _lastAccessTime = new DateTime (2009, 10, 2);
       _lastWriteTime = new DateTime (2009, 10, 3);
-      _inMemoryFileInfo = new InMemoryFileInfo (_tempFile.FileName, stream, _creationTime, _lastAccessTime, _lastWriteTime);
-    }
-
-    [TearDown]
-    public void TearDown ()
-    {
-      _tempFile.Dispose();
+      _inMemoryFileInfo = new InMemoryFileInfo (_fileName, _stream, null, _creationTime, _lastAccessTime, _lastWriteTime);
     }
 
     [Test]
     public void FullName ()
     {
-      Assert.That (_inMemoryFileInfo.FullName, Is.EqualTo (_tempFile.FileName));
+      Assert.That (_inMemoryFileInfo.FullName, Is.EqualTo (_fileName));
     }
 
     [Test]
     public void Extension ()
     {
-      Assert.That (_inMemoryFileInfo.Extension, Is.EqualTo (Path.GetExtension (_tempFile.FileName)));
+      Assert.That (_inMemoryFileInfo.Extension, Is.EqualTo (Path.GetExtension (_fileName)));
     }
 
     [Test]
     public void Name ()
     {
-      Assert.That (_inMemoryFileInfo.Name, Is.EqualTo (Path.GetFileName (_tempFile.FileName)));
+      Assert.That (_inMemoryFileInfo.Name, Is.EqualTo (Path.GetFileName (_fileName)));
     }
 
     [Test]
     public void Length ()
     {
-      Assert.That (_inMemoryFileInfo.Length, Is.EqualTo (_tempFile.Length));
+      Assert.That (_inMemoryFileInfo.Length, Is.EqualTo (_stream.Length));
     }
 
     [Test]
@@ -113,11 +111,7 @@ namespace Remotion.Dms.UnitTests.Shared.IO
     [Test]
     public void Open ()
     {
-      var actualStream = _inMemoryFileInfo.Open (FileMode.Open, FileAccess.Read, FileShare.ReadWrite);
-      var constraintStream = File.Open (_tempFile.FileName, FileMode.Open, FileAccess.Read, FileShare.ReadWrite);
-      Assert.That (actualStream, Is.EqualTo (constraintStream));
-      actualStream.Dispose();
-      constraintStream.Dispose();
+      Assert.That (_inMemoryFileInfo.Open (FileMode.Open, FileAccess.Read, FileShare.ReadWrite), Is.SameAs (_stream));
     }
   }
 }

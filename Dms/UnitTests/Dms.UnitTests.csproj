@@ -235,6 +235,7 @@
     <Compile Include="DesktopConnector\Utilities\TypeNameConverter2Test.cs" />
     <Compile Include="DesktopConnector\Utilities\XmlProcessingInstructionExtractorTest.cs" />
     <Compile Include="Shared\IO\DirectoryInfoWrapperTest.cs" />
+    <Compile Include="Shared\IO\DirectoryTreeResolverTest.cs" />
     <Compile Include="Shared\IO\FileInfoWrapperTest.cs" />
     <Compile Include="Shared\IO\FileSystemHelperTest.cs" />
     <Compile Include="Shared\IO\InMemoryFileInfoTest.cs" />
