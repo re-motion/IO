@@ -51,13 +51,19 @@ namespace Remotion.Dms.Shared.IO.Zip
       _zipFile = new ZipFile (_archiveStream);
       _zipFile.NameTransform = new WindowsNameTransform();
 
-      _rootDirectories = new Dictionary<string, InMemoryDirectoryInfo> ();
-      _directoryDateTime = DateTime.Now;
+      var directoryTreeResolver = new DirectoryTreeResolver (DateTime.Now);
       var files = new List<IFileInfo> ();
+
       foreach (ZipEntry zipEntry in _zipFile)
       {
         if (zipEntry.IsFile)
-          files.Add (AddFileToDirectoryTree (zipEntry));
+        {
+          var localZipEntry = zipEntry;
+          var fileInfo = directoryTreeResolver.GetFileInfoWithPath (
+              _zipFile.NameTransform.TransformFile (localZipEntry.Name),
+              (fileName, directory) => new ExtractedZipEntryAsFileInfo (_zipFile, localZipEntry, directory));
+          files.Add (fileInfo);
+        }
       }
 
       return files.ToArray();
@@ -67,69 +73,6 @@ namespace Remotion.Dms.Shared.IO.Zip
     {
       if (_zipFile != null)
         _zipFile.Close ();
-    }
-
-    private Dictionary<string, InMemoryDirectoryInfo> _rootDirectories;
-    private DateTime _directoryDateTime;
-
-    private IFileInfo AddFileToDirectoryTree (ZipEntry zipEntry)
-    {
-      var nameParts = _zipFile.NameTransform.TransformFile (zipEntry.Name).Split (Path.DirectorySeparatorChar, Path.AltDirectorySeparatorChar);
-
-      if (nameParts.Length == 1)
-      {
-
-        return new ExtractedZipEntryAsFileInfo (_zipFile, zipEntry, null);
-      }
-      else
-      {
-        InMemoryDirectoryInfo directoryInfo = GetOrCreateDirectoryInfo (GetElementsExceptLast (nameParts));
-
-        var fileInfo = new ExtractedZipEntryAsFileInfo (_zipFile, zipEntry, directoryInfo);
-
-        directoryInfo.Files.Add (fileInfo);
-
-        return fileInfo;
-      }
-    }
-
-    private InMemoryDirectoryInfo GetOrCreateDirectoryInfo (string[] nameParts)
-    {
-      if (nameParts.Length == 0)
-      {
-        throw new ArgumentEmptyException ("nameParts");
-      }
-      else if (nameParts.Length == 1)
-      {
-        var name = nameParts[0];
-        if (!_rootDirectories.ContainsKey (name))
-          _rootDirectories.Add (name, CreateDirectoryInfo (name, null));
-
-        return _rootDirectories[name];
-      }
-      else
-      {
-        var parent = GetOrCreateDirectoryInfo (GetElementsExceptLast (nameParts));
-        var name = string.Join (Path.DirectorySeparatorChar.ToString(), nameParts);
-        var directoryInfo = (InMemoryDirectoryInfo) parent.Directories.Find (d => d.FullName == name);
-        if (directoryInfo == null)
-          directoryInfo = CreateDirectoryInfo (name, parent);
-        parent.Directories.Add (directoryInfo);
-
-        return directoryInfo;
-      }
-    }
-
-    private InMemoryDirectoryInfo CreateDirectoryInfo (string fullName, InMemoryDirectoryInfo parent)
-    {
-      return new InMemoryDirectoryInfo (fullName, parent, _directoryDateTime, _directoryDateTime, _directoryDateTime);
-    }
-
-    private string[] GetElementsExceptLast (string[] nameParts)
-    {
-      var directoryNames = new string[nameParts.Length - 1];
-      Array.Copy (nameParts, directoryNames, directoryNames.Length);
-      return directoryNames;
     }
   }
 }
