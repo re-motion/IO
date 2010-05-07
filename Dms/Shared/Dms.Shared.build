@@ -34,7 +34,7 @@
       <sources failonempty="true">
         <include name="*.cs" />
         <include name="Exceptions/**/*.cs" />
-        <include name="Messages/**/*.cs" />
+        <include name="IO/**/*.cs" />
         <include name="Utilities/**/*.cs" />
         <include name="Properties/**/*.cs" />
         <exclude name="Properties/AssemblyInfoTemplate.cs" />
