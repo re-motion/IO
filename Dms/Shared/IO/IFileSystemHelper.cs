@@ -22,5 +22,7 @@ namespace Remotion.Dms.Shared.IO
     string Combine (string path1, string path2);
     DirectoryInfo CreateDirectory (string path);
     string GetPathWithEnvironmentVariable (string path);
+    IArchiveBuilder CreateArchiveBuilder ();
+    IArchiveExtractor CreateArchiveExtractor (Stream archiveStream);
   }
 }

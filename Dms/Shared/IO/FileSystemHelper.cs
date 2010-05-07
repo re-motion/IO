@@ -20,6 +20,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Text;
 using System.Threading;
+using Remotion.Dms.Shared.IO.Zip;
 using Remotion.Dms.Shared.Utilities;
 
 namespace Remotion.Dms.Shared.IO
@@ -44,7 +45,7 @@ namespace Remotion.Dms.Shared.IO
 
     public bool FileExists (string path)
     {
-      ArgumentUtility.CheckNotNullOrEmpty ("path", path); 
+      ArgumentUtility.CheckNotNullOrEmpty ("path", path);
       return File.Exists (path);
     }
 
@@ -107,7 +108,7 @@ namespace Remotion.Dms.Shared.IO
       {
         fileIndex++;
         var fileIndexString = string.Format (" ({0})", fileIndex);
-        resultingFileName = BuildShortFileName(rootedPath, fileNameWithoutExtension, extension, fileIndexString);
+        resultingFileName = BuildShortFileName (rootedPath, fileNameWithoutExtension, extension, fileIndexString);
       }
       return resultingFileName;
     }
@@ -115,11 +116,11 @@ namespace Remotion.Dms.Shared.IO
     private string BuildShortFileName (string rootedPath, string fileNameWithoutExtension, string extension, string fileIndexString)
     {
       string resultingFileName = Path.Combine (rootedPath, fileNameWithoutExtension + fileIndexString + extension);
-        
+
       if (resultingFileName.Length > c_maxPathLength)
       {
         int numberOfExcessCharacters = resultingFileName.Length - c_maxPathLength;
-        
+
         int shortFileNameLength = fileNameWithoutExtension.Length - numberOfExcessCharacters;
         if (shortFileNameLength < 1)
         {
@@ -144,7 +145,7 @@ namespace Remotion.Dms.Shared.IO
 
     public IFileInfo[] GetFilesOfDirectory (string path)
     {
-      List<IFileInfo> fileInfos = new List<IFileInfo> ();
+      List<IFileInfo> fileInfos = new List<IFileInfo>();
       return GetFilesInSubdirectories (path, fileInfos);
     }
 
@@ -159,7 +160,7 @@ namespace Remotion.Dms.Shared.IO
       if (subDirectories.Length > 0)
       {
         foreach (DirectoryInfo subDirectoryInfo in subDirectories)
-          GetFilesInSubdirectories (Path.Combine(path, subDirectoryInfo.Name), fileInfos); //Path.Combine
+          GetFilesInSubdirectories (Path.Combine (path, subDirectoryInfo.Name), fileInfos); //Path.Combine
       }
       return fileInfos.ToArray();
     }
@@ -182,6 +183,17 @@ namespace Remotion.Dms.Shared.IO
     public string GetPathWithEnvironmentVariable (string path)
     {
       return Environment.ExpandEnvironmentVariables (path);
+    }
+
+    public IArchiveBuilder CreateArchiveBuilder ()
+    {
+      return new ZipFileBuilder();
+    }
+
+    public IArchiveExtractor CreateArchiveExtractor (Stream archiveStream)
+    {
+      ArgumentUtility.CheckNotNull ("archiveStream", archiveStream);
+      return new ZipFileExtractor (archiveStream);
     }
   }
 }
