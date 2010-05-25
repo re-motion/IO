@@ -240,6 +240,7 @@
     <Compile Include="Shared\IO\DirectoryTreeResolverTest.cs" />
     <Compile Include="Shared\IO\FileInfoWrapperTest.cs" />
     <Compile Include="Shared\IO\FileSystemHelperTest.cs" />
+    <Compile Include="Shared\IO\InMemoryDirectoryInfoTest.cs" />
     <Compile Include="Shared\IO\InMemoryFileInfoTest.cs" />
     <Compile Include="Shared\IO\Zip\ZipFileBuilderTest.cs" />
     <Compile Include="Shared\Exceptions\DmsLockStolenExceptionTest.cs" />

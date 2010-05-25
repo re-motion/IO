@@ -120,16 +120,5 @@ namespace Remotion.Dms.Shared.IO
     {
       return _fullName;
     }
-    //public void AddDirectory (IDirectoryInfo directoryInfo)
-    //{
-    //  ArgumentUtility.CheckNotNull ("directoryInfo", directoryInfo);
-    //  _directories.Add (directoryInfo);
-    //}
-
-    //public void AddFile (IFileInfo fileInfo)
-    //{
-    //  ArgumentUtility.CheckNotNull ("fileInfo", fileInfo);
-    //  _files.Add (fileInfo);
-    //}
   }
 }
