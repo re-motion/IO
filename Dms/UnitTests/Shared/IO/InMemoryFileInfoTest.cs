@@ -19,7 +19,6 @@ using System;
 using System.IO;
 using NUnit.Framework;
 using NUnit.Framework.SyntaxHelpers;
-using Remotion.Development.UnitTesting.IO;
 using Remotion.Dms.Shared.IO;
 using Rhino.Mocks;
 
@@ -45,7 +44,7 @@ namespace Remotion.Dms.UnitTests.Shared.IO
       _creationTime = new DateTime (2009, 10, 1);
       _lastAccessTime = new DateTime (2009, 10, 2);
       _lastWriteTime = new DateTime (2009, 10, 3);
-      _inMemoryFileInfo = new InMemoryFileInfo (_fileName, _stream, null, _creationTime, _lastAccessTime, _lastWriteTime);
+      _inMemoryFileInfo = new InMemoryFileInfo (_fileName, _stream, _directory, _creationTime, _lastAccessTime, _lastWriteTime);
     }
 
     [Test]
@@ -75,7 +74,7 @@ namespace Remotion.Dms.UnitTests.Shared.IO
     [Test]
     public void Directory ()
     {
-      Assert.That (_inMemoryFileInfo.Directory, Is.Null);
+      Assert.That (_inMemoryFileInfo.Directory, Is.SameAs (_directory));
     }
 
     [Test]
@@ -112,6 +111,12 @@ namespace Remotion.Dms.UnitTests.Shared.IO
     public void Open ()
     {
       Assert.That (_inMemoryFileInfo.Open (FileMode.Open, FileAccess.Read, FileShare.ReadWrite), Is.SameAs (_stream));
+    }
+
+    [Test]
+    public void ToStringTest ()
+    {
+      Assert.That (_inMemoryFileInfo.ToString (), Is.EqualTo (_fileName));
     }
   }
 }
