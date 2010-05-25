@@ -20,10 +20,12 @@ using System;
 namespace Remotion.Dms.Shared.IO
 {
   /// <summary>
-  /// The <see cref="IArchiveExtractor"/> declares an API for extracting an archive to a defined path.
+  /// The <see cref="IArchiveExtractor"/> declares an API for extracting the files contained in an archive 
+  /// and returning them as a list of <see cref="IFileInfo"/> objects.
   /// </summary>
   public interface IArchiveExtractor : IDisposable
   {
     void Extract (string archiveFile, string destinationPath);
+    IFileInfo[] GetFiles ();
   }
 }
