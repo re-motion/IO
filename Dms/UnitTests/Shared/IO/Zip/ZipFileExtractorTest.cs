@@ -18,9 +18,11 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using ICSharpCode.SharpZipLib.Zip;
 using NUnit.Framework;
 using NUnit.Framework.SyntaxHelpers;
+using Remotion.Development.UnitTesting.IO;
 using Remotion.Dms.DesktopConnector.Utilities;
 using Remotion.Dms.Shared.IO;
 using Remotion.Dms.Shared.IO.Zip;
@@ -75,9 +77,9 @@ namespace Remotion.Dms.UnitTests.Shared.IO.Zip
       {
       }
 
-      var zipUnpacker = new ZipFileExtractor (new MemoryStream());
+      var zipExtractor = new ZipFileExtractor (new MemoryStream());
       _destinationPath = Path.Combine (_helperExtended.GetOrCreateAppDataPath(), Guid.NewGuid().ToString());
-      zipUnpacker.Extract (zipFileName, _destinationPath);
+      zipExtractor.Extract (zipFileName, _destinationPath);
 
       List<string> files = new List<string>();
       foreach (var file in Directory.GetFiles (_destinationPath))
@@ -98,17 +100,18 @@ namespace Remotion.Dms.UnitTests.Shared.IO.Zip
 
       using (var zipArchiveStream = new MemoryStream (zipArchive))
       {
-        var zipExtractor = new ZipFileExtractor (zipArchiveStream);
+        using (var zipExtractor = new ZipFileExtractor (zipArchiveStream))
+        {
+          var files = zipExtractor.GetFiles();
 
-        var files = zipExtractor.GetFiles();
+          Assert.That (files.Length, Is.EqualTo (2));
 
-        Assert.That (files.Length, Is.EqualTo (2));
+          Assert.That (files[0].FullName, Is.EqualTo (Path.GetFileName (_file1)));
+          Assert.That (GetBytesFromFile (files[0]), Is.EqualTo (File.ReadAllBytes (_file1)));
 
-        Assert.That (files[0].FullName, Is.EqualTo (Path.GetFileName (_file1)));
-        Assert.That (GetBytesFromFile (files[0]), Is.EqualTo (File.ReadAllBytes (_file1)));
-
-        Assert.That (files[1].FullName, Is.EqualTo (Path.GetFileName (_file2)));
-        Assert.That (GetBytesFromFile (files[1]), Is.EqualTo (File.ReadAllBytes (_file2)));
+          Assert.That (files[1].FullName, Is.EqualTo (Path.GetFileName (_file2)));
+          Assert.That (GetBytesFromFile (files[1]), Is.EqualTo (File.ReadAllBytes (_file2)));
+        }
       }
     }
 
@@ -125,16 +128,124 @@ namespace Remotion.Dms.UnitTests.Shared.IO.Zip
 
       using (var zipArchiveStream = new MemoryStream (zipArchive))
       {
-        var zipExtractor = new ZipFileExtractor (zipArchiveStream);
+        using (var zipExtractor = new ZipFileExtractor (zipArchiveStream))
+        {
+          var files = zipExtractor.GetFiles();
 
-        var files = zipExtractor.GetFiles();
+          Assert.That (files[0].FullName, Is.EqualTo (Path.Combine ("SubFolder", Path.GetFileName (_file1))));
+          Assert.That (files[1].FullName, Is.EqualTo (Path.Combine ("SubFolder", Path.GetFileName (_file2))));
 
-        Assert.That (files[0].FullName, Is.EqualTo (Path.Combine ("SubFolder", Path.GetFileName (_file1))));
-        Assert.That (files[1].FullName, Is.EqualTo (Path.Combine ("SubFolder", Path.GetFileName (_file2))));
+          Assert.That (files[0].Directory, Is.Not.Null);
+          Assert.That (files[0].Directory.Name, Is.EqualTo ("SubFolder"));
+          Assert.That (files[0].Directory, Is.SameAs (files[1].Directory));
+        }
+      }
+    }
 
-        Assert.That (files[0].Directory, Is.Not.Null);
-        Assert.That (files[0].Directory.Name, Is.EqualTo ("SubFolder"));
-        Assert.That (files[0].Directory, Is.SameAs (files[1].Directory));
+    [Test]
+    public void ExtractZipFile_WithFileWithUmlaut ()
+    {
+      File.Move (_file1, Path.Combine (_sourcePath, "Umlaut_Ä.bin"));
+
+      byte[] zipArchive = CreateZipArchive (_sourcePath);
+
+      using (var zipArchiveStream = new MemoryStream (zipArchive))
+      {
+        using (var zipExtractor = new ZipFileExtractor (zipArchiveStream))
+        {
+          var files = zipExtractor.GetFiles ();
+
+          Assert.That (files[1].FullName, Is.EqualTo (Path.GetFileName ( "Umlaut_Ä.bin")));
+        }
+      }
+    }
+
+    [Test]
+    public void ExtractZipFile_WithEmtpyFile ()
+    {
+      File.WriteAllBytes (Path.Combine (_sourcePath, "EmtpyFile.bin"), new byte[0]);
+
+      byte[] zipArchive = CreateZipArchive (_sourcePath);
+
+      using (var zipArchiveStream = new MemoryStream (zipArchive))
+      {
+        using (var zipExtractor = new ZipFileExtractor (zipArchiveStream))
+        {
+          var files = zipExtractor.GetFiles ();
+
+          Assert.That (files[0].FullName, Is.EqualTo (Path.GetFileName ("EmtpyFile.bin")));
+          Assert.That (GetBytesFromFile (files[0]), Is.EqualTo (new byte[0]));
+        }
+      }
+    }
+
+    [Test]
+    public void BuildReturnsZipFilesWithFoldersAndFiles ()
+    {
+      //complex
+      //-file1
+      //-Directory1
+      //--file2
+      //--file3
+      //-Directory2
+      //--Directory3 ü
+      //---file4
+      //---file5
+      //--file6
+
+      var file1 = new TempFile ();
+      var file2 = new TempFile ();
+      var file3 = new TempFile ();
+      var file4 = new TempFile ();
+      var file5 = new TempFile ();
+      var file6 = new TempFile ();
+
+      var bytes = new byte[8191];
+      for (int i = 0; i < 8191; i++)
+        bytes[i] = (byte) i;
+
+      file1.WriteAllBytes (bytes);
+      file2.WriteAllBytes (bytes);
+      file3.WriteAllBytes (bytes);
+      file4.WriteAllBytes (bytes);
+      file5.WriteAllBytes (bytes);
+      file6.WriteAllBytes (bytes);
+
+      var rootPath = Path.Combine (Path.GetTempPath (), Guid.NewGuid ().ToString ());
+
+      var directory1 = Directory.CreateDirectory (Path.Combine (rootPath, "Directory1"));
+      var directory2 = Directory.CreateDirectory (Path.Combine (rootPath, "Directory2"));
+      var directory3 = Directory.CreateDirectory (Path.Combine (directory2.FullName, "Directory3 ü"));
+
+      File.Move (file1.FileName, Path.Combine (rootPath, Path.GetFileName (file1.FileName)));
+      File.Move (file2.FileName, Path.Combine (directory1.FullName, Path.GetFileName (file2.FileName)));
+      File.Move (file3.FileName, Path.Combine (directory1.FullName, Path.GetFileName (file3.FileName)));
+      File.Move (file4.FileName, Path.Combine (directory3.FullName, Path.GetFileName (file4.FileName)));
+      File.Move (file5.FileName, Path.Combine (directory3.FullName, Path.GetFileName (file5.FileName)));
+      File.Move (file6.FileName, Path.Combine (directory2.FullName, Path.GetFileName (file6.FileName)));
+
+      byte[] zipArchive = CreateZipArchive (rootPath);
+
+      Directory.Delete (rootPath, true);
+
+      using (var archiveStream = new MemoryStream (zipArchive))
+      {
+        using (var zipFileExtractor = new ZipFileExtractor (archiveStream))
+        {
+          var files = zipFileExtractor.GetFiles();
+          var actualFileNames = files.Select (file => file.FullName).ToArray();
+          var expectedFileNames = new[]
+                                  {
+                                      Path.GetFileName (file1.FileName),
+                                      Path.Combine (directory1.Name, Path.GetFileName (file2.FileName)),
+                                      Path.Combine (directory1.Name, Path.GetFileName (file3.FileName)),
+                                      Path.Combine (Path.Combine (directory3.Parent.Name, directory3.Name), Path.GetFileName (file4.FileName)),
+                                      Path.Combine (Path.Combine (directory3.Parent.Name, directory3.Name), Path.GetFileName (file5.FileName)),
+                                      Path.Combine (directory2.Name, Path.GetFileName (file6.FileName))
+                                  };
+
+          Assert.That (actualFileNames, Is.EquivalentTo (expectedFileNames));
+        }
       }
     }
 
