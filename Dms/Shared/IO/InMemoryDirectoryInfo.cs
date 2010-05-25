@@ -22,6 +22,9 @@ using Remotion.Dms.Shared.Utilities;
 
 namespace Remotion.Dms.Shared.IO
 {
+  /// <summary>
+  /// In-memory implementation of the <see cref="IDirectoryInfo"/> interface.
+  /// </summary>
   public class InMemoryDirectoryInfo : IDirectoryInfo
   {
     private readonly string _fullName;

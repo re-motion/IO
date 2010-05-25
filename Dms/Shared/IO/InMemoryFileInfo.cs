@@ -21,6 +21,9 @@ using Remotion.Dms.Shared.Utilities;
 
 namespace Remotion.Dms.Shared.IO
 {
+  /// <summary>
+  /// In-memory implementation of the <see cref="IFileInfo"/> interface.
+  /// </summary>
   public class InMemoryFileInfo : IFileInfo
   {
     private readonly string _fileName;
