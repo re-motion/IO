@@ -16,14 +16,12 @@
 // Additional permissions are listed in the file re-motion_exceptions.txt.
 // 
 using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using ICSharpCode.SharpZipLib.Zip;
 using NUnit.Framework;
 using NUnit.Framework.SyntaxHelpers;
 using Remotion.Development.UnitTesting.IO;
-using Remotion.Dms.DesktopConnector.Utilities;
 using Remotion.Dms.Shared.IO;
 using Remotion.Dms.Shared.IO.Zip;
 
@@ -32,17 +30,13 @@ namespace Remotion.Dms.UnitTests.Shared.IO.Zip
   [TestFixture]
   public class ZipFileExtractorTest
   {
-    private FileSystemHelperExtended _helperExtended;
     private string _file1;
     private string _file2;
-    private string _destinationPath;
     private string _sourcePath;
 
     [SetUp]
     public void SetUp ()
     {
-      _helperExtended = new FileSystemHelperExtended();
-
       _sourcePath = Path.Combine (Path.GetTempPath(), Guid.NewGuid().ToString());
       Directory.CreateDirectory (_sourcePath);
 
@@ -56,41 +50,8 @@ namespace Remotion.Dms.UnitTests.Shared.IO.Zip
     [TearDown]
     public void TearDown ()
     {
-      if (Directory.Exists (_destinationPath))
-        Directory.Delete (_destinationPath);
-
       if (Directory.Exists (_sourcePath))
         Directory.Delete (_sourcePath, true);
-    }
-
-    [Test]
-    public void ExtractZipFile ()
-    {
-      var zipBuilder = _helperExtended.CreateArchiveBuilder();
-      zipBuilder.Progress += ((sender, e) => { });
-      zipBuilder.AddFile (new FileInfoWrapper (new FileInfo (_file1)));
-      zipBuilder.AddFile (new FileInfoWrapper (new FileInfo (_file2)));
-
-      var zipFileName = _helperExtended.MakeUniqueAndValidFileName (_helperExtended.GetOrCreateAppDataPath(), Guid.NewGuid() + ".zip");
-
-      using (zipBuilder.Build (zipFileName))
-      {
-      }
-
-      var zipExtractor = new ZipFileExtractor (new MemoryStream());
-      _destinationPath = Path.Combine (_helperExtended.GetOrCreateAppDataPath(), Guid.NewGuid().ToString());
-      zipExtractor.Extract (zipFileName, _destinationPath);
-
-      List<string> files = new List<string>();
-      foreach (var file in Directory.GetFiles (_destinationPath))
-        files.Add (file);
-
-      Assert.That (Path.GetFileName (_file1), Is.EqualTo (Path.GetFileName (files[0])));
-      Assert.That (Path.GetFileName (_file2), Is.EqualTo (Path.GetFileName (files[1])));
-
-      _helperExtended.Delete (files[0]);
-      _helperExtended.Delete (files[1]);
-      _helperExtended.Delete (zipFileName);
     }
 
     [Test]
@@ -239,7 +200,9 @@ namespace Remotion.Dms.UnitTests.Shared.IO.Zip
                                       Path.GetFileName (file1.FileName),
                                       Path.Combine (directory1.Name, Path.GetFileName (file2.FileName)),
                                       Path.Combine (directory1.Name, Path.GetFileName (file3.FileName)),
+// ReSharper disable PossibleNullReferenceException
                                       Path.Combine (Path.Combine (directory3.Parent.Name, directory3.Name), Path.GetFileName (file4.FileName)),
+// ReSharper restore PossibleNullReferenceException
                                       Path.Combine (Path.Combine (directory3.Parent.Name, directory3.Name), Path.GetFileName (file5.FileName)),
                                       Path.Combine (directory2.Name, Path.GetFileName (file6.FileName))
                                   };

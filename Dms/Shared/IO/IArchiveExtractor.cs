@@ -25,7 +25,6 @@ namespace Remotion.Dms.Shared.IO
   /// </summary>
   public interface IArchiveExtractor : IDisposable
   {
-    void Extract (string archiveFile, string destinationPath);
     IFileInfo[] GetFiles ();
   }
 }

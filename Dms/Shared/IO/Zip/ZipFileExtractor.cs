@@ -37,15 +37,6 @@ namespace Remotion.Dms.Shared.IO.Zip
       _archiveStream = archiveStream;
     }
 
-    public void Extract (string archiveFile, string destinationPath)
-    {
-      ArgumentUtility.CheckNotNullOrEmpty ("archiveFile", archiveFile);
-      ArgumentUtility.CheckNotNullOrEmpty ("destinationPath", destinationPath);
-
-      FastZip fastZip = new FastZip ();
-      fastZip.ExtractZip (archiveFile, destinationPath, FastZip.Overwrite.Always, null, null, null, false);
-    }
-
     public IFileInfo[] GetFiles ()
     {
       _zipFile = new ZipFile (_archiveStream);
