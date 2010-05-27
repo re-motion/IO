@@ -160,6 +160,7 @@
     <Compile Include="DesktopConnector\FileHandling\ApplicationWatcherGeneration\ApplicationWatcherFactoryTests\DefaultTest.cs" />
     <Compile Include="DesktopConnector\FileHandling\ApplicationWatcherGeneration\ApplicationWatcherFactoryTests\FallbackTest.cs" />
     <Compile Include="DesktopConnector\FileHandling\ApplicationWatcherGeneration\ApplicationWatcherFactoryTests\PreferredTest.cs" />
+    <Compile Include="DesktopConnector\FileHandling\ApplicationWatcherGeneration\ExecuteableFilterTest.cs" />
     <Compile Include="DesktopConnector\FileHandling\ApplicationWatcherGeneration\VersionFilterTest.cs" />
     <Compile Include="DesktopConnector\FileHandling\ApplicationProxyFactoryTest.cs" />
     <Compile Include="DesktopConnector\FileHandling\ApplicationWatcherGeneration\ApplicationNameFilterTest.cs" />
