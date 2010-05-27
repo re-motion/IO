@@ -157,9 +157,10 @@
     <Compile Include="DesktopConnector\Configuration\SingleScanConfigurationElementTest.cs" />
     <Compile Include="DesktopConnector\Configuration\TempFileConfigurationElementTest.cs" />
     <Compile Include="DesktopConnector\Configuration\XmlCriteriaElementTest.cs" />
-    <Compile Include="DesktopConnector\FileHandling\ApplicationWatcherGeneration\ApplicationWatcherFactoryTests\DefaultTest.cs" />
-    <Compile Include="DesktopConnector\FileHandling\ApplicationWatcherGeneration\ApplicationWatcherFactoryTests\FallbackTest.cs" />
-    <Compile Include="DesktopConnector\FileHandling\ApplicationWatcherGeneration\ApplicationWatcherFactoryTests\PreferredTest.cs" />
+    <Compile Include="DesktopConnector\FileHandling\ApplicationWatcherGeneration\ApplicationWatcherFactoryTests\FallbackForMatchInNonPreferredApplicationTest.cs" />
+    <Compile Include="DesktopConnector\FileHandling\ApplicationWatcherGeneration\ApplicationWatcherFactoryTests\SelectDefaultApplicationTest.cs" />
+    <Compile Include="DesktopConnector\FileHandling\ApplicationWatcherGeneration\ApplicationWatcherFactoryTests\FallbackForNoMatchTest.cs" />
+    <Compile Include="DesktopConnector\FileHandling\ApplicationWatcherGeneration\ApplicationWatcherFactoryTests\SelectPreferredApplicationTest.cs" />
     <Compile Include="DesktopConnector\FileHandling\ApplicationWatcherGeneration\ExecuteableFilterTest.cs" />
     <Compile Include="DesktopConnector\FileHandling\ApplicationWatcherGeneration\VersionFilterTest.cs" />
     <Compile Include="DesktopConnector\FileHandling\ApplicationProxyFactoryTest.cs" />
