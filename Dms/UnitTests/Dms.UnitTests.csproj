@@ -164,10 +164,10 @@
     <Compile Include="DesktopConnector\FileHandling\ApplicationProxyFactoryTest.cs" />
     <Compile Include="DesktopConnector\FileHandling\ApplicationWatcherGeneration\ApplicationNameFilterTest.cs" />
     <Compile Include="DesktopConnector\FileHandling\ApplicationWatcherGeneration\PreferredFilterTest.cs" />
-    <Compile Include="DesktopConnector\FileHandling\FileCleanupStrategies\WatchingApplicationProxyFileCleanupStrategyTest.cs" />
+    <Compile Include="DesktopConnector\FileHandling\ManagedFileCleanupStrategies\WatchingApplicationProxyFileCleanupStrategyTest.cs" />
     <Compile Include="DesktopConnector\FileHandling\FileOpenerUsingExecutableTest.cs" />
-    <Compile Include="DesktopConnector\FileHandling\FileCleanupStrategies\DeletePhysicalFileCleanupStrategyTest.cs" />
-    <Compile Include="DesktopConnector\FileHandling\FileCleanupStrategies\NullFileCleanupStrategyTest.cs" />
+    <Compile Include="DesktopConnector\FileHandling\ManagedFileCleanupStrategies\DeletePhysicalFileCleanupStrategyTest.cs" />
+    <Compile Include="DesktopConnector\FileHandling\ManagedFileCleanupStrategies\NullFileCleanupStrategyTest.cs" />
     <Compile Include="DesktopConnector\FileHandling\WatchingApplicationProxyTests\HandleFileDisposed.cs" />
     <Compile Include="DesktopConnector\FileHandling\WatchingApplicationProxyTests\HandleFileChanged.cs" />
     <Compile Include="DesktopConnector\FileHandling\WatchingApplicationProxyTests\Initialize.cs" />
