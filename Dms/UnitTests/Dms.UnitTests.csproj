@@ -316,6 +316,9 @@
     <Compile Include="Web\Classes\DmsUrlBuilderTest.cs" />
     <Compile Include="Web\Classes\SessionManagerTest.cs" />
     <Compile Include="Web\Classes\WebConfigurationAdapterTest.cs" />
+    <Compile Include="Web\StubResourceUrlResolver.cs" />
+    <Compile Include="Web\StubResourceUrlResolverFactory.cs" />
+    <Compile Include="Web\StubServiceLocator.cs" />
     <Compile Include="Web\UI\Controls\BocContentValueTests\Common.cs" />
     <Compile Include="Web\UI\Controls\BocContentValueTests\LoadUnboundValue.cs" />
     <Compile Include="Web\UI\Controls\BocContentValueTests\LoadValue.cs" />
