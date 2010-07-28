@@ -124,6 +124,8 @@
     <Compile Include="Clients.Windows.Tray\Interactions\PollingBasedProgressReporterInteractionTest.cs" />
     <Compile Include="Clients.Windows.Tray\Interactions\UserInteractionFactoryTest.cs" />
     <Compile Include="Clients.Windows.Tray\Interactions\UserInteractionTest.cs" />
+    <Compile Include="Clients.Windows.Tray\OleAccess\ComTypes\FILEDESCRIPTORATest.cs" />
+    <Compile Include="Clients.Windows.Tray\OleAccess\ComTypes\FILEDESCRIPTORWTest.cs" />
     <Compile Include="Clients.Windows.Tray\OleAccess\DataObjectFileInfoTest.cs" />
     <Compile Include="Clients.Windows.Tray\OleAccess\OleClipboardStrategyTest.cs" />
     <Compile Include="Clients.Windows.Tray\OleAccess\OleDragDropStrategyTest.cs" />
