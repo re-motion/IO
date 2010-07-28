@@ -124,6 +124,7 @@
     <Compile Include="Clients.Windows.Tray\Interactions\PollingBasedProgressReporterInteractionTest.cs" />
     <Compile Include="Clients.Windows.Tray\Interactions\UserInteractionFactoryTest.cs" />
     <Compile Include="Clients.Windows.Tray\Interactions\UserInteractionTest.cs" />
+    <Compile Include="Clients.Windows.Tray\OleAccess\DataObjectFileInfoTest.cs" />
     <Compile Include="Clients.Windows.Tray\OleAccess\OleClipboardStrategyTest.cs" />
     <Compile Include="Clients.Windows.Tray\OleAccess\OleDragDropStrategyTest.cs" />
     <Compile Include="Clients.Windows.Tray\ProgramRunnerTest.cs" />
@@ -389,10 +390,6 @@
     <ProjectReference Include="..\DesktopConnector\Dms.DesktopConnector.csproj">
       <Project>{F3AB6F46-3776-4562-8BB2-FFFDE7E62BE0}</Project>
       <Name>Dms.DesktopConnector</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\DocumentEventMonitor\Dms.DocumentEventMonitor.csproj">
-      <Project>{D8878C01-CE48-4CAE-BCCE-096A70744F65}</Project>
-      <Name>Dms.DocumentEventMonitor</Name>
     </ProjectReference>
     <ProjectReference Include="..\Shared\Dms.Shared.csproj">
       <Project>{B79940B8-1949-406D-9CCA-E6349898E11A}</Project>
