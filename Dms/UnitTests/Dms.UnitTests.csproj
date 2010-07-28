@@ -127,6 +127,7 @@
     <Compile Include="Clients.Windows.Tray\OleAccess\DataObjectFileInfoTest.cs" />
     <Compile Include="Clients.Windows.Tray\OleAccess\OleClipboardStrategyTest.cs" />
     <Compile Include="Clients.Windows.Tray\OleAccess\OleDragDropStrategyTest.cs" />
+    <Compile Include="Clients.Windows.Tray\OleAccess\OleFileDropListReaderTest.cs" />
     <Compile Include="Clients.Windows.Tray\ProgramRunnerTest.cs" />
     <Compile Include="Core\ObjectBinding\DmsPropertyReflectorMixinTest.cs" />
     <Compile Include="Core\ObjectBinding\ContentPropertyTest.cs" />
