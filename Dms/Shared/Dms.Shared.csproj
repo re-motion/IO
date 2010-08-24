@@ -115,6 +115,9 @@
     <Compile Include="IO\TemporaryFileStream.cs" />
     <Compile Include="IO\Zip\ZipFileBuilder.cs" />
     <Compile Include="IO\Zip\ZipFileExtractor.cs" />
+    <Compile Include="Utilities\ReSharperAnnotations\AssertionConditionAttribute.cs" />
+    <Compile Include="Utilities\ReSharperAnnotations\AssertionConditionType.cs" />
+    <Compile Include="Utilities\ReSharperAnnotations\AssertionMethodAttribute.cs" />
     <None Include="..\..\remotion.snk">
       <Link>remotion.snk</Link>
     </None>

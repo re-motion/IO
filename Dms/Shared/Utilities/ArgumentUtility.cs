@@ -16,12 +16,14 @@
 // Additional permissions are listed in the file re-motion_exceptions.txt.
 // 
 using System;
+using JetBrains.Annotations;
 
 namespace Remotion.Dms.Shared.Utilities
 {
   public static class ArgumentUtility
   {
-    public static T CheckNotNull<T> (string argumentName, T actualValue)
+    [AssertionMethod]
+    public static T CheckNotNull<T> (string argumentName, [AssertionCondition (AssertionConditionType.IS_NOT_NULL)] T actualValue)
     {
 // ReSharper disable CompareNonConstrainedGenericWithNull
       if (actualValue == null)
@@ -31,7 +33,8 @@ namespace Remotion.Dms.Shared.Utilities
       return actualValue;
     }
 
-    public static string CheckNotNullOrEmpty (string argumentName, string actualValue)
+    [AssertionMethod]
+    public static string CheckNotNullOrEmpty (string argumentName, [AssertionCondition (AssertionConditionType.IS_NOT_NULL)] string actualValue)
     {
       CheckNotNull (argumentName, actualValue);
       if (actualValue.Length == 0)
