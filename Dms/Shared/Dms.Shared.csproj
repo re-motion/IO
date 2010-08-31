@@ -118,6 +118,7 @@
     <Compile Include="Utilities\ReSharperAnnotations\AssertionConditionAttribute.cs" />
     <Compile Include="Utilities\ReSharperAnnotations\AssertionConditionType.cs" />
     <Compile Include="Utilities\ReSharperAnnotations\AssertionMethodAttribute.cs" />
+    <Compile Include="Utilities\ReSharperAnnotations\InvokerParameterNameAttribute.cs" />
     <None Include="..\..\remotion.snk">
       <Link>remotion.snk</Link>
     </None>
