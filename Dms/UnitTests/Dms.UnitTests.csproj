@@ -135,6 +135,7 @@
     <Compile Include="Clients.Windows.Tray\OleAccess\StorageMediumStreams\OleStreamedDataStreamTest.cs" />
     <Compile Include="Clients.Windows.Tray\OleAccess\StorageMediumStreams\TestableOleStorageMediumStream.cs" />
     <Compile Include="Clients.Windows.Tray\ProgramRunnerTest.cs" />
+    <Compile Include="Clients.Windows.Tray\Utilities\WindowFinder\WindowFinderTest.cs" />
     <Compile Include="Core\ObjectBinding\DmsPropertyReflectorMixinTest.cs" />
     <Compile Include="Core\ObjectBinding\ContentPropertyTest.cs" />
     <Compile Include="Core\ObjectBinding\TestDomain\ClassContentMixin.cs" />
