@@ -110,7 +110,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Clients.Windows.Tray\ArgumentHandlerTest.cs" />
-    <Compile Include="Clients.Windows.Tray\AssociatedProgramFinderTest.cs" />
+    <Compile Include="Clients.Windows.Tray\Utilities\AssociatedProgramFinderTest.cs" />
     <Compile Include="Clients.Windows.Tray\Forms\FormFactoryTest.cs" />
     <Compile Include="Clients.Windows.Tray\Interactions\ClipboardInteractionTest.cs" />
     <Compile Include="Clients.Windows.Tray\Interactions\FolderBrowserInteractionTest.cs" />
@@ -438,6 +438,7 @@
       <Install>true</Install>
     </BootstrapperPackage>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
