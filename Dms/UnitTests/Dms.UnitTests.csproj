@@ -135,6 +135,7 @@
     <Compile Include="Clients.Windows.Tray\OleAccess\StorageMediumStreams\OleStreamedDataStreamTest.cs" />
     <Compile Include="Clients.Windows.Tray\OleAccess\StorageMediumStreams\TestableOleStorageMediumStream.cs" />
     <Compile Include="Clients.Windows.Tray\ProgramRunnerTest.cs" />
+    <Compile Include="Clients.Windows.Tray\Utilities\WindowFinder\NativeWindowFinderTests\NativeWindowFinderTest_ErrorHandling.cs" />
     <Compile Include="Clients.Windows.Tray\Utilities\WindowFinder\NativeWindowFinderTests\NativeWindowFinderTest_FilterByClassName.cs" />
     <Compile Include="Clients.Windows.Tray\Utilities\WindowFinder\NativeWindowFinderTests\NativeWindowFinderTest_FilterByWindowText.cs" />
     <Compile Include="Clients.Windows.Tray\Utilities\WindowFinder\NativeWindowFinderTests\NativeWindowFinderTest_FilterByProcess.cs" />
