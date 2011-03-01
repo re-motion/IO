@@ -74,6 +74,9 @@
     <Reference Include="System.XML" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\AssemblyInfoShared.cs">
+      <Link>Properties\AssemblyInfoShared.cs</Link>
+    </Compile>
     <Compile Include="DmsClientAction.cs" />
     <Compile Include="DmsFileSelection.cs" />
     <Compile Include="DmsServerAction.cs" />
@@ -122,7 +125,6 @@
     <None Include="..\..\remotion.snk">
       <Link>remotion.snk</Link>
     </None>
-    <None Include="Properties\AssemblyInfoTemplate.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Dms.Shared.build" />
