@@ -1,0 +1,453 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.30729</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{1763F21F-531C-4E86-ACFC-9A8BF903F945}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Remotion.Dms.UnitTests</RootNamespace>
+    <AssemblyName>Remotion.Dms.UnitTests</AssemblyName>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SignAssembly>true</SignAssembly>
+    <AssemblyOriginatorKeyFile>..\..\remotion.snk</AssemblyOriginatorKeyFile>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <OldToolsVersion>3.5</OldToolsVersion>
+    <UpgradeBackupLocation />
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Castle.Core, Version=1.1.0.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\prereq\Assemblies\Castle.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Castle.MicroKernel, Version=2.0.0.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\prereq\Assemblies\Castle.MicroKernel.dll</HintPath>
+    </Reference>
+    <Reference Include="CommonServiceLocator.WindsorAdapter, Version=1.0.0.1, Culture=neutral, PublicKeyToken=5f888aefae8667bf, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\prereq\Assemblies\CommonServiceLocator.WindsorAdapter.dll</HintPath>
+    </Reference>
+    <Reference Include="ICSharpCode.SharpZipLib, Version=0.85.5.452, Culture=neutral, PublicKeyToken=1b03e6acf1164f73, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\prereq\Assemblies\ICSharpCode.SharpZipLib.dll</HintPath>
+    </Reference>
+    <Reference Include="log4net, Version=1.2.10.0, Culture=neutral, PublicKeyToken=1b44e1d426115821, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\prereq\Assemblies\log4net.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.ServiceLocation, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\prereq\Assemblies\Microsoft.Practices.ServiceLocation.dll</HintPath>
+    </Reference>
+    <Reference Include="nunit.framework, Version=2.4.0.2, Culture=neutral, PublicKeyToken=96d09a1eb7f44a77, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\prereq\Assemblies\nunit.framework.dll</HintPath>
+    </Reference>
+    <Reference Include="Rhino.Mocks, Version=3.5.0.2, Culture=neutral, PublicKeyToken=0b3305902db7183f, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\prereq\Assemblies\Rhino.Mocks.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.configuration" />
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Remoting" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Abstractions">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="..\AssemblyInfoShared.cs">
+      <Link>Properties\AssemblyInfoShared.cs</Link>
+    </Compile>
+    <Compile Include="Clients.Windows.Tray\ArgumentHandlerTest.cs" />
+    <Compile Include="Clients.Windows.Tray\Utilities\AssociatedProgramFinderTest.cs" />
+    <Compile Include="Clients.Windows.Tray\Forms\FormFactoryTest.cs" />
+    <Compile Include="Clients.Windows.Tray\Interactions\ClipboardInteractionTest.cs" />
+    <Compile Include="Clients.Windows.Tray\Interactions\FolderBrowserInteractionTest.cs" />
+    <Compile Include="Clients.Windows.Tray\Interactions\DropTargetInteractionTest.cs" />
+    <Compile Include="Clients.Windows.Tray\Interactions\FileBrowserInteractionTest.cs" />
+    <Compile Include="Clients.Windows.Tray\Interactions\FileSelectionInteractionFactoryTest.cs" />
+    <Compile Include="Clients.Windows.Tray\Interactions\PollingBasedProgressReporterInteractionTest.cs" />
+    <Compile Include="Clients.Windows.Tray\Interactions\UserInteractionFactoryTest.cs" />
+    <Compile Include="Clients.Windows.Tray\Interactions\UserInteractionTest.cs" />
+    <Compile Include="Clients.Windows.Tray\OleAccess\ComTypes\FILEDESCRIPTORATest.cs" />
+    <Compile Include="Clients.Windows.Tray\OleAccess\ComTypes\FILEDESCRIPTORWTest.cs" />
+    <Compile Include="Clients.Windows.Tray\OleAccess\IntPtrUtilityTest.cs" />
+    <Compile Include="Clients.Windows.Tray\OleAccess\OleFormatReaders\OleFileDescriptorMarshalerTest.cs" />
+    <Compile Include="Clients.Windows.Tray\OleAccess\StorageMediumStreams\OleStorageMediumStreamBaseTest.cs" />
+    <Compile Include="Clients.Windows.Tray\OleAccess\StorageMediumStreams\OleStorageMediumStreamFactoryTest.cs" />
+    <Compile Include="Clients.Windows.Tray\OleAccess\StorageMediumStreams\OleStorageStreamTest.cs" />
+    <Compile Include="Clients.Windows.Tray\OleAccess\DataObjectFileInfoTest.cs" />
+    <Compile Include="Clients.Windows.Tray\OleAccess\OleClipboardStrategyTest.cs" />
+    <Compile Include="Clients.Windows.Tray\OleAccess\OleDragDropStrategyTest.cs" />
+    <Compile Include="Clients.Windows.Tray\OleAccess\OleFormatReaders\OleFileDescriptorReaderTest.cs" />
+    <Compile Include="Clients.Windows.Tray\OleAccess\OleFormatReaders\OleFileDropListReaderTest.cs" />
+    <Compile Include="Clients.Windows.Tray\OleAccess\StorageMediumStreams\OleStreamedDataStreamTest.cs" />
+    <Compile Include="Clients.Windows.Tray\OleAccess\StorageMediumStreams\TestableOleStorageMediumStream.cs" />
+    <Compile Include="Clients.Windows.Tray\ProgramRunnerTest.cs" />
+    <Compile Include="Clients.Windows.Tray\Utilities\WindowFinder\NativeWindowFinderTests\NativeWindowFinderTest_ErrorHandling.cs" />
+    <Compile Include="Clients.Windows.Tray\Utilities\WindowFinder\NativeWindowFinderTests\NativeWindowFinderTest_FilterByClassName.cs" />
+    <Compile Include="Clients.Windows.Tray\Utilities\WindowFinder\NativeWindowFinderTests\NativeWindowFinderTest_FilterByWindowText.cs" />
+    <Compile Include="Clients.Windows.Tray\Utilities\WindowFinder\NativeWindowFinderTests\NativeWindowFinderTest_FilterByProcess.cs" />
+    <Compile Include="Clients.Windows.Tray\Utilities\WindowFinder\NativeWindowFinderTests\NativeWindowFinderTestBase.cs" />
+    <Compile Include="Clients.Windows.Tray\Utilities\WindowFinder\NativeWindowFinderTests\NativeWindowFinderTest_WithoutFilterCriteria.cs" />
+    <Compile Include="Core\ObjectBinding\DmsPropertyReflectorMixinTest.cs" />
+    <Compile Include="Core\ObjectBinding\ContentPropertyTest.cs" />
+    <Compile Include="Core\ObjectBinding\TestDomain\ClassContentMixin.cs" />
+    <Compile Include="Core\ObjectBinding\TestDomain\ClassWithReferenceProperty.cs" />
+    <Compile Include="Core\ObjectBinding\TestDomain\ConcreteContent.cs" />
+    <Compile Include="Core\ObjectBinding\TestDomain\ContentMixin.cs" />
+    <Compile Include="Core\ObjectBinding\TestDomain\SimpleReferenceType.cs" />
+    <Compile Include="DesktopConnector\ActionHandler\DownloadActionHandlerBaseTest.cs" />
+    <Compile Include="DesktopConnector\ActionHandler\DownloadActionHandlerTest.cs" />
+    <Compile Include="DesktopConnector\ActionHandler\LoginActionHandlerTest.cs" />
+    <Compile Include="DesktopConnector\ActionHandler\NewFileActionHandlerTest.cs" />
+    <Compile Include="DesktopConnector\ActionHandler\ReadOnlyDownloadActionHandlerTest.cs" />
+    <Compile Include="DesktopConnector\ActionHandler\ReplaceActionHandlerTest.cs" />
+    <Compile Include="DesktopConnector\ActionHandler\UploadActionHandlerExceptionHandlingTest.cs" />
+    <Compile Include="DesktopConnector\Configuration\ApplicationCriteriaElementTest.cs" />
+    <Compile Include="DesktopConnector\Configuration\ApplicationMappingConfigurationTest.cs" />
+    <Compile Include="DesktopConnector\Configuration\LocalFileApplicationMappingProviderTest.cs" />
+    <Compile Include="DesktopConnector\Configuration\ApplicationMappingElementTest.cs" />
+    <Compile Include="DesktopConnector\Configuration\ApplicationMappingProviderTest.cs" />
+    <Compile Include="DesktopConnector\Configuration\ApplicationWatcherArgumentsCriteriaElementTest.cs" />
+    <Compile Include="DesktopConnector\Configuration\ApplicationWatcherStub.cs" />
+    <Compile Include="DesktopConnector\Configuration\CleanupIntervalConfigurationElementTest.cs" />
+    <Compile Include="DesktopConnector\Configuration\DesktopConnectorConfigurationTest.cs" />
+    <Compile Include="DesktopConnector\Configuration\FileExtensionElementTest.cs" />
+    <Compile Include="DesktopConnector\Configuration\FileExtensionMappingCollectionTest.cs" />
+    <Compile Include="DesktopConnector\Configuration\RemoteApplicationMappingProviderTest.cs" />
+    <Compile Include="DesktopConnector\Configuration\ScannerConfigurationElementTest.cs" />
+    <Compile Include="DesktopConnector\Configuration\SingleScanConfigurationElementTest.cs" />
+    <Compile Include="DesktopConnector\Configuration\TempFileConfigurationElementTest.cs" />
+    <Compile Include="DesktopConnector\Configuration\XmlCriteriaElementTest.cs" />
+    <Compile Include="DesktopConnector\FileHandling\ApplicationWatcherGeneration\ApplicationWatcherFactoryTests\FallbackForMatchInNonPreferredApplicationTest.cs" />
+    <Compile Include="DesktopConnector\FileHandling\ApplicationWatcherGeneration\ApplicationWatcherFactoryTests\SelectDefaultApplicationTest.cs" />
+    <Compile Include="DesktopConnector\FileHandling\ApplicationWatcherGeneration\ApplicationWatcherFactoryTests\FallbackForNoMatchTest.cs" />
+    <Compile Include="DesktopConnector\FileHandling\ApplicationWatcherGeneration\ApplicationWatcherFactoryTests\SelectPreferredApplicationTest.cs" />
+    <Compile Include="DesktopConnector\FileHandling\ApplicationWatcherGeneration\ExecuteableFilterTest.cs" />
+    <Compile Include="DesktopConnector\FileHandling\ApplicationWatcherGeneration\VersionFilterTest.cs" />
+    <Compile Include="DesktopConnector\FileHandling\ApplicationProxyFactoryTest.cs" />
+    <Compile Include="DesktopConnector\FileHandling\ApplicationWatcherGeneration\ApplicationNameFilterTest.cs" />
+    <Compile Include="DesktopConnector\FileHandling\ApplicationWatcherGeneration\PreferenceFilterTest.cs" />
+    <Compile Include="DesktopConnector\FileHandling\ManagedFileCleanupStrategies\WatchingApplicationProxyFileCleanupStrategyTest.cs" />
+    <Compile Include="DesktopConnector\FileHandling\FileOpenerUsingExecutableTest.cs" />
+    <Compile Include="DesktopConnector\FileHandling\ManagedFileCleanupStrategies\DeletePhysicalFileCleanupStrategyTest.cs" />
+    <Compile Include="DesktopConnector\FileHandling\ManagedFileCleanupStrategies\NullFileCleanupStrategyTest.cs" />
+    <Compile Include="DesktopConnector\FileHandling\WatchingApplicationProxyTests\HandleFileDisposed.cs" />
+    <Compile Include="DesktopConnector\FileHandling\WatchingApplicationProxyTests\HandleFileChanged.cs" />
+    <Compile Include="DesktopConnector\FileHandling\WatchingApplicationProxyTests\Initialize.cs" />
+    <Compile Include="DesktopConnector\FileHandling\WatchingApplicationProxyTests\OpenFile.cs" />
+    <Compile Include="DesktopConnector\FileHandling\WatchingApplicationProxyTests\HandleFileClosed.cs" />
+    <Compile Include="DesktopConnector\FileHandling\DownloadedFileStates\DeserializingStateTest.cs" />
+    <Compile Include="DesktopConnector\FileHandling\DownloadedFileStates\ErrorStateTest.cs" />
+    <Compile Include="DesktopConnector\FileHandling\DownloadedFileStates\LostSyncBeingOpenedStateTest.cs" />
+    <Compile Include="DesktopConnector\FileHandling\DownloadedFileStates\DownloadedReadOnlyManagedFileStateTestBase.cs" />
+    <Compile Include="DesktopConnector\FileHandling\DownloadedFileStates\LostSyncDirtyCommitRequestedStateTest.cs" />
+    <Compile Include="DesktopConnector\FileHandling\DownloadedFileStates\LostSyncDirtyUploadRequestedStateTest.cs" />
+    <Compile Include="DesktopConnector\FileHandling\DownloadedFileStates\NewManagedFileStateTestBase.cs" />
+    <Compile Include="DesktopConnector\FileHandling\DownloadedFileStates\ReplacementManagedFileStateTestBase.cs" />
+    <Compile Include="DesktopConnector\FileHandling\DownloadedFileStates\UnInitializedErrorStateTest.cs" />
+    <Compile Include="DesktopConnector\FileHandling\DownloadedManagedFileBaseTest.cs" />
+    <Compile Include="DesktopConnector\FileHandling\DownloadedManagedFileTest.cs" />
+    <Compile Include="DesktopConnector\FileHandling\ReadOnlyDownloadedManagedFileTest.cs" />
+    <Compile Include="DesktopConnector\FileHandling\FileTransfer\FileTransferAgentFactoryTests\V1_0.cs" />
+    <Compile Include="DesktopConnector\FileHandling\FileTransfer\FileTransferAgentFactoryTests\UnknownVersion.cs" />
+    <Compile Include="DesktopConnector\FileHandling\ManagedFileLockingStrategyTest.cs" />
+    <Compile Include="DesktopConnector\FileHandling\NewManagedFileTest.cs" />
+    <Compile Include="DesktopConnector\FileHandling\ReplacementManagedFileTest.cs" />
+    <Compile Include="DesktopConnector\FileHandling\SessionInfoCollectionTest.cs" />
+    <Compile Include="DesktopConnector\FileHandling\SessionInfoTest.cs" />
+    <Compile Include="DesktopConnector\FileHandling\ApplicationWatcher\FileLockBasedApplicationWatcherTest.cs" />
+    <Compile Include="DesktopConnector\FileHandling\ApplicationWatcher\ProcessBasedApplicationWatcherTest.cs" />
+    <Compile Include="DesktopConnector\FileHandling\ApplicationWatcher\ProcessWatcherTest.cs" />
+    <Compile Include="DesktopConnector\FileHandling\DownloadedFileStates\ManagedFileStateBaseTest.cs" />
+    <Compile Include="DesktopConnector\FileHandling\DownloadedFileStates\ReadOnlyBeingDownloadedStateTest.cs" />
+    <Compile Include="DesktopConnector\FileHandling\DownloadedFileStates\ReadOnlyBeingOpenedStateTest.cs" />
+    <Compile Include="DesktopConnector\FileHandling\DownloadedFileStates\ReadOnlyBeingWatchedStateTest.cs" />
+    <Compile Include="DesktopConnector\FileHandling\DownloadedFileStates\RecoveredStateTest.cs" />
+    <Compile Include="DesktopConnector\FileHandling\DownloadedFileStates\RecoveryFailedStateTest.cs" />
+    <Compile Include="DesktopConnector\FileHandling\DownloadedFileStates\ReplacementRequestedStateTest.cs" />
+    <Compile Include="DesktopConnector\FileHandling\FileSystemHelperExtendedTest.cs" />
+    <Compile Include="DesktopConnector\FileHandling\FileTransfer\V1_0\FileDownloadAgentTest.cs" />
+    <Compile Include="DesktopConnector\FileHandling\FileTransfer\FileTransferAgentBaseTest.cs" />
+    <Compile Include="DesktopConnector\FileHandling\FileTransfer\V1_0\ReadOnlyFileDownloadAgentTest.cs" />
+    <Compile Include="DesktopConnector\FileHandling\FileTransfer\TemporaryFileStreamTest.cs" />
+    <Compile Include="DesktopConnector\FileHandling\FileTransfer\PermanentUploadStreamTest.cs" />
+    <Compile Include="DesktopConnector\FileHandling\ManagedFileFactoryTest.cs" />
+    <Compile Include="DesktopConnector\FileHandling\PeriodicTimerTest.cs" />
+    <Compile Include="DesktopConnector\FileHandling\SimpleApplicationProxyTest.cs" />
+    <Compile Include="DesktopConnector\FileHandling\UIStates\ClosedUIStateTest.cs" />
+    <Compile Include="DesktopConnector\FileHandling\UIStates\DeserializingUIStateTest.cs" />
+    <Compile Include="DesktopConnector\FileHandling\UIStates\DownloadUIStateTest.cs" />
+    <Compile Include="DesktopConnector\FileHandling\UIStates\FailureUIStateTest.cs" />
+    <Compile Include="DesktopConnector\FileHandling\UIStates\OpenUIStateTest.cs" />
+    <Compile Include="DesktopConnector\FileHandling\UIStates\RecoveredUIStateTest.cs" />
+    <Compile Include="DesktopConnector\FileHandling\UIStates\RecoveringUIStateTest.cs" />
+    <Compile Include="DesktopConnector\FileHandling\UIStates\RecoveryFailedUIStateTest.cs" />
+    <Compile Include="DesktopConnector\FileHandling\UIStates\UploadUIStateTest.cs" />
+    <Compile Include="DesktopConnector\FileHandling\ApplicationWatcherGeneration\XmlProcessingInstructionFilterTest.cs" />
+    <Compile Include="DesktopConnector\ReplaceUrlTest.cs" />
+    <Compile Include="DesktopConnector\Services\DmsServiceAgentTest.cs" />
+    <Compile Include="DesktopConnector\FileHandling\FileTransfer\V1_0\DownloadedFileUploadAgentTest.cs" />
+    <Compile Include="DesktopConnector\FileHandling\FileTransfer\V1_0\NewFileUploadAgentTest.cs" />
+    <Compile Include="DesktopConnector\Services\LoginServiceAgentTest.cs" />
+    <Compile Include="DesktopConnector\Services\ServiceAgentFactoryTest.cs" />
+    <Compile Include="DesktopConnector\Services\VersionMatcherTest.cs" />
+    <Compile Include="DesktopConnector\Services\WebServiceAgentBaseTest.cs" />
+    <Compile Include="DesktopConnector\UI\NullUIThreadInvokerTest.cs" />
+    <Compile Include="DesktopConnector\UI\ScannerFileSelectionInteractionTest.cs" />
+    <Compile Include="DesktopConnector\Utilities\NullAssociatedProgramFinderTest.cs" />
+    <Compile Include="DesktopConnector\Utilities\RegistryAccessorTest.cs" />
+    <Compile Include="DesktopConnector\Utilities\RegistryHelperTest.cs" />
+    <Compile Include="DesktopConnector\Utilities\SessionInfoObjectMother.cs" />
+    <Compile Include="DesktopConnector\Utilities\BackgroundThreadInvokerTest.cs" />
+    <Compile Include="DesktopConnector\Utilities\StubThreadInvoker.cs" />
+    <Compile Include="DesktopConnector\Utilities\TypeNameConverter2Test.cs" />
+    <Compile Include="DesktopConnector\Utilities\XmlProcessingInstructionExtractorTest.cs" />
+    <Compile Include="Shared\IO\DirectoryInfoWrapperTest.cs" />
+    <Compile Include="Shared\IO\DirectoryTreeResolverTest.cs" />
+    <Compile Include="Shared\IO\FileInfoWrapperTest.cs" />
+    <Compile Include="Shared\IO\FileSystemHelperTest.cs" />
+    <Compile Include="Shared\IO\InMemoryDirectoryInfoTest.cs" />
+    <Compile Include="Shared\IO\InMemoryFileInfoTest.cs" />
+    <Compile Include="Shared\IO\Zip\ZipFileBuilderTest.cs" />
+    <Compile Include="Shared\Exceptions\DmsLockStolenExceptionTest.cs" />
+    <Compile Include="Shared\Utilities\BrowserBase64SerializationHelperTest.cs" />
+    <Compile Include="DesktopConnector\DmsUrlTest.cs" />
+    <Compile Include="DesktopConnector\FileHandling\FileTransfer\DownloadHandlerMock.cs" />
+    <Compile Include="DesktopConnector\FileHandling\FileTransfer\FileDownloadAgentBaseTest.cs" />
+    <Compile Include="DesktopConnector\FileHandling\ApplicationWatcher\ApplicationWatcherBaseTest.cs" />
+    <Compile Include="DesktopConnector\FileHandling\ApplicationWatcher\AttributeChangedWatcherTest.cs" />
+    <Compile Include="DesktopConnector\FileHandling\ApplicationWatcher\PollingFileLockWatcherTest.cs" />
+    <Compile Include="DesktopConnector\FileHandling\DownloadedFileStates\NewFileStateTest.cs" />
+    <Compile Include="DesktopConnector\FileHandling\DownloadedFileStates\BeingOpenedStateTest.cs" />
+    <Compile Include="DesktopConnector\FileHandling\DownloadedFileStates\CommitFailedStateTest.cs" />
+    <Compile Include="DesktopConnector\FileHandling\DownloadedFileStates\BeingCommittedStateTest.cs" />
+    <Compile Include="DesktopConnector\FileHandling\DownloadedFileStates\DownloadRequestedStateTest.cs" />
+    <Compile Include="DesktopConnector\FileHandling\DownloadedFileStates\BeingDownloadedStateTest.cs" />
+    <Compile Include="DesktopConnector\FileHandling\DownloadedFileStates\DeserializedStateTest.cs" />
+    <Compile Include="DesktopConnector\FileHandling\DownloadedFileStates\UploadFailedStateTest.cs" />
+    <Compile Include="DesktopConnector\FileHandling\DownloadedFileStates\DiscardRequestedStateTest.cs" />
+    <Compile Include="DesktopConnector\FileHandling\DownloadedFileStates\LostSyncClosedStateTest.cs" />
+    <Compile Include="DesktopConnector\FileHandling\DownloadedFileStates\LostSyncDirtyClosedStateTest.cs" />
+    <Compile Include="DesktopConnector\FileHandling\DownloadedFileStates\LostSyncDirtyStateTest.cs" />
+    <Compile Include="DesktopConnector\FileHandling\DownloadedFileStates\LostSyncStateTest.cs" />
+    <Compile Include="DesktopConnector\FileHandling\DownloadedFileStates\CommitRequestedStateTest.cs" />
+    <Compile Include="DesktopConnector\FileHandling\DownloadedFileStates\UploadRequestedStateTest.cs" />
+    <Compile Include="DesktopConnector\FileHandling\FileLocking\FileLockAgentTest.cs" />
+    <Compile Include="DesktopConnector\FileHandling\ManagedFileCollectionTest.cs" />
+    <Compile Include="DesktopConnector\FileHandling\DownloadedFileStates\BeingEditedStateTest.cs" />
+    <Compile Include="DesktopConnector\FileHandling\DownloadedFileStates\BeingUploadedStateTest.cs" />
+    <Compile Include="DesktopConnector\FileHandling\DownloadedFileStates\CommittedStateTest.cs" />
+    <Compile Include="DesktopConnector\FileHandling\DownloadedFileStates\DiscardedStateTest.cs" />
+    <Compile Include="DesktopConnector\FileHandling\DownloadedFileStates\DownloadedManagedFileStateTestBase.cs" />
+    <Compile Include="DesktopConnector\FileHandling\ManagedFileTest.cs" />
+    <Compile Include="DesktopConnector\FileHandling\FileOperationExecutorTest.cs" />
+    <Compile Include="DesktopConnector\FileHandling\FileOpenerUsingDefaultTest.cs" />
+    <Compile Include="Clients.Windows.Tray\Forms\ManagedFilesFormTest.cs" />
+    <Compile Include="Clients.Windows.Tray\ProgramTest.cs" />
+    <Compile Include="DesktopConnector\FileHandling\QueueManagerTest.cs" />
+    <Compile Include="DesktopConnector\FileHandling\FileTransfer\UploadStreamBaseTest.cs" />
+    <Compile Include="DesktopConnector\Utilities\DocumentInfoObjectMother.cs" />
+    <Compile Include="DesktopConnector\Utilities\FileVersionProviderTest.cs" />
+    <Compile Include="Globalization\NotificationResourcesTest.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>NotificationResourcesTest.resx</DependentUpon>
+    </Compile>
+    <Compile Include="MiniWebServerTestHelper.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="DesktopConnector\FileHandling\PersistenceManagerTest.cs" />
+    <Compile Include="DesktopConnector\UI\UIThreadInvokerTest.cs" />
+    <Compile Include="DesktopConnector\FileHandling\FileTransfer\FileUploadAgentBaseTest.cs" />
+    <Compile Include="DesktopConnector\FileHandling\FileTransfer\UploadHandlerMock.cs" />
+    <Compile Include="Shared\Utilities\ArgumentUtilityTest.cs" />
+    <Compile Include="DesktopConnector\Utilities\ManagedFileObjectMother.cs" />
+    <Compile Include="Shared\IO\FileSizeTest.cs" />
+    <Compile Include="Shared\IO\StreamCopierTest.cs" />
+    <Compile Include="DesktopConnector\Utilities\UriUtilityTest.cs" />
+    <Compile Include="DesktopConnector\UrlHandlerTest.cs" />
+    <Compile Include="Shared\IO\Zip\ZipFileExtractorTest.cs" />
+    <Compile Include="WebServer\ImageRequestHandler.cs" />
+    <Compile Include="WebServer\IMiniWebServer.cs" />
+    <Compile Include="WebServer\IRequestHandler.cs" />
+    <Compile Include="WebServer\MiniWebServer.cs" />
+    <Compile Include="WebServer\PingHandler.cs" />
+    <Compile Include="Core\AuthenticationContextStub.cs" />
+    <Compile Include="Core\AuthenticationContextTest.cs" />
+    <Compile Include="Web\Classes\DmsServiceImplementationTest.cs" />
+    <Compile Include="Web\Classes\DmsUrlBuilderTest.cs" />
+    <Compile Include="Web\Classes\SessionManagerTest.cs" />
+    <Compile Include="Web\Classes\WebConfigurationAdapterTest.cs" />
+    <Compile Include="Web\StubResourceUrlResolver.cs" />
+    <Compile Include="Web\StubResourceUrlResolverFactory.cs" />
+    <Compile Include="Web\StubServiceLocator.cs" />
+    <Compile Include="Web\UI\Controls\BocContentValueTests\Common.cs" />
+    <Compile Include="Web\UI\Controls\BocContentValueTests\LoadUnboundValue.cs" />
+    <Compile Include="Web\UI\Controls\BocContentValueTests\LoadValue.cs" />
+    <Compile Include="Web\UI\Controls\BocContentValueTests\MenuLifeCycle.cs" />
+    <Compile Include="Web\UI\Controls\ContentCommands\ContentDownloadCommandTest.cs" />
+    <Compile Include="Web\UI\Controls\ContentCommands\ContentDownloadReadOnlyCommandTest.cs" />
+    <Compile Include="Web\UI\Controls\ContentCommands\ContentReplacementCommandTest.cs" />
+    <Compile Include="Web\UI\Controls\ContentMenuItems\ContentClipboardReplacementMenuItemTest.cs" />
+    <Compile Include="Web\UI\Controls\ContentMenuItems\ContentDownloadMenuItemTest.cs" />
+    <Compile Include="Web\UI\Controls\BocListExtensions\DmsEditableRowControlFactoryMixinTest.cs" />
+    <Compile Include="Web\UI\Controls\ContentMenuItems\ContentDownloadReadOnlyMenuItemTest.cs" />
+    <Compile Include="Web\UI\Controls\ContentMenuItems\ContentDragAndDropReplacementMenuItemTest.cs" />
+    <Compile Include="Web\UI\Controls\ContentMenuItems\ContentReplacementMenuItemBaseTest.cs" />
+    <Compile Include="Web\UI\Controls\ContentMenuItems\ContentBrowseReplacementMenuItemTest.cs" />
+    <Compile Include="Web\UI\Controls\ContentMenuItems\ContentScanReplacementMenuItemTest.cs" />
+    <Compile Include="Web\UI\Controls\VersionServiceTest.cs" />
+    <Compile Include="Web\UI\DmsHandlerTest.cs" />
+    <Compile Include="Web\UI\DmsServiceTest.cs" />
+    <Compile Include="Web\UI\LoginServiceTest.cs" />
+    <Compile Include="Web\UI\WebServiceBaseTest.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Remotion\Core\Core\Core.Core.csproj">
+      <Project>{2AA369EC-A4E7-4D75-9101-EFA90E902625}</Project>
+      <Name>Core.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Remotion\Core\Interfaces\Core.Interfaces.csproj">
+      <Project>{BD061F4A-A9E6-461E-A804-7999623A0060}</Project>
+      <Name>Core.Interfaces</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Remotion\Development\Core\Development.Core.csproj">
+      <Project>{B719A305-0493-4C72-88FE-9A2FC6964578}</Project>
+      <Name>Development.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Remotion\Development\Web\Development.Web.csproj">
+      <Project>{44924ED6-8C12-416D-972F-F1F10417E7EF}</Project>
+      <Name>Development.Web</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Remotion\ObjectBinding\Core\ObjectBinding.Core.csproj">
+      <Project>{FDCCDB1E-0962-41DA-99A1-2DB390C48748}</Project>
+      <Name>ObjectBinding.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Remotion\ObjectBinding\Interfaces\ObjectBinding.Interfaces.csproj">
+      <Project>{A1FCDC69-E8E3-4DC0-8EE7-A8FEA772EF5B}</Project>
+      <Name>ObjectBinding.Interfaces</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Remotion\ObjectBinding\Web\ObjectBinding.Web.csproj">
+      <Project>{390FBB93-A757-47A7-B769-A64A7465FF84}</Project>
+      <Name>ObjectBinding.Web</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Remotion\Security\Interfaces\Security.Interfaces.csproj">
+      <Project>{6B243694-318E-4C20-A2EA-B910EFE5F2F6}</Project>
+      <Name>Security.Interfaces</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Remotion\Web\Core\Web.Core.csproj">
+      <Project>{DF8BA786-9679-4879-8757-16AE2709D83A}</Project>
+      <Name>Web.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Clients.Windows.Tray\Dms.Clients.Windows.Tray.csproj">
+      <Project>{B5CBF254-BC60-4018-A772-DAD5DE4C96EE}</Project>
+      <Name>Dms.Clients.Windows.Tray</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Core\Dms.Core.csproj">
+      <Project>{7ACCED5E-6AE7-477D-8D15-ED33DEAB0FD9}</Project>
+      <Name>Dms.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DesktopConnector\Dms.DesktopConnector.csproj">
+      <Project>{F3AB6F46-3776-4562-8BB2-FFFDE7E62BE0}</Project>
+      <Name>Dms.DesktopConnector</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Shared\Dms.Shared.csproj">
+      <Project>{B79940B8-1949-406D-9CCA-E6349898E11A}</Project>
+      <Name>Dms.Shared</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Web\Dms.Web.csproj">
+      <Project>{F47CE8AE-22DA-4666-8371-01E7A32D539B}</Project>
+      <Name>Dms.Web</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\remotion.snk">
+      <Link>remotion.snk</Link>
+    </None>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Globalization\NotificationResourcesTest.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>NotificationResourcesTest.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Windows.Installer.3.1">
+      <Visible>False</Visible>
+      <ProductName>Windows Installer 3.1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
