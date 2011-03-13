@@ -416,6 +416,7 @@
       <Link>remotion.snk</Link>
     </None>
     <None Include="App.config" />
+    <None Include="Dms.UnitTests.build" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Globalization\NotificationResourcesTest.resx">
