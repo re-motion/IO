@@ -19,7 +19,6 @@ using System;
 using System.IO;
 using System.Linq;
 using NUnit.Framework;
-using NUnit.Framework.SyntaxHelpers;
 using Remotion.Dms.Shared.IO;
 
 namespace Remotion.Dms.UnitTests.Shared.IO

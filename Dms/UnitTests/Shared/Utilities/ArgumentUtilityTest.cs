@@ -17,7 +17,6 @@
 // 
 using System;
 using NUnit.Framework;
-using NUnit.Framework.SyntaxHelpers;
 using Remotion.Dms.Shared.Utilities;
 
 namespace Remotion.Dms.UnitTests.Shared.Utilities

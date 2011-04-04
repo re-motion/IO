@@ -19,7 +19,6 @@ using System;
 using System.IO;
 using System.Text;
 using NUnit.Framework;
-using NUnit.Framework.SyntaxHelpers;
 using Remotion.Dms.Shared.IO;
 
 namespace Remotion.Dms.UnitTests.Shared.IO
@@ -125,7 +124,7 @@ namespace Remotion.Dms.UnitTests.Shared.IO
       }
       string actual = _fileSystemHelper.MakeUniqueAndValidFileName (_tempFolder, Path.GetFileNameWithoutExtension (shortFileName) + "MoreText.txt");
       Assert.That (actual.Length, Is.LessThan (260));
-      Assert.That (actual, NUnit.Framework.SyntaxHelpers.Text.EndsWith (" (1).txt"));
+      Assert.That (actual, Is.StringEnding (" (1).txt"));
     }
   }
 }

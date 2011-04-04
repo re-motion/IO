@@ -18,7 +18,6 @@
 using System;
 using System.Globalization;
 using NUnit.Framework;
-using NUnit.Framework.SyntaxHelpers;
 using Remotion.Dms.Shared.IO;
 using Remotion.Utilities;
 

@@ -18,7 +18,6 @@
 using System;
 using System.IO;
 using NUnit.Framework;
-using NUnit.Framework.SyntaxHelpers;
 using Remotion.Development.UnitTesting.IO;
 using Remotion.Dms.Shared.IO;
 
@@ -139,7 +138,7 @@ namespace Remotion.Dms.UnitTests.Shared.IO
     [Test]
     public void DirectoryMember ()
     {
-      Assert.That (_directoryInfoWrapper.Directory, Is.InstanceOfType (typeof(DirectoryInfoWrapper)));
+      Assert.That (_directoryInfoWrapper.Directory, Is.InstanceOf (typeof(DirectoryInfoWrapper)));
       Assert.That (_directoryInfoWrapper.Directory.Name, Is.EqualTo (_folder));
     }
   }
