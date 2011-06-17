@@ -122,8 +122,8 @@
     <Compile Include="Utilities\ReSharperAnnotations\AssertionConditionType.cs" />
     <Compile Include="Utilities\ReSharperAnnotations\AssertionMethodAttribute.cs" />
     <Compile Include="Utilities\ReSharperAnnotations\InvokerParameterNameAttribute.cs" />
-    <None Include="..\..\license-headers\Revision AGPL.licenseheader">
-      <Link>Revision AGPL.licenseheader</Link>
+    <None Include="..\Dms AGPL.licenseheader">
+      <Link>Dms AGPL.licenseheader</Link>
     </None>
     <None Include="..\..\remotion.snk">
       <Link>remotion.snk</Link>
