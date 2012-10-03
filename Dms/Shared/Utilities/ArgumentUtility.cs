@@ -23,7 +23,7 @@ namespace Remotion.Dms.Shared.Utilities
   public static class ArgumentUtility
   {
     [AssertionMethod]
-    public static T CheckNotNull<T> ([InvokerParameterName] string argumentName, [AssertionCondition (AssertionConditionType.IS_NOT_NULL)] T actualValue)
+    public static T CheckNotNull<T> ([InvokerParameterName] string argumentName, [AssertionCondition (AssertionConditionType.IS_NOT_NULL)] [NoEnumeration] T actualValue)
     {
 // ReSharper disable CompareNonConstrainedGenericWithNull
       if (actualValue == null)

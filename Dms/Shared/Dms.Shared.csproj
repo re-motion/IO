@@ -122,6 +122,7 @@
     <Compile Include="Utilities\ReSharperAnnotations\AssertionConditionType.cs" />
     <Compile Include="Utilities\ReSharperAnnotations\AssertionMethodAttribute.cs" />
     <Compile Include="Utilities\ReSharperAnnotations\InvokerParameterNameAttribute.cs" />
+    <Compile Include="Utilities\ReSharperAnnotations\NoEnumerationAttribute.cs" />
     <None Include="..\Dms AGPL.licenseheader">
       <Link>Dms AGPL.licenseheader</Link>
     </None>
