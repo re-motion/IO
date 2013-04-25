@@ -14,7 +14,8 @@
     <FileAlignment>512</FileAlignment>
     <SignAssembly>true</SignAssembly>
     <AssemblyOriginatorKeyFile>..\..\remotion.snk</AssemblyOriginatorKeyFile>
-    <FileUpgradeFlags></FileUpgradeFlags>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
     <OldToolsVersion>3.5</OldToolsVersion>
     <UpgradeBackupLocation />
     <PublishUrl>publish\</PublishUrl>
@@ -346,7 +347,7 @@
       <Name>Core.Core</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Remotion\Development\Core\Development.Core.csproj">
-      <Project>{B719A305-0493-4C72-88FE-9A2FC6964578}</Project>
+      <Project>{b719a305-0493-4c72-88fe-9a2fc6964578}</Project>
       <Name>Development.Core</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Remotion\Development\Web\Development.Web.csproj">
