@@ -28,7 +28,7 @@ using System.Reflection;
 [assembly: AssemblyProduct ("re-vision (www.re-motion.org)")]
 [assembly: AssemblyCopyright ("Copyright (c) rubicon IT GmbH, www.rubicon.eu - Licensed under GNU AGPL 3.0")]
 [assembly: AssemblyTrademark ("")]
-[assembly: AssemblyInformationalVersion ("1.15.1.0 DEV Debug; SVNRevision=27564")]
+[assembly: AssemblyInformationalVersion ("1.15.1.0 DEV Debug; SVNRevision=27567")]
 
 //
 // Version information for an assembly consists of the following four values:
