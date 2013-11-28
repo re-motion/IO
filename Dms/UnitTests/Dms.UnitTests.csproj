@@ -334,6 +334,7 @@
     <Compile Include="Web\UI\Controls\ContentMenuItems\ContentReplacementMenuItemBaseTest.cs" />
     <Compile Include="Web\UI\Controls\ContentMenuItems\ContentBrowseReplacementMenuItemTest.cs" />
     <Compile Include="Web\UI\Controls\ContentMenuItems\ContentScanReplacementMenuItemTest.cs" />
+    <Compile Include="Web\UI\Controls\ContentMenuItems\MenuItemTestBase.cs" />
     <Compile Include="Web\UI\Controls\VersionServiceTest.cs" />
     <Compile Include="Web\UI\DmsHandlerTest.cs" />
     <Compile Include="Web\UI\DmsServiceTest.cs" />
