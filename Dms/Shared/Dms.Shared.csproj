@@ -77,20 +77,20 @@
     <Reference Include="System.XML" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="..\..\sharedsource\resharperannotations\AssertionConditionAttribute.cs">
-      <Link>SharedSource\ReSharperAnnotations\AssertionConditionAttribute.cs</Link>
+    <Compile Include="..\..\SharedSource\Core\ResharperAnnotations\AssertionConditionAttribute.cs">
+      <Link>SharedSource\ResharperAnnotations\AssertionConditionAttribute.cs</Link>
     </Compile>
-    <Compile Include="..\..\SharedSource\ReSharperAnnotations\AssertionConditionType.cs">
-      <Link>SharedSource\ReSharperAnnotations\AssertionConditionType.cs</Link>
+    <Compile Include="..\..\SharedSource\Core\ResharperAnnotations\AssertionConditionType.cs">
+      <Link>SharedSource\ResharperAnnotations\AssertionConditionType.cs</Link>
     </Compile>
-    <Compile Include="..\..\sharedsource\resharperannotations\AssertionMethodAttribute.cs">
-      <Link>SharedSource\ReSharperAnnotations\AssertionMethodAttribute.cs</Link>
+    <Compile Include="..\..\SharedSource\Core\ResharperAnnotations\AssertionMethodAttribute.cs">
+      <Link>SharedSource\ResharperAnnotations\AssertionMethodAttribute.cs</Link>
     </Compile>
-    <Compile Include="..\..\SharedSource\ReSharperAnnotations\InvokerParameterNameAttribute.cs">
-      <Link>SharedSource\ReSharperAnnotations\InvokerParameterNameAttribute.cs</Link>
+    <Compile Include="..\..\SharedSource\Core\ResharperAnnotations\InvokerParameterNameAttribute.cs">
+      <Link>SharedSource\ResharperAnnotations\InvokerParameterNameAttribute.cs</Link>
     </Compile>
-    <Compile Include="..\..\SharedSource\ReSharperAnnotations\NoEnumerationAttribute.cs">
-      <Link>SharedSource\ReSharperAnnotations\NoEnumerationAttribute.cs</Link>
+    <Compile Include="..\..\SharedSource\Core\ResharperAnnotations\NoEnumerationAttribute.cs">
+      <Link>SharedSource\ResharperAnnotations\NoEnumerationAttribute.cs</Link>
     </Compile>
     <Compile Include="..\AssemblyInfoShared.cs">
       <Link>Properties\AssemblyInfoShared.cs</Link>
