@@ -299,7 +299,6 @@
     <Compile Include="DesktopConnector\UI\UIThreadInvokerTest.cs" />
     <Compile Include="DesktopConnector\FileHandling\FileTransfer\FileUploadAgentBaseTest.cs" />
     <Compile Include="DesktopConnector\FileHandling\FileTransfer\UploadHandlerMock.cs" />
-    <Compile Include="Shared\Utilities\ArgumentUtilityTest.cs" />
     <Compile Include="DesktopConnector\Utilities\ManagedFileObjectMother.cs" />
     <Compile Include="Shared\IO\FileSizeTest.cs" />
     <Compile Include="Shared\IO\StreamCopierTest.cs" />
@@ -385,6 +384,7 @@
     <ProjectReference Include="..\DesktopConnector\Dms.DesktopConnector.csproj">
       <Project>{F3AB6F46-3776-4562-8BB2-FFFDE7E62BE0}</Project>
       <Name>Dms.DesktopConnector</Name>
+      <Aliases>global</Aliases>
     </ProjectReference>
     <ProjectReference Include="..\Shared\Dms.Shared.csproj">
       <Project>{B79940B8-1949-406D-9CCA-E6349898E11A}</Project>
