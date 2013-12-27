@@ -18,7 +18,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
-using Remotion.Dms.Shared.Utilities;
+using Remotion.Utilities;
 
 namespace Remotion.Dms.Shared.IO
 {
@@ -73,11 +73,10 @@ namespace Remotion.Dms.Shared.IO
 
     private InMemoryDirectoryInfo GetLeafDirectoryInfo (string[] directoryPath)
     {
-      ArgumentUtility.CheckNotNull ("directoryPath", directoryPath);
+      ArgumentUtility.CheckNotNullOrEmpty ("directoryPath", directoryPath);
 
-      if (directoryPath.Length == 0)
-        throw new ArgumentEmptyException ("nameParts");
-      else if (directoryPath.Length == 1)
+
+      if (directoryPath.Length == 1)
       {
         var name = directoryPath[0];
         if (!_rootDirectories.ContainsKey (name))

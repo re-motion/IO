@@ -21,7 +21,7 @@ using System.IO;
 using System.Text;
 using System.Threading;
 using Remotion.Dms.Shared.IO.Zip;
-using Remotion.Dms.Shared.Utilities;
+using Remotion.Utilities;
 
 namespace Remotion.Dms.Shared.IO
 {

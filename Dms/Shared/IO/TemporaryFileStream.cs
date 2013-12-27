@@ -16,7 +16,7 @@
 // Additional permissions are listed in the file re-motion_exceptions.txt.
 // 
 using System.IO;
-using Remotion.Dms.Shared.Utilities;
+using Remotion.Utilities;
 
 namespace Remotion.Dms.Shared.IO
 {
