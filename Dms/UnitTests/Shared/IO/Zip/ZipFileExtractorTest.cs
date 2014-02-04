@@ -211,6 +211,46 @@ namespace Remotion.Dms.UnitTests.Shared.IO.Zip
       }
     }
 
+    [Test]
+    public void GetZipArchiveAsDirectoryInfo ()
+    {
+      Directory.CreateDirectory (Path.Combine (_sourcePath, "SubFolderEmpty"));
+      string subFolder1 = Path.Combine (_sourcePath, "SubFolder1");
+      Directory.CreateDirectory (subFolder1);
+      File.Move (_file1, Path.Combine (subFolder1, "File1.bin"));
+      
+      string subFolder2 = Path.Combine (_sourcePath, "SubFolder2");
+      Directory.CreateDirectory (subFolder2);
+      File.Move (_file2, Path.Combine (subFolder2, "File2.bin"));
+
+      byte[] zipArchive = CreateZipArchive (_sourcePath);
+
+      using (var zipArchiveStream = new MemoryStream (zipArchive))
+      {
+        using (var zipExtractor = new ZipFileExtractor (zipArchiveStream))
+        {
+          var directory = zipExtractor.GetZipArchiveAsDirectoryInfo();
+
+          Assert.That (directory.Exists);
+          Assert.That (directory.GetDirectories().Select (d => d.Name), Is.EqualTo (new[] { "SubFolder1", "SubFolder2" }));
+
+          var subDirectory1 = directory.GetDirectories().Single (d => d.Name == "SubFolder1");
+          Assert.That (subDirectory1.Exists);
+          Assert.That (subDirectory1.FullName, Is.EqualTo ("SubFolder1"));
+          Assert.That (subDirectory1.GetDirectories(), Is.Empty);
+          Assert.That (subDirectory1.GetFiles().Select (f => f.Name), Is.EqualTo (new[] { "File1.bin" }));
+          Assert.That (subDirectory1.GetFiles().Select (f => f.FullName), Is.EqualTo (new[] { "SubFolder1\\File1.bin" }));
+        
+          var subDirectory2 = directory.GetDirectories().Single (d => d.Name == "SubFolder2");
+          Assert.That (subDirectory2.Exists);
+          Assert.That (subDirectory2.FullName, Is.EqualTo ("SubFolder2"));
+          Assert.That (subDirectory2.GetDirectories(), Is.Empty);
+          Assert.That (subDirectory2.GetFiles().Select (f => f.Name), Is.EqualTo (new[] { "File2.bin" }));
+          Assert.That (subDirectory2.GetFiles().Select (f => f.FullName), Is.EqualTo (new[] { "SubFolder2\\File2.bin" }));
+        }
+      }
+    }
+
     private byte[] GetBytesFromFile (IFileInfo fileInfo)
     {
       using (var stream = fileInfo.Open (FileMode.Open, FileAccess.Read, FileShare.None))
