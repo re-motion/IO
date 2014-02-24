@@ -299,7 +299,6 @@
     <Compile Include="DesktopConnector\UI\UIThreadInvokerTest.cs" />
     <Compile Include="DesktopConnector\FileHandling\FileTransfer\FileUploadAgentBaseTest.cs" />
     <Compile Include="DesktopConnector\FileHandling\FileTransfer\UploadHandlerMock.cs" />
-    <Compile Include="Shared\Utilities\ArgumentUtilityTest.cs" />
     <Compile Include="DesktopConnector\Utilities\ManagedFileObjectMother.cs" />
     <Compile Include="Shared\IO\FileSizeTest.cs" />
     <Compile Include="Shared\IO\StreamCopierTest.cs" />
@@ -355,6 +354,10 @@
       <Project>{44924ED6-8C12-416D-972F-F1F10417E7EF}</Project>
       <Name>Development.Web</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\Remotion\Globalization\Core\Globalization.Core.csproj">
+      <Project>{AC6AB6EB-F6AC-45A4-88A7-877D11A65CCB}</Project>
+      <Name>Globalization.Core</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Remotion\Mixins\Core\Mixins.Core.csproj">
       <Project>{D641E4E2-23F3-4454-8074-1327EF07BAA1}</Project>
       <Name>Mixins.Core</Name>
@@ -371,6 +374,10 @@
       <Project>{FBE0CBDD-82FF-4173-8536-47D3B5BC2E98}</Project>
       <Name>Security.Core</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\TypePipe\Core\TypePipe.Core.csproj">
+      <Project>{98E7F7AA-12B2-4A6B-8922-52C8E53B378E}</Project>
+      <Name>TypePipe.Core</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Remotion\Web\Core\Web.Core.csproj">
       <Project>{DF8BA786-9679-4879-8757-16AE2709D83A}</Project>
       <Name>Web.Core</Name>
@@ -386,6 +393,7 @@
     <ProjectReference Include="..\DesktopConnector\Dms.DesktopConnector.csproj">
       <Project>{F3AB6F46-3776-4562-8BB2-FFFDE7E62BE0}</Project>
       <Name>Dms.DesktopConnector</Name>
+      <Aliases>global</Aliases>
     </ProjectReference>
     <ProjectReference Include="..\Shared\Dms.Shared.csproj">
       <Project>{B79940B8-1949-406D-9CCA-E6349898E11A}</Project>

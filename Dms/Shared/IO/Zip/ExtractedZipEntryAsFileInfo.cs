@@ -18,7 +18,7 @@
 using System;
 using System.IO;
 using ICSharpCode.SharpZipLib.Zip;
-using Remotion.Dms.Shared.Utilities;
+using Remotion.Utilities;
 
 namespace Remotion.Dms.Shared.IO.Zip
 {

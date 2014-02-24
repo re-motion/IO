@@ -15,11 +15,12 @@
 // 
 // Additional permissions are listed in the file re-motion_exceptions.txt.
 // 
+
 using System;
 using System.Collections.Generic;
 using System.IO;
 using ICSharpCode.SharpZipLib.Zip;
-using Remotion.Dms.Shared.Utilities;
+using Remotion.Utilities;
 
 namespace Remotion.Dms.Shared.IO.Zip
 {
@@ -29,28 +30,49 @@ namespace Remotion.Dms.Shared.IO.Zip
   public class ZipFileExtractor : IArchiveExtractor
   {
     private readonly Stream _archiveStream;
-    private ZipFile _zipFile;
+    private readonly ZipFile _zipFile;
+    private readonly IFileInfo[] _files;
+    private readonly InMemoryDirectoryInfo _root;
 
     public ZipFileExtractor (Stream archiveStream)
     {
       ArgumentUtility.CheckNotNull ("archiveStream", archiveStream);
       _archiveStream = archiveStream;
+
+      _zipFile = new ZipFile (_archiveStream);
+      _zipFile.NameTransform = new WindowsNameTransform();
+      var directoryTreeResolver = new DirectoryTreeResolver (DateTime.Now);
+      _files = GetFilesInternal(directoryTreeResolver);
+      _root = new InMemoryDirectoryInfo ("\\\\", null, DateTime.UtcNow, DateTime.UtcNow, DateTime.UtcNow);
+      _root.Directories.AddRange (directoryTreeResolver.GetRootDirectories());
     }
 
     public IFileInfo[] GetFiles ()
     {
-      _zipFile = new ZipFile (_archiveStream);
-      _zipFile.NameTransform = new WindowsNameTransform();
+      return _files;
+    }
 
-      var directoryTreeResolver = new DirectoryTreeResolver (DateTime.Now);
-      var files = new List<IFileInfo> ();
+    public IDirectoryInfo GetZipArchiveAsDirectoryInfo ()
+    {
+      return _root;
+    }
+
+    public void Dispose ()
+    {
+      if (_zipFile != null)
+        _zipFile.Close();
+    }
+
+    private IFileInfo[] GetFilesInternal (DirectoryTreeResolver treeResolver)
+    {
+      var files = new List<IFileInfo>();
 
       foreach (ZipEntry zipEntry in _zipFile)
       {
         if (zipEntry.IsFile)
         {
           var localZipEntry = zipEntry;
-          var fileInfo = directoryTreeResolver.GetFileInfoWithPath (
+          var fileInfo = treeResolver.GetFileInfoWithPath (
               _zipFile.NameTransform.TransformFile (localZipEntry.Name),
               (fileName, directory) => new ExtractedZipEntryAsFileInfo (_zipFile, localZipEntry, directory));
           files.Add (fileInfo);
@@ -58,12 +80,6 @@ namespace Remotion.Dms.Shared.IO.Zip
       }
 
       return files.ToArray();
-    }
-
-    public void Dispose ()
-    {
-      if (_zipFile != null)
-        _zipFile.Close ();
     }
   }
 }
