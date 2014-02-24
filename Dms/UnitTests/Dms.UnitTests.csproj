@@ -314,6 +314,7 @@
     <Compile Include="Core\AuthenticationContextTest.cs" />
     <Compile Include="Web\Classes\DmsServiceImplementationTest.cs" />
     <Compile Include="Web\Classes\DmsUrlBuilderTest.cs" />
+    <Compile Include="Web\Classes\IWebConfigurationAdapterTest.cs" />
     <Compile Include="Web\Classes\SessionManagerTest.cs" />
     <Compile Include="Web\Classes\WebConfigurationAdapterTest.cs" />
     <Compile Include="Web\StubInfrastructureResourceUrlFactory.cs" />
