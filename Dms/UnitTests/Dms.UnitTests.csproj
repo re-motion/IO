@@ -171,6 +171,7 @@
     <Compile Include="DesktopConnector\FileHandling\FileOpenerUsingExecutableTest.cs" />
     <Compile Include="DesktopConnector\FileHandling\ManagedFileCleanupStrategies\DeletePhysicalFileCleanupStrategyTest.cs" />
     <Compile Include="DesktopConnector\FileHandling\ManagedFileCleanupStrategies\NullFileCleanupStrategyTest.cs" />
+    <Compile Include="DesktopConnector\FileHandling\OneTimeTimerTest.cs" />
     <Compile Include="DesktopConnector\FileHandling\WatchingApplicationProxyTests\HandleFileDisposed.cs" />
     <Compile Include="DesktopConnector\FileHandling\WatchingApplicationProxyTests\HandleFileChanged.cs" />
     <Compile Include="DesktopConnector\FileHandling\WatchingApplicationProxyTests\Initialize.cs" />
