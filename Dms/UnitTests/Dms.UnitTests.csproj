@@ -258,7 +258,7 @@
     <Compile Include="DesktopConnector\FileHandling\FileTransfer\DownloadHandlerMock.cs" />
     <Compile Include="DesktopConnector\FileHandling\FileTransfer\FileDownloadAgentBaseTest.cs" />
     <Compile Include="DesktopConnector\FileHandling\ApplicationWatcher\ApplicationWatcherBaseTest.cs" />
-    <Compile Include="DesktopConnector\FileHandling\ApplicationWatcher\AttributeChangedWatcherTest.cs" />
+    <Compile Include="DesktopConnector\FileHandling\ApplicationWatcher\LastWriteChangedFileWatcherTest.cs" />
     <Compile Include="DesktopConnector\FileHandling\ApplicationWatcher\PollingFileLockWatcherTest.cs" />
     <Compile Include="DesktopConnector\FileHandling\DownloadedFileStates\NewFileStateTest.cs" />
     <Compile Include="DesktopConnector\FileHandling\DownloadedFileStates\BeingOpenedStateTest.cs" />
