@@ -167,7 +167,7 @@
     <Compile Include="DesktopConnector\FileHandling\ApplicationProxyFactoryTest.cs" />
     <Compile Include="DesktopConnector\FileHandling\ApplicationWatcherGeneration\ApplicationNameFilterTest.cs" />
     <Compile Include="DesktopConnector\FileHandling\ApplicationWatcherGeneration\PreferenceFilterTest.cs" />
-    <Compile Include="DesktopConnector\FileHandling\ApplicationWatcher\FileRenamedWatcherTest.cs" />
+    <Compile Include="DesktopConnector\FileHandling\ApplicationWatcher\FileRenamedFileWatcherTest.cs" />
     <Compile Include="DesktopConnector\FileHandling\ApplicationWatcher\ThrottlingFileWatcherDecoratorTest.cs" />
     <Compile Include="DesktopConnector\FileHandling\ManagedFileCleanupStrategies\WatchingApplicationProxyFileCleanupStrategyTest.cs" />
     <Compile Include="DesktopConnector\FileHandling\FileOpenerUsingExecutableTest.cs" />
