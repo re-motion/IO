@@ -199,8 +199,6 @@
     <Compile Include="DesktopConnector\FileHandling\ReplacementManagedFileTest.cs" />
     <Compile Include="DesktopConnector\FileHandling\SessionInfoCollectionTest.cs" />
     <Compile Include="DesktopConnector\FileHandling\SessionInfoTest.cs" />
-    <Compile Include="DesktopConnector\FileHandling\ApplicationWatcher\FileLockBasedApplicationWatcherTest.cs" />
-    <Compile Include="DesktopConnector\FileHandling\ApplicationWatcher\ProcessBasedApplicationWatcherTest.cs" />
     <Compile Include="DesktopConnector\FileHandling\ApplicationWatcher\ProcessWatcherTest.cs" />
     <Compile Include="DesktopConnector\FileHandling\DownloadedFileStates\ManagedFileStateBaseTest.cs" />
     <Compile Include="DesktopConnector\FileHandling\DownloadedFileStates\ReadOnlyBeingDownloadedStateTest.cs" />
@@ -257,7 +255,7 @@
     <Compile Include="DesktopConnector\DmsUrlTest.cs" />
     <Compile Include="DesktopConnector\FileHandling\FileTransfer\DownloadHandlerMock.cs" />
     <Compile Include="DesktopConnector\FileHandling\FileTransfer\FileDownloadAgentBaseTest.cs" />
-    <Compile Include="DesktopConnector\FileHandling\ApplicationWatcher\ApplicationWatcherBaseTest.cs" />
+    <Compile Include="DesktopConnector\FileHandling\ApplicationWatcher\FileWatcherBasedApplicationWatcherTest.cs" />
     <Compile Include="DesktopConnector\FileHandling\ApplicationWatcher\LastWriteChangedFileWatcherTest.cs" />
     <Compile Include="DesktopConnector\FileHandling\ApplicationWatcher\PollingFileLockWatcherTest.cs" />
     <Compile Include="DesktopConnector\FileHandling\DownloadedFileStates\NewFileStateTest.cs" />
