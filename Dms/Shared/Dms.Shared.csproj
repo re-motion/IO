@@ -140,6 +140,9 @@
     <Compile Include="IO\TemporaryFileStream.cs" />
     <Compile Include="IO\Zip\ZipFileBuilder.cs" />
     <Compile Include="IO\Zip\ZipFileExtractor.cs" />
+    <None Include="..\..\SharedSource\SharedSource Apache-2.0.licenseheader">
+      <Link>SharedSource\SharedSource Apache-2.0.licenseheader</Link>
+    </None>
     <None Include="..\Dms AGPL.licenseheader">
       <Link>Dms AGPL.licenseheader</Link>
     </None>
