@@ -148,7 +148,7 @@
     <Compile Include="DesktopConnector\Configuration\ApplicationMappingElementTest.cs" />
     <Compile Include="DesktopConnector\Configuration\ApplicationMappingProviderTest.cs" />
     <Compile Include="DesktopConnector\Configuration\ApplicationWatcherArgumentsCriteriaElementTest.cs" />
-    <Compile Include="DesktopConnector\Configuration\ApplicationWatcherStub.cs" />
+    <Compile Include="DesktopConnector\FileHandling\ApplicationWatcher\ApplicationWatcherStub.cs" />
     <Compile Include="DesktopConnector\Configuration\CleanupIntervalConfigurationElementTest.cs" />
     <Compile Include="DesktopConnector\Configuration\DesktopConnectorConfigurationTest.cs" />
     <Compile Include="DesktopConnector\Configuration\FileExtensionElementTest.cs" />
