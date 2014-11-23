@@ -19,7 +19,7 @@ using System.IO;
 using NUnit.Framework;
 using Remotion.Dms.Shared.IO;
 using Rhino.Mocks;
-using Is = Rhino.Mocks.Constraints.Is;
+using MockIs = Rhino.Mocks.Constraints.Is;
 
 namespace Remotion.Dms.UnitTests.Shared.IO
 {
@@ -52,11 +52,11 @@ namespace Remotion.Dms.UnitTests.Shared.IO
       {
         Expect.Call (inputMock.Read (null, 0, 0))
             .IgnoreArguments()
-            .Constraints (Is.Anything(), Is.Equal (0), Is.Equal (_streamCopier.BufferSize))
+            .Constraints (MockIs.Anything(), MockIs.Equal (0), MockIs.Equal (_streamCopier.BufferSize))
             .Do (writeAllAtOnce);
         Expect.Call (inputMock.Read (null, 0, 0))
             .IgnoreArguments()
-            .Constraints (Is.Anything(), Is.Equal (0), Is.Equal (_streamCopier.BufferSize))
+            .Constraints (MockIs.Anything(), MockIs.Equal (0), MockIs.Equal (_streamCopier.BufferSize))
             .Return (0);
       }
 
@@ -64,7 +64,7 @@ namespace Remotion.Dms.UnitTests.Shared.IO
       mockRepository.ReplayAll();
 
       _streamCopier.CopyStream (inputMock, outputStream, inputMock.Length);
-      Assert.That (outputStream.ToArray(), NUnit.Framework.Is.EqualTo (new byte[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 }));
+      Assert.That (outputStream.ToArray(), Is.EqualTo (new byte[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 }));
 
       mockRepository.VerifyAll();
     }
@@ -100,27 +100,93 @@ namespace Remotion.Dms.UnitTests.Shared.IO
       {
         Expect.Call (inputMock.Read (null, 0, 0))
             .IgnoreArguments()
-            .Constraints (Is.Anything(), Is.Equal (0), Is.Equal (_streamCopier.BufferSize))
+            .Constraints (MockIs.Anything(), MockIs.Equal (0), MockIs.Equal (_streamCopier.BufferSize))
             .Do (writeStep1);
         Expect.Call (inputMock.Read (null, 0, 0))
             .IgnoreArguments()
-            .Constraints (Is.Anything(), Is.Equal (0), Is.Equal (_streamCopier.BufferSize))
+            .Constraints (MockIs.Anything(), MockIs.Equal (0), MockIs.Equal (_streamCopier.BufferSize))
             .Do (writeStep2);
         Expect.Call (inputMock.Read (null, 0, 0))
             .IgnoreArguments()
-            .Constraints (Is.Anything(), Is.Equal (0), Is.Equal (_streamCopier.BufferSize))
+            .Constraints (MockIs.Anything(), MockIs.Equal (0), MockIs.Equal (_streamCopier.BufferSize))
             .Do (writeStep3);
         Expect.Call (inputMock.Read (null, 0, 0))
             .IgnoreArguments()
-            .Constraints (Is.Anything(), Is.Equal (0), Is.Equal (_streamCopier.BufferSize))
+            .Constraints (MockIs.Anything(), MockIs.Equal (0), MockIs.Equal (_streamCopier.BufferSize))
             .Return (0);
       }
 
       MemoryStream outputStream = new MemoryStream();
       mockRepository.ReplayAll();
 
-      _streamCopier.CopyStream (inputMock, outputStream, inputMock.Length);
-      Assert.That (outputStream.ToArray(), NUnit.Framework.Is.EqualTo (new byte[] { 0, 1, 2, 3, 4, 0, 1, 2, 0, 1 }));
+      var result = _streamCopier.CopyStream (inputMock, outputStream, inputMock.Length);
+
+      Assert.That (result, Is.True);
+      Assert.That (outputStream.ToArray(), Is.EqualTo (new byte[] { 0, 1, 2, 3, 4, 0, 1, 2, 0, 1 }));
+
+      mockRepository.VerifyAll();
+    }
+
+    [Test]
+    public void CopyStream_LengthDiffersWithContentTooShort ()
+    {
+      MockRepository mockRepository = new MockRepository();
+      Stream inputMock = mockRepository.StrictMock<Stream>();
+      SetupResult.For (inputMock.Length).Return (10L);
+      Func<byte[], int, int, int> writeStep1 = delegate (byte[] buffer, int offset, int count)
+      {
+        for (int i = 0; i < 10; ++i)
+          buffer[offset + i] = (byte) i;
+        return 10;
+      };
+
+      using (mockRepository.Ordered())
+      {
+        Expect.Call (inputMock.Read (null, 0, 0))
+            .IgnoreArguments()
+            .Constraints (MockIs.Anything(), MockIs.Equal (0), MockIs.Equal (_streamCopier.BufferSize))
+            .Do (writeStep1);
+        Expect.Call (inputMock.Read (null, 0, 0))
+            .IgnoreArguments()
+            .Constraints (MockIs.Anything(), MockIs.Equal (0), MockIs.Equal (_streamCopier.BufferSize))
+            .Return (0);
+      }
+
+      MemoryStream outputStream = new MemoryStream();
+      mockRepository.ReplayAll();
+
+      var result = _streamCopier.CopyStream (inputMock, outputStream, inputMock.Length * 2);
+      Assert.That (result, Is.False);
+
+      mockRepository.VerifyAll();
+    }
+
+    [Test]
+    public void CopyStream_LengthDiffersWithContentTooLong ()
+    {
+      MockRepository mockRepository = new MockRepository();
+      Stream inputMock = mockRepository.StrictMock<Stream>();
+      SetupResult.For (inputMock.Length).Return (10L);
+      Func<byte[], int, int, int> writeStep1 = delegate (byte[] buffer, int offset, int count)
+      {
+        for (int i = 0; i < 10; ++i)
+          buffer[offset + i] = (byte) i;
+        return 10;
+      };
+
+      using (mockRepository.Ordered())
+      {
+        Expect.Call (inputMock.Read (null, 0, 0))
+            .IgnoreArguments()
+            .Constraints (MockIs.Anything(), MockIs.Equal (0), MockIs.Equal (_streamCopier.BufferSize))
+            .Do (writeStep1);
+      }
+
+      MemoryStream outputStream = new MemoryStream();
+      mockRepository.ReplayAll();
+
+      var result = _streamCopier.CopyStream (inputMock, outputStream, inputMock.Length / 2);
+      Assert.That (result, Is.False);
 
       mockRepository.VerifyAll();
     }
