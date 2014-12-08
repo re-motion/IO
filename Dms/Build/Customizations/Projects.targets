@@ -1,10 +1,14 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <ReleaseProjectFiles Include="$(SolutionDirectory)Core\Core.csproj">
-      <CreateNuGetPackageWithSymbolServerSupport>True</CreateNuGetPackageWithSymbolServerSupport>
+    <ReleaseProjectFiles Include="$(SolutionDirectory)\Dms\Clients.Windows.Tray\Dms.Clients.Windows.Tray.csproj" />
+    <ReleaseProjectFiles Include="$(SolutionDirectory)\Dms\Core\Dms.Core.csproj">
       <CreateDocumentationFile>True</CreateDocumentationFile>
     </ReleaseProjectFiles>
-    <UnitTestProjectFiles Include="$(SolutionDirectory)UnitTests\UnitTests.csproj"/>
+    <ReleaseProjectFiles Include="$(SolutionDirectory)\Dms\DesktopConnector\Dms.DesktopConnector.csproj" />
+    <ReleaseProjectFiles Include="$(SolutionDirectory)\Dms\DocumentEventMonitor\Dms.DocumentEventMonitor.csproj" />
+    <ReleaseProjectFiles Include="$(SolutionDirectory)\Dms\Shared\Dms.Shared.csproj" />
+    <ReleaseProjectFiles Include="$(SolutionDirectory)\Dms\Web\Dms.Web.csproj" />
+    <UnitTestProjectFiles Include="$(SolutionDirectory)\Dms\UnitTests\Dms.UnitTests.csproj" />
   </ItemGroup>
 </Project>
