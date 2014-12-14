@@ -43,6 +43,7 @@
     <None Include="Remotion.Server.WithOverrides.build" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="NuSpec\" />
     <Folder Include="Properties\" />
   </ItemGroup>
   <ItemGroup>
