@@ -5,6 +5,7 @@
   <Target Name="BeforePrepareBuildProperties" BeforeTargets="PrepareBuildProperties">
     <PropertyGroup>
       <TempDirectory>$(TempDirectory)Dms\</TempDirectory>
+      <OutputDirectory>$(OutputDirectory)Dms\</OutputDirectory>
     </PropertyGroup>
   </Target>
 </Project>
