@@ -27,5 +27,6 @@
     <file src="Schemas*\*.xsd" target="schema" />
     <file src="Res\**\*" target="res" />
     <file src="UI\**\*.as?x;UI\**\*.master" target="res/UI" />
+    <file src="UrlMapping.xml*" target="res" />
   </files>
 </package>
