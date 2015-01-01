@@ -42,6 +42,7 @@
     <None Include="NuSpec\TemplateShared.nuspec" />
     <None Include="NuSpec\TemplateSharedForTool.nuspec" />
     <None Include="NuSpec\TemplateSharedForWebClient.nuspec" />
+    <None Include="NuSpec\Web.targets" />
     <None Include="packages.config" />
     <None Include="Remotion.build" />
     <None Include="Remotion.Local.build" />
