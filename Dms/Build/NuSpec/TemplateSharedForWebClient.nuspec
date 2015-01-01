@@ -27,5 +27,6 @@
     <file src="Res\**\*" target="res" />
     <file src="UI\**\*.as?x;UI\**\*.master" target="res/UI" />
     <file src="UrlMapping.xml*" target="res" />
+    <file src="$NuSpecFolder$Web.targets" target="build\$id$.targets" />
   </files>
 </package>
