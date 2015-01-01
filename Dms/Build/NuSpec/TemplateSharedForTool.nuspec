@@ -23,8 +23,7 @@
     <file src="bin\$configuration$\$id$.exe.config*" target="lib\net45"/>
     <file src="bin\$configuration$\$id$.exe.config*" target="_files"/>
     <file src="FacetManifest.xml*" />
-    <!-- By using a wildcard, the file-inclusion does not fail if no documentation file was found. -->
-    <file src="$documentationFolder$*\$id$.chm" target="doc" />
+    <file src="$documentationFile$" target="doc" />
     <!-- By using a wildcard, the file-inclusion does not fail if no schema folder exists. -->
     <file src="Schemas*\*.xsd" target="schema" />
   </files>
