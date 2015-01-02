@@ -25,7 +25,8 @@
 
     <MakeDir Directories="$(_resFolder)" />
     <Exec Command="mklink /D /J &quot;%(RemotionWebResource_Package.ProjectResFolder)&quot; &quot;%(RemotionWebResource_Package.PackageResFolder)&quot;"
-          Condition="Exists (%(RemotionWebResource_Package.PackageResFolder))" />
+          Condition="Exists (%(RemotionWebResource_Package.PackageResFolder))"
+          StandardOutputImportance="Low" />
   </Target>
 
   <Target Name="RemotionWebResource_AfterClean" AfterTargets="AfterClean" DependsOnTargets="RemotionWebResource_DeleteResFolder"/>
