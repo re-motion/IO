@@ -1,12 +1,24 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-	<PropertyGroup>
-		<AssemblyInfoFile>$(SolutionDirectory)Dms\AssemblyInfoShared.*</AssemblyInfoFile>
-		<CompanyName>rubicon IT GmbH</CompanyName>
-		<CompanyUrl>http://www.rubicon.eu</CompanyUrl>
-		<Copyright>Copyright (c) rubicon IT GmbH, www.rubicon.eu - Licensed under GNU AGPL 3.0</Copyright>
-		<ProductName>re-vision (www.re-motion.org)</ProductName>
-		<DocumentationRootPage>$(SolutionDirectory)Dms\Core\Doc\include\GettingStartedWithRevision.aml</DocumentationRootPage>
-		<DocumentationNamespaceSummaryFiles>$(SolutionDirectory)Dms\**\Doc\include\*.NamespaceDoc.xml</DocumentationNamespaceSummaryFiles>
-	</PropertyGroup>
+  <PropertyGroup>
+    <AssemblyInfoFile>$(SolutionDirectory)Dms\AssemblyInfoShared.*</AssemblyInfoFile>
+    <CompanyName>rubicon IT GmbH</CompanyName>
+    <CompanyUrl>http://www.rubicon.eu</CompanyUrl>
+    <Copyright>Copyright (c) rubicon IT GmbH, www.rubicon.eu - Licensed under GNU AGPL 3.0</Copyright>
+    <ProductName>re-vision (www.re-motion.org)</ProductName>
+    <DocumentationRootPage>$(SolutionDirectory)Dms\Core\Doc\include\GettingStartedWithRevision.aml</DocumentationRootPage>
+    <DocumentationNamespaceSummaryFiles>$(SolutionDirectory)Dms\**\Doc\include\*.NamespaceDoc.xml</DocumentationNamespaceSummaryFiles>
+    <DependDBProjectName>re-motion SecurityManager</DependDBProjectName>
+    <DependDBRetentionTime>30</DependDBRetentionTime>
+    <DependDBProjectBranch>trunk</DependDBProjectBranch>
+    <!-- Will be passed to MSBuild by TeamCity and uses fallback in local build script. -->
+    <DependDBProjectImportNotificationMailAddress></DependDBProjectImportNotificationMailAddress>
+  </PropertyGroup>
+  <ItemGroup>
+    <!-- "%2A" represents an escaped "*" -->
+    <DependDBTrackedReference Include="Remotion.%2A"/>
+    <DependDBNuGetSource Include="$(SolutionDirectory)BuildOutput\TypePipe\NuGetWithDebugSymbols\Debug"/>
+    <DependDBNuGetSource Include="$(SolutionDirectory)BuildOutput\Remotion\NuGetWithDebugSymbols\Debug"/>
+    <DependDBNuGetSource Include="$(SolutionDirectory)packages"/>
+  </ItemGroup>
 </Project>
