@@ -13,12 +13,8 @@
     <DependDBProjectBranch>trunk</DependDBProjectBranch>
     <!-- Will be passed to MSBuild by TeamCity and uses fallback in local build script. -->
     <DependDBProjectImportNotificationMailAddress></DependDBProjectImportNotificationMailAddress>
+    <DependDBTrackedReferences>Remotion;Remotion.*</DependDBTrackedReferences>
+    <!-- '#OutputDirectory#' and '#ConfigurationID#' will be replaced by '$(OutputDirectory)' and '$(ConfigurationID)' during DependDB processing. See Shared.Overrides.targets:BeforeCheckDependDBProperties -->
+    <DependDBNuGetSources>#OutputDirectory#..\TypePipe\NuGetWithDebugSymbols\#ConfigurationID#;#OutputDirectory#..\Remotion\NuGetWithDebugSymbols\#ConfigurationID#;$(SolutionDirectory)packages</DependDBNuGetSources>
   </PropertyGroup>
-  <ItemGroup>
-    <!-- "%2A" represents an escaped "*" -->
-    <DependDBTrackedReference Include="Remotion.%2A"/>
-    <DependDBNuGetSource Include="$(SolutionDirectory)BuildOutput\TypePipe\NuGetWithDebugSymbols\Debug"/>
-    <DependDBNuGetSource Include="$(SolutionDirectory)BuildOutput\Remotion\NuGetWithDebugSymbols\Debug"/>
-    <DependDBNuGetSource Include="$(SolutionDirectory)packages"/>
-  </ItemGroup>
 </Project>
