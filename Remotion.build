@@ -1,0 +1,522 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Copyright (C) 2005 - 2008 rubicon informationstechnologie gmbh
+ !
+ ! This program is free software: you can redistribute it and/or modify it under 
+ ! the terms of the re:motion license agreement in license.txt. If you did not 
+ ! receive it, please visit http://www.re-motion.org/licensing.
+ ! 
+ ! Unless otherwise provided, this software is distributed on an "AS IS" basis, 
+ ! WITHOUT WARRANTY OF ANY KIND, either express or implied. 
+-->
+
+<!--EXTERNAL_PROPERTIES: build.version.noconfig-->
+<project xmlns="nant-schema" name="Remotion">
+
+  <include buildfile="build/properties.include.build" verbose="true" />
+  <include buildfile="build/Remotion.include.build" verbose="true" />
+  <include buildfile="build/Remotion.Doc.include.build" verbose="true" />
+
+  <property name="solution.basedir" value="${project::get-base-directory()}" />
+  <property name="solution.build-version-file" value="${solution.basedir}/build/buildversion.xml" />
+  <property name="solution.key-file" value="${solution.basedir}/remotion.snk" overwrite="false" />
+  <property name="solution.intellisense-xslt-file" value="file:///${solution.basedir}/build/xmldoc.xslt" overwrite="false" />
+  <property name="prereq.assemblies" value="${solution.basedir}/prereq/assemblies" />
+  <property name="project.basedir" value="${solution.basedir}/${project.dir}" dynamic="true" />
+  <property name="build.outputdir" value="${build.basedir}/${nant.settings.currentframework}/bin/${project.config}" dynamic="true" />
+  <property name="build.temp.root" value="" overwrite="false" />
+  <property name="build.temp.outputdir" value="${build.temp.basedir}/${nant.settings.currentframework}/${project.config}" dynamic="true" />
+  <property name="build.test.outputdir" value="${build.temp.basedir}/${nant.settings.currentframework}/tests/${project.config}" dynamic="true" />
+  <property name="build.update.assembly-info" value="true" overwrite="false" />
+  <property name="doc.targetdir" value="${build.basedir}/${nant.settings.currentframework}/doc" dynamic="true" />
+
+  <property name="svn.exe" value="C:\Program Files\Subversion\bin\svn.exe" overwrite="false"/>
+  
+  <property name="doc.sdkdocversion" value="SDK_v2_0" />
+
+  <target name="local" description="make local build into directory build/current">
+    <property name="build.local" value="true" />
+  </target>
+
+  <target name="init-build-version">
+    <buildversion versionfile="${solution.build-version-file}" increment="false" />
+    <echo message="current version is ${build.version.noconfig}"/>
+
+    <property name="build.basedir" value="${solution.basedir}/build/${build.version.noconfig}" unless="${property::exists('build.local')}" overwrite="false"/>
+    <property name="build.basedir" value="${solution.basedir}/build/Current" if="${property::exists('build.local')}" overwrite="false"/>
+    
+    <property name="build.temp.basedir" value="${build.temp.root}/${build.version.noconfig}" unless="${property::exists('build.local')}" />
+    <property name="build.temp.basedir" value="${build.temp.root}/Current" if="${property::exists('build.local')}" />
+    <property name="build.temp.basedir" value="${build.basedir}/temp" dynamic="true" if="${string::get-length(build.temp.root) == 0}"/>
+  </target>
+  
+  <!--======================= CONFIGURATION  =======================-->
+  <!-- specify one or more of these targets before the main targets to initialize the correct configuration properties -->
+
+  <target name="set-debug">
+    <property name="build.step.get-sourcefiles" value="false" />
+    <property name="build.step.compile-binaries" value="true" />
+    <property name="build.step.copy-resources" value="false" />
+    <property name="build.step.create-doc" value="false" />
+    <property name="build.step.run-tests" value="true" />
+    <property name="project.config" value="debug" />
+    <property name="build.debug" value="Full" />
+    <property name="build.csc.define" value="DEBUG;TRACE;"/>
+    <call target="init-build-version" />
+  </target>
+
+  <target name="set-release">
+    <property name="build.step.get-sourcefiles" value="false" />
+    <property name="build.step.compile-binaries" value="true" />
+    <property name="build.step.copy-resources" value="false" />
+    <property name="build.step.create-doc" value="false" />
+    <property name="build.step.run-tests" value="true" />
+    <property name="project.config" value="release" />
+    <property name="build.debug" value="PdbOnly" />
+    <property name="build.csc.define" value="TRACE;"/>
+    <call target="init-build-version" />
+  </target>
+
+  <target name="set-resources">
+    <property name="build.step.get-sourcefiles" value="false" />
+    <property name="build.step.compile-binaries" value="false" />
+    <property name="build.step.copy-resources" value="true" />
+    <property name="build.step.create-doc" value="false" />
+    <property name="build.step.run-tests" value="false" />
+    <property name="project.config" value="documentation" />
+    <property name="build.debug" value="None" />
+    <call target="init-build-version" />
+  </target>
+
+  <target name="set-sourcefiles">
+    <property name="build.step.get-sourcefiles" value="true" />
+    <property name="build.step.compile-binaries" value="false" />
+    <property name="build.step.copy-resources" value="false" />
+    <property name="build.step.create-doc" value="false" />
+    <property name="build.step.run-tests" value="false" />
+    <property name="project.config" value="documentation" />
+    <property name="build.debug" value="None" />
+    <call target="init-build-version" />
+  </target>
+
+  <target name="set-documentation">
+    <property name="build.step.get-sourcefiles" value="false" />
+    <property name="build.step.compile-binaries" value="true" />
+    <property name="build.step.copy-resources" value="false" />
+    <property name="build.step.create-doc" value="true" />
+    <property name="build.step.run-tests" value="false" />
+    <property name="project.config" value="documentation" />
+    <property name="build.debug" value="None" />
+    <property name="build.csc.define" value="TRACE;"/>
+    <call target="init-build-version" />
+  </target>
+
+  <!--======================= PROJECT GROUPS =======================-->
+
+  <target name="sourcefiles">
+    <call target="set-sourcefiles" />
+    <call target="all" />
+    <call target="all-test" />
+  </target>
+
+  <target name="debug">
+    <call target="set-debug" />
+    <call target="all" />
+    <call target="all-test" />
+  </target>
+
+  <target name="release">
+    <call target="set-release" />
+    <call target="all" />
+    <call target="all-test" />
+  </target>
+
+  <target name="resources">
+    <call target="set-resources" />
+    <call target="all" />
+    <call target="all-test" />
+  </target>
+
+  <target name="doc">
+    <call target="doc-public" />
+    <call target="doc-internal" />
+  </target>
+
+  <target name="deploy">
+    <call target="cleantemp" />
+    <call target="zip" cascade="false" />
+    <call target="sourcezip" cascade="false" />
+    <call target="securityManager-zip" cascade="false" />
+    <call target="securityManager-sourcezip" cascade="false" />
+    <call target="getcurrent" cascade="false" />
+  </target>
+
+  <target name="build-no-doc" >
+    <!--
+    <call target="clean" />
+    -->
+    <call target="resources" />
+    <call target="debug" />
+    <call target="release" />
+  </target>
+
+  <target name="all" depends="prereq,
+      Core.Interfaces, Core.Core, Core.Mixins.MixerTool.Console, 
+      Development.CodeDom, Development.Core, Development.Data, 
+      Web, Web.ExecutionEngine.CodeGenerator, Web.Security,
+      ObjectBinding.Interfaces, ObjectBinding, ObjectBinding.Web, ObjectBinding.Web.Preview, 
+      ObjectBinding.Web.CodeGenerator, ObjectBinding.Web.CodeGenerator.Templates, 
+      Data.Interfaces, Data.Linq, Data.DomainObjects, Data.DomainObjects.Security, 
+      Data.DomainObjects.RdbmsTools, Data.DomainObjects.RdbmsTools.Console, 
+      Security.Interfaces, Security, Security.Metadata.Extractor, Security.MSBuild.Tasks, 
+      SecurityManager.Core, SecurityManager.Metadata.Importer, SecurityManager.Clients.Web">
+    <echo message="Target has executed."/>
+  </target>
+
+  <target name="all-test" depends="prereq, Core.Mixins.Samples, Core.UnitTests, Development.UnitTests, Web.UnitTests, ObjectBinding.UnitTests, 
+      Data.UnitTests, Data.DomainObjects.RdbmsTools.UnitTests, 
+      Security.UnitTests.TestDomain, Security.UnitTests, SecurityManager.Core.UnitTests">
+    <echo message="Target has executed."/>
+  </target>
+
+  <!--
+  <target name="forCooNet" depends="prereq, Core, Development.Core, Development.CodeDom, Web, ObjectBinding, ObjectBinding.Web">
+    <echo message="Target has executed."/>
+  </target>
+  -->
+
+  <!--======================= PROJECTS =======================-->
+
+  <target name="prereq">
+    <property name="project.name" value="prereq" />
+    <property name="project.dir" value="prereq" />
+    <property name="project.output" value="" />
+    <property name="project.extension" value="" />
+    <call target="execute-buildstep" if="${build.step.get-sourcefiles}" />
+  </target>
+
+  <target name="Core.Interfaces">
+    <property name="project.name" value="Core.Interfaces" />
+    <property name="project.dir" value="Core/Interfaces" />
+    <property name="project.output" value="Remotion.Interfaces" />
+    <property name="project.extension" value="dll" />
+    <call target="execute-buildstep" />
+  </target>
+
+  <target name="Core.Core" depends="Core.Interfaces">
+    <property name="project.name" value="Core.Core" />
+    <property name="project.dir" value="Core/Core" />
+    <property name="project.output" value="Remotion" />
+    <property name="project.extension" value="dll" />
+    <call target="execute-buildstep" />
+  </target>
+
+  <target name="Core.Mixins.MixerTool.Console" depends="Core.Core">
+    <property name="project.name" value="Core.Mixins.MixerTool.Console" />
+    <property name="project.dir" value="Core/Mixins.MixerTool.Console" />
+    <property name="project.output" value="Remotion.Mixins.MixerTool.Console" />
+    <property name="project.extension" value="dll" />
+    <call target="execute-buildstep" />
+  </target>
+
+  <target name="Development.Core" depends="Core.Core">
+    <property name="project.name" value="Development.Core" />
+    <property name="project.dir" value="Development/Core" />
+    <property name="project.output" value="Remotion.Development" />
+    <property name="project.extension" value="dll" />
+    <call target="execute-buildstep" />
+  </target>
+
+  <target name="Development.Data" depends="Core.Core, Data.DomainObjects, Data.Linq">
+    <property name="project.name" value="Development.Data" />
+    <property name="project.dir" value="Development/Data" />
+    <property name="project.output" value="Remotion.Development.Data" />
+    <property name="project.extension" value="dll" />
+    <call target="execute-buildstep" />
+  </target>
+
+  <target name="Development.Web" depends="Core.Core, Development.Core, Web">
+    <property name="project.name" value="Development.Web" />
+    <property name="project.dir" value="Development/Web" />
+    <property name="project.output" value="Remotion.Development.Web" />
+    <property name="project.extension" value="dll" />
+    <call target="execute-buildstep" />
+  </target>
+
+  <target name="Development.CodeDom" depends="Core.Core">
+    <property name="project.name" value="Development.CodeDom" />
+    <property name="project.dir" value="Development/CodeDom" />
+    <property name="project.output" value="Remotion.Development.CodeDom" />
+    <property name="project.extension" value="dll" />
+    <call target="execute-buildstep" />
+  </target>
+
+  <target name="Data.Interfaces" depends="Core.Core">
+    <property name="project.name" value="Data.Interfaces" />
+    <property name="project.dir" value="Data/Interfaces" />
+    <property name="project.output" value="Remotion.Data.Interfaces" />
+    <property name="project.extension" value="dll" />
+    <call target="execute-buildstep" />
+  </target>
+
+  <target name="Data.Linq" depends="Core.Core">
+    <property name="project.name" value="Data.Linq" />
+    <property name="project.dir" value="Data/Linq" />
+    <property name="project.output" value="Remotion.Data.Linq" />
+    <property name="project.extension" value="dll" />
+    <call target="execute-buildstep" />
+  </target>
+
+  <target name="Data.DomainObjects" depends="Core.Core, Data.Interfaces, Data.Linq, ObjectBinding">
+    <property name="project.name" value="Data.DomainObjects" />
+    <property name="project.dir" value="Data/DomainObjects" />
+    <property name="project.output" value="Remotion.Data.DomainObjects" />
+    <property name="project.extension" value="dll" />
+    <call target="execute-buildstep" />
+  </target>
+
+  <target name="Data.DomainObjects.RdbmsTools" depends="Core.Core, Data.DomainObjects">
+    <property name="project.name" value="Data.DomainObjects.RdbmsTools" />
+    <property name="project.dir" value="Data/DomainObjects.RdbmsTools" />
+    <property name="project.output" value="Remotion.Data.DomainObjects.RdbmsTools" />
+    <property name="project.extension" value="dll" />
+    <call target="execute-buildstep" />
+  </target>
+
+  <target name="Data.DomainObjects.RdbmsTools.Console" depends="Core.Core, Data.DomainObjects, Data.DomainObjects.RdbmsTools">
+    <property name="project.name" value="Data.DomainObjects.RdbmsTools.Console" />
+    <property name="project.dir" value="Data/DomainObjects.RdbmsTools.Console" />
+    <property name="project.output" value="dbschema" />
+    <property name="project.extension" value="exe" />
+    <call target="execute-buildstep" />
+  </target>
+
+  <target name="Data.DomainObjects.Security" depends="Core.Core, Data.DomainObjects, Security">
+    <property name="project.name" value="Data.DomainObjects.Security" />
+    <property name="project.dir" value="Data/DomainObjects.Security" />
+    <property name="project.output" value="Remotion.Data.DomainObjects.Security" />
+    <property name="project.extension" value="dll" />
+    <call target="execute-buildstep" />
+  </target>
+
+  <target name="Web" depends="Core.Core, Data.Interfaces, Security.Interfaces">
+    <property name="project.name" value="Web" />
+    <property name="project.dir" value="Web/Core" />
+    <property name="project.output" value="Remotion.Web" />
+    <property name="project.extension" value="dll" />
+    <call target="execute-buildstep" />
+  </target>
+
+  <target name="Web.ExecutionEngine.CodeGenerator" depends="Core.Core, Web">
+    <property name="project.name" value="Web.ExecutionEngine.CodeGenerator" />
+    <property name="project.dir" value="Web/ExecutionEngine.CodeGenerator" />
+    <property name="project.output" value="wxegen" />
+    <property name="project.extension" value="exe" />
+    <call target="execute-buildstep" />
+  </target>
+
+  <target name="Web.Security" depends="Core.Core, Security, Web">
+    <property name="project.name" value="Web.Security" />
+    <property name="project.dir" value="Web/Security" />
+    <property name="project.output" value="Remotion.Web.Security" />
+    <property name="project.extension" value="dll" />
+    <call target="execute-buildstep" />
+  </target>
+
+  <target name="ObjectBinding.Interfaces" depends="Core.Core">
+    <property name="project.name" value="ObjectBinding.Interfaces" />
+    <property name="project.dir" value="ObjectBinding/Interfaces" />
+    <property name="project.output" value="Remotion.ObjectBinding.Interfaces" />
+    <property name="project.extension" value="dll" />
+    <call target="execute-buildstep" />
+  </target>
+  
+  <target name="ObjectBinding" depends="Core.Core, ObjectBinding.Interfaces, Security.Interfaces">
+    <property name="project.name" value="ObjectBinding" />
+    <property name="project.dir" value="ObjectBinding/Core" />
+    <property name="project.output" value="Remotion.ObjectBinding" />
+    <property name="project.extension" value="dll" />
+    <call target="execute-buildstep" />
+  </target>
+
+  <target name="ObjectBinding.Web" depends="Core.Core, Web, ObjectBinding, Security.Interfaces">
+    <property name="project.name" value="ObjectBinding.Web" />
+    <property name="project.dir" value="ObjectBinding/Web" />
+    <property name="project.output" value="Remotion.ObjectBinding.Web" />
+    <property name="project.extension" value="dll" />
+    <call target="execute-buildstep" />
+  </target>
+
+  <target name="ObjectBinding.Web.CodeGenerator" 
+      depends="Core.Core, Web, ObjectBinding, ObjectBinding.Web, Data.DomainObjects">
+    <property name="project.name" value="ObjectBinding.Web.CodeGenerator" />
+    <property name="project.dir" value="ObjectBinding/Web.CodeGenerator/Core" />
+    <property name="project.output" value="UIGen" />
+    <property name="project.extension" value="exe" />
+    <call target="execute-buildstep" />
+  </target>
+
+  <target name="ObjectBinding.Web.CodeGenerator.Templates">
+    <property name="project.name" value="ObjectBinding.Web.CodeGenerator.Templates" />
+    <property name="project.dir" value="ObjectBinding/Web.CodeGenerator/Templates" />
+    <property name="project.output" value="" />
+    <property name="project.extension" value="" />
+    <call target="execute-buildstep" if="${build.step.get-sourcefiles}" />
+    
+    <copy todir="${build.basedir}/UIGenTemplates" flatten="false" overwrite="true" if="${build.step.copy-resources}">
+      <fileset basedir="${project.basedir}">
+        <include name="**/*.*" />
+      </fileset>
+    </copy>
+  </target>
+
+  <target name="ObjectBinding.Web.Preview" depends="Core.Core, Web, ObjectBinding, ObjectBinding.Web">
+    <property name="project.name" value="ObjectBinding.Web.Preview" />
+    <property name="project.dir" value="ObjectBinding/Web.Preview" />
+    <property name="project.output" value="Remotion.ObjectBinding.Web.Preview" />
+    <property name="project.extension" value="dll" />
+    <call target="execute-buildstep" />
+  </target>
+
+  <target name="Security.Interfaces" depends="Core.Core, Core.Interfaces">
+    <property name="project.name" value="Security.Interfaces" />
+    <property name="project.dir" value="Security/Interfaces" />
+    <property name="project.output" value="Remotion.Security.Interfaces" />
+    <property name="project.extension" value="dll" />
+    <call target="execute-buildstep" />
+  </target>
+  
+  <target name="Security" depends="Core.Core, Security.Interfaces">
+    <property name="project.name" value="Security" />
+    <property name="project.dir" value="Security/Core" />
+    <property name="project.output" value="Remotion.Security" />
+    <property name="project.extension" value="dll" />
+    <call target="execute-buildstep" />
+  </target>
+
+  <target name="Security.Metadata.Extractor" depends="Core.Core, Security">
+    <property name="project.name" value="Security.Metadata.Extractor" />
+    <property name="project.dir" value="Security/Metadata.Extractor" />
+    <property name="project.output" value="Remotion.Security.Metadata.Extractor" />
+    <property name="project.extension" value="exe" />
+    <call target="execute-buildstep" />
+  </target>
+
+  <target name="Security.MSBuild.Tasks" depends="Core.Core, Security">
+    <property name="project.name" value="Security.MSBuild.Tasks" />
+    <property name="project.dir" value="Security/MSBuild.Tasks" />
+    <property name="project.output" value="Remotion.Security.MSBuild.Tasks" />
+    <property name="project.extension" value="dll" />
+    <call target="execute-buildstep" />
+  </target>
+
+  <target name="SecurityManager.Core" depends="Core.Core, ObjectBinding, Data.DomainObjects">
+    <property name="project.name" value="SecurityManager.Core" />
+    <property name="project.dir" value="SecurityManager/Core" />
+    <property name="project.output" value="Remotion.SecurityManager" />
+    <property name="project.extension" value="dll" />
+    <call target="execute-buildstep" />
+  </target>
+
+  <target name="SecurityManager.Metadata.Importer" depends="Core.Core, Data.DomainObjects, SecurityManager.Core">
+    <property name="project.name" value="SecurityManager.Metadata.Importer" />
+    <property name="project.dir" value="SecurityManager/Metadata.Importer" />
+    <property name="project.output" value="Remotion.SecurityManager.Metadata.Importer" />
+    <property name="project.extension" value="exe" />
+    <call target="execute-buildstep" />
+  </target>
+
+  <target name="SecurityManager.Clients.Web" depends="Core.Core, ObjectBinding, ObjectBinding.Web, Web, 
+          Data.DomainObjects, SecurityManager.Core">
+    <property name="project.name" value="SecurityManager.Clients.Web" />
+    <property name="project.dir" value="SecurityManager/Clients.Web" />
+    <property name="project.output" value="Remotion.SecurityManager.Clients.Web" />
+    <property name="project.extension" value="dll" />
+    <call target="execute-buildstep" />
+  </target>
+  
+  <!--======================= UNIT TESTS =======================-->
+
+  <target name="Core.Mixins.Samples" depends="Core.Core">
+    <property name="project.name" value="Core.Mixins.Samples" />
+    <property name="project.dir" value="Core/Mixins.Samples" />
+    <property name="project.output" value="Remotion.Mixins.Samples" />
+    <property name="project.extension" value="dll" />
+    <call target="buildtest" />
+  </target>
+  
+  <target name="Core.UnitTests" depends="Core.Core, Core.Mixins.Samples, Development.Core">
+    <property name="project.name" value="Core.UnitTests" />
+    <property name="project.dir" value="Core/UnitTests" />
+    <property name="project.output" value="Remotion.UnitTests" />
+    <property name="project.extension" value="dll" />
+    <call target="buildtest" />
+  </target>
+
+  <target name="Development.UnitTests" depends="Development.Core, Development.Data, Development.Web">
+    <property name="project.name" value="Development.UnitTests" />
+    <property name="project.dir" value="Development/UnitTests" />
+    <property name="project.output" value="Remotion.Development.UnitTests" />
+    <property name="project.extension" value="dll" />
+    <call target="buildtest" />
+  </target>
+
+  <target name="Web.UnitTests" depends="Core.Core, Development.Core, Development.Web, Security, Web.Security, Web">
+    <property name="project.name" value="Web.UnitTests" />
+    <property name="project.dir" value="Web/UnitTests" />
+    <property name="project.output" value="Remotion.Web.UnitTests" />
+    <property name="project.extension" value="dll" />
+    <call target="buildtest" />
+  </target>
+
+  <target name="ObjectBinding.UnitTests" depends="Core.Core, Development.Core, Development.Web, ObjectBinding, Web">
+    <property name="project.name" value="ObjectBinding.UnitTests" />
+    <property name="project.dir" value="ObjectBinding/UnitTests" />
+    <property name="project.output" value="Remotion.ObjectBinding.UnitTests" />
+    <property name="project.extension" value="dll" />
+    <call target="buildtest" />
+  </target>
+
+  <target name="Data.UnitTests" depdends="
+          Core.Core, Data.Linq, Data.DomainObjects, Data.DomainObjects.Security
+          Development.Core, Development.Data, Development.Web, Security.Interfaces, Security">
+    <property name="project.name" value="Data.UnitTests" />
+    <property name="project.dir" value="Data/UnitTests" />
+    <property name="project.output" value="Remotion.Data.UnitTests" />
+    <property name="project.extension" value="dll" />
+    <call target="buildtest" />
+  </target>
+
+  <target name="Data.DomainObjects.RdbmsTools.UnitTests" depends="Core.Core, Data.DomainObjects, Data.DomainObjects.RdbmsTools">
+    <property name="project.name" value="Data.DomainObjects.RdbmsTools.UnitTests" />
+    <property name="project.dir" value="Data/DomainObjects.RdbmsTools.UnitTests" />
+    <property name="project.output" value="Remotion.Data.DomainObjects.RdbmsTools.UnitTests" />
+    <property name="project.extension" value="dll" />
+    <call target="buildtest" />
+  </target>
+
+  <target name="Security.UnitTests.TestDomain" depends="Core.Core, Security">
+    <property name="project.name" value="Security.UnitTests.TestDomain" />
+    <property name="project.dir" value="Security/UnitTests.TestDomain" />
+    <property name="project.output" value="Remotion.Security.UnitTests.TestDomain" />
+    <property name="project.extension" value="dll" />
+    <call target="buildtest" />
+  </target>
+
+  <target name="Security.UnitTests" depends="Core.Core, Data.DomainObjects, Development.Core, Security, Security.UnitTests.TestDomain">
+    <property name="project.name" value="Security.UnitTests" />
+    <property name="project.dir" value="Security/UnitTests" />
+    <property name="project.output" value="Remotion.Security.UnitTests" />
+    <property name="project.extension" value="dll" />
+    <call target="buildtest" />
+  </target>
+
+  <target name="SecurityManager.Core.UnitTests" depends="Core.Core, Data.DomainObjects, Data.DomainObjects.Security, 
+          Development.Core, Development.Data, ObjectBinding, Security, SecurityManager.Core">
+    <property name="project.name" value="SecurityManager.Core.UnitTests" />
+    <property name="project.dir" value="SecurityManager/Core.UnitTests" />
+    <property name="project.output" value="Remotion.SecurityManager.UnitTests" />
+    <property name="project.extension" value="dll" />
+    <call target="buildtest" />
+  </target>
+
+</project>
