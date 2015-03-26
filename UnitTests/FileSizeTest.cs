@@ -16,22 +16,16 @@
 // Additional permissions are listed in the file re-motion_exceptions.txt.
 // 
 using System;
-using System.Globalization;
 using NUnit.Framework;
 using Remotion.Dms.Shared.IO;
-using Remotion.Utilities;
 
 namespace Remotion.Dms.UnitTests.Shared.IO
 {
   [TestFixture]
+  [SetCulture ("")]
+  [SetUICulture ("")]
   public class FileSizeTest
   {
-    [SetUp]
-    public void SetUp ()
-    {
-      new CultureScope(CultureInfo.InvariantCulture, CultureInfo.InvariantCulture);
-    }
-
     [Test]
     [ExpectedException(typeof(ArgumentOutOfRangeException))]
     public void ValueSmallerZero ()
@@ -51,7 +45,7 @@ namespace Remotion.Dms.UnitTests.Shared.IO
       Assert.That (new FileSize (10000).ToString (), Is.EqualTo ("9.77 kB"));
       Assert.That (new FileSize (100000).ToString (), Is.EqualTo ("97.66 kB")); 
       Assert.That (new FileSize (1000000).ToString (), Is.EqualTo ("976.56 kB")); 
-      Assert.That (new FileSize (1023000).ToString (), Is.EqualTo ("999.02 kB")); //TODO: possible refacotr output to 1000 
+      Assert.That (new FileSize (1023000).ToString (), Is.EqualTo ("999.02 kB")); //TODO: possible refactor output to 1000 
 
       Assert.That (new FileSize (10000000).ToString (), Is.EqualTo ("9.54 MB"));
       Assert.That (new FileSize (100000000).ToString (), Is.EqualTo ("95.37 MB"));
