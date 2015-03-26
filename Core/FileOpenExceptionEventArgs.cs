@@ -15,9 +15,10 @@
 // 
 // Additional permissions are listed in the file re-motion_exceptions.txt.
 // 
+
 using System;
 
-namespace Remotion.Dms.Shared.IO
+namespace Remotion.IO
 {
   public class FileOpenExceptionEventArgs : EventArgs
   {

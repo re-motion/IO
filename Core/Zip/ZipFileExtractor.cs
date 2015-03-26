@@ -22,7 +22,7 @@ using System.IO;
 using ICSharpCode.SharpZipLib.Zip;
 using Remotion.Utilities;
 
-namespace Remotion.Dms.Shared.IO.Zip
+namespace Remotion.IO.Zip
 {
   /// <summary>
   /// Implements <see cref="IArchiveExtractor"/>.

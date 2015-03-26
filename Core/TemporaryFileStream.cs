@@ -20,7 +20,7 @@ using System;
 using System.IO;
 using Remotion.Utilities;
 
-namespace Remotion.Dms.Shared.IO
+namespace Remotion.IO
 {
   /// <summary>
   /// Wraps a <see cref="Stream"/> and deletes the underlying file on dispose

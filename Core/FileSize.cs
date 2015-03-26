@@ -15,9 +15,10 @@
 // 
 // Additional permissions are listed in the file re-motion_exceptions.txt.
 // 
+
 using System;
 
-namespace Remotion.Dms.Shared.IO
+namespace Remotion.IO
 {
   /// <summary>
   /// Represents a custom file size type to print the size in an human readable way.

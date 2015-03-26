@@ -15,13 +15,13 @@
 // 
 // Additional permissions are listed in the file re-motion_exceptions.txt.
 // 
+
 using System;
 using System.IO;
 using System.Text;
 using NUnit.Framework;
-using Remotion.Dms.Shared.IO;
 
-namespace Remotion.Dms.UnitTests.Shared.IO
+namespace Remotion.IO.UnitTests
 {
   [TestFixture]
   public class FileSystemHelperTest

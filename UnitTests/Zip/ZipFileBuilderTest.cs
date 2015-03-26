@@ -15,6 +15,7 @@
 // 
 // Additional permissions are listed in the file re-motion_exceptions.txt.
 // 
+
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -23,12 +24,11 @@ using System.Text;
 using ICSharpCode.SharpZipLib.Zip;
 using NUnit.Framework;
 using Remotion.Development.UnitTesting.IO;
-using Remotion.Dms.Shared.IO;
-using Remotion.Dms.Shared.IO.Zip;
+using Remotion.IO.Zip;
 using Remotion.Utilities;
 using Rhino.Mocks;
 
-namespace Remotion.Dms.UnitTests.Shared.IO.Zip
+namespace Remotion.IO.UnitTests.Zip
 {
   [TestFixture]
   public class ZipFileBuilderTest

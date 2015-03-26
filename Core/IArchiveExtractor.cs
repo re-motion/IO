@@ -15,9 +15,10 @@
 // 
 // Additional permissions are listed in the file re-motion_exceptions.txt.
 // 
+
 using System;
 
-namespace Remotion.Dms.Shared.IO
+namespace Remotion.IO
 {
   /// <summary>
   /// The <see cref="IArchiveExtractor"/> declares an API for extracting the files contained in an archive 

@@ -15,11 +15,12 @@
 // 
 // Additional permissions are listed in the file re-motion_exceptions.txt.
 // 
+
 using System;
 using System.IO;
 using Remotion.Utilities;
 
-namespace Remotion.Dms.Shared.IO
+namespace Remotion.IO
 {
   /// <summary>
   /// The <see cref="FileInfoWrapper"/> implements <see cref="IFileInfo"/> and exposes methods for the creation, copying, deletion, moving, 

@@ -15,12 +15,13 @@
 // 
 // Additional permissions are listed in the file re-motion_exceptions.txt.
 // 
+
 using System;
 using System.IO;
 using ICSharpCode.SharpZipLib.Zip;
 using Remotion.Utilities;
 
-namespace Remotion.Dms.Shared.IO.Zip
+namespace Remotion.IO.Zip
 {
   /// <summary>
   /// Wrapper type to represent a <see cref="ZipEntry"/> as an <see cref="IFileInfo"/>.

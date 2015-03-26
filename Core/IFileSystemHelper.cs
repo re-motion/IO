@@ -1,7 +1,7 @@
 using System;
 using System.IO;
 
-namespace Remotion.Dms.Shared.IO
+namespace Remotion.IO
 {
   /// <summary>
   /// Encapsulate FileIO

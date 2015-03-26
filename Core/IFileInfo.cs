@@ -19,7 +19,7 @@
 using System;
 using System.IO;
 
-namespace Remotion.Dms.Shared.IO
+namespace Remotion.IO
 {
   /// <summary>
   /// The <see cref="IFileInfo"/> interfaces declares a method for opening a file.

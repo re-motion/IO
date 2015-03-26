@@ -14,14 +14,14 @@
 // You should have received a copy of the GNU Lesser General Public License
 // along with re-motion; if not, see http://www.gnu.org/licenses.
 // 
+
 using System;
 using System.IO;
 using NUnit.Framework;
-using Remotion.Dms.Shared.IO;
 using Rhino.Mocks;
 using MockIs = Rhino.Mocks.Constraints.Is;
 
-namespace Remotion.Dms.UnitTests.Shared.IO
+namespace Remotion.IO.UnitTests
 {
   [TestFixture]
   public class StreamCopierTest

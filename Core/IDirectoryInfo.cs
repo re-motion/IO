@@ -18,7 +18,7 @@
 
 using System;
 
-namespace Remotion.Dms.Shared.IO
+namespace Remotion.IO
 {
   /// <summary>
   /// The <see cref="IDirectoryInfo"/> declares methods for enumerating through directories and its files.

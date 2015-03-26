@@ -15,6 +15,7 @@
 // 
 // Additional permissions are listed in the file re-motion_exceptions.txt.
 // 
+
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -22,7 +23,7 @@ using ICSharpCode.SharpZipLib.Core;
 using ICSharpCode.SharpZipLib.Zip;
 using Remotion.Utilities;
 
-namespace Remotion.Dms.Shared.IO.Zip
+namespace Remotion.IO.Zip
 {
   /// <summary>
   /// Implements <see cref="IArchiveBuilder"/>. 

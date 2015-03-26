@@ -15,10 +15,11 @@
 // 
 // Additional permissions are listed in the file re-motion_exceptions.txt.
 // 
+
 using System;
 using System.IO;
 
-namespace Remotion.Dms.Shared.IO
+namespace Remotion.IO
 {
   /// <summary>
   /// The <see cref="IArchiveBuilder"/> declares an API for adding files and directories to an archive and to return the archive as a stream.

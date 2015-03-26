@@ -18,7 +18,7 @@
 
 using System;
 
-namespace Remotion.Dms.Shared.IO
+namespace Remotion.IO
 {
   public enum FileProcessingRecoveryAction
   {

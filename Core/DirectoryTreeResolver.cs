@@ -15,12 +15,13 @@
 // 
 // Additional permissions are listed in the file re-motion_exceptions.txt.
 // 
+
 using System;
 using System.Collections.Generic;
 using System.IO;
 using Remotion.Utilities;
 
-namespace Remotion.Dms.Shared.IO
+namespace Remotion.IO
 {
   /// <summary>
   /// Responsible for taking a full path and turning it into a hierarchy directories (<see cref="IDirectoryInfo"/>) and files (<see cref="IFileInfo"/>).

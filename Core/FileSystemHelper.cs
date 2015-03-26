@@ -15,15 +15,16 @@
 // 
 // Additional permissions are listed in the file re-motion_exceptions.txt.
 // 
+
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
 using System.Threading;
-using Remotion.Dms.Shared.IO.Zip;
+using Remotion.IO.Zip;
 using Remotion.Utilities;
 
-namespace Remotion.Dms.Shared.IO
+namespace Remotion.IO
 {
   /// <summary>
   /// Implements <see cref="IFileSystemHelper"/>
