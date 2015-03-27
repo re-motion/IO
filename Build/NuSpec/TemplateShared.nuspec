@@ -6,7 +6,7 @@
     <title>$title$</title>
     <authors>$author$</authors>
     <owners>$author$</owners>
-    <licenseUrl>http://opensource.org/licenses/AGPL-3.0</licenseUrl>
+    <licenseUrl>http://opensource.org/licenses/LGPL-2.1</licenseUrl>
     <projectUrl>http://www.re-motion.org</projectUrl>
     <description>$description$</description>
     <copyright>$copyright$</copyright>
