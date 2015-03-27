@@ -124,6 +124,12 @@
     <Compile Include="Zip\ExtractedZipEntryAsFileInfo.cs" />
     <Compile Include="Zip\ZipFileBuilder.cs" />
     <Compile Include="Zip\ZipFileExtractor.cs" />
+    <None Include="..\Build\NuSpec\TemplateShared.nuspec">
+      <Link>TemplateShared.nuspec</Link>
+    </None>
+    <None Include="..\LGPL.licenseheader">
+      <Link>LGPL.licenseheader</Link>
+    </None>
     <None Include="..\remotion.snk">
       <Link>remotion.snk</Link>
     </None>
@@ -135,10 +141,7 @@
   <ItemGroup>
     <None Include="FacetManifest.xml" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="SharedSource\ResharperAnnotations\" />
-    <Folder Include="SharedSource\Utilities\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

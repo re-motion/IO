@@ -32,36 +32,22 @@
   </PropertyGroup>
   <ItemGroup>
     <None Include="Customizations\Local\Configuration.targets" />
-    <None Include="Customizations\Local\Shared.targets" />
-    <None Include="Customizations\Overrides.targets" />
-    <None Include="Customizations\Projects.targets" />
-    <None Include="Customizations\Properties.targets" />
+    <None Include="Customizations\Projects.props" />
+    <None Include="Customizations\Properties.props" />
     <None Include="Customizations\Server\Configuration.targets" />
-    <None Include="Customizations\Server\Shared.targets" />
-    <None Include="Customizations\Version.targets" />
-    <None Include="NuSpec\Install.ps1" />
+    <None Include="Customizations\Version.props" />
     <None Include="NuSpec\TemplateShared.nuspec" />
-    <None Include="NuSpec\TemplateSharedForTool.nuspec" />
-    <None Include="NuSpec\TemplateSharedForWeb.nuspec" />
-    <None Include="NuSpec\Uninstall.ps1" />
-    <None Include="NuSpec\Web.targets" />
     <None Include="packages.config" />
     <None Include="Remotion.build" />
     <None Include="Remotion.Local.build" />
     <None Include="Remotion.Server.build" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="NuSpec\bin\Debug\" />
-    <Folder Include="NuSpec\bin\Release\" />
-    <Folder Include="NuSpec\res\" />
-    <Folder Include="NuSpec\schemas\" />
-    <Folder Include="NuSpec\UI\" />
     <Folder Include="Properties\" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Remotion.BuildScript">
-      <HintPath>..\packages\Remotion.BuildScript.2.0.0-alpha005\lib\net45\Remotion.BuildScript.dll</HintPath>
-      <Private>True</Private>
+      <HintPath>..\packages\Remotion.BuildScript.2.0.0-alpha006\lib\net45\Remotion.BuildScript.dll</HintPath>
     </Reference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

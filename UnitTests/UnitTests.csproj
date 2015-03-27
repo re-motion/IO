@@ -124,6 +124,9 @@
     <Compile Include="Zip\ZipFileExtractorTest.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="..\LGPL.licenseheader">
+      <Link>LGPL.licenseheader</Link>
+    </None>
     <None Include="..\remotion.snk">
       <Link>remotion.snk</Link>
     </None>
