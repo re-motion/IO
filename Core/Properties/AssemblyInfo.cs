@@ -14,16 +14,10 @@
 // You should have received a copy of the GNU Lesser General Public License
 // along with re-motion; if not, see http://www.gnu.org/licenses.
 // 
-
 using System;
 using System.Reflection;
 
-//
-// General Information about an assembly is controlled through the following 
-// set of attributes. Change these attribute values to modify the information
-// associated with an assembly.
-//
-[assembly: AssemblyTitle ("Remotion Dms Shared Library")]
-[assembly: AssemblyDescription("Classes and utilities used by Dms clients and server.")]
-[assembly: AssemblyCulture("")]		
-[assembly: CLSCompliant(true)]
+[assembly: AssemblyTitle ("Remotion IO Library")]
+[assembly: AssemblyDescription ("Object-oriented wrapper for System.IO as associated utilities.")]
+[assembly: AssemblyCulture ("")]
+[assembly: CLSCompliant (true)]

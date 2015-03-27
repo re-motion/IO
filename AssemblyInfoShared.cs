@@ -14,32 +14,14 @@
 // You should have received a copy of the GNU Lesser General Public License
 // along with re-motion; if not, see http://www.gnu.org/licenses.
 // 
-
 using System;
 using System.Reflection;
 
-//
-// General Information about an assembly is controlled through the following 
-// set of attributes. Change these attribute values to modify the information
-// associated with an assembly.
-//
-[assembly: AssemblyConfiguration ("Build type: Debug")]
-[assembly: AssemblyCompany("rubicon IT GmbH")]
-[assembly: AssemblyProduct ("re-vision (www.re-motion.org)")]
-[assembly: AssemblyCopyright ("Copyright (c) rubicon IT GmbH, www.rubicon.eu - Licensed under GNU AGPL 3.0")]
+[assembly: AssemblyCompany ("rubicon IT GmbH")]
+[assembly: AssemblyProduct ("re-motion (www.re-motion.org)")]
+[assembly: AssemblyCopyright ("Copyright (c) rubicon IT GmbH, www.rubicon.eu - Licensed under GNU LGPL 2.1 (or later)")]
 [assembly: AssemblyTrademark ("")]
-[assembly: AssemblyInformationalVersion ("1.15.29.10000+Debug")]
-
-//
-// Version information for an assembly consists of the following four values:
-//
-//      Major Version
-//      Minor Version 
-//      Build Number
-//      Revision
-//
-// You can specify all the values or you can default the Revision and Build Numbers 
-// by using the '*' as shown below:
-
-[assembly: AssemblyVersion("1.15.29.10000")]
-[assembly: AssemblyFileVersion ("1.15.29.10000")]
+[assembly: AssemblyConfiguration ("Build type: Debug")]
+[assembly: AssemblyVersion ("2.0.0.0")]
+[assembly: AssemblyFileVersion ("2.0.0.24009")]
+[assembly: AssemblyInformationalVersion ("2.0.0-x.9+Debug")]
