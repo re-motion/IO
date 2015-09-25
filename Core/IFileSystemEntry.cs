@@ -16,6 +16,7 @@
 // 
 
 using System;
+using JetBrains.Annotations;
 
 namespace Remotion.IO
 {
@@ -24,6 +25,8 @@ namespace Remotion.IO
   /// </summary>
   public interface IFileSystemEntry
   {
+    [CanBeNull]
+    string PhysicalPath { get; }
     string FullName { get; }
     string Name { get; }
     string Extension { get; }

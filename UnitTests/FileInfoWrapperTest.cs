@@ -43,6 +43,12 @@ namespace Remotion.IO.UnitTests
     }
 
     [Test]
+    public void PhysicalPath ()
+    {
+      Assert.That (_fileInfoWrapper.PhysicalPath, Is.EqualTo (_tempFile.FileName));
+    }
+
+    [Test]
     public void FullName ()
     {
       Assert.That (_fileInfoWrapper.FullName, Is.EqualTo (_tempFile.FileName));

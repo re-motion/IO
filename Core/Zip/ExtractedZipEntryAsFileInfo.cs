@@ -41,6 +41,11 @@ namespace Remotion.IO.Zip
       _directory = directory;
     }
 
+    public string PhysicalPath
+    {
+      get { return null; }
+    }
+
     public long Length
     {
       get { return _zipEntry.Size; }
