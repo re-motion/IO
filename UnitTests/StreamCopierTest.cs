@@ -16,7 +16,9 @@
 // 
 
 using System;
+using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using NUnit.Framework;
 using Rhino.Mocks;
 using MockIs = Rhino.Mocks.Constraints.Is;
@@ -34,227 +36,196 @@ namespace Remotion.IO.UnitTests
       _streamCopier = new StreamCopier();
     }
 
-    [Test]
-    [Ignore ("TODO: Implement raise event")]
-    public void CopyStream_WriteAllAtOnce ()
+    [TestCase (null)]
+    [TestCase (10)]
+    [TestCase (20)]
+    public void CopyStream_WriteAllAtOnce (int? maxLength)
     {
-      MockRepository mockRepository = new MockRepository();
-      Stream inputMock = mockRepository.StrictMock<Stream>();
+      Stream inputMock = MockRepository.GenerateStrictMock<Stream>();
+      inputMock.Stub (s => s.CanSeek).Return (false);
 
-      Func<byte[], int, int, int> writeAllAtOnce = delegate (byte[] buffer, int offset, int count)
-      {
-        for (int i = 0; i < 10; ++i)
-          buffer[offset + i] = (byte) i;
-        return 10;
-      };
-
-      using (mockRepository.Ordered())
-      {
-        Expect.Call (inputMock.Read (null, 0, 0))
-            .IgnoreArguments()
-            .Constraints (MockIs.Anything(), MockIs.Equal (0), MockIs.Equal (_streamCopier.BufferSize))
-            .Do (writeAllAtOnce);
-        Expect.Call (inputMock.Read (null, 0, 0))
-            .IgnoreArguments()
-            .Constraints (MockIs.Anything(), MockIs.Equal (0), MockIs.Equal (_streamCopier.BufferSize))
-            .Return (0);
-      }
+      SetupReadExpectation (inputMock, Enumerable.Range (0, 10).Select (i => (byte) i));
+      SetupReadExpectation (inputMock, new byte[] { });
 
       MemoryStream outputStream = new MemoryStream();
-      mockRepository.ReplayAll();
 
       _streamCopier.CopyStream (inputMock, outputStream);
       Assert.That (outputStream.ToArray(), Is.EqualTo (new byte[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 }));
 
-      mockRepository.VerifyAll();
+      inputMock.VerifyAllExpectations();
     }
 
-    [Test]
-    public void CopyStream_WriteInSteps_ReturnsTrue ()
+
+    [TestCase (null)]
+    [TestCase (10)]
+    public void CopyStream_WriteInSteps_ReturnsTrue (int? maxLength)
     {
-      MockRepository mockRepository = new MockRepository();
-      Stream inputMock = mockRepository.StrictMock<Stream>();
-      SetupResult.For (inputMock.Length).Return (10L);
-      inputMock.Expect (s => s.CanSeek).Return (true);
-      Func<byte[], int, int, int> writeStep1 = delegate (byte[] buffer, int offset, int count)
-      {
-        for (int i = 0; i < 5; ++i)
-          buffer[offset + i] = (byte) i;
-        return 5;
-      };
+      Stream inputMock = MockRepository.GenerateStrictMock<Stream>();
 
-      Func<byte[], int, int, int> writeStep2 = delegate (byte[] buffer, int offset, int count)
-      {
-        for (int i = 0; i < 3; ++i)
-          buffer[offset + i] = (byte) i;
-        return 3;
-      };
-
-      Func<byte[], int, int, int> writeStep3 = delegate (byte[] buffer, int offset, int count)
-      {
-        for (int i = 0; i < 2; ++i)
-          buffer[offset + i] = (byte) i;
-        return 2;
-      };
-
-      using (mockRepository.Ordered())
-      {
-        Expect.Call (inputMock.Read (null, 0, 0))
-            .IgnoreArguments()
-            .Constraints (MockIs.Anything(), MockIs.Equal (0), MockIs.Equal (_streamCopier.BufferSize))
-            .Do (writeStep1);
-        Expect.Call (inputMock.Read (null, 0, 0))
-            .IgnoreArguments()
-            .Constraints (MockIs.Anything(), MockIs.Equal (0), MockIs.Equal (_streamCopier.BufferSize))
-            .Do (writeStep2);
-        Expect.Call (inputMock.Read (null, 0, 0))
-            .IgnoreArguments()
-            .Constraints (MockIs.Anything(), MockIs.Equal (0), MockIs.Equal (_streamCopier.BufferSize))
-            .Do (writeStep3);
-        Expect.Call (inputMock.Read (null, 0, 0))
-            .IgnoreArguments()
-            .Constraints (MockIs.Anything(), MockIs.Equal (0), MockIs.Equal (_streamCopier.BufferSize))
-            .Return (0);
-      }
+      inputMock.Stub (s => s.CanSeek).Return (false);
+      SetupReadExpectation (inputMock, Enumerable.Range (0, 5).Select (i => (byte) i));
+      SetupReadExpectation (inputMock, Enumerable.Range (10, 3).Select (i => (byte) i));
+      SetupReadExpectation (inputMock, Enumerable.Range (20, 2).Select (i => (byte) i));
+      SetupReadExpectation (inputMock, new byte[] { });
 
       MemoryStream outputStream = new MemoryStream();
-      mockRepository.ReplayAll();
 
-      var result = _streamCopier.CopyStream (inputMock, outputStream);
+      var bytesTransferredHistory = new List<long>();
+      _streamCopier.TransferProgress += (sender, e) => bytesTransferredHistory.Add (e.CurrentValue);
+
+      var result = _streamCopier.CopyStream (inputMock, outputStream, maxLength);
 
       Assert.That (result, Is.True);
-      Assert.That (outputStream.ToArray(), Is.EqualTo (new byte[] { 0, 1, 2, 3, 4, 0, 1, 2, 0, 1 }));
+      Assert.That (outputStream.ToArray(), Is.EqualTo (new byte[] { 0, 1, 2, 3, 4, 10, 11, 12, 20, 21 }));
+      Assert.That (bytesTransferredHistory, Is.EqualTo (new object[] { 5L, 8L, 10L, 10L }));
 
-      mockRepository.VerifyAll();
+      inputMock.VerifyAllExpectations();
     }
 
     [Test]
     public void CopyStream_LengthDiffersWithContentTooShort ()
     {
-      MockRepository mockRepository = new MockRepository();
-      Stream inputMock = mockRepository.StrictMock<Stream>();
+      Stream inputMock = MockRepository.GenerateStrictMock<Stream>();
       const int streamLength = 10;
       const int contentLength = streamLength / 2;
-      SetupResult.For (inputMock.Length).Return (streamLength);
-      inputMock.Expect (s => s.CanSeek).Return (true);
-      Func<byte[], int, int, int> writeStep1 = delegate (byte[] buffer, int offset, int count)
-      {
-        for (int i = 0; i < contentLength; ++i)
-          buffer[offset + i] = (byte) i;
-        return contentLength;
-      };
 
-      using (mockRepository.Ordered())
-      {
-        Expect.Call (inputMock.Read (null, 0, 0))
-            .IgnoreArguments()
-            .Constraints (MockIs.Anything(), MockIs.Equal (0), MockIs.Equal (_streamCopier.BufferSize))
-            .Do (writeStep1);
-        Expect.Call (inputMock.Read (null, 0, 0))
-            .IgnoreArguments()
-            .Constraints (MockIs.Anything(), MockIs.Equal (0), MockIs.Equal (_streamCopier.BufferSize))
-            .Return (0);
-      }
+      inputMock.Stub (s => s.Length).Return (streamLength);
+      inputMock.Stub (s => s.CanSeek).Return (true);
+      SetupReadExpectation (inputMock, Enumerable.Range (0, contentLength).Select (i => (byte) i));
+      SetupReadExpectation (inputMock, new byte[] { });
 
       MemoryStream outputStream = new MemoryStream();
-      mockRepository.ReplayAll();
 
-      Assert.That (
-          () => _streamCopier.CopyStream (inputMock, outputStream),
-          Throws.TypeOf<InvalidOperationException>().With.Message.EqualTo ("The stream did not return the specified amount of data."));
+      Assert.That (_streamCopier.CopyStream (inputMock, outputStream), Is.False);
 
-      mockRepository.VerifyAll();
+      inputMock.VerifyAllExpectations();
     }
 
     [Test]
-    public void CopyStream_LengthDiffersWithContentTooLong ()
+    public void CopyStream_LengthDiffersWithContentTooLong_ThrowsIOException ()
     {
-      MockRepository mockRepository = new MockRepository();
-      Stream inputMock = mockRepository.StrictMock<Stream>();
+      Stream inputMock = MockRepository.GenerateStrictMock<Stream>();
       const int streamLength = 10;
       const int contentLength = streamLength * 2;
-      SetupResult.For (inputMock.Length).Return (streamLength);
-      inputMock.Expect (s => s.CanSeek).Return (true);
-      Func<byte[], int, int, int> writeStep1 = delegate (byte[] buffer, int offset, int count)
-      {
-        for (int i = 0; i < contentLength; ++i)
-          buffer[offset + i] = (byte) i;
-        return contentLength;
-      };
 
-      using (mockRepository.Ordered())
-      {
-        Expect.Call (inputMock.Read (null, 0, 0))
-            .IgnoreArguments()
-            .Constraints (MockIs.Anything(), MockIs.Equal (0), MockIs.Equal (_streamCopier.BufferSize))
-            .Do (writeStep1);
-      }
+      inputMock.Stub (s => s.Length).Return (streamLength);
+      inputMock.Stub (s => s.CanSeek).Return (true);
+      SetupReadExpectation (inputMock, Enumerable.Range (0, contentLength).Select (i => (byte) i));
+      SetupReadExpectation (inputMock, new byte[] { });
 
       MemoryStream outputStream = new MemoryStream();
-      mockRepository.ReplayAll();
 
       Assert.That (
           () => _streamCopier.CopyStream (inputMock, outputStream),
-          Throws.TypeOf<InvalidOperationException>().With.Message.EqualTo ("The stream returned more data than the specified length."));
+          Throws.TypeOf<IOException>().With.Message.EqualTo ("The stream returned more data than the stream length (10 bytes) specified."));
 
-      mockRepository.VerifyAll();
+      inputMock.VerifyAllExpectations();
     }
 
     [Test]
     public void CopyStream_UserCancels_ReturnsFalse ()
     {
-      Stream inputMock = MockRepository.GenerateStub<Stream>();
-      inputMock.Expect (s => s.Read (null, 0, 0)).IgnoreArguments().Return (1);
-      inputMock.Expect (s => s.Length).Return (10);
+      Stream inputMock = MockRepository.GenerateStrictMock<Stream>();
 
-      _streamCopier.TransferProgress += (sender, e) => { e.Cancel = true; };
+      const int numberOfNotificationsToWait = 5;
+
+      inputMock.Expect (s => s.Read (null, 0, 0)).IgnoreArguments().Return (1).Repeat.Times (numberOfNotificationsToWait);
+      inputMock.Stub (s => s.Length).Return (10);
+
+      var transferProgressNotificationCount = 0;
+      _streamCopier.TransferProgress += (sender, e) =>
+      {
+        transferProgressNotificationCount++;
+        if (transferProgressNotificationCount == numberOfNotificationsToWait)
+          e.Cancel = true;
+      };
 
       Assert.That (_streamCopier.CopyStream (inputMock, new MemoryStream()), Is.False);
+
+      inputMock.VerifyAllExpectations();
     }
 
     [Test]
-    public void CopyStream_StreamCannotSeek_ReportsNullInProgressAsStreamLength ()
+    public void CopyStream_StreamCannotRead_DoesntCallLength ()
     {
       Stream inputMock = MockRepository.GenerateStrictMock<Stream>();
-      inputMock.Expect (s => s.Read (null, 0, 0)).IgnoreArguments().Return (1);
-      inputMock.Expect (s => s.CanSeek).Return (false);
-
-      long? streamLength = null;
-      bool transferProgressEventRaised = false;
-      _streamCopier.TransferProgress += (sender, e) =>
-      {
-        transferProgressEventRaised = true;
-        streamLength = e.StreamLength;
-        e.Cancel = true;
-      };
+      inputMock.Expect (s => s.Read (null, 0, 0)).IgnoreArguments().Return (0);
+      inputMock.Stub (s => s.CanSeek).Return (false);
+      inputMock.Stub (s => s.Length).Throw (new AssertionException ("Length should not be called, when CanSeek returns false."));
 
       _streamCopier.CopyStream (inputMock, new MemoryStream());
 
-      Assert.That (transferProgressEventRaised, Is.True);
-      Assert.That (streamLength, Is.Null);
+      inputMock.VerifyAllExpectations();
     }
 
     [Test]
-    public void CopyStream_StreamCanSeek_ReportsStreamLengthInProgressAsStreamLength ()
+    public void CopyStream_PassesCorrectBufferLength ()
     {
       Stream inputMock = MockRepository.GenerateStrictMock<Stream>();
-      inputMock.Expect (s => s.Read (null, 0, 0)).IgnoreArguments().Return (1);
-      inputMock.Expect (s => s.CanSeek).Return (true);
-      inputMock.Expect (s => s.Length).Return (1111);
-
-      long? streamLength = null;
-      bool transferProgressEventRaised = false;
-      _streamCopier.TransferProgress += (sender, e) =>
-      {
-        transferProgressEventRaised = true;
-        streamLength = e.StreamLength;
-        e.Cancel = true;
-      };
+      inputMock.Expect (s => s.Read (new byte[_streamCopier.BufferSize], 0, _streamCopier.BufferSize)).Return (0);
+      inputMock.Stub (s => s.CanSeek).Return (false);
 
       _streamCopier.CopyStream (inputMock, new MemoryStream());
 
-      Assert.That (transferProgressEventRaised, Is.True);
-      Assert.That (streamLength, Is.EqualTo (1111));
+      inputMock.VerifyAllExpectations();
+    }
+
+    [Test]
+    public void CopyStream_StreamReturnsMoreDataThanMaximumLength_ThrowsIOException ()
+    {
+      Stream inputStub = MockRepository.GenerateStub<Stream>();
+      inputStub.Stub (_ => _.CanSeek).Return (false);
+      inputStub.Expect (_ => _.Read (null, 0, 0)).IgnoreArguments().Return (13);
+
+      Assert.That (
+          () => _streamCopier.CopyStream (inputStub, new MemoryStream(), 12),
+          Throws.InstanceOf<IOException>().With.Message.EqualTo ("The stream returned more data (13 bytes) than the specified maximum (12 bytes)."));
+    }
+
+    [Test]
+    public void CopyStream_StreamReturnsMoreDataThanStreamLength_ThrowsIOException ()
+    {
+      Stream inputStub = MockRepository.GenerateStub<Stream>();
+      inputStub.Stub (_ => _.CanSeek).Return (true);
+      inputStub.Stub (_ => _.Length).Return (11);
+      inputStub.Stub (_ => _.Read (null, 0, 0)).IgnoreArguments().Return (13).Repeat.Once();
+      inputStub.Stub (_ => _.Read (null, 0, 0)).IgnoreArguments().Return (0);
+
+      Assert.That (
+          () => _streamCopier.CopyStream (inputStub, new MemoryStream()),
+          Throws.InstanceOf<IOException>().With.Message.EqualTo ("The stream returned more data than the stream length (11 bytes) specified."));
+    }
+
+    [Test]
+    public void CopyStream_StreamReturnsMoreDataThanMaximumLengthAndStreamLength_ThrowsIOException ()
+    {
+      Stream inputStub = MockRepository.GenerateStub<Stream>();
+      inputStub.Stub (_ => _.CanSeek).Return (true);
+      inputStub.Stub (_ => _.Length).Return (11);
+      inputStub.Expect (_ => _.Read (null, 0, 0)).IgnoreArguments().Return (13);
+
+      Assert.That (
+          () => _streamCopier.CopyStream (inputStub, new MemoryStream(), 12),
+          Throws.InstanceOf<IOException>().With.Message.EqualTo ("The stream returned more data (13 bytes) than the specified maximum (12 bytes)."));
+    }
+
+    private void SetupReadExpectation (Stream streamMock, IEnumerable<byte> bytes)
+    {
+      var byteArray = bytes.ToArray();
+
+      streamMock
+          .Expect (s => s.Read (null, 0, 0))
+          .IgnoreArguments()
+          .WhenCalled (invocation =>
+          {
+            var buffer = (byte[]) invocation.Arguments[0];
+            var offset = (int) invocation.Arguments[1];
+
+            for (int i = 0; i < byteArray.Length; ++i)
+              buffer[offset + i] = byteArray[i];
+          })
+          .Return (byteArray.Length)
+          .Repeat.Once();
     }
   }
 }
