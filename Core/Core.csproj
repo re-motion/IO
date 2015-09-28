@@ -120,6 +120,7 @@
     <Compile Include="ReadOnlyStream.cs" />
     <Compile Include="StreamCopier.cs" />
     <Compile Include="StreamCopyProgressEventArgs.cs" />
+    <Compile Include="StreamWithTimeoutDecorator.cs" />
     <Compile Include="TemporaryFileStream.cs" />
     <Compile Include="Zip\ExtractedZipEntryAsFileInfo.cs" />
     <Compile Include="Zip\ZipFileBuilder.cs" />
