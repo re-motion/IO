@@ -43,7 +43,7 @@ namespace Remotion.IO
       get { return _bufferSize; }
     }
 
-    public bool CopyStream (Stream input, Stream output, long inputLength)
+    public bool CopyStream (Stream input, Stream output)
     {
       ArgumentUtility.CheckNotNull ("input", input);
       ArgumentUtility.CheckNotNull ("output", output);
@@ -51,6 +51,7 @@ namespace Remotion.IO
       long bytesTransferred = 0;
       byte[] buffer = new byte[BufferSize];
       int bytesRead;
+      var inputLength = input.CanSeek ? input.Length : (long?) null;
       do
       {
         bytesRead = input.Read (buffer, 0, buffer.Length);
@@ -66,7 +67,7 @@ namespace Remotion.IO
       } while (bytesRead != 0);
 
 
-      if (bytesTransferred != inputLength)
+      if (inputLength.HasValue && bytesTransferred != inputLength)
         throw new InvalidOperationException ("The stream did not return the specified amount of data.");
 
       return true;

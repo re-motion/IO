@@ -94,7 +94,7 @@ namespace Remotion.IO.Zip
 
         var streamCopier = new StreamCopier();
         streamCopier.TransferProgress += OnZippingProgress;
-        if (!streamCopier.CopyStream (fileStream, zipOutputStream, fileStream.Length))
+        if (!streamCopier.CopyStream (fileStream, zipOutputStream))
         {
           zipEntry.Size = -1;
           throw new AbortException();

@@ -63,7 +63,7 @@ namespace Remotion.IO.UnitTests
       MemoryStream outputStream = new MemoryStream();
       mockRepository.ReplayAll();
 
-      _streamCopier.CopyStream (inputMock, outputStream, inputMock.Length);
+      _streamCopier.CopyStream (inputMock, outputStream);
       Assert.That (outputStream.ToArray(), Is.EqualTo (new byte[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 }));
 
       mockRepository.VerifyAll();
@@ -75,6 +75,7 @@ namespace Remotion.IO.UnitTests
       MockRepository mockRepository = new MockRepository();
       Stream inputMock = mockRepository.StrictMock<Stream>();
       SetupResult.For (inputMock.Length).Return (10L);
+      inputMock.Expect (s => s.CanSeek).Return (true);
       Func<byte[], int, int, int> writeStep1 = delegate (byte[] buffer, int offset, int count)
       {
         for (int i = 0; i < 5; ++i)
@@ -119,7 +120,7 @@ namespace Remotion.IO.UnitTests
       MemoryStream outputStream = new MemoryStream();
       mockRepository.ReplayAll();
 
-      var result = _streamCopier.CopyStream (inputMock, outputStream, inputMock.Length);
+      var result = _streamCopier.CopyStream (inputMock, outputStream);
 
       Assert.That (result, Is.True);
       Assert.That (outputStream.ToArray(), Is.EqualTo (new byte[] { 0, 1, 2, 3, 4, 0, 1, 2, 0, 1 }));
@@ -132,12 +133,15 @@ namespace Remotion.IO.UnitTests
     {
       MockRepository mockRepository = new MockRepository();
       Stream inputMock = mockRepository.StrictMock<Stream>();
-      SetupResult.For (inputMock.Length).Return (10L);
+      const int streamLength = 10;
+      const int contentLength = streamLength / 2;
+      SetupResult.For (inputMock.Length).Return (streamLength);
+      inputMock.Expect (s => s.CanSeek).Return (true);
       Func<byte[], int, int, int> writeStep1 = delegate (byte[] buffer, int offset, int count)
       {
-        for (int i = 0; i < 10; ++i)
+        for (int i = 0; i < contentLength; ++i)
           buffer[offset + i] = (byte) i;
-        return 10;
+        return contentLength;
       };
 
       using (mockRepository.Ordered())
@@ -156,7 +160,7 @@ namespace Remotion.IO.UnitTests
       mockRepository.ReplayAll();
 
       Assert.That (
-          () => _streamCopier.CopyStream (inputMock, outputStream, inputMock.Length * 2),
+          () => _streamCopier.CopyStream (inputMock, outputStream),
           Throws.TypeOf<InvalidOperationException>().With.Message.EqualTo ("The stream did not return the specified amount of data."));
 
       mockRepository.VerifyAll();
@@ -167,12 +171,15 @@ namespace Remotion.IO.UnitTests
     {
       MockRepository mockRepository = new MockRepository();
       Stream inputMock = mockRepository.StrictMock<Stream>();
-      SetupResult.For (inputMock.Length).Return (10L);
+      const int streamLength = 10;
+      const int contentLength = streamLength * 2;
+      SetupResult.For (inputMock.Length).Return (streamLength);
+      inputMock.Expect (s => s.CanSeek).Return (true);
       Func<byte[], int, int, int> writeStep1 = delegate (byte[] buffer, int offset, int count)
       {
-        for (int i = 0; i < 10; ++i)
+        for (int i = 0; i < contentLength; ++i)
           buffer[offset + i] = (byte) i;
-        return 10;
+        return contentLength;
       };
 
       using (mockRepository.Ordered())
@@ -187,7 +194,7 @@ namespace Remotion.IO.UnitTests
       mockRepository.ReplayAll();
 
       Assert.That (
-          () => _streamCopier.CopyStream (inputMock, outputStream, inputMock.Length / 2),
+          () => _streamCopier.CopyStream (inputMock, outputStream),
           Throws.TypeOf<InvalidOperationException>().With.Message.EqualTo ("The stream returned more data than the specified length."));
 
       mockRepository.VerifyAll();
@@ -198,10 +205,56 @@ namespace Remotion.IO.UnitTests
     {
       Stream inputMock = MockRepository.GenerateStub<Stream>();
       inputMock.Expect (s => s.Read (null, 0, 0)).IgnoreArguments().Return (1);
+      inputMock.Expect (s => s.Length).Return (10);
 
       _streamCopier.TransferProgress += (sender, e) => { e.Cancel = true; };
 
-      Assert.That (_streamCopier.CopyStream (inputMock, new MemoryStream(), 10), Is.False);
+      Assert.That (_streamCopier.CopyStream (inputMock, new MemoryStream()), Is.False);
+    }
+
+    [Test]
+    public void CopyStream_StreamCannotSeek_ReportsNullInProgressAsStreamLength ()
+    {
+      Stream inputMock = MockRepository.GenerateStrictMock<Stream>();
+      inputMock.Expect (s => s.Read (null, 0, 0)).IgnoreArguments().Return (1);
+      inputMock.Expect (s => s.CanSeek).Return (false);
+
+      long? streamLength = null;
+      bool transferProgressEventRaised = false;
+      _streamCopier.TransferProgress += (sender, e) =>
+      {
+        transferProgressEventRaised = true;
+        streamLength = e.StreamLength;
+        e.Cancel = true;
+      };
+
+      _streamCopier.CopyStream (inputMock, new MemoryStream());
+
+      Assert.That (transferProgressEventRaised, Is.True);
+      Assert.That (streamLength, Is.Null);
+    }
+
+    [Test]
+    public void CopyStream_StreamCanSeek_ReportsStreamLengthInProgressAsStreamLength ()
+    {
+      Stream inputMock = MockRepository.GenerateStrictMock<Stream>();
+      inputMock.Expect (s => s.Read (null, 0, 0)).IgnoreArguments().Return (1);
+      inputMock.Expect (s => s.CanSeek).Return (true);
+      inputMock.Expect (s => s.Length).Return (1111);
+
+      long? streamLength = null;
+      bool transferProgressEventRaised = false;
+      _streamCopier.TransferProgress += (sender, e) =>
+      {
+        transferProgressEventRaised = true;
+        streamLength = e.StreamLength;
+        e.Cancel = true;
+      };
+
+      _streamCopier.CopyStream (inputMock, new MemoryStream());
+
+      Assert.That (transferProgressEventRaised, Is.True);
+      Assert.That (streamLength, Is.EqualTo (1111));
     }
   }
 }
