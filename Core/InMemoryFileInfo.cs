@@ -46,6 +46,11 @@ namespace Remotion.IO
       _directory = directory;
     }
 
+    public string PhysicalPath
+    {
+      get { return null; }
+    }
+
     public string FullName
     {
       get { return _fileName; }

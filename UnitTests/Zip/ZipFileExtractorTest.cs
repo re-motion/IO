@@ -65,9 +65,11 @@ namespace Remotion.IO.UnitTests.Zip
 
           Assert.That (files.Length, Is.EqualTo (2));
 
+          Assert.That (files[0].PhysicalPath, Is.Null);
           Assert.That (files[0].FullName, Is.EqualTo (Path.GetFileName (_file1)));
           Assert.That (GetBytesFromFile (files[0]), Is.EqualTo (File.ReadAllBytes (_file1)));
 
+          Assert.That (files[1].PhysicalPath, Is.Null);
           Assert.That (files[1].FullName, Is.EqualTo (Path.GetFileName (_file2)));
           Assert.That (GetBytesFromFile (files[1]), Is.EqualTo (File.ReadAllBytes (_file2)));
         }
@@ -91,9 +93,12 @@ namespace Remotion.IO.UnitTests.Zip
         {
           var files = zipExtractor.GetFiles();
 
+          Assert.That (files[0].PhysicalPath, Is.Null);
           Assert.That (files[0].FullName, Is.EqualTo (Path.Combine ("SubFolder", Path.GetFileName (_file1))));
+          Assert.That (files[1].PhysicalPath, Is.Null);
           Assert.That (files[1].FullName, Is.EqualTo (Path.Combine ("SubFolder", Path.GetFileName (_file2))));
 
+          Assert.That (files[0].Directory.PhysicalPath, Is.Null);
           Assert.That (files[0].Directory, Is.Not.Null);
           Assert.That (files[0].Directory.Name, Is.EqualTo ("SubFolder"));
           Assert.That (files[0].Directory, Is.SameAs (files[1].Directory));

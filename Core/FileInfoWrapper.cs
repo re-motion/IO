@@ -35,6 +35,11 @@ namespace Remotion.IO
       _wrappedInstance = fileInfo;
     }
 
+    public string PhysicalPath
+    {
+      get { return _wrappedInstance.FullName; }
+    }
+
     public string FullName
     {
       get { return _wrappedInstance.FullName; }

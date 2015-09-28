@@ -51,6 +51,11 @@ namespace Remotion.IO
       _lastWriteTimeUtc = lastWriteTimeUtc;
     }
 
+    public string PhysicalPath
+    {
+      get { return null; }
+    }
+
     public string FullName
     {
       get { return _fullName; }

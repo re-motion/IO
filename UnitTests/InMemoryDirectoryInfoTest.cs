@@ -44,6 +44,12 @@ namespace Remotion.IO.UnitTests
     }
 
     [Test]
+    public void PhysicalPath ()
+    {
+      Assert.That (_inMemoryDirectoryInfo.PhysicalPath, Is.Null);
+    }
+
+    [Test]
     public void FullName ()
     {
       Assert.That (_inMemoryDirectoryInfo.FullName, Is.EqualTo (_directoryName));
