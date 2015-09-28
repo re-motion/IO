@@ -57,14 +57,19 @@ namespace Remotion.IO
         output.Write (buffer, 0, bytesRead);
         bytesTransferred += bytesRead;
         if (bytesTransferred > inputLength)
-          return false;
+          throw new InvalidOperationException ("The stream returned more data than the specified length.");
 
         var args = new StreamCopyProgressEventArgs (bytesTransferred, inputLength);
         OnTransferProgress (args);
         if (args.Cancel)
           return false;
       } while (bytesRead != 0);
-      return bytesTransferred == inputLength;
+
+
+      if (bytesTransferred != inputLength)
+        throw new InvalidOperationException ("The stream did not return the specified amount of data.");
+
+      return true;
     }
 
     private void OnTransferProgress (StreamCopyProgressEventArgs args)

@@ -70,7 +70,7 @@ namespace Remotion.IO.UnitTests
     }
 
     [Test]
-    public void CopyStream_WriteInSteps ()
+    public void CopyStream_WriteInSteps_ReturnsTrue ()
     {
       MockRepository mockRepository = new MockRepository();
       Stream inputMock = mockRepository.StrictMock<Stream>();
@@ -155,8 +155,9 @@ namespace Remotion.IO.UnitTests
       MemoryStream outputStream = new MemoryStream();
       mockRepository.ReplayAll();
 
-      var result = _streamCopier.CopyStream (inputMock, outputStream, inputMock.Length * 2);
-      Assert.That (result, Is.False);
+      Assert.That (
+          () => _streamCopier.CopyStream (inputMock, outputStream, inputMock.Length * 2),
+          Throws.TypeOf<InvalidOperationException>().With.Message.EqualTo ("The stream did not return the specified amount of data."));
 
       mockRepository.VerifyAll();
     }
@@ -185,10 +186,22 @@ namespace Remotion.IO.UnitTests
       MemoryStream outputStream = new MemoryStream();
       mockRepository.ReplayAll();
 
-      var result = _streamCopier.CopyStream (inputMock, outputStream, inputMock.Length / 2);
-      Assert.That (result, Is.False);
+      Assert.That (
+          () => _streamCopier.CopyStream (inputMock, outputStream, inputMock.Length / 2),
+          Throws.TypeOf<InvalidOperationException>().With.Message.EqualTo ("The stream returned more data than the specified length."));
 
       mockRepository.VerifyAll();
+    }
+
+    [Test]
+    public void CopyStream_UserCancels_ReturnsFalse ()
+    {
+      Stream inputMock = MockRepository.GenerateStub<Stream>();
+      inputMock.Expect (s => s.Read (null, 0, 0)).IgnoreArguments().Return (1);
+
+      _streamCopier.TransferProgress += (sender, e) => { e.Cancel = true; };
+
+      Assert.That (_streamCopier.CopyStream (inputMock, new MemoryStream(), 10), Is.False);
     }
   }
 }
