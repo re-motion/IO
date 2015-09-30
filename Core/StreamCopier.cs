@@ -21,6 +21,9 @@ using Remotion.Utilities;
 
 namespace Remotion.IO
 {
+  /// <summary>
+  /// Provides functionality for copying streams with progress report.
+  /// </summary>
   public class StreamCopier
   {
     private readonly int _bufferSize;
@@ -43,7 +46,25 @@ namespace Remotion.IO
       get { return _bufferSize; }
     }
 
-    public bool CopyStream (Stream input, Stream output, long inputLength)
+    /// <summary>
+    /// Copies the <paramref name="input"/> <see cref="Stream"/> to the <paramref name="output"/> <see cref="Stream"/>.
+    /// </summary>
+    /// <param name="input">The input stream. Must not be <see langword="null" />.</param>
+    /// <param name="output">The output stream. Must not be <see langword="null" />.</param>
+    /// <param name="maxLength">If specified, the maximum length of the <paramref name="input"/> <see cref="Stream"/>.</param>
+    /// <returns>
+    /// <see langword="true" /> if all bytes were copied and <see langword="false" /> if the copying was either cancelled via the <see cref="TransferProgress"/> event 
+    /// or the <paramref name="input"/> <see cref="Stream"/> returned less data than specified by its <see cref="Stream.Length"/> property.</returns>
+    /// <exception cref="IOException">
+    /// <para>
+    /// Thrown if the <paramref name="input"/> <see cref="Stream"/> returned more bytes than specified via <paramref name="maxLength"/>
+    /// </para>
+    /// <para>- or -</para>
+    /// <para>
+    /// the <paramref name="input"/> <see cref="Stream"/> is seekable and returned more bytes than specified by its <see cref="Stream.Length"/> property.
+    /// </para>
+    /// </exception>
+    public bool CopyStream (Stream input, Stream output, int? maxLength = null)
     {
       ArgumentUtility.CheckNotNull ("input", input);
       ArgumentUtility.CheckNotNull ("output", output);
@@ -51,20 +72,31 @@ namespace Remotion.IO
       long bytesTransferred = 0;
       byte[] buffer = new byte[BufferSize];
       int bytesRead;
+
       do
       {
         bytesRead = input.Read (buffer, 0, buffer.Length);
         output.Write (buffer, 0, bytesRead);
         bytesTransferred += bytesRead;
-        if (bytesTransferred > inputLength)
-          return false;
 
-        var args = new StreamCopyProgressEventArgs (bytesTransferred, inputLength);
+        if (bytesTransferred > maxLength)
+          throw new IOException (string.Format ("The stream returned more data ({0} bytes) than the specified maximum ({1} bytes).", bytesTransferred, maxLength));
+
+        var args = new StreamCopyProgressEventArgs (bytesTransferred);
         OnTransferProgress (args);
         if (args.Cancel)
           return false;
       } while (bytesRead != 0);
-      return bytesTransferred == inputLength;
+
+      var finalInputLength = input.CanSeek ? input.Length : (long?) null;
+
+      if (bytesTransferred > finalInputLength)
+        throw new IOException (string.Format ("The stream returned more data than the stream length ({0} bytes) specified.", finalInputLength));
+
+      if (bytesTransferred < finalInputLength)
+        return false;
+
+      return true;
     }
 
     private void OnTransferProgress (StreamCopyProgressEventArgs args)

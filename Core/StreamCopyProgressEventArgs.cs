@@ -22,24 +22,17 @@ namespace Remotion.IO
   public class StreamCopyProgressEventArgs : EventArgs
   {
     private readonly long _currentValue;
-    private readonly long _fileLength;
     private bool _cancel;
 
-    public StreamCopyProgressEventArgs (long currentValue, long fileLength)
+    public StreamCopyProgressEventArgs (long currentValue)
     {
       _currentValue = currentValue;
-      _fileLength = fileLength;
       _cancel = false;
     }
 
     public long CurrentValue
     {
       get { return _currentValue; }
-    }
-
-    public long StreamLength
-    {
-      get { return _fileLength; }
     }
 
     public bool Cancel
