@@ -82,9 +82,8 @@ namespace Remotion.IO
         if (bytesTransferred > maxLength)
           throw new IOException (string.Format ("The stream returned more data ({0} bytes) than the specified maximum ({1} bytes).", bytesTransferred, maxLength));
 
-        var args = new StreamCopyProgressEventArgs (bytesTransferred);
-        OnTransferProgress (args);
-        if (args.Cancel)
+        var isCancelRequested = OnTransferProgress (bytesTransferred);
+        if (isCancelRequested)
           return false;
       } while (bytesRead != 0);
 
@@ -99,10 +98,17 @@ namespace Remotion.IO
       return true;
     }
 
-    private void OnTransferProgress (StreamCopyProgressEventArgs args)
+    private bool OnTransferProgress (long bytesTransferred)
     {
       if (TransferProgress != null)
+      {
+        // Memory allocation optimization: Only allocate event args if they are actually needed. 
+        // This reduces GC pressure when transferring large files in a server process.
+        var args = new StreamCopyProgressEventArgs (bytesTransferred);
         TransferProgress (this, args);
+        return args.Cancel;
+      }
+      return false;
     }
   }
 }
