@@ -64,7 +64,7 @@ namespace Remotion.IO
     /// the <paramref name="input"/> <see cref="Stream"/> is seekable and returned more bytes than specified by its <see cref="Stream.Length"/> property.
     /// </para>
     /// </exception>
-    public bool CopyStream (Stream input, Stream output, int? maxLength = null)
+    public bool CopyStream (Stream input, Stream output, long? maxLength = null)
     {
       ArgumentUtility.CheckNotNull ("input", input);
       ArgumentUtility.CheckNotNull ("output", output);
