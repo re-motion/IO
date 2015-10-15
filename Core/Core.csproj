@@ -119,6 +119,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ReadOnlyStream.cs" />
     <Compile Include="StreamCopier.cs" />
+    <Compile Include="ArchiveBuilderProgressEventArgs.cs" />
     <Compile Include="StreamCopyProgressEventArgs.cs" />
     <Compile Include="StreamWithTimeoutDecorator.cs" />
     <Compile Include="TemporaryFileStream.cs" />

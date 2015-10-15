@@ -28,7 +28,7 @@ namespace Remotion.IO
     void AddFile (IFileInfo fileInfo);
     void AddDirectory (IDirectoryInfo directoryInfo);
     Stream Build (string archiveFileName);
-    event EventHandler<StreamCopyProgressEventArgs> Progress; 
+    event EventHandler<ArchiveBuilderProgressEventArgs> Progress;
     event EventHandler<FileOpenExceptionEventArgs> Error; 
     FileProcessingRecoveryAction FileProcessingRecoveryAction { get; set; }
   }
