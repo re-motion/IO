@@ -31,10 +31,12 @@ namespace Remotion.IO.Zip
   public class ZipFileBuilder : IArchiveBuilder
   {
     private readonly List<IFileSystemEntry> _files = new List<IFileSystemEntry>();
-    public event EventHandler<StreamCopyProgressEventArgs> Progress;
+    public event EventHandler<ArchiveBuilderProgressEventArgs> Progress;
     public event EventHandler<FileOpenExceptionEventArgs> Error;
 
     private FileProcessingRecoveryAction _fileProcessingRecoveryAction;
+    private int _currentFileIndex = 0;
+    private long _currentTotalValueExcludingCurrentFileValue = 0;
 
     public ZipFileBuilder ()
     {
@@ -75,13 +77,18 @@ namespace Remotion.IO.Zip
             AddDirectoryToZipFile ((IDirectoryInfo) fileInfo, zipOutputStream, nameTransform);
         }
       }
+      
       _files.Clear();
+      _currentFileIndex = 0;
+      _currentTotalValueExcludingCurrentFileValue = 0;
+
       return File.Open (archiveFileName, FileMode.Open, FileAccess.Read, FileShare.None);
     }
 
     private void AddFileToZipFile (IFileInfo fileInfo, ZipOutputStream zipOutputStream, ZipNameTransform nameTransform)
     {
       var fileStream = GetFileStream (fileInfo);
+      var fileLength = fileInfo.Length;
 
       if (fileStream == null)
         return;
@@ -93,13 +100,17 @@ namespace Remotion.IO.Zip
       {
 
         var streamCopier = new StreamCopier();
-        streamCopier.TransferProgress += OnZippingProgress;
+        streamCopier.TransferProgress += (sender, args) => OnZippingProgress (args, fileInfo.FullName);
+
         if (!streamCopier.CopyStream (fileStream, zipOutputStream))
         {
           zipEntry.Size = -1;
           throw new AbortException();
         }
       }
+
+      _currentFileIndex++;
+      _currentTotalValueExcludingCurrentFileValue += fileLength;
     }
 
     private void AddDirectoryToZipFile (IDirectoryInfo directoryInfo, ZipOutputStream zipOutputStream, ZipNameTransform nameTransform)
@@ -147,14 +158,25 @@ namespace Remotion.IO.Zip
                  IsUnicodeText = true,
                  Size = fileInfo.Length,
                  DateTime = fileInfo.LastWriteTimeUtc
-
              };
     }
 
-    private void OnZippingProgress (object sender, StreamCopyProgressEventArgs args)
+    private void OnZippingProgress (StreamCopyProgressEventArgs currentFileProgress, string currentFilePath)
     {
       if (Progress != null)
-        Progress (this, args);
+      {
+        var currentFileValue = currentFileProgress.CurrentValue;
+        var currentTotalValue = _currentTotalValueExcludingCurrentFileValue + currentFileValue;
+        var archiveBuilderProgressEventArgs = new ArchiveBuilderProgressEventArgs (
+            currentFileValue,
+            currentTotalValue,
+            _currentFileIndex,
+            currentFilePath);
+
+        archiveBuilderProgressEventArgs.Cancel = currentFileProgress.Cancel;
+        Progress (this, archiveBuilderProgressEventArgs);
+        currentFileProgress.Cancel = archiveBuilderProgressEventArgs.Cancel;
+      }
     }
 
     private bool OnFileOpenError (object sender, FileOpenExceptionEventArgs args)
