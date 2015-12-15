@@ -162,7 +162,6 @@ namespace Remotion.IO.Zip
       return new ZipEntry (nameTransform.TransformFile (fileInfo.FullName))
              {
                  IsUnicodeText = true,
-                 Size = fileInfo.Length,
                  DateTime = fileInfo.LastWriteTimeUtc
              };
     }
