@@ -431,24 +431,24 @@ namespace Remotion.IO.UnitTests.Zip
 
       Assert.That (progressArgs.Count, Is.EqualTo (18));
 
-      AssertBuildProgress (progressArgs[0], 10, 10, 0, @"root\file1");
-      AssertBuildProgress (progressArgs[1], 10, 10, 0, @"root\file1");
-      AssertBuildProgress (progressArgs[2], 30, 20, 1, @"root\file2");
-      AssertBuildProgress (progressArgs[3], 30, 20, 1, @"root\file2");
-      AssertBuildProgress (progressArgs[4], 60, 30, 2, @"root\dir2\file1");
-      AssertBuildProgress (progressArgs[5], 60, 30, 2, @"root\dir2\file1");
-      AssertBuildProgress (progressArgs[6], 100, 40, 3, @"root\dir2\file2");
-      AssertBuildProgress (progressArgs[7], 100, 40, 3, @"root\dir2\file2");
-      AssertBuildProgress (progressArgs[8], 150, 50, 4, @"root\dir2\dir2\file1");
-      AssertBuildProgress (progressArgs[9], 150, 50, 4, @"root\dir2\dir2\file1");
-      AssertBuildProgress (progressArgs[10], 210, 60, 5, @"root\dir2\dir2\file2");
-      AssertBuildProgress (progressArgs[11], 210, 60, 5, @"root\dir2\dir2\file2");
-      AssertBuildProgress (progressArgs[12], 280, 70, 6, @"root\dir2\dir2\dir2\file1");
-      AssertBuildProgress (progressArgs[13], 280, 70, 6, @"root\dir2\dir2\dir2\file1");
-      AssertBuildProgress (progressArgs[14], 360, 80, 7, @"root\dir2\dir2\dir2\file2");
-      AssertBuildProgress (progressArgs[15], 360, 80, 7, @"root\dir2\dir2\dir2\file2");
-      AssertBuildProgress (progressArgs[16], 450, 90, 8, @"root\dir3\file1");
-      AssertBuildProgress (progressArgs[17], 450, 90, 8, @"root\dir3\file1");
+      AssertBuildProgress (progressArgs[0], 10, 10, 0, @"root\file1", 10, 2);
+      AssertBuildProgress (progressArgs[1], 10, 10, 0, @"root\file1", 10, 2);
+      AssertBuildProgress (progressArgs[2], 30, 20, 1, @"root\file2", 20, 2);
+      AssertBuildProgress (progressArgs[3], 30, 20, 1, @"root\file2", 20, 2);
+      AssertBuildProgress (progressArgs[4], 60, 30, 2, @"root\dir2\file1", 30, 4);
+      AssertBuildProgress (progressArgs[5], 60, 30, 2, @"root\dir2\file1", 30, 4);
+      AssertBuildProgress (progressArgs[6], 100, 40, 3, @"root\dir2\file2", 40, 4);
+      AssertBuildProgress (progressArgs[7], 100, 40, 3, @"root\dir2\file2", 40, 4);
+      AssertBuildProgress (progressArgs[8], 150, 50, 4, @"root\dir2\dir2\file1", 50, 6);
+      AssertBuildProgress (progressArgs[9], 150, 50, 4, @"root\dir2\dir2\file1", 50, 6);
+      AssertBuildProgress (progressArgs[10], 210, 60, 5, @"root\dir2\dir2\file2", 60, 6);
+      AssertBuildProgress (progressArgs[11], 210, 60, 5, @"root\dir2\dir2\file2", 60, 6);
+      AssertBuildProgress (progressArgs[12], 280, 70, 6, @"root\dir2\dir2\dir2\file1", 70, 8);
+      AssertBuildProgress (progressArgs[13], 280, 70, 6, @"root\dir2\dir2\dir2\file1", 70, 8);
+      AssertBuildProgress (progressArgs[14], 360, 80, 7, @"root\dir2\dir2\dir2\file2", 80, 8);
+      AssertBuildProgress (progressArgs[15], 360, 80, 7, @"root\dir2\dir2\dir2\file2", 80, 8);
+      AssertBuildProgress (progressArgs[16], 450, 90, 8, @"root\dir3\file1", 90, 9);
+      AssertBuildProgress (progressArgs[17], 450, 90, 8, @"root\dir3\file1", 90, 9);
     }
 
     [Test]
@@ -480,20 +480,74 @@ namespace Remotion.IO.UnitTests.Zip
 
       Assert.That (progressArgs.Count, Is.EqualTo (6));
 
-      AssertBuildProgress (progressArgs[0], StreamCopier.DefaultCopyBufferSize, StreamCopier.DefaultCopyBufferSize, 0, @"root\file1");
-      AssertBuildProgress (progressArgs[1], StreamCopier.DefaultCopyBufferSize + 1000, StreamCopier.DefaultCopyBufferSize + 1000, 0, @"root\file1");
-      AssertBuildProgress (progressArgs[2], StreamCopier.DefaultCopyBufferSize + 1000, StreamCopier.DefaultCopyBufferSize + 1000, 0, @"root\file1");
-      AssertBuildProgress (progressArgs[3], 2 * StreamCopier.DefaultCopyBufferSize + 1000, StreamCopier.DefaultCopyBufferSize, 1, @"root\file2");
-      AssertBuildProgress (progressArgs[4], 2 * StreamCopier.DefaultCopyBufferSize + 1000 + 2000, StreamCopier.DefaultCopyBufferSize + 2000, 1, @"root\file2");
-      AssertBuildProgress (progressArgs[5], 2 * StreamCopier.DefaultCopyBufferSize + 1000 + 2000, StreamCopier.DefaultCopyBufferSize + 2000, 1, @"root\file2");
+      AssertBuildProgress (
+          progressArgs[0],
+          StreamCopier.DefaultCopyBufferSize,
+          StreamCopier.DefaultCopyBufferSize,
+          0,
+          @"root\file1",
+          StreamCopier.DefaultCopyBufferSize + 1000,
+          2);
+
+      AssertBuildProgress (
+          progressArgs[1],
+          StreamCopier.DefaultCopyBufferSize + 1000,
+          StreamCopier.DefaultCopyBufferSize + 1000,
+          0,
+          @"root\file1",
+          StreamCopier.DefaultCopyBufferSize + 1000,
+          2);
+
+      AssertBuildProgress (
+          progressArgs[2],
+          StreamCopier.DefaultCopyBufferSize + 1000,
+          StreamCopier.DefaultCopyBufferSize + 1000,
+          0,
+          @"root\file1",
+          StreamCopier.DefaultCopyBufferSize + 1000,
+          2);
+
+      AssertBuildProgress (
+          progressArgs[3],
+          2 * StreamCopier.DefaultCopyBufferSize + 1000,
+          StreamCopier.DefaultCopyBufferSize,
+          1,
+          @"root\file2",
+          StreamCopier.DefaultCopyBufferSize + 2000,
+          2);
+
+      AssertBuildProgress (progressArgs[4],
+          2 * StreamCopier.DefaultCopyBufferSize + 1000 + 2000,
+          StreamCopier.DefaultCopyBufferSize + 2000,
+          1,
+          @"root\file2",
+          StreamCopier.DefaultCopyBufferSize + 2000,
+          2);
+
+      AssertBuildProgress (progressArgs[5],
+          2 * StreamCopier.DefaultCopyBufferSize + 1000 + 2000,
+          StreamCopier.DefaultCopyBufferSize + 2000,
+          1,
+          @"root\file2",
+          StreamCopier.DefaultCopyBufferSize + 2000,
+          2);
     }
 
-    private void AssertBuildProgress (ArchiveBuilderProgressEventArgs args, long expectedTotalValue, long expectedCurrentFileValue, int expectedFileIndex, string expectedFileFullName)
+    private void AssertBuildProgress (
+        ArchiveBuilderProgressEventArgs args,
+        long expectedTotalValue,
+        long expectedCurrentFileValue,
+        int expectedFileIndex,
+        string expectedFileFullName,
+        long estimatedCurrentFileSize,
+        int estimatedCurrentFileCount)
     {
       Assert.That (args.CurrentTotalValue, Is.EqualTo (expectedTotalValue));
       Assert.That (args.CurrentFileValue, Is.EqualTo (expectedCurrentFileValue));
       Assert.That (args.CurrentFileIndex, Is.EqualTo (expectedFileIndex));
       Assert.That (args.CurrentFileFullName, Is.EqualTo (expectedFileFullName));
+      Assert.That (args.CurrentEstimatedFileSize, Is.EqualTo (estimatedCurrentFileSize));
+      Assert.That (args.CurrentEstimatedFileCount, Is.EqualTo (estimatedCurrentFileCount));
     }
 
     private Func<IDirectoryInfo, IFileInfo> CreateFile (string name, int size)

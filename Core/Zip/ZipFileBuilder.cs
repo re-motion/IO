@@ -37,6 +37,7 @@ namespace Remotion.IO.Zip
     private FileProcessingRecoveryAction _fileProcessingRecoveryAction;
     private int _currentFileIndex = 0;
     private long _currentTotalValueExcludingCurrentFileValue = 0;
+    private int _currentEstimatedFileCount = 0;
 
     public ZipFileBuilder ()
     {
@@ -58,6 +59,7 @@ namespace Remotion.IO.Zip
     {
       ArgumentUtility.CheckNotNull ("fileInfo", fileInfo);
       _files.Add (fileInfo);
+      _currentEstimatedFileCount++;
     }
 
     public Stream Build (string archiveFileName)
@@ -77,10 +79,11 @@ namespace Remotion.IO.Zip
             AddDirectoryToZipFile ((IDirectoryInfo) fileInfo, zipOutputStream, nameTransform);
         }
       }
-      
+
       _files.Clear();
       _currentFileIndex = 0;
       _currentTotalValueExcludingCurrentFileValue = 0;
+      _currentEstimatedFileCount = 0;
 
       return File.Open (archiveFileName, FileMode.Open, FileAccess.Read, FileShare.None);
     }
@@ -100,7 +103,7 @@ namespace Remotion.IO.Zip
       {
 
         var streamCopier = new StreamCopier();
-        streamCopier.TransferProgress += (sender, args) => OnZippingProgress (args, fileInfo.FullName);
+        streamCopier.TransferProgress += (sender, args) => OnZippingProgress (args, fileInfo.FullName, fileInfo.Length);
 
         if (!streamCopier.CopyStream (fileStream, zipOutputStream))
         {
@@ -115,7 +118,10 @@ namespace Remotion.IO.Zip
 
     private void AddDirectoryToZipFile (IDirectoryInfo directoryInfo, ZipOutputStream zipOutputStream, ZipNameTransform nameTransform)
     {
-      foreach (var file in directoryInfo.GetFiles ())
+      var files = directoryInfo.GetFiles ();
+      _currentEstimatedFileCount += files.Length;
+
+      foreach (var file in files)
         AddFileToZipFile (file, zipOutputStream, nameTransform);
       foreach (var directory in directoryInfo.GetDirectories ())
         AddDirectoryToZipFile (directory, zipOutputStream, nameTransform);
@@ -161,7 +167,7 @@ namespace Remotion.IO.Zip
              };
     }
 
-    private void OnZippingProgress (StreamCopyProgressEventArgs currentFileProgress, string currentFilePath)
+    private void OnZippingProgress (StreamCopyProgressEventArgs currentFileProgress, string currentFilePath, long currentEstimatedFileSize)
     {
       if (Progress != null)
       {
@@ -171,7 +177,9 @@ namespace Remotion.IO.Zip
             currentFileValue,
             currentTotalValue,
             _currentFileIndex,
-            currentFilePath);
+            currentFilePath,
+            currentEstimatedFileSize,
+            _currentEstimatedFileCount);
 
         archiveBuilderProgressEventArgs.Cancel = currentFileProgress.Cancel;
         Progress (this, archiveBuilderProgressEventArgs);
