@@ -180,11 +180,6 @@ namespace Remotion.IO
       return Directory.CreateDirectory (path);
     }
 
-    public string GetPathWithEnvironmentVariable (string path)
-    {
-      return Environment.ExpandEnvironmentVariables (path);
-    }
-
     public IArchiveBuilder CreateArchiveBuilder ()
     {
       return new ZipFileBuilder();

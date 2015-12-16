@@ -37,7 +37,6 @@ namespace Remotion.IO
     void DeleteDirectory (string path, bool recursive);
     string Combine (string path1, string path2);
     DirectoryInfo CreateDirectory (string path);
-    string GetPathWithEnvironmentVariable (string path);
     IArchiveBuilder CreateArchiveBuilder ();
     IArchiveExtractor CreateArchiveExtractor (Stream archiveStream);
   }
