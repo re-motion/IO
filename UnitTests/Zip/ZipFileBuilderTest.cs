@@ -533,6 +533,37 @@ namespace Remotion.IO.UnitTests.Zip
           2);
     }
 
+    [Test]
+    public void Build_FileSizeIsGreaterThanBufferSize_ProgressHandlerThrowsExceptionAfterFirstChunk_ForwardsException ()
+    {
+      var root =
+          CreateDirectory ("root", CreateFile ("file1", 3 * StreamCopier.DefaultCopyBufferSize)) (null);
+
+      var zipBuilder = new ZipFileBuilder();
+
+      root.Files.ForEach (zipBuilder.AddFile);
+
+      var exception = new Exception ("blablubb");
+      zipBuilder.Progress += (sender, e) => { throw exception; };
+
+      var zipFileName = Path.GetTempFileName();
+      try
+      {
+        Assert.That (
+            () =>
+            {
+              using (zipBuilder.Build (zipFileName))
+              {
+              }
+            },
+            Throws.Exception.SameAs (exception));
+      }
+      finally
+      {
+        File.Delete (zipFileName);
+      }
+    }
+
     private void AssertBuildProgress (
         ArchiveBuilderProgressEventArgs args,
         long expectedTotalValue,
