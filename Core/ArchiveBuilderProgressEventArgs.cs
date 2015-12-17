@@ -26,9 +26,17 @@ namespace Remotion.IO
     private readonly long _currentTotalValue;
     private readonly int _currentFileIndex;
     private readonly string _currentFileFullName;
+    private readonly long _currentEstimatedFileSize;
+    private readonly int? _currentEstimatedFileCount;
     private bool _cancel;
 
-    public ArchiveBuilderProgressEventArgs (long currentFileValue, long currentTotalValue, int currentFileIndex, string currentFileFullName)
+    public ArchiveBuilderProgressEventArgs (
+        long currentFileValue,
+        long currentTotalValue,
+        int currentFileIndex,
+        string currentFileFullName,
+        long currentEstimatedFileSize,
+        int? currentEstimatedFileCount)
     {
       ArgumentUtility.CheckNotNullOrEmpty ("currentFileFullName", currentFileFullName);
 
@@ -36,6 +44,8 @@ namespace Remotion.IO
       _currentTotalValue = currentTotalValue;
       _currentFileIndex = currentFileIndex;
       _currentFileFullName = currentFileFullName;
+      _currentEstimatedFileSize = currentEstimatedFileSize;
+      _currentEstimatedFileCount = currentEstimatedFileCount;
       _cancel = false;
     }
 
@@ -63,6 +73,16 @@ namespace Remotion.IO
     public string CurrentFileFullName
     {
       get { return _currentFileFullName; }
+    }
+
+    public long CurrentEstimatedFileSize
+    {
+      get { return _currentEstimatedFileSize; }
+    }
+
+    public int? CurrentEstimatedFileCount
+    {
+      get { return _currentEstimatedFileCount; }
     }
   }
 }
