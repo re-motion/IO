@@ -197,6 +197,41 @@ namespace Remotion.IO.UnitTests.Zip
       }
     }
 
+    [Test]
+    public void Build_IOExceptionDuringCopyingOccurs_ThrowsAbortExceptionWithIOExceptionAsInner ()
+    {
+      var zipBuilder = new ZipFileBuilder();
+      zipBuilder.Progress += ((sender, e) => { });
+
+      var streamStub = MockRepository.GenerateStub<Stream>();
+      var ioException = new IOException();
+      streamStub.Stub (_ => _.Read (null, 0, 0)).IgnoreArguments().Throw (ioException);
+
+      var fileInfoStub = MockRepository.GenerateStub<IFileInfo>();
+      fileInfoStub.Stub (mock => mock.FullName).Return (@"C:\fileName");
+      fileInfoStub.Stub (mock => mock.Open (FileMode.Open, FileAccess.Read, FileShare.Read)).Return (streamStub);
+      fileInfoStub.Stub (mock => mock.Directory).Return (new DirectoryInfoWrapper (new DirectoryInfo (@"C:\")));
+
+      zipBuilder.AddFile (fileInfoStub);
+      var zipFileName = Path.GetTempFileName();
+      try
+      {
+        Assert.That (
+            () =>
+            {
+              using (zipBuilder.Build (zipFileName))
+              {
+              }
+            },
+            Throws.InstanceOf<AbortException>()
+                .With.Message.EqualTo (@"Error while copying the data from the file 'C:\fileName' to the archive.")
+                .And.InnerException.SameAs (ioException));
+      }
+      finally
+      {
+        FileUtility.DeleteAndWaitForCompletion (zipFileName);
+      }
+    }
 
     [Test]
     [ExpectedException (typeof (AbortException))]

@@ -21,5 +21,13 @@ namespace Remotion.IO
 {
   public class AbortException : Exception
   {
+    public AbortException ()
+    {
+    }
+
+    public AbortException (string message, Exception innerException)
+        : base(message, innerException)
+    {
+    }
   }
 }

@@ -113,10 +113,19 @@ namespace Remotion.IO.Zip
         var streamCopier = new StreamCopier();
         streamCopier.TransferProgress += (sender, args) => OnZippingProgress (args, fileInfo.FullName, fileInfo.Length);
 
-        if (!streamCopier.CopyStream (fileStream, zipOutputStream))
+        try
         {
-          zipEntry.Size = -1;
-          throw new AbortException();
+          if (!streamCopier.CopyStream (fileStream, zipOutputStream))
+          {
+            zipEntry.Size = -1;
+            throw new AbortException();
+          }
+        }
+        catch (IOException ex)
+        {
+          throw new AbortException (
+              string.Format ("Error while copying the data from the file '{0}' to the archive.", fileInfo.FullName),
+              ex);
         }
       }
 
