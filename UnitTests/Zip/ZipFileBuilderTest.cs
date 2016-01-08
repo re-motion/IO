@@ -564,6 +564,38 @@ namespace Remotion.IO.UnitTests.Zip
       }
     }
 
+    [TestCase (FileShare.None, FileShare.Read)]
+    [TestCase (FileShare.Read, FileShare.Read)]
+    [TestCase (FileShare.Delete, FileShare.Read | FileShare.Delete)]
+    [TestCase (FileShare.Write, FileShare.ReadWrite)]
+    [TestCase (FileShare.ReadWrite, FileShare.ReadWrite)]
+    [TestCase (FileShare.ReadWrite | FileShare.Delete, FileShare.ReadWrite | FileShare.Delete)]
+    public void Build_UsesProperFileShareToOpenTheFile (FileShare specifiedAdditionFileShare, FileShare expectedFileShareWhichIsUsedToOpenTheFile)
+    {
+      var zipBuilder = new ZipFileBuilder (specifiedAdditionFileShare);
+      zipBuilder.Progress += ((sender, e) => { });
+
+      var fileInfoMock = MockRepository.GenerateMock<IFileInfo>();
+      fileInfoMock.Stub (mock => mock.FullName).Return (@"C:\fileName");
+      fileInfoMock.Stub (mock => mock.Directory).Return (new DirectoryInfoWrapper (new DirectoryInfo (@"C:\")));
+      fileInfoMock.Expect (mock => mock.Open (FileMode.Open, FileAccess.Read, expectedFileShareWhichIsUsedToOpenTheFile)).Return (new MemoryStream());
+
+      zipBuilder.AddFile (fileInfoMock);
+      var zipFileName = Path.GetTempFileName();
+      try
+      {
+        using (zipBuilder.Build (zipFileName))
+        {
+        }
+      }
+      finally
+      {
+        FileUtility.DeleteAndWaitForCompletion (zipFileName);
+      }
+
+      fileInfoMock.VerifyAllExpectations();
+    }
+
     private void AssertBuildProgress (
         ArchiveBuilderProgressEventArgs args,
         long expectedTotalValue,
