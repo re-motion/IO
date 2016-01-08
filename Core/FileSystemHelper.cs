@@ -180,9 +180,9 @@ namespace Remotion.IO
       return Directory.CreateDirectory (path);
     }
 
-    public IArchiveBuilder CreateArchiveBuilder ()
+    public IArchiveBuilder CreateArchiveBuilder (FileShare additionalFileShareToUse = FileShare.None)
     {
-      return new ZipFileBuilder();
+      return new ZipFileBuilder (additionalFileShareToUse);
     }
 
     public IArchiveExtractor CreateArchiveExtractor (Stream archiveStream)

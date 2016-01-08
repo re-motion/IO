@@ -38,9 +38,17 @@ namespace Remotion.IO.Zip
     private int _currentFileIndex = 0;
     private long _currentTotalValueExcludingCurrentFileValue = 0;
     private int _currentEstimatedFileCount = 0;
+    private readonly FileShare _fileShareToUse;
 
-    public ZipFileBuilder ()
+    /// <summary>
+    /// Creates an instance of <see cref="ZipFileBuilder"/>
+    /// </summary>
+    /// <param name="additionalFileShareToUse">The <see cref="FileShare"/> that should be used to read the files in addition to <see cref="FileShare.Read"/>.
+    /// (That means <see cref="FileShare.Read"/> is used at least in any case, regardless if it is specified or not)
+    /// </param>
+    public ZipFileBuilder (FileShare additionalFileShareToUse = FileShare.None)
     {
+      _fileShareToUse = additionalFileShareToUse | FileShare.Read;
     }
 
     public FileProcessingRecoveryAction FileProcessingRecoveryAction
@@ -134,7 +142,7 @@ namespace Remotion.IO.Zip
       {
         try
         {
-          return fileInfo.Open (FileMode.Open, FileAccess.Read, FileShare.Read);
+          return fileInfo.Open (FileMode.Open, FileAccess.Read, _fileShareToUse);
         }
         catch (FileNotFoundException ex)
         {
