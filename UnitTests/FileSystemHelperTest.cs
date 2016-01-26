@@ -125,5 +125,36 @@ namespace Remotion.IO.UnitTests
       Assert.That (actual.Length, Is.LessThan (260));
       Assert.That (actual, Is.StringEnding (" (1).txt"));
     }
+
+    [Test]
+    public void MakeValidFileName_FileNameIsTooLong_FileNameIsTruncatedAtTheEnd ()
+    {
+      string actual = _fileSystemHelper.MakeValidFileName (
+          _tempFolder,
+          "00abcdefg_01abcdefg_02abcdefg_03abcdefg_04abcdefg_05abcdefg_06abcdefg_07abcdefg_08abcdefg_09abcdefg_10abcdefg_11abcdefg_12abcdefg_13abcdefg_14abcdefg_15abcdefg_16abcdefg_17abcdefg_18abcdefg_19abcdefg_20abcdefg_21abcdefg_22abcdefg_23abcdefg_24abcdefg_25abcdefg.txt");
+      Assert.That (actual.Length, Is.LessThan (260));
+      Assert.That (Path.GetFileName (actual).StartsWith ("00abcdefg_"));
+    }
+
+    [Test]
+    public void MakeValidFileName_FileNameIsNotUnique_IsNotTakenIntoAccount ()
+    {
+      using (File.Create (Path.Combine (_tempFolder, "MyFile.txt")))
+      {
+        //NOP
+      }
+      Assert.That (
+          _fileSystemHelper.MakeValidFileName (_tempFolder, "MyFile.txt"),
+          Is.EqualTo (Path.Combine (_tempFolder, "MyFile.txt")));
+    }
+
+    [Test]
+    public void MakeValidFileName_FileNameContainsInvalidChars_InvalidCharsAreRemoved ()
+    {
+      string actual = _fileSystemHelper.MakeValidFileName (
+          _tempFolder,
+          @"\ab!c:d<e>f§.txt");
+      Assert.That (Path.GetFileName (actual), Is.EqualTo ("ab!cdef§.txt"));
+    }
   }
 }

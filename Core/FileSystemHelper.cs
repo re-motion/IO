@@ -91,6 +91,19 @@ namespace Remotion.IO
         Thread.Sleep (10);
     }
 
+    public string MakeValidFileName (string path, string proposedFileName)
+    {
+      ArgumentUtility.CheckNotNullOrEmpty ("path", path);
+      ArgumentUtility.CheckNotNullOrEmpty ("proposedFileName", proposedFileName);
+
+      string rootedPath = Path.GetFullPath (path);
+      string cleanedUpFileName = RemoveInvalidChars (proposedFileName);
+      string fileNameWithoutExtension = Path.GetFileNameWithoutExtension (cleanedUpFileName);
+      string extension = Path.GetExtension (cleanedUpFileName);
+
+      return BuildShortFileName (rootedPath, fileNameWithoutExtension, extension, "");
+    }
+
     public string MakeUniqueAndValidFileName (string path, string proposedFileName)
     {
       ArgumentUtility.CheckNotNullOrEmpty ("path", path);
