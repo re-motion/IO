@@ -122,5 +122,11 @@ namespace Remotion.IO.UnitTests
     {
       Assert.That (_inMemoryFileInfo.ToString (), Is.EqualTo (_fileName));
     }
+
+    [Test]
+    public void Refresh_DoesNothing ()
+    {
+      Assert.That (() => _inMemoryFileInfo.Refresh(), Throws.Nothing);
+    }
   }
 }

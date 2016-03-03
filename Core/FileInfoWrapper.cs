@@ -98,5 +98,9 @@ namespace Remotion.IO
       return _wrappedInstance.Open (mode, access, share);
     }
 
+    public void Refresh ()
+    {
+      _wrappedInstance.Refresh();
+    }
   }
 }

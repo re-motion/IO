@@ -100,5 +100,10 @@ namespace Remotion.IO.Zip
     {
       return _zipFile.GetInputStream (_zipEntry);
     }
+
+    public void Refresh ()
+    {
+      //
+    }
   }
 }

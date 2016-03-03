@@ -112,5 +112,10 @@ namespace Remotion.IO
       }
       return directoryInfo;
     }
+
+    public void Refresh ()
+    {
+      _wrappedInstance.Refresh();
+    }
   }
 }

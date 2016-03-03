@@ -144,5 +144,21 @@ namespace Remotion.IO.UnitTests
       actualStream.Dispose();
       constraintStream.Dispose();
     }
+
+    [Test]
+    public void Refresh ()
+    {
+      var accessTime1 = new DateTime (2010, 1, 1, 0, 0, 0, DateTimeKind.Utc);
+      var accessTime2 = new DateTime (2005, 1, 1, 0, 0, 0, DateTimeKind.Utc);
+
+      File.SetLastAccessTime (_tempFile.FileName, accessTime1);
+      _fileInfoWrapper.Refresh();
+      Assert.That (_fileInfoWrapper.LastAccessTimeUtc, Is.EqualTo (accessTime1));
+
+      File.SetLastAccessTime (_tempFile.FileName, accessTime2);
+      Assert.That (_fileInfoWrapper.LastAccessTimeUtc, Is.EqualTo (accessTime1));
+      _fileInfoWrapper.Refresh();
+      Assert.That (_fileInfoWrapper.LastAccessTimeUtc, Is.EqualTo (accessTime2));
+    }
   }
 }
