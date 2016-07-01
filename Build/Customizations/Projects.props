@@ -6,7 +6,7 @@
       <!--<CreateNuGetPackageWithSymbolServerSupport>False</CreateNuGetPackageWithSymbolServerSupport>-->
       <!--<ExcludeFromDocumentation>False</ExcludeFromDocumentation>-->
     </ReleaseProjectFiles>
-    <UnitTestProjectFiles Include="$(SolutionDirectory)UnitTests\UnitTests.csproj" />
+    <UnitTestProjectFiles Include="$(SolutionDirectory)UnitTests\UnitTests.csproj"/>
     <!--
     <IntegrationTestProjectFiles Include="$(SolutionDirectory)IntegrationTests\IntegrationTests.csproj">
       <IsDatabaseTest>False</IsDatabaseTest>
