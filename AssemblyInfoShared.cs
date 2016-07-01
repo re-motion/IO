@@ -18,7 +18,7 @@ using System;
 using System.Reflection;
 
 [assembly: AssemblyCompany ("rubicon IT GmbH")]
-[assembly: AssemblyProduct ("re-motion (www.re-motion.org)")]
+[assembly: AssemblyProduct ("re-motion Framework (www.re-motion.org)")]
 [assembly: AssemblyCopyright ("Copyright (c) rubicon IT GmbH, www.rubicon.eu - Licensed under GNU LGPL 2.1 (or later)")]
 [assembly: AssemblyTrademark ("")]
 [assembly: AssemblyConfiguration ("Build type: Debug")]
