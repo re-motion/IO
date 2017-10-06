@@ -140,10 +140,24 @@ namespace Remotion.IO.UnitTests
     }
 
     [Test]
-    public void Parent ()
+    public void Parent_WithSubDirectory_ReturnsParentDirectory ()
     {
       Assert.That (_directoryInfoWrapper.Parent, Is.InstanceOf (typeof(DirectoryInfoWrapper)));
-      Assert.That (_directoryInfoWrapper.Parent.Name, Is.EqualTo (_folder));
+      Assert.That (_directoryInfoWrapper.Parent.FullName, Is.EqualTo (Directory.GetParent (_path).FullName));
+    }
+
+    [Test]
+    public void Parent_WithRootDirectory_ReturnsRoot ()
+    {
+      var directoryInfoWrapper = new DirectoryInfoWrapper (new DirectoryInfo ("C:\\Windows"));
+      Assert.That (directoryInfoWrapper.Parent.FullName, Is.EqualTo ("C:\\"));
+    }
+
+    [Test]
+    public void Parent_WithRoot_ReturnsNull ()
+    {
+      var directoryInfoWrapper = new DirectoryInfoWrapper (new DirectoryInfo ("C:\\"));
+      Assert.That (directoryInfoWrapper.Parent, Is.Null);
     }
 
     [Test]
