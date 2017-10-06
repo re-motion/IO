@@ -90,6 +90,12 @@ namespace Remotion.IO.UnitTests.Zip
     }
 
     [Test]
+    public void MimeType ()
+    {
+      Assert.That (new ZipFileBuilder().MimeType, Is.EqualTo ("application/zip"));
+    }
+
+    [Test]
     public void BuildReturnsZipFileWithFiles ()
     {
       var zipBuilder = new ZipFileBuilder();

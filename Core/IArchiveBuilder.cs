@@ -31,5 +31,10 @@ namespace Remotion.IO
     event EventHandler<ArchiveBuilderProgressEventArgs> Progress;
     event EventHandler<FileOpenExceptionEventArgs> Error; 
     FileProcessingRecoveryAction FileProcessingRecoveryAction { get; set; }
+
+    /// <summary>
+    /// Returns the mime-type of the archive
+    /// </summary>
+    string MimeType { get; }
   }
 }

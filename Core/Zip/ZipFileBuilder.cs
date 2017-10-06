@@ -51,6 +51,11 @@ namespace Remotion.IO.Zip
       _fileShareToUse = additionalFileShareToUse | FileShare.Read;
     }
 
+    public string MimeType
+    {
+      get { return "application/zip"; }
+    }
+
     public FileProcessingRecoveryAction FileProcessingRecoveryAction
     {
       get { return _fileProcessingRecoveryAction; }
