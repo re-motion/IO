@@ -17,6 +17,7 @@
 
 using System;
 using System.IO;
+using System.Linq;
 using System.Text;
 using NUnit.Framework;
 
@@ -155,6 +156,62 @@ namespace Remotion.IO.UnitTests
           _tempFolder,
           @"\ab!c:d<e>f§.txt");
       Assert.That (Path.GetFileName (actual), Is.EqualTo ("ab!cdef§.txt"));
+    }
+
+    [Test]
+    public void GetFilesOfDirectory_NotEmpty_ReturnsAllFilesInHierarchy ()
+    {
+      var expectedFilePath1 = Path.Combine (_tempFolder, "MyFile1.txt");
+      using (File.Create (expectedFilePath1))
+      {
+        //NOP
+      }
+
+      var directoryPath1 = Path.Combine (_tempFolder, "MyDirectory1");
+      Directory.CreateDirectory (directoryPath1);
+
+      var expectedFilePath2 = Path.Combine (directoryPath1, "MyFile2.txt");
+      using (File.Create (expectedFilePath2))
+      {
+        //NOP
+      }
+
+      var expectedFilePath3 = Path.Combine (directoryPath1, "MyFile3.txt");
+      using (File.Create (expectedFilePath3))
+      {
+        //NOP
+      }
+
+      var directoryPath2 = Path.Combine (_tempFolder, "MyDirectory2");
+      Directory.CreateDirectory (directoryPath2);
+
+      var expectedFilePath4 = Path.Combine (directoryPath2, "MyFile4.txt");
+      using (File.Create (expectedFilePath4))
+      {
+        //NOP
+      }
+
+      var result = _fileSystemHelper.GetFilesOfDirectory (_tempFolder);
+
+      Assert.That (
+          result.Select (f => f.FullName),
+          Is.EquivalentTo (new[] { expectedFilePath1, expectedFilePath2, expectedFilePath3, expectedFilePath4 }));
+    }
+
+    [Test]
+    public void GetFilesOfDirectory_Empty_ReturnsEmptyList ()
+    {
+      var result = _fileSystemHelper.GetFilesOfDirectory (_tempFolder);
+
+      Assert.That (result, Is.Empty);
+    }
+
+    [Test]
+    public void GetFilesOfDirectory_NonExistent_ReturnsEmptyList ()
+    {
+      var result = _fileSystemHelper.GetFilesOfDirectory ("C:\\" + Guid.NewGuid());
+
+      Assert.That (result, Is.Empty);
     }
   }
 }
