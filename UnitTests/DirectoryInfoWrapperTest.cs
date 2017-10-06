@@ -146,5 +146,21 @@ namespace Remotion.IO.UnitTests
       Assert.That (_directoryInfoWrapper.Directory, Is.InstanceOf (typeof(DirectoryInfoWrapper)));
       Assert.That (_directoryInfoWrapper.Directory.Name, Is.EqualTo (_folder));
     }
+
+    [Test]
+    public void Refresh ()
+    {
+      var accessTime1 = new DateTime (2010, 1, 1, 0, 0, 0, DateTimeKind.Utc);
+      var accessTime2 = new DateTime (2005, 1, 1, 0, 0, 0, DateTimeKind.Utc);
+
+      Directory.SetLastAccessTime (_path, accessTime1);
+      _directoryInfoWrapper.Refresh();
+      Assert.That (_directoryInfoWrapper.LastAccessTimeUtc, Is.EqualTo (accessTime1));
+
+      Directory.SetLastAccessTime (_path, accessTime2);
+      Assert.That (_directoryInfoWrapper.LastAccessTimeUtc, Is.EqualTo (accessTime1));
+      _directoryInfoWrapper.Refresh();
+      Assert.That (_directoryInfoWrapper.LastAccessTimeUtc, Is.EqualTo (accessTime2));
+    }
   }
 }

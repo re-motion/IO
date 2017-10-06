@@ -126,5 +126,11 @@ namespace Remotion.IO.UnitTests
 
       Assert.That (_inMemoryDirectoryInfo.GetDirectories(), Is.EquivalentTo (directory));
     }
+
+    [Test]
+    public void Refresh_DoesNothing ()
+    {
+      Assert.That (() => _inMemoryDirectoryInfo.Refresh(), Throws.Nothing);
+    }
   }
 }

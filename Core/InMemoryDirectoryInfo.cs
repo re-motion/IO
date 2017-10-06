@@ -121,6 +121,11 @@ namespace Remotion.IO
       get { return _directories; }
     }
 
+    public void Refresh ()
+    {
+      // NOP
+    }
+
     public override string ToString ()
     {
       return _fullName;

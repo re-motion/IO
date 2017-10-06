@@ -106,6 +106,11 @@ namespace Remotion.IO
       return _stream;
     }
 
+    public void Refresh ()
+    {
+      // NOP
+    }
+
     public override string ToString ()
     {
       return _fileName;

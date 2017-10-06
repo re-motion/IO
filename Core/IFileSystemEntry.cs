@@ -36,5 +36,6 @@ namespace Remotion.IO
     DateTime LastAccessTimeUtc { get; }
     DateTime LastWriteTimeUtc { get; }
     IDirectoryInfo Directory { get; }
+    void Refresh ();
   }
 }
