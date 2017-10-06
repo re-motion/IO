@@ -158,6 +158,11 @@ namespace Remotion.IO
 
     public IFileInfo[] GetFilesOfDirectory (string path)
     {
+      ArgumentUtility.CheckNotNullOrEmpty ("path", path);
+
+      if (!Directory.Exists (path))
+        return new IFileInfo[0];
+
       List<IFileInfo> fileInfos = new List<IFileInfo>();
       return GetFilesInSubdirectories (path, fileInfos);
     }
