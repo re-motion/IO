@@ -22,7 +22,6 @@ using Remotion.Development.UnitTesting.IO;
 
 namespace Remotion.IO.UnitTests
 {
-  [Explicit]
   [TestFixture]
   public class DirectoryInfoWrapperTest
   {
@@ -97,28 +96,28 @@ namespace Remotion.IO.UnitTests
     [Test]
     public void CreationTimeUtc ()
     {
-      Assert.That (_directoryInfoWrapper.CreationTimeUtc, Is.EqualTo (Directory.GetCreationTime (_path)));
+      Assert.That (_directoryInfoWrapper.CreationTimeUtc, Is.EqualTo (Directory.GetCreationTime (_path).ToUniversalTime()));
     }
 
     [Test]
     public void SetCreationTimeUtc ()
     {
       _directoryInfoWrapper.CreationTimeUtc = new DateTime (2009, 10, 10);
-      Assert.That (_directoryInfoWrapper.CreationTimeUtc, Is.EqualTo (Directory.GetCreationTime (_path)));
+      Assert.That (_directoryInfoWrapper.CreationTimeUtc, Is.EqualTo (Directory.GetCreationTime (_path).ToUniversalTime()));
     }
 
     [Test]
     public void LastAccessTimUtce ()
     {
       _directoryInfoWrapper.LastAccessTimeUtc = new DateTime (2009, 10, 10);
-      Assert.That (_directoryInfoWrapper.LastAccessTimeUtc, Is.EqualTo (Directory.GetLastAccessTime (_path))); 
+      Assert.That (_directoryInfoWrapper.LastAccessTimeUtc, Is.EqualTo (Directory.GetLastAccessTime (_path).ToUniversalTime())); 
     }
 
     [Test]
     public void LastWriteTimeUtc ()
     {
       _directoryInfoWrapper.LastWriteTimeUtc = new DateTime (2009, 10, 10);
-      Assert.That (_directoryInfoWrapper.LastWriteTimeUtc, Is.EqualTo (Directory.GetLastWriteTime (_path)));
+      Assert.That (_directoryInfoWrapper.LastWriteTimeUtc, Is.EqualTo (Directory.GetLastWriteTime (_path).ToUniversalTime()));
     }
 
     [Test]
