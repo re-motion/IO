@@ -37,7 +37,7 @@ namespace Remotion.IO
     IFileInfo[] GetFilesOfDirectory (string path);
     void DeleteDirectory (string path, bool recursive);
     string Combine (string path1, string path2);
-    DirectoryInfo CreateDirectory (string path);
+    IDirectoryInfo CreateDirectory (string path);
     IArchiveBuilder CreateArchiveBuilder (FileShare additionalFileShareToUse = FileShare.None);
     IArchiveExtractor CreateArchiveExtractor (Stream archiveStream);
   }

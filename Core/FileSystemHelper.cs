@@ -193,9 +193,11 @@ namespace Remotion.IO
       return Path.Combine (path1, path2);
     }
 
-    public DirectoryInfo CreateDirectory (string path)
+    public IDirectoryInfo CreateDirectory (string path)
     {
-      return Directory.CreateDirectory (path);
+      ArgumentUtility.CheckNotNullOrEmpty ("path", path);
+
+      return new DirectoryInfoWrapper (Directory.CreateDirectory (path));
     }
 
     public IArchiveBuilder CreateArchiveBuilder (FileShare additionalFileShareToUse = FileShare.None)
