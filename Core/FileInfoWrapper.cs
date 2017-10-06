@@ -60,9 +60,9 @@ namespace Remotion.IO
       get { return _wrappedInstance.Length; }
     }
 
-    public IDirectoryInfo Directory
+    public IDirectoryInfo Parent
     {
-      get { return new DirectoryInfoWrapper(_wrappedInstance.Directory); }
+      get { return new DirectoryInfoWrapper (_wrappedInstance.Directory); }
     }
 
     public bool IsReadOnly

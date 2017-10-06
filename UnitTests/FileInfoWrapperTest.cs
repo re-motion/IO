@@ -73,15 +73,16 @@ namespace Remotion.IO.UnitTests
     }
 
     [Test]
-    public void DirectoryName ()
+    public void Parent_WithFileInDirectory_ReturnsDirectory ()
     {
-      Assert.That (_fileInfoWrapper.Directory.FullName, Is.EqualTo (Path.GetDirectoryName(_tempFile.FileName)));
+      Assert.That (_fileInfoWrapper.Parent.FullName, Is.EqualTo (new DirectoryInfo (Path.GetDirectoryName (_tempFile.FileName)).FullName));
     }
 
     [Test]
-    public void Directory ()
+    public void Parent_WithRootFile_ReturnsRoot ()
     {
-      Assert.That (_fileInfoWrapper.Directory.Name, Is.EqualTo (new DirectoryInfo(Path.GetDirectoryName(_tempFile.FileName)).Name));
+      var fileInfoWrapper = new FileInfoWrapper (new FileInfo ("C:\\test.txt"));
+      Assert.That (fileInfoWrapper.Parent.FullName, Is.EqualTo (new DirectoryInfo ("C:\\").FullName));
     }
 
     [Test]

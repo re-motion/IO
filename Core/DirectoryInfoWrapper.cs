@@ -87,7 +87,7 @@ namespace Remotion.IO
       set { _wrappedInstance.LastWriteTimeUtc = value; }
     }
 
-    public IDirectoryInfo Directory
+    public IDirectoryInfo Parent
     {
       get { return this; }
     }

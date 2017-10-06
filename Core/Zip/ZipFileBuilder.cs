@@ -83,7 +83,7 @@ namespace Remotion.IO.Zip
       {
         foreach (var fileInfo in _files)
         {
-          var directoryName = fileInfo.Directory == null ? string.Empty : fileInfo.Directory.FullName;
+          var directoryName = fileInfo.Parent == null ? string.Empty : fileInfo.Parent.FullName;
           var nameTransform = new ZipNameTransform (directoryName);
 
           if (fileInfo is IFileInfo)

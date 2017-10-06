@@ -140,10 +140,10 @@ namespace Remotion.IO.UnitTests
     }
 
     [Test]
-    public void DirectoryMember ()
+    public void Parent ()
     {
-      Assert.That (_directoryInfoWrapper.Directory, Is.InstanceOf (typeof(DirectoryInfoWrapper)));
-      Assert.That (_directoryInfoWrapper.Directory.Name, Is.EqualTo (_folder));
+      Assert.That (_directoryInfoWrapper.Parent, Is.InstanceOf (typeof(DirectoryInfoWrapper)));
+      Assert.That (_directoryInfoWrapper.Parent.Name, Is.EqualTo (_folder));
     }
 
     [Test]

@@ -76,9 +76,9 @@ namespace Remotion.IO.UnitTests
     }
 
     [Test]
-    public void Directory ()
+    public void Parent ()
     {
-      Assert.That (_inMemoryFileInfo.Directory, Is.SameAs (_directory));
+      Assert.That (_inMemoryFileInfo.Parent, Is.SameAs (_directory));
     }
 
     [Test]
