@@ -98,10 +98,10 @@ namespace Remotion.IO.UnitTests.Zip
           Assert.That (files[1].PhysicalPath, Is.Null);
           Assert.That (files[1].FullName, Is.EqualTo (Path.Combine ("SubFolder", Path.GetFileName (_file2))));
 
-          Assert.That (files[0].Directory.PhysicalPath, Is.Null);
-          Assert.That (files[0].Directory, Is.Not.Null);
-          Assert.That (files[0].Directory.Name, Is.EqualTo ("SubFolder"));
-          Assert.That (files[0].Directory, Is.SameAs (files[1].Directory));
+          Assert.That (files[0].Parent.PhysicalPath, Is.Null);
+          Assert.That (files[0].Parent, Is.Not.Null);
+          Assert.That (files[0].Parent.Name, Is.EqualTo ("SubFolder"));
+          Assert.That (files[0].Parent, Is.SameAs (files[1].Parent));
         }
       }
     }

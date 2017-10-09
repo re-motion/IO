@@ -18,6 +18,7 @@
 using System;
 using System.IO;
 using ICSharpCode.SharpZipLib.Zip;
+using JetBrains.Annotations;
 using Remotion.Utilities;
 
 namespace Remotion.IO.Zip
@@ -27,11 +28,19 @@ namespace Remotion.IO.Zip
   /// </summary>
   public class ExtractedZipEntryAsFileInfo : IFileInfo
   {
+    [NotNull]
     private readonly ZipFile _zipFile;
+
+    [NotNull]
     private readonly ZipEntry _zipEntry;
+
+    [CanBeNull]
     private readonly IDirectoryInfo _directory;
 
-    public ExtractedZipEntryAsFileInfo (ZipFile zipFile, ZipEntry zipEntry, IDirectoryInfo directory)
+    public ExtractedZipEntryAsFileInfo (
+        [NotNull] ZipFile zipFile,
+        [NotNull] ZipEntry zipEntry,
+        [CanBeNull] IDirectoryInfo directory)
     {
       ArgumentUtility.CheckNotNull ("zipFile", zipFile);
       ArgumentUtility.CheckNotNull ("zipEntry", zipEntry);
@@ -91,7 +100,7 @@ namespace Remotion.IO.Zip
       get { return _zipEntry.DateTime; }
     }
 
-    public IDirectoryInfo Directory
+    public IDirectoryInfo Parent
     {
       get { return _directory; }
     }

@@ -22,7 +22,6 @@ using Remotion.Development.UnitTesting.IO;
 
 namespace Remotion.IO.UnitTests
 {
-  [Explicit]
   [TestFixture]
   public class DirectoryInfoWrapperTest
   {
@@ -97,28 +96,28 @@ namespace Remotion.IO.UnitTests
     [Test]
     public void CreationTimeUtc ()
     {
-      Assert.That (_directoryInfoWrapper.CreationTimeUtc, Is.EqualTo (Directory.GetCreationTime (_path)));
+      Assert.That (_directoryInfoWrapper.CreationTimeUtc, Is.EqualTo (Directory.GetCreationTime (_path).ToUniversalTime()));
     }
 
     [Test]
     public void SetCreationTimeUtc ()
     {
       _directoryInfoWrapper.CreationTimeUtc = new DateTime (2009, 10, 10);
-      Assert.That (_directoryInfoWrapper.CreationTimeUtc, Is.EqualTo (Directory.GetCreationTime (_path)));
+      Assert.That (_directoryInfoWrapper.CreationTimeUtc, Is.EqualTo (Directory.GetCreationTime (_path).ToUniversalTime()));
     }
 
     [Test]
     public void LastAccessTimUtce ()
     {
       _directoryInfoWrapper.LastAccessTimeUtc = new DateTime (2009, 10, 10);
-      Assert.That (_directoryInfoWrapper.LastAccessTimeUtc, Is.EqualTo (Directory.GetLastAccessTime (_path))); 
+      Assert.That (_directoryInfoWrapper.LastAccessTimeUtc, Is.EqualTo (Directory.GetLastAccessTime (_path).ToUniversalTime())); 
     }
 
     [Test]
     public void LastWriteTimeUtc ()
     {
       _directoryInfoWrapper.LastWriteTimeUtc = new DateTime (2009, 10, 10);
-      Assert.That (_directoryInfoWrapper.LastWriteTimeUtc, Is.EqualTo (Directory.GetLastWriteTime (_path)));
+      Assert.That (_directoryInfoWrapper.LastWriteTimeUtc, Is.EqualTo (Directory.GetLastWriteTime (_path).ToUniversalTime()));
     }
 
     [Test]
@@ -141,10 +140,24 @@ namespace Remotion.IO.UnitTests
     }
 
     [Test]
-    public void DirectoryMember ()
+    public void Parent_WithSubDirectory_ReturnsParentDirectory ()
     {
-      Assert.That (_directoryInfoWrapper.Directory, Is.InstanceOf (typeof(DirectoryInfoWrapper)));
-      Assert.That (_directoryInfoWrapper.Directory.Name, Is.EqualTo (_folder));
+      Assert.That (_directoryInfoWrapper.Parent, Is.InstanceOf (typeof(DirectoryInfoWrapper)));
+      Assert.That (_directoryInfoWrapper.Parent.FullName, Is.EqualTo (Directory.GetParent (_path).FullName));
+    }
+
+    [Test]
+    public void Parent_WithRootDirectory_ReturnsRoot ()
+    {
+      var directoryInfoWrapper = new DirectoryInfoWrapper (new DirectoryInfo ("C:\\Windows"));
+      Assert.That (directoryInfoWrapper.Parent.FullName, Is.EqualTo ("C:\\"));
+    }
+
+    [Test]
+    public void Parent_WithRoot_ReturnsNull ()
+    {
+      var directoryInfoWrapper = new DirectoryInfoWrapper (new DirectoryInfo ("C:\\"));
+      Assert.That (directoryInfoWrapper.Parent, Is.Null);
     }
 
     [Test]

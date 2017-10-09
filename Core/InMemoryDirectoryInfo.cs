@@ -18,6 +18,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using JetBrains.Annotations;
 using Remotion.Utilities;
 
 namespace Remotion.IO
@@ -27,17 +28,22 @@ namespace Remotion.IO
   /// </summary>
   public class InMemoryDirectoryInfo : IDirectoryInfo
   {
+    [NotNull]
     private readonly string _fullName;
+
     private readonly List<IDirectoryInfo> _directories = new List<IDirectoryInfo>();
     private readonly List<IFileInfo> _files = new List<IFileInfo>();
+
+    [CanBeNull]
     private readonly IDirectoryInfo _parent;
+
     private readonly DateTime _creationTimeUtc;
     private readonly DateTime _lastAccessTimeUtc;
     private readonly DateTime _lastWriteTimeUtc;
 
     public InMemoryDirectoryInfo (
-        string fullName,
-        IDirectoryInfo parent,
+        [NotNull] string fullName,
+        [CanBeNull] IDirectoryInfo parent,
         DateTime creationTimeUtc,
         DateTime lastAccessTimeUtc,
         DateTime lastWriteTimeUtc)
@@ -96,7 +102,7 @@ namespace Remotion.IO
       get { return _lastWriteTimeUtc; }
     }
 
-    public IDirectoryInfo Directory
+    public IDirectoryInfo Parent
     {
       get { return _parent; }
     }

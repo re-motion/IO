@@ -87,9 +87,14 @@ namespace Remotion.IO
       set { _wrappedInstance.LastWriteTimeUtc = value; }
     }
 
-    public IDirectoryInfo Directory
+    public IDirectoryInfo Parent
     {
-      get { return this; }
+      get
+      {
+        if (_wrappedInstance.Parent == null)
+          return null;
+        return new DirectoryInfoWrapper (_wrappedInstance.Parent);
+      }
     }
 
     public IFileInfo[] GetFiles ()

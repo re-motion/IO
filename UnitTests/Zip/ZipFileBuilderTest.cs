@@ -187,7 +187,7 @@ namespace Remotion.IO.UnitTests.Zip
       var fileInfoMock = MockRepository.GenerateMock<IFileInfo>();
       fileInfoMock.Expect (mock => mock.FullName).Return (@"C:\fileName");
       fileInfoMock.Expect (mock => mock.Open (FileMode.Open, FileAccess.Read, FileShare.Read)).Throw (new IOException ("ioexception"));
-      fileInfoMock.Stub (mock => mock.Directory).Return (new DirectoryInfoWrapper (new DirectoryInfo (@"C:\")));
+      fileInfoMock.Stub (mock => mock.Parent).Return (new DirectoryInfoWrapper (new DirectoryInfo (@"C:\")));
 
       zipBuilder.AddFile (fileInfoMock);
       var zipFileName = Path.GetTempFileName();
@@ -216,7 +216,7 @@ namespace Remotion.IO.UnitTests.Zip
       var fileInfoStub = MockRepository.GenerateStub<IFileInfo>();
       fileInfoStub.Stub (mock => mock.FullName).Return (@"C:\fileName");
       fileInfoStub.Stub (mock => mock.Open (FileMode.Open, FileAccess.Read, FileShare.Read)).Return (streamStub);
-      fileInfoStub.Stub (mock => mock.Directory).Return (new DirectoryInfoWrapper (new DirectoryInfo (@"C:\")));
+      fileInfoStub.Stub (mock => mock.Parent).Return (new DirectoryInfoWrapper (new DirectoryInfo (@"C:\")));
 
       zipBuilder.AddFile (fileInfoStub);
       var zipFileName = Path.GetTempFileName();
@@ -249,7 +249,7 @@ namespace Remotion.IO.UnitTests.Zip
       var fileInfoMock = MockRepository.GenerateMock<IFileInfo>();
       fileInfoMock.Expect (mock => mock.FullName).Return (@"C:\fileName");
       fileInfoMock.Expect (mock => mock.Open (FileMode.Open, FileAccess.Read, FileShare.Read)).Throw (new IOException());
-      fileInfoMock.Stub (mock => mock.Directory).Return (new DirectoryInfoWrapper (new DirectoryInfo (@"C:\")));
+      fileInfoMock.Stub (mock => mock.Parent).Return (new DirectoryInfoWrapper (new DirectoryInfo (@"C:\")));
 
       zipBuilder.AddFile (fileInfoMock);
 
@@ -278,7 +278,7 @@ namespace Remotion.IO.UnitTests.Zip
 
       fileInfoMock.Expect (mock => mock.FullName).Return (@"C:\fileName");
       fileInfoMock.Expect (mock => mock.Open (FileMode.Open, FileAccess.Read, FileShare.Read)).Throw (new IOException());
-      fileInfoMock.Stub (mock => mock.Directory).Return (new DirectoryInfoWrapper (new DirectoryInfo (@"C:\")));
+      fileInfoMock.Stub (mock => mock.Parent).Return (new DirectoryInfoWrapper (new DirectoryInfo (@"C:\")));
 
       zipBuilder.AddFile (new FileInfoWrapper (new FileInfo (_file1.FileName)));
       zipBuilder.AddFile (fileInfoMock);
@@ -314,7 +314,7 @@ namespace Remotion.IO.UnitTests.Zip
       var stream = fileInfo.Open (FileMode.Open, FileAccess.Read, FileShare.Read);
       fileInfoStub.Expect (mock => mock.Open (FileMode.Open, FileAccess.Read, FileShare.Read)).Return (stream);
 
-      fileInfoStub.Stub (mock => mock.Directory).Return (new DirectoryInfoWrapper (new DirectoryInfo (Path.GetDirectoryName (_file2.FileName))));
+      fileInfoStub.Stub (mock => mock.Parent).Return (new DirectoryInfoWrapper (new DirectoryInfo (Path.GetDirectoryName (_file2.FileName))));
 
       var zipFileName = Path.GetTempFileName();
       using (zipBuilder.Build (zipFileName))
@@ -618,7 +618,7 @@ namespace Remotion.IO.UnitTests.Zip
 
       var fileInfoMock = MockRepository.GenerateMock<IFileInfo>();
       fileInfoMock.Stub (mock => mock.FullName).Return (@"C:\fileName");
-      fileInfoMock.Stub (mock => mock.Directory).Return (new DirectoryInfoWrapper (new DirectoryInfo (@"C:\")));
+      fileInfoMock.Stub (mock => mock.Parent).Return (new DirectoryInfoWrapper (new DirectoryInfo (@"C:\")));
       fileInfoMock.Expect (mock => mock.Open (FileMode.Open, FileAccess.Read, expectedFileShareWhichIsUsedToOpenTheFile)).Return (new MemoryStream());
 
       zipBuilder.AddFile (fileInfoMock);

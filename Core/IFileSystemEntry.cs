@@ -35,7 +35,8 @@ namespace Remotion.IO
     DateTime CreationTimeUtc { get; }
     DateTime LastAccessTimeUtc { get; }
     DateTime LastWriteTimeUtc { get; }
-    IDirectoryInfo Directory { get; }
+    [CanBeNull]
+    IDirectoryInfo Parent { get; }
     void Refresh ();
   }
 }
