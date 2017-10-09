@@ -16,6 +16,7 @@
 // 
 
 using System;
+using System.Globalization;
 
 namespace Remotion.IO
 {
@@ -53,22 +54,121 @@ namespace Remotion.IO
     {
       if (_value >= c_terabyte)
       {
-        return ((decimal) _value / c_terabyte).ToString ("0.00 TB");
+        return ((decimal) _value / c_terabyte).ToString (GetLocalizedFormattingStringForTeraBytes());
       }
       else if ((decimal) _value >= c_gigabyte)
       {
-        return ((decimal) _value / c_gigabyte).ToString ("0.00 GB");
+        return ((decimal) _value / c_gigabyte).ToString (GetLocalizedFormattingStringForGigaBytes());
       }
       else if (_value >= c_megabyte)
       {
-        return((decimal)_value / c_megabyte).ToString ("0.00 MB");
+        return((decimal)_value / c_megabyte).ToString (GetLocalizedFormattingStringForMegaBytes());
       }
       else if (_value >= c_kilobyte)
       {
-        return ((decimal) _value / c_kilobyte).ToString ("0.00 kB");
+        return ((decimal) _value / c_kilobyte).ToString (GetLocalizedFormattingStringForKiloBytes());
+      }
+      else if (_value > 1)
+      {
+        return _value.ToString (GetLocalizedFormattingStringForBytes());
+      }
+      else if (_value == 1)
+      {
+        return GetLocalizedStringForOneByte();
       }
       else
-        return _value + " B";
+      {
+        return GetLocalizedStringForZeroBytes();
+      }
+    }
+
+    private string GetLocalizedFormattingStringForTeraBytes ()
+    {
+      switch (CultureInfo.CurrentUICulture.TwoLetterISOLanguageName)
+      {
+        case "fr":
+          return "0.00 To";
+        default:
+          return "0.00 TB";
+      }
+    }
+
+    private string GetLocalizedFormattingStringForGigaBytes ()
+    {
+      switch (CultureInfo.CurrentUICulture.TwoLetterISOLanguageName)
+      {
+        case "fr":
+          return "0.00 Go";
+        default:
+          return "0.00 GB";
+      }
+    }
+
+    private string GetLocalizedFormattingStringForMegaBytes ()
+    {
+      switch (CultureInfo.CurrentUICulture.TwoLetterISOLanguageName)
+      {
+        case "fr":
+          return "0.00 Mo";
+        default:
+          return "0.00 MB";
+      }
+    }
+
+    private string GetLocalizedFormattingStringForKiloBytes ()
+    {
+      switch (CultureInfo.CurrentUICulture.TwoLetterISOLanguageName)
+      {
+        case "fr":
+          return "0.00 Ko";
+        default:
+          return "0.00 KB";
+      }
+    }
+
+    private string GetLocalizedFormattingStringForBytes ()
+    {
+      switch (CultureInfo.CurrentUICulture.TwoLetterISOLanguageName)
+      {
+        case "fr":
+          return "0 octets";
+        case "de":
+          return "0 Bytes";
+        case "it":
+          return "0 byte";
+        default:
+          return "0 bytes";
+      }
+    }
+
+    private string GetLocalizedStringForOneByte ()
+    {
+      switch (CultureInfo.CurrentUICulture.TwoLetterISOLanguageName)
+      {
+        case "fr":
+          return "1 octet";
+        case "de":
+          return "1 Byte";
+        case "it":
+          return "1 byte";
+        default:
+          return "1 byte";
+      }
+    }
+
+    private string GetLocalizedStringForZeroBytes ()
+    {
+      switch (CultureInfo.CurrentUICulture.TwoLetterISOLanguageName)
+      {
+        case "fr":
+          return "0 octets";
+        case "de":
+          return "0 Bytes";
+        case "it":
+          return "0 byte";
+        default:
+          return "0 bytes";
+      }
     }
   }
 }
