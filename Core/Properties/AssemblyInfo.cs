@@ -17,7 +17,7 @@
 using System;
 using System.Reflection;
 
-[assembly: AssemblyTitle ("Remotion IO Library")]
-[assembly: AssemblyDescription ("Object-oriented wrapper for System.IO as associated utilities.")]
+[assembly: AssemblyTitle ("re-motion IO Library")]
+[assembly: AssemblyDescription ("Object-oriented wrapper for System.IO and associated utilities.")]
 [assembly: AssemblyCulture ("")]
 [assembly: CLSCompliant (true)]

@@ -24,21 +24,13 @@ namespace Remotion.IO
   /// </summary>
   public interface IFileSystemHelper
   {
-    FileStream OpenFile (string path, FileMode mode, FileAccess access, FileShare share);
+    FileStream FileOpen (string path, FileMode mode, FileAccess access, FileShare share);
     bool FileExists (string path);
+    void FileDelete (string path);
+    void FileMove (string sourceFile, string destinationFile);
+    IDirectoryInfo DirectoryCreate (string path);
     bool DirectoryExists (string path);
-    string GetTempFileName ();
-    string GetTempFolder ();
-    DateTime GetLastWriteTime(string path);
-    void Delete (string path);
-    void Move (string sourceFile, string destinationFile);
-    string MakeUniqueAndValidFileName (string path, string proposedFileName);
+    void DirectoryDelete (string path, bool recursive);
     IFileInfo[] GetFilesOfDirectory (string path);
-    void DeleteDirectory (string path, bool recursive);
-    string Combine (string path1, string path2);
-    DirectoryInfo CreateDirectory (string path);
-    string GetPathWithEnvironmentVariable (string path);
-    IArchiveBuilder CreateArchiveBuilder ();
-    IArchiveExtractor CreateArchiveExtractor (Stream archiveStream);
   }
 }

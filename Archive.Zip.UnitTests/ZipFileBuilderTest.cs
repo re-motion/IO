@@ -21,17 +21,33 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using ICSharpCode.SharpZipLib.Zip;
+using JetBrains.Annotations;
 using NUnit.Framework;
 using Remotion.Development.UnitTesting.IO;
-using Remotion.IO.Zip;
 using Remotion.Utilities;
 using Rhino.Mocks;
 
-namespace Remotion.IO.UnitTests.Zip
+namespace Remotion.IO.Archive.Zip.UnitTests
 {
   [TestFixture]
   public class ZipFileBuilderTest
   {
+    private class NotClosableMemeoryStream : MemoryStream
+    {
+      public NotClosableMemeoryStream ([NotNull] byte[] buffer)
+        : base (buffer)
+      {
+      }
+
+      protected override void Dispose (bool disposing)
+      {
+      }
+
+      public override void Close ()
+      {
+      }
+    }
+
     private TempFile _file1;
     private TempFile _file2;
     private string _folder;
@@ -70,6 +86,12 @@ namespace Remotion.IO.UnitTests.Zip
       Directory.Delete (_path, true);
       if (Directory.Exists (_destinationPath))
         Directory.Delete (_destinationPath, true);
+    }
+
+    [Test]
+    public void MimeType ()
+    {
+      Assert.That (new ZipFileBuilder().MimeType, Is.EqualTo ("application/zip"));
     }
 
     [Test]
@@ -164,7 +186,7 @@ namespace Remotion.IO.UnitTests.Zip
       var fileInfoMock = MockRepository.GenerateMock<IFileInfo>();
       fileInfoMock.Expect (mock => mock.FullName).Return (@"C:\fileName");
       fileInfoMock.Expect (mock => mock.Open (FileMode.Open, FileAccess.Read, FileShare.Read)).Throw (new IOException ("ioexception"));
-      fileInfoMock.Stub (mock => mock.Directory).Return (new DirectoryInfoWrapper (new DirectoryInfo (@"C:\")));
+      fileInfoMock.Stub (mock => mock.Parent).Return (new DirectoryInfoWrapper (new DirectoryInfo (@"C:\")));
 
       zipBuilder.AddFile (fileInfoMock);
       var zipFileName = Path.GetTempFileName();
@@ -180,6 +202,41 @@ namespace Remotion.IO.UnitTests.Zip
       }
     }
 
+    [Test]
+    public void Build_IOExceptionDuringCopyingOccurs_ThrowsAbortExceptionWithIOExceptionAsInner ()
+    {
+      var zipBuilder = new ZipFileBuilder();
+      zipBuilder.Progress += ((sender, e) => { });
+
+      var streamStub = MockRepository.GenerateStub<Stream>();
+      var ioException = new IOException();
+      streamStub.Stub (_ => _.Read (null, 0, 0)).IgnoreArguments().Throw (ioException);
+
+      var fileInfoStub = MockRepository.GenerateStub<IFileInfo>();
+      fileInfoStub.Stub (mock => mock.FullName).Return (@"C:\fileName");
+      fileInfoStub.Stub (mock => mock.Open (FileMode.Open, FileAccess.Read, FileShare.Read)).Return (streamStub);
+      fileInfoStub.Stub (mock => mock.Parent).Return (new DirectoryInfoWrapper (new DirectoryInfo (@"C:\")));
+
+      zipBuilder.AddFile (fileInfoStub);
+      var zipFileName = Path.GetTempFileName();
+      try
+      {
+        Assert.That (
+            () =>
+            {
+              using (zipBuilder.Build (zipFileName))
+              {
+              }
+            },
+            Throws.InstanceOf<AbortException>()
+                .With.Message.EqualTo (@"Error while copying the data from the file 'C:\fileName' to the archive.")
+                .And.InnerException.SameAs (ioException));
+      }
+      finally
+      {
+        FileUtility.DeleteAndWaitForCompletion (zipFileName);
+      }
+    }
 
     [Test]
     [ExpectedException (typeof (AbortException))]
@@ -191,7 +248,7 @@ namespace Remotion.IO.UnitTests.Zip
       var fileInfoMock = MockRepository.GenerateMock<IFileInfo>();
       fileInfoMock.Expect (mock => mock.FullName).Return (@"C:\fileName");
       fileInfoMock.Expect (mock => mock.Open (FileMode.Open, FileAccess.Read, FileShare.Read)).Throw (new IOException());
-      fileInfoMock.Stub (mock => mock.Directory).Return (new DirectoryInfoWrapper (new DirectoryInfo (@"C:\")));
+      fileInfoMock.Stub (mock => mock.Parent).Return (new DirectoryInfoWrapper (new DirectoryInfo (@"C:\")));
 
       zipBuilder.AddFile (fileInfoMock);
 
@@ -220,7 +277,7 @@ namespace Remotion.IO.UnitTests.Zip
 
       fileInfoMock.Expect (mock => mock.FullName).Return (@"C:\fileName");
       fileInfoMock.Expect (mock => mock.Open (FileMode.Open, FileAccess.Read, FileShare.Read)).Throw (new IOException());
-      fileInfoMock.Stub (mock => mock.Directory).Return (new DirectoryInfoWrapper (new DirectoryInfo (@"C:\")));
+      fileInfoMock.Stub (mock => mock.Parent).Return (new DirectoryInfoWrapper (new DirectoryInfo (@"C:\")));
 
       zipBuilder.AddFile (new FileInfoWrapper (new FileInfo (_file1.FileName)));
       zipBuilder.AddFile (fileInfoMock);
@@ -256,7 +313,7 @@ namespace Remotion.IO.UnitTests.Zip
       var stream = fileInfo.Open (FileMode.Open, FileAccess.Read, FileShare.Read);
       fileInfoStub.Expect (mock => mock.Open (FileMode.Open, FileAccess.Read, FileShare.Read)).Return (stream);
 
-      fileInfoStub.Stub (mock => mock.Directory).Return (new DirectoryInfoWrapper (new DirectoryInfo (Path.GetDirectoryName (_file2.FileName))));
+      fileInfoStub.Stub (mock => mock.Parent).Return (new DirectoryInfoWrapper (new DirectoryInfo (Path.GetDirectoryName (_file2.FileName))));
 
       var zipFileName = Path.GetTempFileName();
       using (zipBuilder.Build (zipFileName))
@@ -361,7 +418,7 @@ namespace Remotion.IO.UnitTests.Zip
     public void BuildThrowsAbortExceptionUponCancel ()
     {
       var zipBuilder = new ZipFileBuilder ();
-      zipBuilder.Progress += ((sender, e) => { e.Cancel = e.CurrentValue > 1000; });
+      zipBuilder.Progress += ((sender, e) => { e.Cancel = e.CurrentFileValue > 1000; });
       zipBuilder.AddFile (new FileInfoWrapper (new FileInfo (_file1.FileName)));
 
       var zipFileName = Path.GetTempFileName ();
@@ -369,6 +426,276 @@ namespace Remotion.IO.UnitTests.Zip
       using (zipBuilder.Build (zipFileName))
       {
       }
+    }
+
+    [Test]
+    public void BuildReportsProperly ()
+    {
+      var root =
+          CreateDirectory ("root",
+              CreateFile ("file1", 10),
+              CreateFile ("file2", 20),
+              CreateDirectory ("dir1"),
+              CreateDirectory ("dir2",
+                  CreateFile ("file1", 30),
+                  CreateFile ("file2", 40),
+                  CreateDirectory ("dir2",
+                      CreateFile ("file1", 50),
+                      CreateFile ("file2", 60),
+                      CreateDirectory ("dir2",
+                          CreateFile ("file1", 70),
+                          CreateFile ("file2", 80)))),
+              CreateDirectory ("dir3",
+                  CreateFile ("file1", 90))) (null);
+
+      var zipBuilder = new ZipFileBuilder();
+
+      root.Files.ForEach (zipBuilder.AddFile);
+      root.Directories.ForEach (zipBuilder.AddDirectory);
+
+      var progressArgs = new List<ArchiveBuilderProgressEventArgs>();
+
+      zipBuilder.Progress += (sender, e) => progressArgs.Add (e);
+
+      var zipFileName = Path.GetTempFileName();
+      try
+      {
+        using (zipBuilder.Build (zipFileName))
+        {
+        }
+      }
+      finally
+      {
+        File.Delete (zipFileName);
+      }
+
+      Assert.That (progressArgs.Count, Is.EqualTo (18));
+
+      AssertBuildProgress (progressArgs[0], 10, 10, 0, @"root\file1", 10, 2);
+      AssertBuildProgress (progressArgs[1], 10, 10, 0, @"root\file1", 10, 2);
+      AssertBuildProgress (progressArgs[2], 30, 20, 1, @"root\file2", 20, 2);
+      AssertBuildProgress (progressArgs[3], 30, 20, 1, @"root\file2", 20, 2);
+      AssertBuildProgress (progressArgs[4], 60, 30, 2, @"root\dir2\file1", 30, 4);
+      AssertBuildProgress (progressArgs[5], 60, 30, 2, @"root\dir2\file1", 30, 4);
+      AssertBuildProgress (progressArgs[6], 100, 40, 3, @"root\dir2\file2", 40, 4);
+      AssertBuildProgress (progressArgs[7], 100, 40, 3, @"root\dir2\file2", 40, 4);
+      AssertBuildProgress (progressArgs[8], 150, 50, 4, @"root\dir2\dir2\file1", 50, 6);
+      AssertBuildProgress (progressArgs[9], 150, 50, 4, @"root\dir2\dir2\file1", 50, 6);
+      AssertBuildProgress (progressArgs[10], 210, 60, 5, @"root\dir2\dir2\file2", 60, 6);
+      AssertBuildProgress (progressArgs[11], 210, 60, 5, @"root\dir2\dir2\file2", 60, 6);
+      AssertBuildProgress (progressArgs[12], 280, 70, 6, @"root\dir2\dir2\dir2\file1", 70, 8);
+      AssertBuildProgress (progressArgs[13], 280, 70, 6, @"root\dir2\dir2\dir2\file1", 70, 8);
+      AssertBuildProgress (progressArgs[14], 360, 80, 7, @"root\dir2\dir2\dir2\file2", 80, 8);
+      AssertBuildProgress (progressArgs[15], 360, 80, 7, @"root\dir2\dir2\dir2\file2", 80, 8);
+      AssertBuildProgress (progressArgs[16], 450, 90, 8, @"root\dir3\file1", 90, 9);
+      AssertBuildProgress (progressArgs[17], 450, 90, 8, @"root\dir3\file1", 90, 9);
+    }
+
+    [Test]
+    public void Build_FileSizeIsGreaterThanBufferSize_ReportsProperly ()
+    {
+      var root =
+          CreateDirectory ("root",
+              CreateFile ("file1", StreamCopier.DefaultCopyBufferSize + 1000),
+              CreateFile ("file2", StreamCopier.DefaultCopyBufferSize + 2000)) (null);
+
+      var zipBuilder = new ZipFileBuilder();
+
+      root.Files.ForEach (zipBuilder.AddFile);
+      var progressArgs = new List<ArchiveBuilderProgressEventArgs>();
+
+      zipBuilder.Progress += (sender, e) => progressArgs.Add (e);
+
+      var zipFileName = Path.GetTempFileName();
+      try
+      {
+        using (zipBuilder.Build (zipFileName))
+        {
+        }
+      }
+      finally
+      {
+        File.Delete (zipFileName);
+      }
+
+      Assert.That (progressArgs.Count, Is.EqualTo (6));
+
+      AssertBuildProgress (
+          progressArgs[0],
+          StreamCopier.DefaultCopyBufferSize,
+          StreamCopier.DefaultCopyBufferSize,
+          0,
+          @"root\file1",
+          StreamCopier.DefaultCopyBufferSize + 1000,
+          2);
+
+      AssertBuildProgress (
+          progressArgs[1],
+          StreamCopier.DefaultCopyBufferSize + 1000,
+          StreamCopier.DefaultCopyBufferSize + 1000,
+          0,
+          @"root\file1",
+          StreamCopier.DefaultCopyBufferSize + 1000,
+          2);
+
+      AssertBuildProgress (
+          progressArgs[2],
+          StreamCopier.DefaultCopyBufferSize + 1000,
+          StreamCopier.DefaultCopyBufferSize + 1000,
+          0,
+          @"root\file1",
+          StreamCopier.DefaultCopyBufferSize + 1000,
+          2);
+
+      AssertBuildProgress (
+          progressArgs[3],
+          2 * StreamCopier.DefaultCopyBufferSize + 1000,
+          StreamCopier.DefaultCopyBufferSize,
+          1,
+          @"root\file2",
+          StreamCopier.DefaultCopyBufferSize + 2000,
+          2);
+
+      AssertBuildProgress (progressArgs[4],
+          2 * StreamCopier.DefaultCopyBufferSize + 1000 + 2000,
+          StreamCopier.DefaultCopyBufferSize + 2000,
+          1,
+          @"root\file2",
+          StreamCopier.DefaultCopyBufferSize + 2000,
+          2);
+
+      AssertBuildProgress (progressArgs[5],
+          2 * StreamCopier.DefaultCopyBufferSize + 1000 + 2000,
+          StreamCopier.DefaultCopyBufferSize + 2000,
+          1,
+          @"root\file2",
+          StreamCopier.DefaultCopyBufferSize + 2000,
+          2);
+    }
+
+    [Test]
+    public void Build_FileSizeIsGreaterThanBufferSize_ProgressHandlerThrowsExceptionAfterFirstChunk_ForwardsException ()
+    {
+      var root =
+          CreateDirectory ("root", CreateFile ("file1", 3 * StreamCopier.DefaultCopyBufferSize)) (null);
+
+      var zipBuilder = new ZipFileBuilder();
+
+      root.Files.ForEach (zipBuilder.AddFile);
+
+      var exception = new Exception ("blablubb");
+      zipBuilder.Progress += (sender, e) => { throw exception; };
+
+      var zipFileName = Path.GetTempFileName();
+      try
+      {
+        Assert.That (
+            () =>
+            {
+              using (zipBuilder.Build (zipFileName))
+              {
+              }
+            },
+            Throws.Exception.SameAs (exception));
+      }
+      finally
+      {
+        File.Delete (zipFileName);
+      }
+    }
+
+    [TestCase (FileShare.None, FileShare.Read)]
+    [TestCase (FileShare.Read, FileShare.Read)]
+    [TestCase (FileShare.Delete, FileShare.Read | FileShare.Delete)]
+    [TestCase (FileShare.Write, FileShare.ReadWrite)]
+    [TestCase (FileShare.ReadWrite, FileShare.ReadWrite)]
+    [TestCase (FileShare.ReadWrite | FileShare.Delete, FileShare.ReadWrite | FileShare.Delete)]
+    public void Build_UsesProperFileShareToOpenTheFile (FileShare specifiedAdditionFileShare, FileShare expectedFileShareWhichIsUsedToOpenTheFile)
+    {
+      var zipBuilder = new ZipFileBuilder (specifiedAdditionFileShare);
+      zipBuilder.Progress += ((sender, e) => { });
+
+      var fileInfoMock = MockRepository.GenerateMock<IFileInfo>();
+      fileInfoMock.Stub (mock => mock.FullName).Return (@"C:\fileName");
+      fileInfoMock.Stub (mock => mock.Parent).Return (new DirectoryInfoWrapper (new DirectoryInfo (@"C:\")));
+      fileInfoMock.Expect (mock => mock.Open (FileMode.Open, FileAccess.Read, expectedFileShareWhichIsUsedToOpenTheFile)).Return (new MemoryStream());
+
+      zipBuilder.AddFile (fileInfoMock);
+      var zipFileName = Path.GetTempFileName();
+      try
+      {
+        using (zipBuilder.Build (zipFileName))
+        {
+        }
+      }
+      finally
+      {
+        FileUtility.DeleteAndWaitForCompletion (zipFileName);
+      }
+
+      fileInfoMock.VerifyAllExpectations();
+    }
+
+    private void AssertBuildProgress (
+        ArchiveBuilderProgressEventArgs args,
+        long expectedTotalValue,
+        long expectedCurrentFileValue,
+        int expectedFileIndex,
+        string expectedFileFullName,
+        long estimatedCurrentFileSize,
+        int estimatedCurrentFileCount)
+    {
+      Assert.That (args.CurrentTotalValue, Is.EqualTo (expectedTotalValue));
+      Assert.That (args.CurrentFileValue, Is.EqualTo (expectedCurrentFileValue));
+      Assert.That (args.CurrentFileIndex, Is.EqualTo (expectedFileIndex));
+      Assert.That (args.CurrentFileFullName, Is.EqualTo (expectedFileFullName));
+      Assert.That (args.CurrentEstimatedFileSize, Is.EqualTo (estimatedCurrentFileSize));
+      Assert.That (args.CurrentEstimatedFileCount, Is.EqualTo (estimatedCurrentFileCount));
+    }
+
+    private Func<IDirectoryInfo, IFileInfo> CreateFile (string name, int size)
+    {
+      return parent => new InMemoryFileInfo (
+          Path.Combine (parent.FullName, name),
+          new NotClosableMemeoryStream (new byte[size]),
+          parent,
+          DateTime.Now,
+          DateTime.Now,
+          DateTime.Now);
+    }
+
+    private Func<IDirectoryInfo, InMemoryDirectoryInfo> CreateDirectory (
+        string name,
+        params Func<IDirectoryInfo, IFileSystemEntry>[] subEntries)
+    {
+      return parent =>
+      {
+        var directory = new InMemoryDirectoryInfo (
+            parent != null ? Path.Combine (parent.FullName, name) : name,
+            parent,
+            DateTime.Now,
+            DateTime.Now,
+            DateTime.Now);
+
+        foreach (var subEntry in subEntries)
+        {
+          var value = subEntry (directory);
+
+          var dir = value as IDirectoryInfo;
+          if (dir != null)
+          {
+            directory.Directories.Add (dir);
+          }
+          else
+          {
+            var file = value as IFileInfo;
+            if (file != null)
+              directory.Files.Add (file);
+          }
+        }
+
+        return directory;
+      };
     }
 
     private void CheckUnzippedFiles (string zipFileName, IList<string> expectedFiles)

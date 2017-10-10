@@ -35,6 +35,11 @@ namespace Remotion.IO
       _wrappedInstance = directoryInfo;
     }
 
+    public string PhysicalPath
+    {
+      get { return _wrappedInstance.FullName; }
+    }
+
     public string FullName
     {
       get { return _wrappedInstance.FullName; }
@@ -82,9 +87,14 @@ namespace Remotion.IO
       set { _wrappedInstance.LastWriteTimeUtc = value; }
     }
 
-    public IDirectoryInfo Directory
+    public IDirectoryInfo Parent
     {
-      get { return this; }
+      get
+      {
+        if (_wrappedInstance.Parent == null)
+          return null;
+        return new DirectoryInfoWrapper (_wrappedInstance.Parent);
+      }
     }
 
     public IFileInfo[] GetFiles ()
@@ -106,6 +116,11 @@ namespace Remotion.IO
         directoryInfo[i] = new DirectoryInfoWrapper (_wrappedInstance.GetDirectories ()[i]);
       }
       return directoryInfo;
+    }
+
+    public void Refresh ()
+    {
+      _wrappedInstance.Refresh();
     }
   }
 }

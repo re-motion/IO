@@ -43,7 +43,7 @@ namespace Remotion.IO
     public override void Close ()
     {
       base.Close ();
-      _fileSystemHelper.Delete (_filePath);
+      _fileSystemHelper.FileDelete (_filePath);
     }
   }
 }

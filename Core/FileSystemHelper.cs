@@ -18,9 +18,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Text;
 using System.Threading;
-using Remotion.IO.Zip;
 using Remotion.Utilities;
 
 namespace Remotion.IO
@@ -28,16 +26,13 @@ namespace Remotion.IO
   /// <summary>
   /// Implements <see cref="IFileSystemHelper"/>
   /// </summary>
-  [Serializable]
   public class FileSystemHelper : IFileSystemHelper
   {
-    private const int c_maxPathLength = 259;
-
     public FileSystemHelper ()
     {
     }
 
-    public FileStream OpenFile (string path, FileMode mode, FileAccess access, FileShare share)
+    public FileStream FileOpen (string path, FileMode mode, FileAccess access, FileShare share)
     {
       ArgumentUtility.CheckNotNullOrEmpty ("path", path);
       return File.Open (path, mode, access, share);
@@ -49,29 +44,7 @@ namespace Remotion.IO
       return File.Exists (path);
     }
 
-    public bool DirectoryExists (string path)
-    {
-      ArgumentUtility.CheckNotNullOrEmpty ("path", path);
-      return Directory.Exists (path);
-    }
-
-    public string GetTempFileName ()
-    {
-      return Path.GetTempFileName();
-    }
-
-    public string GetTempFolder ()
-    {
-      return Path.Combine (Path.GetTempPath(), Guid.NewGuid().ToString());
-    }
-
-    public DateTime GetLastWriteTime (string path)
-    {
-      ArgumentUtility.CheckNotNullOrEmpty ("path", path);
-      return File.GetLastWriteTime (path);
-    }
-
-    public void Delete (string path)
+    public void FileDelete (string path)
     {
       ArgumentUtility.CheckNotNullOrEmpty ("path", path);
       File.Delete (path);
@@ -80,7 +53,7 @@ namespace Remotion.IO
         Thread.Sleep (10);
     }
 
-    public void Move (string sourceFile, string destinationFile)
+    public void FileMove (string sourceFile, string destinationFile)
     {
       ArgumentUtility.CheckNotNull ("sourceFile", sourceFile);
       ArgumentUtility.CheckNotNull ("destinationFile", destinationFile);
@@ -91,60 +64,31 @@ namespace Remotion.IO
         Thread.Sleep (10);
     }
 
-    public string MakeUniqueAndValidFileName (string path, string proposedFileName)
+    public IDirectoryInfo DirectoryCreate (string path)
     {
       ArgumentUtility.CheckNotNullOrEmpty ("path", path);
-      ArgumentUtility.CheckNotNullOrEmpty ("proposedFileName", proposedFileName);
 
-      string rootedPath = Path.GetFullPath (path);
-      string cleanedUpFileName = RemoveInvalidChars (proposedFileName);
-      string fileNameWithoutExtension = Path.GetFileNameWithoutExtension (cleanedUpFileName);
-      string extension = Path.GetExtension (cleanedUpFileName);
-
-      int fileIndex = 0;
-      string resultingFileName = BuildShortFileName (rootedPath, fileNameWithoutExtension, extension, "");
-
-      while (File.Exists (resultingFileName))
-      {
-        fileIndex++;
-        var fileIndexString = string.Format (" ({0})", fileIndex);
-        resultingFileName = BuildShortFileName (rootedPath, fileNameWithoutExtension, extension, fileIndexString);
-      }
-      return resultingFileName;
+      return new DirectoryInfoWrapper (Directory.CreateDirectory (path));
     }
 
-    private string BuildShortFileName (string rootedPath, string fileNameWithoutExtension, string extension, string fileIndexString)
+    public bool DirectoryExists (string path)
     {
-      string resultingFileName = Path.Combine (rootedPath, fileNameWithoutExtension + fileIndexString + extension);
-
-      if (resultingFileName.Length > c_maxPathLength)
-      {
-        int numberOfExcessCharacters = resultingFileName.Length - c_maxPathLength;
-
-        int shortFileNameLength = fileNameWithoutExtension.Length - numberOfExcessCharacters;
-        if (shortFileNameLength < 1)
-        {
-          throw new ArgumentException (
-              string.Format ("The filename '{0}' exceeds the maximum length for file names.", Path.GetFileName (resultingFileName)));
-        }
-
-        string shortFileNameWithoutExtension = fileNameWithoutExtension.Substring (0, shortFileNameLength);
-        resultingFileName = Path.Combine (rootedPath, shortFileNameWithoutExtension + fileIndexString + extension);
-      }
-      return resultingFileName;
+      ArgumentUtility.CheckNotNullOrEmpty ("path", path);
+      return Directory.Exists (path);
     }
 
-    private string RemoveInvalidChars (string fileName)
+    public void DirectoryDelete (string path, bool recursive)
     {
-      var builder = new StringBuilder (fileName);
-      foreach (var invalidFileNameChar in Path.GetInvalidFileNameChars())
-        builder.Replace (invalidFileNameChar.ToString(), "");
-      fileName = builder.ToString();
-      return fileName;
+      Directory.Delete (path, recursive);
     }
 
     public IFileInfo[] GetFilesOfDirectory (string path)
     {
+      ArgumentUtility.CheckNotNullOrEmpty ("path", path);
+
+      if (!Directory.Exists (path))
+        return new IFileInfo[0];
+
       List<IFileInfo> fileInfos = new List<IFileInfo>();
       return GetFilesInSubdirectories (path, fileInfos);
     }
@@ -163,37 +107,6 @@ namespace Remotion.IO
           GetFilesInSubdirectories (Path.Combine (path, subDirectoryInfo.Name), fileInfos); //Path.Combine
       }
       return fileInfos.ToArray();
-    }
-
-    public void DeleteDirectory (string path, bool recursive)
-    {
-      Directory.Delete (path, recursive);
-    }
-
-    public string Combine (string path1, string path2)
-    {
-      return Path.Combine (path1, path2);
-    }
-
-    public DirectoryInfo CreateDirectory (string path)
-    {
-      return Directory.CreateDirectory (path);
-    }
-
-    public string GetPathWithEnvironmentVariable (string path)
-    {
-      return Environment.ExpandEnvironmentVariables (path);
-    }
-
-    public IArchiveBuilder CreateArchiveBuilder ()
-    {
-      return new ZipFileBuilder();
-    }
-
-    public IArchiveExtractor CreateArchiveExtractor (Stream archiveStream)
-    {
-      ArgumentUtility.CheckNotNull ("archiveStream", archiveStream);
-      return new ZipFileExtractor (archiveStream);
     }
   }
 }

@@ -41,7 +41,7 @@ namespace Remotion.IO.UnitTests
       Assert.That (directory, Is.Not.Null);
       Assert.That (directory.Name, Is.EqualTo ("Directory"));
       Assert.That (directory.FullName, Is.EqualTo ("Directory"));
-      Assert.That (directory.Directory, Is.Null);
+      Assert.That (directory.Parent, Is.Null);
       Assert.That (directory.CreationTimeUtc, Is.EqualTo (new DateTime (2000, 1, 1)));
       Assert.That (directory.LastAccessTimeUtc, Is.EqualTo (new DateTime (2000, 1, 1)));
       Assert.That (directory.LastWriteTimeUtc, Is.EqualTo (new DateTime (2000, 1, 1)));
@@ -64,8 +64,8 @@ namespace Remotion.IO.UnitTests
       Assert.That (directory, Is.Not.Null);
       Assert.That (directory.Name, Is.EqualTo ("Directory"));
       Assert.That (directory.FullName, Is.EqualTo ("Parent\\Directory"));
-      Assert.That (directory.Directory, Is.Not.Null);
-      Assert.That (directory.Directory.Name, Is.EqualTo ("Parent"));
+      Assert.That (directory.Parent, Is.Not.Null);
+      Assert.That (directory.Parent.Name, Is.EqualTo ("Parent"));
     }
 
     [Test]
@@ -86,25 +86,25 @@ namespace Remotion.IO.UnitTests
       Assert.That (directory.Name, Is.EqualTo ("Directory"));
       Assert.That (directory.FullName, Is.EqualTo ("GreatGrandParent\\GrandParent\\Parent\\Directory"));
 
-      var parent = directory.Directory;
+      var parent = directory.Parent;
       Assert.That (parent, Is.Not.Null);
       Assert.That (parent.Name, Is.EqualTo ("Parent"));
       Assert.That (parent.FullName, Is.EqualTo ("GreatGrandParent\\GrandParent\\Parent"));
       Assert.That (parent.GetDirectories(), Is.EquivalentTo (new[] { directory }));
 
-      var grandParent = parent.Directory;
+      var grandParent = parent.Parent;
       Assert.That (grandParent, Is.Not.Null);
       Assert.That (grandParent.Name, Is.EqualTo ("GrandParent"));
       Assert.That (grandParent.FullName, Is.EqualTo ("GreatGrandParent\\GrandParent"));
       Assert.That (grandParent.GetDirectories(), Is.EquivalentTo (new[] { parent }));
 
-      var greatGrandParent = grandParent.Directory;
+      var greatGrandParent = grandParent.Parent;
       Assert.That (greatGrandParent, Is.Not.Null);
       Assert.That (greatGrandParent.Name, Is.EqualTo ("GreatGrandParent"));
       Assert.That (greatGrandParent.FullName, Is.EqualTo ("GreatGrandParent"));
       Assert.That (greatGrandParent.GetDirectories(), Is.EquivalentTo (new[] { grandParent }));
 
-      Assert.That (greatGrandParent.Directory, Is.Null);
+      Assert.That (greatGrandParent.Parent, Is.Null);
     }
 
     [Test]
@@ -124,11 +124,11 @@ namespace Remotion.IO.UnitTests
       var roots = _resolver.GetRootDirectories ();
       Assert.That (roots.Select (r => r.FullName).ToArray (), Is.EquivalentTo (new[] { "GreatGrandParent1", "GreatGrandParent2" }));
 
-      Assert.That (greatGrandParent1_GrandParent1, Is.SameAs (greatGrandParent1_GrandParent1_Parent1_Directory1.Directory.Directory));
-      Assert.That (greatGrandParent1_GrandParent1_Parent1_Directory1.Directory, Is.SameAs (greatGrandParent1_GrandParent1_Parent1_Directory2.Directory));
-      Assert.That (greatGrandParent1_GrandParent1_Parent1_Directory1.Directory, Is.Not.SameAs (greatGrandParent1_GrandParent2_Parent1_Directory1));
-      Assert.That (greatGrandParent2.Directory, Is.Not.SameAs (greatGrandParent1_GrandParent1.Directory));
-      Assert.That (greatGrandParent2, Is.SameAs (greatGrandParent2_GrandParent1_Parent1_Directory1.Directory.Directory.Directory));
+      Assert.That (greatGrandParent1_GrandParent1, Is.SameAs (greatGrandParent1_GrandParent1_Parent1_Directory1.Parent.Parent));
+      Assert.That (greatGrandParent1_GrandParent1_Parent1_Directory1.Parent, Is.SameAs (greatGrandParent1_GrandParent1_Parent1_Directory2.Parent));
+      Assert.That (greatGrandParent1_GrandParent1_Parent1_Directory1.Parent, Is.Not.SameAs (greatGrandParent1_GrandParent2_Parent1_Directory1));
+      Assert.That (greatGrandParent2.Parent, Is.Not.SameAs (greatGrandParent1_GrandParent1.Parent));
+      Assert.That (greatGrandParent2, Is.SameAs (greatGrandParent2_GrandParent1_Parent1_Directory1.Parent.Parent.Parent));
     }
 
     [Test]
@@ -140,8 +140,8 @@ namespace Remotion.IO.UnitTests
 
       Assert.That (fileInfo, Is.Not.Null);
       Assert.That (fileInfo.FullName, Is.EqualTo ("File"));
-      Assert.That (fileInfo.Directory.FullName, Is.EqualTo ("Parent\\Directory"));
-      Assert.That (fileInfo.Directory.GetFiles(), Is.EquivalentTo (new[] { fileInfo }));
+      Assert.That (fileInfo.Parent.FullName, Is.EqualTo ("Parent\\Directory"));
+      Assert.That (fileInfo.Parent.GetFiles(), Is.EquivalentTo (new[] { fileInfo }));
     }
 
     [Test]
@@ -153,7 +153,7 @@ namespace Remotion.IO.UnitTests
 
       Assert.That (fileInfo, Is.Not.Null);
       Assert.That (fileInfo.FullName, Is.EqualTo ("File"));
-      Assert.That (fileInfo.Directory, Is.Null);
+      Assert.That (fileInfo.Parent, Is.Null);
     }
   }
 }

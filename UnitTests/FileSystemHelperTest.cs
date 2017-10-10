@@ -17,7 +17,7 @@
 
 using System;
 using System.IO;
-using System.Text;
+using System.Linq;
 using NUnit.Framework;
 
 namespace Remotion.IO.UnitTests
@@ -45,85 +45,59 @@ namespace Remotion.IO.UnitTests
     }
 
     [Test]
-    public void MakeUniqueAndValidFileName_FileNameIsUnique ()
+    public void GetFilesOfDirectory_NotEmpty_ReturnsAllFilesInHierarchy ()
     {
+      var expectedFilePath1 = Path.Combine (_tempFolder, "MyFile1.txt");
+      using (File.Create (expectedFilePath1))
+      {
+        //NOP
+      }
+
+      var directoryPath1 = Path.Combine (_tempFolder, "MyDirectory1");
+      Directory.CreateDirectory (directoryPath1);
+
+      var expectedFilePath2 = Path.Combine (directoryPath1, "MyFile2.txt");
+      using (File.Create (expectedFilePath2))
+      {
+        //NOP
+      }
+
+      var expectedFilePath3 = Path.Combine (directoryPath1, "MyFile3.txt");
+      using (File.Create (expectedFilePath3))
+      {
+        //NOP
+      }
+
+      var directoryPath2 = Path.Combine (_tempFolder, "MyDirectory2");
+      Directory.CreateDirectory (directoryPath2);
+
+      var expectedFilePath4 = Path.Combine (directoryPath2, "MyFile4.txt");
+      using (File.Create (expectedFilePath4))
+      {
+        //NOP
+      }
+
+      var result = _fileSystemHelper.GetFilesOfDirectory (_tempFolder);
+
       Assert.That (
-          _fileSystemHelper.MakeUniqueAndValidFileName (_tempFolder, "MyFile.txt"),
-          Is.EqualTo (Path.Combine (_tempFolder, "MyFile.txt")));
+          result.Select (f => f.FullName),
+          Is.EquivalentTo (new[] { expectedFilePath1, expectedFilePath2, expectedFilePath3, expectedFilePath4 }));
     }
 
     [Test]
-    public void MakeUniqueAndValidFileName_FileNameIsNotUnique_OneFileExists ()
+    public void GetFilesOfDirectory_Empty_ReturnsEmptyList ()
     {
-      using (File.Create (Path.Combine (_tempFolder, "MyFile.txt")))
-      {
-        //NOP
-      }
-      Assert.That (
-          _fileSystemHelper.MakeUniqueAndValidFileName (_tempFolder, "MyFile.txt"),
-          Is.EqualTo (Path.Combine (_tempFolder, "MyFile (1).txt")));
+      var result = _fileSystemHelper.GetFilesOfDirectory (_tempFolder);
+
+      Assert.That (result, Is.Empty);
     }
 
     [Test]
-    public void MakeUniqueAndValidFileName_FileNameIsNotUnique_MoreThanOneFileExist ()
+    public void GetFilesOfDirectory_NonExistent_ReturnsEmptyList ()
     {
-      using (File.Create (Path.Combine (_tempFolder, "MyFile.txt")))
-      {
-        //NOP
-      }
-      using (File.Create (Path.Combine (_tempFolder, "MyFile (1).txt")))
-      {
-        //NOP
-      }
-      Assert.That (
-          _fileSystemHelper.MakeUniqueAndValidFileName (_tempFolder, "MyFile.txt"),
-          Is.EqualTo (Path.Combine (_tempFolder, "MyFile (2).txt")));
-    }
+      var result = _fileSystemHelper.GetFilesOfDirectory ("C:\\" + Guid.NewGuid());
 
-    [Test]
-    public void MakeUniqueAndValidFileName_FileNameIsUnique_FileNameIsTooLong ()
-    {
-      string actual = _fileSystemHelper.MakeUniqueAndValidFileName (
-          _tempFolder,
-          "00abcdefg_01abcdefg_02abcdefg_03abcdefg_04abcdefg_05abcdefg_06abcdefg_07abcdefg_08abcdefg_09abcdefg_10abcdefg_11abcdefg_12abcdefg_13abcdefg_14abcdefg_15abcdefg_16abcdefg_17abcdefg_18abcdefg_19abcdefg_20abcdefg_21abcdefg_22abcdefg_23abcdefg_24abcdefg_25abcdefg.txt");
-      Assert.That (actual.Length, Is.LessThan (260));
-    }
-
-    [Test]
-    public void MakeUniqueAndValidFileName_FileNameIsTooLong_FileNameIsNotUnique ()
-    {
-      StringBuilder shortFileNameBuilder = new StringBuilder (260);
-      shortFileNameBuilder.Append (Path.Combine (_tempFolder, "Start"));
-      for (int i = shortFileNameBuilder.Length; i < 259 - 4; i++)
-        shortFileNameBuilder.Append (i % 10);
-      shortFileNameBuilder.Append (".txt");
-
-      string shortFileName = shortFileNameBuilder.ToString();
-      using (File.Create (shortFileName))
-      {
-        //NOP
-      }
-      string actual = _fileSystemHelper.MakeUniqueAndValidFileName (_tempFolder, Path.GetFileName (shortFileName));
-      Assert.That (actual.Length, Is.LessThan (260));
-    }
-
-    [Test]
-    public void MakeUniqueAndValidFileName_FileNameIsTooLong_FileNameIsNotUniqueAfterShorting ()
-    {
-      StringBuilder shortFileNameBuilder = new StringBuilder (260);
-      shortFileNameBuilder.Append (Path.Combine (_tempFolder, "Start"));
-      for (int i = shortFileNameBuilder.Length; i < 259 - 4; i++)
-        shortFileNameBuilder.Append (i % 10);
-      shortFileNameBuilder.Append (".txt");
-
-      string shortFileName = shortFileNameBuilder.ToString();
-      using (File.Create (shortFileName))
-      {
-        //NOP
-      }
-      string actual = _fileSystemHelper.MakeUniqueAndValidFileName (_tempFolder, Path.GetFileNameWithoutExtension (shortFileName) + "MoreText.txt");
-      Assert.That (actual.Length, Is.LessThan (260));
-      Assert.That (actual, Is.StringEnding (" (1).txt"));
+      Assert.That (result, Is.Empty);
     }
   }
 }

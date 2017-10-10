@@ -22,7 +22,7 @@ using ICSharpCode.SharpZipLib.Core;
 using ICSharpCode.SharpZipLib.Zip;
 using Remotion.Utilities;
 
-namespace Remotion.IO.Zip
+namespace Remotion.IO.Archive.Zip
 {
   /// <summary>
   /// Implements <see cref="IArchiveBuilder"/>. 
@@ -31,13 +31,29 @@ namespace Remotion.IO.Zip
   public class ZipFileBuilder : IArchiveBuilder
   {
     private readonly List<IFileSystemEntry> _files = new List<IFileSystemEntry>();
-    public event EventHandler<StreamCopyProgressEventArgs> Progress;
+    public event EventHandler<ArchiveBuilderProgressEventArgs> Progress;
     public event EventHandler<FileOpenExceptionEventArgs> Error;
 
     private FileProcessingRecoveryAction _fileProcessingRecoveryAction;
+    private int _currentFileIndex = 0;
+    private long _currentTotalValueExcludingCurrentFileValue = 0;
+    private int _currentEstimatedFileCount = 0;
+    private readonly FileShare _fileShareToUse;
 
-    public ZipFileBuilder ()
+    /// <summary>
+    /// Creates an instance of <see cref="ZipFileBuilder"/>
+    /// </summary>
+    /// <param name="additionalFileShareToUse">The <see cref="FileShare"/> that should be used to read the files in addition to <see cref="FileShare.Read"/>.
+    /// (That means <see cref="FileShare.Read"/> is used at least in any case, regardless if it is specified or not)
+    /// </param>
+    public ZipFileBuilder (FileShare additionalFileShareToUse = FileShare.None)
     {
+      _fileShareToUse = additionalFileShareToUse | FileShare.Read;
+    }
+
+    public string MimeType
+    {
+      get { return "application/zip"; }
     }
 
     public FileProcessingRecoveryAction FileProcessingRecoveryAction
@@ -56,6 +72,7 @@ namespace Remotion.IO.Zip
     {
       ArgumentUtility.CheckNotNull ("fileInfo", fileInfo);
       _files.Add (fileInfo);
+      _currentEstimatedFileCount++;
     }
 
     public Stream Build (string archiveFileName)
@@ -66,7 +83,7 @@ namespace Remotion.IO.Zip
       {
         foreach (var fileInfo in _files)
         {
-          var directoryName = fileInfo.Directory == null ? string.Empty : fileInfo.Directory.FullName;
+          var directoryName = fileInfo.Parent == null ? string.Empty : fileInfo.Parent.FullName;
           var nameTransform = new ZipNameTransform (directoryName);
 
           if (fileInfo is IFileInfo)
@@ -75,13 +92,19 @@ namespace Remotion.IO.Zip
             AddDirectoryToZipFile ((IDirectoryInfo) fileInfo, zipOutputStream, nameTransform);
         }
       }
+
       _files.Clear();
+      _currentFileIndex = 0;
+      _currentTotalValueExcludingCurrentFileValue = 0;
+      _currentEstimatedFileCount = 0;
+
       return File.Open (archiveFileName, FileMode.Open, FileAccess.Read, FileShare.None);
     }
 
     private void AddFileToZipFile (IFileInfo fileInfo, ZipOutputStream zipOutputStream, ZipNameTransform nameTransform)
     {
       var fileStream = GetFileStream (fileInfo);
+      var fileLength = fileInfo.Length;
 
       if (fileStream == null)
         return;
@@ -93,18 +116,34 @@ namespace Remotion.IO.Zip
       {
 
         var streamCopier = new StreamCopier();
-        streamCopier.TransferProgress += OnZippingProgress;
-        if (!streamCopier.CopyStream (fileStream, zipOutputStream, fileStream.Length))
+        streamCopier.TransferProgress += (sender, args) => OnZippingProgress (args, fileInfo.FullName, fileInfo.Length);
+
+        try
         {
-          zipEntry.Size = -1;
-          throw new AbortException();
+          if (!streamCopier.CopyStream (fileStream, zipOutputStream))
+          {
+            zipEntry.Size = -1;
+            throw new AbortException();
+          }
+        }
+        catch (IOException ex)
+        {
+          throw new AbortException (
+              string.Format ("Error while copying the data from the file '{0}' to the archive.", fileInfo.FullName),
+              ex);
         }
       }
+
+      _currentFileIndex++;
+      _currentTotalValueExcludingCurrentFileValue += fileLength;
     }
 
     private void AddDirectoryToZipFile (IDirectoryInfo directoryInfo, ZipOutputStream zipOutputStream, ZipNameTransform nameTransform)
     {
-      foreach (var file in directoryInfo.GetFiles ())
+      var files = directoryInfo.GetFiles ();
+      _currentEstimatedFileCount += files.Length;
+
+      foreach (var file in files)
         AddFileToZipFile (file, zipOutputStream, nameTransform);
       foreach (var directory in directoryInfo.GetDirectories ())
         AddDirectoryToZipFile (directory, zipOutputStream, nameTransform);
@@ -117,7 +156,7 @@ namespace Remotion.IO.Zip
       {
         try
         {
-          return fileInfo.Open (FileMode.Open, FileAccess.Read, FileShare.Read);
+          return fileInfo.Open (FileMode.Open, FileAccess.Read, _fileShareToUse);
         }
         catch (FileNotFoundException ex)
         {
@@ -145,16 +184,28 @@ namespace Remotion.IO.Zip
       return new ZipEntry (nameTransform.TransformFile (fileInfo.FullName))
              {
                  IsUnicodeText = true,
-                 Size = fileInfo.Length,
                  DateTime = fileInfo.LastWriteTimeUtc
-
              };
     }
 
-    private void OnZippingProgress (object sender, StreamCopyProgressEventArgs args)
+    private void OnZippingProgress (StreamCopyProgressEventArgs currentFileProgress, string currentFilePath, long currentEstimatedFileSize)
     {
       if (Progress != null)
-        Progress (this, args);
+      {
+        var currentFileValue = currentFileProgress.CurrentValue;
+        var currentTotalValue = _currentTotalValueExcludingCurrentFileValue + currentFileValue;
+        var archiveBuilderProgressEventArgs = new ArchiveBuilderProgressEventArgs (
+            currentFileValue,
+            currentTotalValue,
+            _currentFileIndex,
+            currentFilePath,
+            currentEstimatedFileSize,
+            _currentEstimatedFileCount);
+
+        archiveBuilderProgressEventArgs.Cancel = currentFileProgress.Cancel;
+        Progress (this, archiveBuilderProgressEventArgs);
+        currentFileProgress.Cancel = archiveBuilderProgressEventArgs.Cancel;
+      }
     }
 
     private bool OnFileOpenError (object sender, FileOpenExceptionEventArgs args)

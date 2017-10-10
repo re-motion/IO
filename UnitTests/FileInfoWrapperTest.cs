@@ -43,6 +43,12 @@ namespace Remotion.IO.UnitTests
     }
 
     [Test]
+    public void PhysicalPath ()
+    {
+      Assert.That (_fileInfoWrapper.PhysicalPath, Is.EqualTo (_tempFile.FileName));
+    }
+
+    [Test]
     public void FullName ()
     {
       Assert.That (_fileInfoWrapper.FullName, Is.EqualTo (_tempFile.FileName));
@@ -67,15 +73,16 @@ namespace Remotion.IO.UnitTests
     }
 
     [Test]
-    public void DirectoryName ()
+    public void Parent_WithFileInDirectory_ReturnsDirectory ()
     {
-      Assert.That (_fileInfoWrapper.Directory.FullName, Is.EqualTo (Path.GetDirectoryName(_tempFile.FileName)));
+      Assert.That (_fileInfoWrapper.Parent.FullName, Is.EqualTo (new DirectoryInfo (Path.GetDirectoryName (_tempFile.FileName)).FullName));
     }
 
     [Test]
-    public void Directory ()
+    public void Parent_WithRootFile_ReturnsRoot ()
     {
-      Assert.That (_fileInfoWrapper.Directory.Name, Is.EqualTo (new DirectoryInfo(Path.GetDirectoryName(_tempFile.FileName)).Name));
+      var fileInfoWrapper = new FileInfoWrapper (new FileInfo ("C:\\test.txt"));
+      Assert.That (fileInfoWrapper.Parent.FullName, Is.EqualTo (new DirectoryInfo ("C:\\").FullName));
     }
 
     [Test]
@@ -137,6 +144,22 @@ namespace Remotion.IO.UnitTests
       Assert.That (actualStream, Is.EqualTo(constraintStream));
       actualStream.Dispose();
       constraintStream.Dispose();
+    }
+
+    [Test]
+    public void Refresh ()
+    {
+      var accessTime1 = new DateTime (2010, 1, 1, 0, 0, 0, DateTimeKind.Utc);
+      var accessTime2 = new DateTime (2005, 1, 1, 0, 0, 0, DateTimeKind.Utc);
+
+      File.SetLastAccessTime (_tempFile.FileName, accessTime1);
+      _fileInfoWrapper.Refresh();
+      Assert.That (_fileInfoWrapper.LastAccessTimeUtc, Is.EqualTo (accessTime1));
+
+      File.SetLastAccessTime (_tempFile.FileName, accessTime2);
+      Assert.That (_fileInfoWrapper.LastAccessTimeUtc, Is.EqualTo (accessTime1));
+      _fileInfoWrapper.Refresh();
+      Assert.That (_fileInfoWrapper.LastAccessTimeUtc, Is.EqualTo (accessTime2));
     }
   }
 }

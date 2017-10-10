@@ -35,6 +35,11 @@ namespace Remotion.IO
       _wrappedInstance = fileInfo;
     }
 
+    public string PhysicalPath
+    {
+      get { return _wrappedInstance.FullName; }
+    }
+
     public string FullName
     {
       get { return _wrappedInstance.FullName; }
@@ -55,9 +60,9 @@ namespace Remotion.IO
       get { return _wrappedInstance.Length; }
     }
 
-    public IDirectoryInfo Directory
+    public IDirectoryInfo Parent
     {
-      get { return new DirectoryInfoWrapper(_wrappedInstance.Directory); }
+      get { return new DirectoryInfoWrapper (_wrappedInstance.Directory); }
     }
 
     public bool IsReadOnly
@@ -93,5 +98,9 @@ namespace Remotion.IO
       return _wrappedInstance.Open (mode, access, share);
     }
 
+    public void Refresh ()
+    {
+      _wrappedInstance.Refresh();
+    }
   }
 }

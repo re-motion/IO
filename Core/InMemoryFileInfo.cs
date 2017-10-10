@@ -17,6 +17,7 @@
 
 using System;
 using System.IO;
+using JetBrains.Annotations;
 using Remotion.Utilities;
 
 namespace Remotion.IO
@@ -26,14 +27,25 @@ namespace Remotion.IO
   /// </summary>
   public class InMemoryFileInfo : IFileInfo
   {
+    [NotNull]
     private readonly string _fileName;
+
+    [NotNull]
     private readonly Stream _stream;
     private readonly DateTime _creationTimeUtc;
     private readonly DateTime _lastAccessTimeUtc;
     private readonly DateTime _lastWriteTimeUtc;
+
+    [CanBeNull]
     private readonly IDirectoryInfo _directory;
 
-    public InMemoryFileInfo (string fileName, Stream stream, IDirectoryInfo directory, DateTime creationTimeUtc, DateTime lastAccessTimeUtc, DateTime lastWriteTimeUtc)
+    public InMemoryFileInfo (
+        [NotNull] string fileName,
+        [NotNull] Stream stream,
+        [CanBeNull] IDirectoryInfo directory,
+        DateTime creationTimeUtc,
+        DateTime lastAccessTimeUtc,
+        DateTime lastWriteTimeUtc)
     {
       ArgumentUtility.CheckNotNullOrEmpty ("fileName", fileName);
       ArgumentUtility.CheckNotNull ("stream", stream);
@@ -44,6 +56,11 @@ namespace Remotion.IO
       _lastAccessTimeUtc = lastAccessTimeUtc;
       _lastWriteTimeUtc = lastWriteTimeUtc;
       _directory = directory;
+    }
+
+    public string PhysicalPath
+    {
+      get { return null; }
     }
 
     public string FullName
@@ -66,7 +83,7 @@ namespace Remotion.IO
       get { return _stream.Length; }
     }
 
-    public IDirectoryInfo Directory
+    public IDirectoryInfo Parent
     {
       get { return _directory; }
     }
@@ -99,6 +116,11 @@ namespace Remotion.IO
     public Stream Open (FileMode mode, FileAccess access, FileShare share)
     {
       return _stream;
+    }
+
+    public void Refresh ()
+    {
+      // NOP
     }
 
     public override string ToString ()

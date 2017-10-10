@@ -16,6 +16,7 @@
 // 
 
 using System;
+using JetBrains.Annotations;
 
 namespace Remotion.IO
 {
@@ -24,6 +25,8 @@ namespace Remotion.IO
   /// </summary>
   public interface IFileSystemEntry
   {
+    [CanBeNull]
+    string PhysicalPath { get; }
     string FullName { get; }
     string Name { get; }
     string Extension { get; }
@@ -32,6 +35,8 @@ namespace Remotion.IO
     DateTime CreationTimeUtc { get; }
     DateTime LastAccessTimeUtc { get; }
     DateTime LastWriteTimeUtc { get; }
-    IDirectoryInfo Directory { get; }
+    [CanBeNull]
+    IDirectoryInfo Parent { get; }
+    void Refresh ();
   }
 }

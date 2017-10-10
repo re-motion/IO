@@ -56,10 +56,6 @@
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="ICSharpCode.SharpZipLib, Version=0.86.0.518, Culture=neutral, PublicKeyToken=1b03e6acf1164f73, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\SharpZipLib.0.86.0\lib\20\ICSharpCode.SharpZipLib.dll</HintPath>
-    </Reference>
     <Reference Include="nunit.framework, Version=2.6.2.12296, Culture=neutral, PublicKeyToken=96d09a1eb7f44a77, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\NUnit.2.6.2\lib\nunit.framework.dll</HintPath>
@@ -100,20 +96,21 @@
     <Compile Include="App_Packages\Remotion.JetBrains.Annotations.Sources.1.15.23.0\StringFormatMethodAttribute.cs" />
     <Compile Include="App_Packages\Remotion.JetBrains.Annotations.Sources.1.15.23.0\TerminatesProgramAttribute.cs" />
     <Compile Include="App_Packages\Remotion.JetBrains.Annotations.Sources.1.15.23.0\UsedImplicitlyAttribute.cs" />
-    <Compile Include="App_Packages\Remotion.Utilities.ArgumentUtility.Sources.1.25.23.0\ArgumentUtility.cs" />
+    <Compile Include="App_Packages\Remotion.Utilities.ArgumentUtility.Sources.1.15.23.0\ArgumentUtility.cs" />
+    <Compile Include="App_Packages\Remotion.Utilities.CultureScope.Sources.1.17.0\CultureScope.cs" />
     <Compile Include="App_Packages\Remotion.Utilities.FileUtility.Sources.1.15.33.0\FileUtility.cs" />
     <Compile Include="App_Packages\Remotion.Utilities.NullableTypeUtility.Sources.1.15.23.0\NullableTypeUtility.cs" />
     <Compile Include="DirectoryInfoWrapperTest.cs" />
     <Compile Include="DirectoryTreeResolverTest.cs" />
     <Compile Include="FileInfoWrapperTest.cs" />
     <Compile Include="FileSizeTest.cs" />
+    <Compile Include="FileNameFactoryTest.cs" />
     <Compile Include="FileSystemHelperTest.cs" />
     <Compile Include="InMemoryDirectoryInfoTest.cs" />
     <Compile Include="InMemoryFileInfoTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="StreamCopierTest.cs" />
-    <Compile Include="Zip\ZipFileBuilderTest.cs" />
-    <Compile Include="Zip\ZipFileExtractorTest.cs" />
+    <Compile Include="StreamWithTimeoutDecoratorTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\LGPL.licenseheader">
@@ -125,7 +122,8 @@
     <None Include="App.config" />
     <None Include="App_Packages\Remotion.Development.TempFile.Sources.1.15.33.0\SharedSource Apache-2.0.licenseheader" />
     <None Include="App_Packages\Remotion.JetBrains.Annotations.Sources.1.15.23.0\ReSharperAnnotations Apache-2.0.licenseheader" />
-    <None Include="App_Packages\Remotion.Utilities.ArgumentUtility.Sources.1.25.23.0\SharedSource Apache-2.0.licenseheader" />
+    <None Include="App_Packages\Remotion.Utilities.ArgumentUtility.Sources.1.15.23.0\SharedSource Apache-2.0.licenseheader" />
+    <None Include="App_Packages\Remotion.Utilities.CultureScope.Sources.1.17.0\SharedSource Apache-2.0.licenseheader" />
     <None Include="App_Packages\Remotion.Utilities.FileUtility.Sources.1.15.33.0\SharedSource Apache-2.0.licenseheader" />
     <None Include="App_Packages\Remotion.Utilities.NullableTypeUtility.Sources.1.15.23.0\SharedSource Apache-2.0.licenseheader" />
     <None Include="packages.config" />

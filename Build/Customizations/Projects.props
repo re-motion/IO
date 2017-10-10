@@ -6,7 +6,11 @@
       <!--<CreateNuGetPackageWithSymbolServerSupport>False</CreateNuGetPackageWithSymbolServerSupport>-->
       <!--<ExcludeFromDocumentation>False</ExcludeFromDocumentation>-->
     </ReleaseProjectFiles>
-    <UnitTestProjectFiles Include="$(SolutionDirectory)UnitTests\UnitTests.csproj" />
+    <UnitTestProjectFiles Include="$(SolutionDirectory)UnitTests\UnitTests.csproj"/>
+    <ReleaseProjectFiles Include="$(SolutionDirectory)Archive.Zip\Archive.Zip.csproj">
+      <CreateDocumentationFile>False</CreateDocumentationFile>
+    </ReleaseProjectFiles>
+    <UnitTestProjectFiles Include="$(SolutionDirectory)Archive.Zip.UnitTests\Archive.Zip.UnitTests.csproj"/>
     <!--
     <IntegrationTestProjectFiles Include="$(SolutionDirectory)IntegrationTests\IntegrationTests.csproj">
       <IsDatabaseTest>False</IsDatabaseTest>

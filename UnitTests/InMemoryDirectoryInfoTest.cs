@@ -44,6 +44,12 @@ namespace Remotion.IO.UnitTests
     }
 
     [Test]
+    public void PhysicalPath ()
+    {
+      Assert.That (_inMemoryDirectoryInfo.PhysicalPath, Is.Null);
+    }
+
+    [Test]
     public void FullName ()
     {
       Assert.That (_inMemoryDirectoryInfo.FullName, Is.EqualTo (_directoryName));
@@ -62,9 +68,9 @@ namespace Remotion.IO.UnitTests
     }
 
     [Test]
-    public void Directory ()
+    public void Parent ()
     {
-      Assert.That (_inMemoryDirectoryInfo.Directory, Is.SameAs (_parentDirectory));
+      Assert.That (_inMemoryDirectoryInfo.Parent, Is.SameAs (_parentDirectory));
     }
 
     [Test]
@@ -119,6 +125,12 @@ namespace Remotion.IO.UnitTests
       _inMemoryDirectoryInfo.Directories.AddRange (directory);
 
       Assert.That (_inMemoryDirectoryInfo.GetDirectories(), Is.EquivalentTo (directory));
+    }
+
+    [Test]
+    public void Refresh_DoesNothing ()
+    {
+      Assert.That (() => _inMemoryDirectoryInfo.Refresh(), Throws.Nothing);
     }
   }
 }
