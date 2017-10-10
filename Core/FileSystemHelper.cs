@@ -26,7 +26,6 @@ namespace Remotion.IO
   /// <summary>
   /// Implements <see cref="IFileSystemHelper"/>
   /// </summary>
-  [Serializable]
   public class FileSystemHelper : IFileSystemHelper
   {
     public FileSystemHelper ()
