@@ -79,7 +79,7 @@ namespace Remotion.IO
         Thread.Sleep (10);
     }
 
-    public void Move (string sourceFile, string destinationFile)
+    public void FileMove (string sourceFile, string destinationFile)
     {
       ArgumentUtility.CheckNotNull ("sourceFile", sourceFile);
       ArgumentUtility.CheckNotNull ("destinationFile", destinationFile);
@@ -187,7 +187,7 @@ namespace Remotion.IO
       Directory.Delete (path, recursive);
     }
 
-    public IDirectoryInfo CreateDirectory (string path)
+    public IDirectoryInfo DirectoryCreate (string path)
     {
       ArgumentUtility.CheckNotNullOrEmpty ("path", path);
 

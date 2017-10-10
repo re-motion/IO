@@ -31,11 +31,11 @@ namespace Remotion.IO
     string GetTempFolder ();
     DateTime GetLastWriteTime(string path);
     void FileDelete (string path);
-    void Move (string sourceFile, string destinationFile);
+    void FileMove (string sourceFile, string destinationFile);
     string MakeValidFileName (string path, string proposedFileName);
     string MakeUniqueAndValidFileName (string path, string proposedFileName);
     IFileInfo[] GetFilesOfDirectory (string path);
     void DeleteDirectory (string path, bool recursive);
-    IDirectoryInfo CreateDirectory (string path);
+    IDirectoryInfo DirectoryCreate (string path);
   }
 }
