@@ -18,7 +18,6 @@
 using System;
 using System.IO;
 using System.Linq;
-using System.Text;
 using NUnit.Framework;
 
 namespace Remotion.IO.UnitTests
@@ -43,119 +42,6 @@ namespace Remotion.IO.UnitTests
     {
       if (Directory.Exists (_tempFolder))
         Directory.Delete (_tempFolder, true);
-    }
-
-    [Test]
-    public void MakeUniqueAndValidFileName_FileNameIsUnique ()
-    {
-      Assert.That (
-          _fileSystemHelper.MakeUniqueAndValidFileName (_tempFolder, "MyFile.txt"),
-          Is.EqualTo (Path.Combine (_tempFolder, "MyFile.txt")));
-    }
-
-    [Test]
-    public void MakeUniqueAndValidFileName_FileNameIsNotUnique_OneFileExists ()
-    {
-      using (File.Create (Path.Combine (_tempFolder, "MyFile.txt")))
-      {
-        //NOP
-      }
-      Assert.That (
-          _fileSystemHelper.MakeUniqueAndValidFileName (_tempFolder, "MyFile.txt"),
-          Is.EqualTo (Path.Combine (_tempFolder, "MyFile (1).txt")));
-    }
-
-    [Test]
-    public void MakeUniqueAndValidFileName_FileNameIsNotUnique_MoreThanOneFileExist ()
-    {
-      using (File.Create (Path.Combine (_tempFolder, "MyFile.txt")))
-      {
-        //NOP
-      }
-      using (File.Create (Path.Combine (_tempFolder, "MyFile (1).txt")))
-      {
-        //NOP
-      }
-      Assert.That (
-          _fileSystemHelper.MakeUniqueAndValidFileName (_tempFolder, "MyFile.txt"),
-          Is.EqualTo (Path.Combine (_tempFolder, "MyFile (2).txt")));
-    }
-
-    [Test]
-    public void MakeUniqueAndValidFileName_FileNameIsUnique_FileNameIsTooLong ()
-    {
-      string actual = _fileSystemHelper.MakeUniqueAndValidFileName (
-          _tempFolder,
-          "00abcdefg_01abcdefg_02abcdefg_03abcdefg_04abcdefg_05abcdefg_06abcdefg_07abcdefg_08abcdefg_09abcdefg_10abcdefg_11abcdefg_12abcdefg_13abcdefg_14abcdefg_15abcdefg_16abcdefg_17abcdefg_18abcdefg_19abcdefg_20abcdefg_21abcdefg_22abcdefg_23abcdefg_24abcdefg_25abcdefg.txt");
-      Assert.That (actual.Length, Is.LessThan (260));
-    }
-
-    [Test]
-    public void MakeUniqueAndValidFileName_FileNameIsTooLong_FileNameIsNotUnique ()
-    {
-      StringBuilder shortFileNameBuilder = new StringBuilder (260);
-      shortFileNameBuilder.Append (Path.Combine (_tempFolder, "Start"));
-      for (int i = shortFileNameBuilder.Length; i < 259 - 4; i++)
-        shortFileNameBuilder.Append (i % 10);
-      shortFileNameBuilder.Append (".txt");
-
-      string shortFileName = shortFileNameBuilder.ToString();
-      using (File.Create (shortFileName))
-      {
-        //NOP
-      }
-      string actual = _fileSystemHelper.MakeUniqueAndValidFileName (_tempFolder, Path.GetFileName (shortFileName));
-      Assert.That (actual.Length, Is.LessThan (260));
-    }
-
-    [Test]
-    public void MakeUniqueAndValidFileName_FileNameIsTooLong_FileNameIsNotUniqueAfterShorting ()
-    {
-      StringBuilder shortFileNameBuilder = new StringBuilder (260);
-      shortFileNameBuilder.Append (Path.Combine (_tempFolder, "Start"));
-      for (int i = shortFileNameBuilder.Length; i < 259 - 4; i++)
-        shortFileNameBuilder.Append (i % 10);
-      shortFileNameBuilder.Append (".txt");
-
-      string shortFileName = shortFileNameBuilder.ToString();
-      using (File.Create (shortFileName))
-      {
-        //NOP
-      }
-      string actual = _fileSystemHelper.MakeUniqueAndValidFileName (_tempFolder, Path.GetFileNameWithoutExtension (shortFileName) + "MoreText.txt");
-      Assert.That (actual.Length, Is.LessThan (260));
-      Assert.That (actual, Is.StringEnding (" (1).txt"));
-    }
-
-    [Test]
-    public void MakeValidFileName_FileNameIsTooLong_FileNameIsTruncatedAtTheEnd ()
-    {
-      string actual = _fileSystemHelper.MakeValidFileName (
-          _tempFolder,
-          "00abcdefg_01abcdefg_02abcdefg_03abcdefg_04abcdefg_05abcdefg_06abcdefg_07abcdefg_08abcdefg_09abcdefg_10abcdefg_11abcdefg_12abcdefg_13abcdefg_14abcdefg_15abcdefg_16abcdefg_17abcdefg_18abcdefg_19abcdefg_20abcdefg_21abcdefg_22abcdefg_23abcdefg_24abcdefg_25abcdefg.txt");
-      Assert.That (actual.Length, Is.LessThan (260));
-      Assert.That (Path.GetFileName (actual).StartsWith ("00abcdefg_"));
-    }
-
-    [Test]
-    public void MakeValidFileName_FileNameIsNotUnique_IsNotTakenIntoAccount ()
-    {
-      using (File.Create (Path.Combine (_tempFolder, "MyFile.txt")))
-      {
-        //NOP
-      }
-      Assert.That (
-          _fileSystemHelper.MakeValidFileName (_tempFolder, "MyFile.txt"),
-          Is.EqualTo (Path.Combine (_tempFolder, "MyFile.txt")));
-    }
-
-    [Test]
-    public void MakeValidFileName_FileNameContainsInvalidChars_InvalidCharsAreRemoved ()
-    {
-      string actual = _fileSystemHelper.MakeValidFileName (
-          _tempFolder,
-          @"\ab!c:d<e>f§.txt");
-      Assert.That (Path.GetFileName (actual), Is.EqualTo ("ab!cdef§.txt"));
     }
 
     [Test]

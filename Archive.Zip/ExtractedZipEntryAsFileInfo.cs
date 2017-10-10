@@ -21,7 +21,7 @@ using ICSharpCode.SharpZipLib.Zip;
 using JetBrains.Annotations;
 using Remotion.Utilities;
 
-namespace Remotion.IO.Zip
+namespace Remotion.IO.Archive.Zip
 {
   /// <summary>
   /// Wrapper type to represent a <see cref="ZipEntry"/> as an <see cref="IFileInfo"/>.

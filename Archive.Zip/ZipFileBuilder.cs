@@ -22,7 +22,7 @@ using ICSharpCode.SharpZipLib.Core;
 using ICSharpCode.SharpZipLib.Zip;
 using Remotion.Utilities;
 
-namespace Remotion.IO.Zip
+namespace Remotion.IO.Archive.Zip
 {
   /// <summary>
   /// Implements <see cref="IArchiveBuilder"/>. 

@@ -21,9 +21,8 @@ using System.Linq;
 using ICSharpCode.SharpZipLib.Zip;
 using NUnit.Framework;
 using Remotion.Development.UnitTesting.IO;
-using Remotion.IO.Zip;
 
-namespace Remotion.IO.UnitTests.Zip
+namespace Remotion.IO.Archive.Zip.UnitTests
 {
   [TestFixture]
   public class ZipFileExtractorTest
