@@ -182,7 +182,7 @@ namespace Remotion.IO
       return fileInfos.ToArray();
     }
 
-    public void DeleteDirectory (string path, bool recursive)
+    public void DirectoryDelete (string path, bool recursive)
     {
       Directory.Delete (path, recursive);
     }

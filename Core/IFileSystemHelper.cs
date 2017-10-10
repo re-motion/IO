@@ -35,7 +35,7 @@ namespace Remotion.IO
     string MakeValidFileName (string path, string proposedFileName);
     string MakeUniqueAndValidFileName (string path, string proposedFileName);
     IFileInfo[] GetFilesOfDirectory (string path);
-    void DeleteDirectory (string path, bool recursive);
+    void DirectoryDelete (string path, bool recursive);
     IDirectoryInfo DirectoryCreate (string path);
   }
 }
