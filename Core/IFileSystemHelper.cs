@@ -33,7 +33,6 @@ namespace Remotion.IO
     void DirectoryDelete (string path, bool recursive);
     string GetTempFileName ();
     string GetTempFolder ();
-    DateTime GetLastWriteTime(string path);
     string MakeValidFileName (string path, string proposedFileName);
     string MakeUniqueAndValidFileName (string path, string proposedFileName);
     IFileInfo[] GetFilesOfDirectory (string path);

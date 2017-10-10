@@ -96,12 +96,6 @@ namespace Remotion.IO
       return Path.Combine (Path.GetTempPath(), Guid.NewGuid().ToString());
     }
 
-    public DateTime GetLastWriteTime (string path)
-    {
-      ArgumentUtility.CheckNotNullOrEmpty ("path", path);
-      return File.GetLastWriteTime (path);
-    }
-
     public string MakeValidFileName (string path, string proposedFileName)
     {
       ArgumentUtility.CheckNotNullOrEmpty ("path", path);
