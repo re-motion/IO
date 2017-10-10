@@ -48,28 +48,6 @@ namespace Remotion.IO
       return File.Exists (path);
     }
 
-    public bool DirectoryExists (string path)
-    {
-      ArgumentUtility.CheckNotNullOrEmpty ("path", path);
-      return Directory.Exists (path);
-    }
-
-    public string GetTempFileName ()
-    {
-      return Path.GetTempFileName();
-    }
-
-    public string GetTempFolder ()
-    {
-      return Path.Combine (Path.GetTempPath(), Guid.NewGuid().ToString());
-    }
-
-    public DateTime GetLastWriteTime (string path)
-    {
-      ArgumentUtility.CheckNotNullOrEmpty ("path", path);
-      return File.GetLastWriteTime (path);
-    }
-
     public void FileDelete (string path)
     {
       ArgumentUtility.CheckNotNullOrEmpty ("path", path);
@@ -88,6 +66,40 @@ namespace Remotion.IO
 
       while (File.Exists (sourceFile) || !File.Exists (destinationFile))
         Thread.Sleep (10);
+    }
+
+    public IDirectoryInfo DirectoryCreate (string path)
+    {
+      ArgumentUtility.CheckNotNullOrEmpty ("path", path);
+
+      return new DirectoryInfoWrapper (Directory.CreateDirectory (path));
+    }
+
+    public bool DirectoryExists (string path)
+    {
+      ArgumentUtility.CheckNotNullOrEmpty ("path", path);
+      return Directory.Exists (path);
+    }
+
+    public void DirectoryDelete (string path, bool recursive)
+    {
+      Directory.Delete (path, recursive);
+    }
+
+    public string GetTempFileName ()
+    {
+      return Path.GetTempFileName();
+    }
+
+    public string GetTempFolder ()
+    {
+      return Path.Combine (Path.GetTempPath(), Guid.NewGuid().ToString());
+    }
+
+    public DateTime GetLastWriteTime (string path)
+    {
+      ArgumentUtility.CheckNotNullOrEmpty ("path", path);
+      return File.GetLastWriteTime (path);
     }
 
     public string MakeValidFileName (string path, string proposedFileName)
@@ -180,18 +192,6 @@ namespace Remotion.IO
           GetFilesInSubdirectories (Path.Combine (path, subDirectoryInfo.Name), fileInfos); //Path.Combine
       }
       return fileInfos.ToArray();
-    }
-
-    public void DirectoryDelete (string path, bool recursive)
-    {
-      Directory.Delete (path, recursive);
-    }
-
-    public IDirectoryInfo DirectoryCreate (string path)
-    {
-      ArgumentUtility.CheckNotNullOrEmpty ("path", path);
-
-      return new DirectoryInfoWrapper (Directory.CreateDirectory (path));
     }
   }
 }

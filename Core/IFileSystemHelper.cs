@@ -26,16 +26,16 @@ namespace Remotion.IO
   {
     FileStream OpenFile (string path, FileMode mode, FileAccess access, FileShare share);
     bool FileExists (string path);
+    void FileDelete (string path);
+    void FileMove (string sourceFile, string destinationFile);
+    IDirectoryInfo DirectoryCreate (string path);
     bool DirectoryExists (string path);
+    void DirectoryDelete (string path, bool recursive);
     string GetTempFileName ();
     string GetTempFolder ();
     DateTime GetLastWriteTime(string path);
-    void FileDelete (string path);
-    void FileMove (string sourceFile, string destinationFile);
     string MakeValidFileName (string path, string proposedFileName);
     string MakeUniqueAndValidFileName (string path, string proposedFileName);
     IFileInfo[] GetFilesOfDirectory (string path);
-    void DirectoryDelete (string path, bool recursive);
-    IDirectoryInfo DirectoryCreate (string path);
   }
 }
