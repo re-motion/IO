@@ -70,7 +70,7 @@ namespace Remotion.IO
       return File.GetLastWriteTime (path);
     }
 
-    public void Delete (string path)
+    public void FileDelete (string path)
     {
       ArgumentUtility.CheckNotNullOrEmpty ("path", path);
       File.Delete (path);

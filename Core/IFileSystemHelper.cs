@@ -30,7 +30,7 @@ namespace Remotion.IO
     string GetTempFileName ();
     string GetTempFolder ();
     DateTime GetLastWriteTime(string path);
-    void Delete (string path);
+    void FileDelete (string path);
     void Move (string sourceFile, string destinationFile);
     string MakeValidFileName (string path, string proposedFileName);
     string MakeUniqueAndValidFileName (string path, string proposedFileName);
