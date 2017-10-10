@@ -15,22 +15,16 @@
 // along with re-motion; if not, see http://www.gnu.org/licenses.
 // 
 using System;
-using System.IO;
 
 namespace Remotion.IO
 {
   /// <summary>
-  /// Encapsulate FileIO
+  /// Defines an API for creating valid file names.
   /// </summary>
-  public interface IFileSystemHelper
+  /// <seealso cref="FileNameFactory"/>
+  public interface IFileNameFactory
   {
-    FileStream OpenFile (string path, FileMode mode, FileAccess access, FileShare share);
-    bool FileExists (string path);
-    void FileDelete (string path);
-    void FileMove (string sourceFile, string destinationFile);
-    IDirectoryInfo DirectoryCreate (string path);
-    bool DirectoryExists (string path);
-    void DirectoryDelete (string path, bool recursive);
-    IFileInfo[] GetFilesOfDirectory (string path);
+    string MakeValidFilePath (string path, string proposedFileName);
+    string MakeUniqueAndValidFilePath (string path, string proposedFileName);
   }
 }

@@ -18,7 +18,6 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Text;
 using System.Threading;
 using Remotion.Utilities;
 
@@ -30,8 +29,6 @@ namespace Remotion.IO
   [Serializable]
   public class FileSystemHelper : IFileSystemHelper
   {
-    private const int c_maxPathLength = 259;
-
     public FileSystemHelper ()
     {
     }
@@ -84,71 +81,6 @@ namespace Remotion.IO
     public void DirectoryDelete (string path, bool recursive)
     {
       Directory.Delete (path, recursive);
-    }
-
-    public string MakeValidFileName (string path, string proposedFileName)
-    {
-      ArgumentUtility.CheckNotNullOrEmpty ("path", path);
-      ArgumentUtility.CheckNotNullOrEmpty ("proposedFileName", proposedFileName);
-
-      string rootedPath = Path.GetFullPath (path);
-      string cleanedUpFileName = RemoveInvalidChars (proposedFileName);
-      string fileNameWithoutExtension = Path.GetFileNameWithoutExtension (cleanedUpFileName);
-      string extension = Path.GetExtension (cleanedUpFileName);
-
-      return BuildShortFileName (rootedPath, fileNameWithoutExtension, extension, "");
-    }
-
-    public string MakeUniqueAndValidFileName (string path, string proposedFileName)
-    {
-      ArgumentUtility.CheckNotNullOrEmpty ("path", path);
-      ArgumentUtility.CheckNotNullOrEmpty ("proposedFileName", proposedFileName);
-
-      string rootedPath = Path.GetFullPath (path);
-      string cleanedUpFileName = RemoveInvalidChars (proposedFileName);
-      string fileNameWithoutExtension = Path.GetFileNameWithoutExtension (cleanedUpFileName);
-      string extension = Path.GetExtension (cleanedUpFileName);
-
-      int fileIndex = 0;
-      string resultingFileName = BuildShortFileName (rootedPath, fileNameWithoutExtension, extension, "");
-
-      while (File.Exists (resultingFileName))
-      {
-        fileIndex++;
-        var fileIndexString = string.Format (" ({0})", fileIndex);
-        resultingFileName = BuildShortFileName (rootedPath, fileNameWithoutExtension, extension, fileIndexString);
-      }
-      return resultingFileName;
-    }
-
-    private string BuildShortFileName (string rootedPath, string fileNameWithoutExtension, string extension, string fileIndexString)
-    {
-      string resultingFileName = Path.Combine (rootedPath, fileNameWithoutExtension + fileIndexString + extension);
-
-      if (resultingFileName.Length > c_maxPathLength)
-      {
-        int numberOfExcessCharacters = resultingFileName.Length - c_maxPathLength;
-
-        int shortFileNameLength = fileNameWithoutExtension.Length - numberOfExcessCharacters;
-        if (shortFileNameLength < 1)
-        {
-          throw new ArgumentException (
-              string.Format ("The filename '{0}' exceeds the maximum length for file names.", Path.GetFileName (resultingFileName)));
-        }
-
-        string shortFileNameWithoutExtension = fileNameWithoutExtension.Substring (0, shortFileNameLength);
-        resultingFileName = Path.Combine (rootedPath, shortFileNameWithoutExtension + fileIndexString + extension);
-      }
-      return resultingFileName;
-    }
-
-    private string RemoveInvalidChars (string fileName)
-    {
-      var builder = new StringBuilder (fileName);
-      foreach (var invalidFileNameChar in Path.GetInvalidFileNameChars())
-        builder.Replace (invalidFileNameChar.ToString(), "");
-      fileName = builder.ToString();
-      return fileName;
     }
 
     public IFileInfo[] GetFilesOfDirectory (string path)

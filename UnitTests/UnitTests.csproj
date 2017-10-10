@@ -104,6 +104,7 @@
     <Compile Include="DirectoryTreeResolverTest.cs" />
     <Compile Include="FileInfoWrapperTest.cs" />
     <Compile Include="FileSizeTest.cs" />
+    <Compile Include="FileNameFactoryTest.cs" />
     <Compile Include="FileSystemHelperTest.cs" />
     <Compile Include="InMemoryDirectoryInfoTest.cs" />
     <Compile Include="InMemoryFileInfoTest.cs" />
