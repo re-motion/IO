@@ -15,24 +15,16 @@
 // along with re-motion; if not, see http://www.gnu.org/licenses.
 // 
 using System;
-using System.IO;
 
 namespace Remotion.IO
 {
   /// <summary>
-  /// Encapsulate FileIO
+  /// Defines an API for creating temp paths.
   /// </summary>
-  public interface IFileSystemHelper
+  /// <seealso cref="TempPathFactory"/>
+  public interface ITempPathFactory
   {
-    FileStream OpenFile (string path, FileMode mode, FileAccess access, FileShare share);
-    bool FileExists (string path);
-    void FileDelete (string path);
-    void FileMove (string sourceFile, string destinationFile);
-    IDirectoryInfo DirectoryCreate (string path);
-    bool DirectoryExists (string path);
-    void DirectoryDelete (string path, bool recursive);
-    string MakeValidFileName (string path, string proposedFileName);
-    string MakeUniqueAndValidFileName (string path, string proposedFileName);
-    IFileInfo[] GetFilesOfDirectory (string path);
+    string GetTempFileName ();
+    string GetTempFolder ();
   }
 }

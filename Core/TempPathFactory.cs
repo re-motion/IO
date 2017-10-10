@@ -20,19 +20,22 @@ using System.IO;
 namespace Remotion.IO
 {
   /// <summary>
-  /// Encapsulate FileIO
+  /// Implements <see cref="ITempPathFactory"/>
   /// </summary>
-  public interface IFileSystemHelper
+  public class TempPathFactory : ITempPathFactory
   {
-    FileStream OpenFile (string path, FileMode mode, FileAccess access, FileShare share);
-    bool FileExists (string path);
-    void FileDelete (string path);
-    void FileMove (string sourceFile, string destinationFile);
-    IDirectoryInfo DirectoryCreate (string path);
-    bool DirectoryExists (string path);
-    void DirectoryDelete (string path, bool recursive);
-    string MakeValidFileName (string path, string proposedFileName);
-    string MakeUniqueAndValidFileName (string path, string proposedFileName);
-    IFileInfo[] GetFilesOfDirectory (string path);
+    public TempPathFactory ()
+    {
+    }
+
+    public string GetTempFileName ()
+    {
+      return Path.GetTempFileName();
+    }
+
+    public string GetTempFolder ()
+    {
+      return Path.Combine (Path.GetTempPath(), Guid.NewGuid().ToString());
+    }
   }
 }

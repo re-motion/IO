@@ -112,6 +112,7 @@
     <Compile Include="IFileSystemHelper.cs" />
     <Compile Include="InMemoryDirectoryInfo.cs" />
     <Compile Include="InMemoryFileInfo.cs" />
+    <Compile Include="ITempPathFactory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ReadOnlyStream.cs" />
     <Compile Include="StreamCopier.cs" />
@@ -119,6 +120,7 @@
     <Compile Include="StreamCopyProgressEventArgs.cs" />
     <Compile Include="StreamWithTimeoutDecorator.cs" />
     <Compile Include="TemporaryFileStream.cs" />
+    <Compile Include="TempPathFactory.cs" />
     <None Include="..\Build\NuSpec\TemplateShared.nuspec">
       <Link>TemplateShared.nuspec</Link>
     </None>

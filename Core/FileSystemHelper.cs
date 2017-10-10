@@ -86,16 +86,6 @@ namespace Remotion.IO
       Directory.Delete (path, recursive);
     }
 
-    public string GetTempFileName ()
-    {
-      return Path.GetTempFileName();
-    }
-
-    public string GetTempFolder ()
-    {
-      return Path.Combine (Path.GetTempPath(), Guid.NewGuid().ToString());
-    }
-
     public string MakeValidFileName (string path, string proposedFileName)
     {
       ArgumentUtility.CheckNotNullOrEmpty ("path", path);
