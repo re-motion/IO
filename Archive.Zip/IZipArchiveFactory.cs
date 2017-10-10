@@ -14,29 +14,18 @@
 // You should have received a copy of the GNU Lesser General Public License
 // along with re-motion; if not, see http://www.gnu.org/licenses.
 // 
+
 using System;
 using System.IO;
 
-namespace Remotion.IO
+namespace Remotion.IO.Archive.Zip
 {
   /// <summary>
-  /// Encapsulate FileIO
+  /// Provides a factory for creating <see cref="IArchiveBuilder"/> and <see cref="IArchiveExtractor"/> for ZIP archives.
   /// </summary>
-  public interface IFileSystemHelper
+  public interface IZipArchiveFactory
   {
-    FileStream OpenFile (string path, FileMode mode, FileAccess access, FileShare share);
-    bool FileExists (string path);
-    bool DirectoryExists (string path);
-    string GetTempFileName ();
-    string GetTempFolder ();
-    DateTime GetLastWriteTime(string path);
-    void Delete (string path);
-    void Move (string sourceFile, string destinationFile);
-    string MakeValidFileName (string path, string proposedFileName);
-    string MakeUniqueAndValidFileName (string path, string proposedFileName);
-    IFileInfo[] GetFilesOfDirectory (string path);
-    void DeleteDirectory (string path, bool recursive);
-    string Combine (string path1, string path2);
-    IDirectoryInfo CreateDirectory (string path);
+    IArchiveBuilder CreateArchiveBuilder (FileShare additionalFileShareToUse = FileShare.None);
+    IArchiveExtractor CreateArchiveExtractor (Stream archiveStream);
   }
 }

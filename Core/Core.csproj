@@ -65,10 +65,6 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="ICSharpCode.SharpZipLib, Version=0.86.0.518, Culture=neutral, PublicKeyToken=1b03e6acf1164f73, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\SharpZipLib.0.86.0\lib\20\ICSharpCode.SharpZipLib.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
   </ItemGroup>
   <ItemGroup>
@@ -123,9 +119,6 @@
     <Compile Include="StreamCopyProgressEventArgs.cs" />
     <Compile Include="StreamWithTimeoutDecorator.cs" />
     <Compile Include="TemporaryFileStream.cs" />
-    <Compile Include="Zip\ExtractedZipEntryAsFileInfo.cs" />
-    <Compile Include="Zip\ZipFileBuilder.cs" />
-    <Compile Include="Zip\ZipFileExtractor.cs" />
     <None Include="..\Build\NuSpec\TemplateShared.nuspec">
       <Link>TemplateShared.nuspec</Link>
     </None>

@@ -24,11 +24,10 @@ using ICSharpCode.SharpZipLib.Zip;
 using JetBrains.Annotations;
 using NUnit.Framework;
 using Remotion.Development.UnitTesting.IO;
-using Remotion.IO.Zip;
 using Remotion.Utilities;
 using Rhino.Mocks;
 
-namespace Remotion.IO.UnitTests.Zip
+namespace Remotion.IO.Archive.Zip.UnitTests
 {
   [TestFixture]
   public class ZipFileBuilderTest

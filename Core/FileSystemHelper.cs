@@ -20,7 +20,6 @@ using System.Collections.Generic;
 using System.IO;
 using System.Text;
 using System.Threading;
-using Remotion.IO.Zip;
 using Remotion.Utilities;
 
 namespace Remotion.IO
@@ -198,17 +197,6 @@ namespace Remotion.IO
       ArgumentUtility.CheckNotNullOrEmpty ("path", path);
 
       return new DirectoryInfoWrapper (Directory.CreateDirectory (path));
-    }
-
-    public IArchiveBuilder CreateArchiveBuilder (FileShare additionalFileShareToUse = FileShare.None)
-    {
-      return new ZipFileBuilder (additionalFileShareToUse);
-    }
-
-    public IArchiveExtractor CreateArchiveExtractor (Stream archiveStream)
-    {
-      ArgumentUtility.CheckNotNull ("archiveStream", archiveStream);
-      return new ZipFileExtractor (archiveStream);
     }
   }
 }
