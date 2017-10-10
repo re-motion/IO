@@ -32,7 +32,7 @@ namespace Remotion.IO
     {
     }
 
-    public FileStream OpenFile (string path, FileMode mode, FileAccess access, FileShare share)
+    public FileStream FileOpen (string path, FileMode mode, FileAccess access, FileShare share)
     {
       ArgumentUtility.CheckNotNullOrEmpty ("path", path);
       return File.Open (path, mode, access, share);

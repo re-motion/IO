@@ -24,7 +24,7 @@ namespace Remotion.IO
   /// </summary>
   public interface IFileSystemHelper
   {
-    FileStream OpenFile (string path, FileMode mode, FileAccess access, FileShare share);
+    FileStream FileOpen (string path, FileMode mode, FileAccess access, FileShare share);
     bool FileExists (string path);
     void FileDelete (string path);
     void FileMove (string sourceFile, string destinationFile);
