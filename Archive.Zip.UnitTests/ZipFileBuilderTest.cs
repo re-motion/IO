@@ -115,7 +115,7 @@ namespace Remotion.IO.Archive.Zip.UnitTests
     [Test]
     public void BuildReturnsZipFileWithEmptyFile_WithDiskFile ()
     {
-      using (var fileEmpty = new TempFile ())
+      using (var fileEmpty = new TempFile())
       {
         var zipBuilder = new ZipFileBuilder();
         zipBuilder.Progress += ((sender, e) => { });
@@ -377,12 +377,20 @@ namespace Remotion.IO.Archive.Zip.UnitTests
       var directory2 = Directory.CreateDirectory (Path.Combine (rootPath, "Directory2"));
       var directory3 = Directory.CreateDirectory (Path.Combine (directory2.FullName, "Directory3 ü"));
 
-      File.Move (file1.FileName, Path.Combine (rootPath, Path.GetFileName (file1.FileName)));
-      File.Move (file2.FileName, Path.Combine (directory1.FullName, Path.GetFileName (file2.FileName)));
-      File.Move (file3.FileName, Path.Combine (directory1.FullName, Path.GetFileName (file3.FileName)));
-      File.Move (file4.FileName, Path.Combine (directory3.FullName, Path.GetFileName (file4.FileName)));
-      File.Move (file5.FileName, Path.Combine (directory3.FullName, Path.GetFileName (file5.FileName)));
-      File.Move (file6.FileName, Path.Combine (directory2.FullName, Path.GetFileName (file6.FileName)));
+      var commonRoot = directory1.Parent.Parent;
+      var file1NewLocation = Path.Combine (rootPath, Path.GetFileName (file1.FileName));
+      var file2NewLocation = Path.Combine (directory1.FullName, Path.GetFileName (file2.FileName));
+      var file3NewLocation = Path.Combine (directory1.FullName, Path.GetFileName (file3.FileName));
+      var file4NewLocation = Path.Combine (directory3.FullName, Path.GetFileName (file4.FileName));
+      var file5NewLocation = Path.Combine (directory3.FullName, Path.GetFileName (file5.FileName));
+      var file6NewLocation = Path.Combine (directory2.FullName, Path.GetFileName (file6.FileName));
+
+      File.Move (file1.FileName, file1NewLocation);
+      File.Move (file2.FileName, file2NewLocation);
+      File.Move (file3.FileName, file3NewLocation);
+      File.Move (file4.FileName, file4NewLocation);
+      File.Move (file5.FileName, file5NewLocation);
+      File.Move (file6.FileName, file6NewLocation);
 
       var zipFileName = Path.GetTempFileName();
 
@@ -403,8 +411,19 @@ namespace Remotion.IO.Archive.Zip.UnitTests
                               Path.GetFileName (file6.FileName)
                           };
 
+      var expectedRelativePaths = new List<string>
+                                  {
+                                      file1NewLocation.Substring (commonRoot.FullName.Length + 1).Replace("\\", "/"),
+                                      file2NewLocation.Substring (commonRoot.FullName.Length + 1).Replace ("\\", "/"),
+                                      file3NewLocation.Substring (commonRoot.FullName.Length + 1).Replace ("\\", "/"),
+                                      file4NewLocation.Substring (commonRoot.FullName.Length + 1).Replace ("\\", "/"),
+                                      file5NewLocation.Substring (commonRoot.FullName.Length + 1).Replace ("\\", "/"),
+                                      file6NewLocation.Substring (commonRoot.FullName.Length + 1).Replace ("\\", "/")
+                                  };
+
       try
       {
+        AssertZipFileEntriesHaveFileNamesTransformed (zipFileName, expectedRelativePaths);
         CheckUnzippedFiles (zipFileName, expectedFiles);
       }
       finally
@@ -417,11 +436,11 @@ namespace Remotion.IO.Archive.Zip.UnitTests
     [ExpectedException (typeof (AbortException))]
     public void BuildThrowsAbortExceptionUponCancel ()
     {
-      var zipBuilder = new ZipFileBuilder ();
+      var zipBuilder = new ZipFileBuilder();
       zipBuilder.Progress += ((sender, e) => { e.Cancel = e.CurrentFileValue > 1000; });
       zipBuilder.AddFile (new FileInfoWrapper (new FileInfo (_file1.FileName)));
 
-      var zipFileName = Path.GetTempFileName ();
+      var zipFileName = Path.GetTempFileName();
 
       using (zipBuilder.Build (zipFileName))
       {
@@ -733,6 +752,17 @@ namespace Remotion.IO.Archive.Zip.UnitTests
       foreach (var file in files)
         reducedFile.Add (file, Path.GetFileName (file));
       return reducedFile;
+    }
+
+    private void AssertZipFileEntriesHaveFileNamesTransformed (string zipFileName, List<string> expectedFiles)
+    {
+      using (var zipFile = new ZipFile (zipFileName))
+      {
+        foreach (ZipEntry file in zipFile)
+          expectedFiles.Remove (file.Name);
+      }
+
+      Assert.That (expectedFiles, Is.Empty);
     }
   }
 }

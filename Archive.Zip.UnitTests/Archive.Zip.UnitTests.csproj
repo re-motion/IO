@@ -107,6 +107,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ZipFileBuilderTest.cs" />
     <Compile Include="ZipFileExtractorTest.cs" />
+    <Compile Include="IntegrationTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\LGPL.licenseheader">
