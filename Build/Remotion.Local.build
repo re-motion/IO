@@ -40,9 +40,10 @@
   <Target Name="TestBuild_Configuration">
     <PropertyGroup>
       <Platforms>x86</Platforms>
-      <DatabaseSystems>SqlServerDefault</DatabaseSystems>
-      <Browsers></Browsers>
-      <TestCategoriesToExclude></TestCategoriesToExclude>
+      <DatabaseSystems>NoDB</DatabaseSystems>
+      <Browsers>NoBrowser</Browsers>
+      <ExecutionRuntimes>LocalMachine</ExecutionRuntimes>
+      <TargetRuntimes>NET48</TargetRuntimes>
       <SkipTests>False</SkipTests>
     </PropertyGroup>
   </Target>

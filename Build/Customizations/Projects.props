@@ -1,16 +1,55 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+
+  <PropertyGroup>
+    <DockerImageForNet472>docker.int.rubicon-it.com/rubicon-docker/dotnet/framework/aspnet/windowsskd:4.7.2-windowsservercore-ltsc2016</DockerImageForNet472>
+    <DockerImageForNet48>docker.int.rubicon-it.com/rubicon-docker/dotnet/framework/aspnet/windowsskd:4.8-windowsservercore-ltsc2016</DockerImageForNet48>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <SupportedBrowsers Include="Chrome;InternetExplorer;Firefox;Edge"/>
+    <SupportedPlatforms Include="x86;x64"/>
+    <SupportedDatabaseSystems Include="SqlServerDefault;SqlServer2012;SqlServer2014;SqlServer2016;SqlServer2017;SqlServer2019"/>
+    <SupportedExecutionRuntimes Include="Win_NET472=$(DockerImageForNet472);Win_NET48=$(DockerImageForNet48)"/>
+    <SupportedTargetRuntimes Include="NET48;NET472;"/>
+    <SupportedConfigurationIDs Include="Debug;Release"/>
+  </ItemGroup>
+
+  <PropertyGroup>
+    <DefaultTestConfiguration>
+      Win_NET48  + NET48  + NoBrowser + NoDB + Debug   + x86;
+      Win_NET48  + NET48  + NoBrowser + NoDB + Release + x86;
+      Win_NET48  + NET48  + NoBrowser + NoDB + Debug   + x64;
+      Win_NET48  + NET48  + NoBrowser + NoDB + Release + x64;
+
+      <!-- Local-->
+      LocalMachine  + NET48  + NoBrowser + NoDB + Debug + x86;
+
+      <!-- Compatibility Mode -->
+      Win_NET48  + NET472 + NoBrowser + NoDB + Release + x64;
+      Win_NET472 + NET472 + NoBrowser + NoDB + Release + x64;
+    </DefaultTestConfiguration>
+  </PropertyGroup>
+
   <ItemGroup>
     <ReleaseProjectFiles Include="$(SolutionDirectory)Core\Core.csproj">
       <CreateDocumentationFile>False</CreateDocumentationFile>
       <!--<CreateNuGetPackageWithSymbolServerSupport>False</CreateNuGetPackageWithSymbolServerSupport>-->
       <!--<ExcludeFromDocumentation>False</ExcludeFromDocumentation>-->
     </ReleaseProjectFiles>
-    <UnitTestProjectFiles Include="$(SolutionDirectory)UnitTests\UnitTests.csproj"/>
+    <UnitTestProjectFiles Include="$(SolutionDirectory)UnitTests\UnitTests.csproj">
+      <TestConfiguration>
+        $(DefaultTestConfiguration)
+      </TestConfiguration>
+    </UnitTestProjectFiles>
     <ReleaseProjectFiles Include="$(SolutionDirectory)Archive.Zip\Archive.Zip.csproj">
       <CreateDocumentationFile>False</CreateDocumentationFile>
     </ReleaseProjectFiles>
-    <UnitTestProjectFiles Include="$(SolutionDirectory)Archive.Zip.UnitTests\Archive.Zip.UnitTests.csproj"/>
+    <UnitTestProjectFiles Include="$(SolutionDirectory)Archive.Zip.UnitTests\Archive.Zip.UnitTests.csproj">
+      <TestConfiguration>
+        $(DefaultTestConfiguration)
+      </TestConfiguration>
+    </UnitTestProjectFiles>
     <!--
     <IntegrationTestProjectFiles Include="$(SolutionDirectory)IntegrationTests\IntegrationTests.csproj">
       <IsDatabaseTest>False</IsDatabaseTest>
