@@ -152,7 +152,7 @@ namespace Remotion.IO.Archive.Zip.UnitTests
     [Test]
     public void BuildReturnsZipFileWithFileWithUmlaut ()
     {
-      string fileWithUmlautInName = Path.Combine (Path.GetTempPath(), "NameWithÄ.txt");
+      string fileWithUmlautInName = Path.Combine (Path.GetTempPath(), "NameWithï¿½.txt");
       File.WriteAllText (fileWithUmlautInName, "Hello World!");
 
       try
@@ -177,7 +177,6 @@ namespace Remotion.IO.Archive.Zip.UnitTests
     }
 
     [Test]
-    [ExpectedException (typeof (IOException))]
     public void NoHandlerForArchiveError_ThrowsException ()
     {
       var zipBuilder = new ZipFileBuilder();
@@ -190,16 +189,7 @@ namespace Remotion.IO.Archive.Zip.UnitTests
 
       zipBuilder.AddFile (fileInfoMock);
       var zipFileName = Path.GetTempFileName();
-      try
-      {
-        using (zipBuilder.Build (zipFileName))
-        {
-        }
-      }
-      finally
-      {
-        FileUtility.DeleteAndWaitForCompletion (zipFileName);
-      }
+      Assert.That (() =>zipBuilder.Build (zipFileName), Throws.InstanceOf<IOException>());
     }
 
     [Test]
@@ -239,7 +229,6 @@ namespace Remotion.IO.Archive.Zip.UnitTests
     }
 
     [Test]
-    [ExpectedException (typeof (AbortException))]
     public void SetFileProcessingRecoveryAction_Abort ()
     {
       var zipBuilder = new ZipFileBuilder();
@@ -255,16 +244,7 @@ namespace Remotion.IO.Archive.Zip.UnitTests
       zipBuilder.Error += ((sender, e) => zipBuilder.FileProcessingRecoveryAction = FileProcessingRecoveryAction.Abort);
 
       var zipFileName = Path.GetTempFileName();
-      try
-      {
-        using (zipBuilder.Build (zipFileName))
-        {
-        }
-      }
-      finally
-      {
-        FileUtility.DeleteAndWaitForCompletion (zipFileName);
-      }
+      Assert.That (() => zipBuilder.Build (zipFileName), Throws.InstanceOf<AbortException>());
     }
 
     [Test]
@@ -348,7 +328,7 @@ namespace Remotion.IO.Archive.Zip.UnitTests
       //--file2
       //--file3
       //-Directory2
-      //--Directory3 ü
+      //--Directory3 ï¿½
       //---file4
       //---file5
       //--file6
@@ -375,7 +355,7 @@ namespace Remotion.IO.Archive.Zip.UnitTests
 
       var directory1 = Directory.CreateDirectory (Path.Combine (rootPath, "Directory1"));
       var directory2 = Directory.CreateDirectory (Path.Combine (rootPath, "Directory2"));
-      var directory3 = Directory.CreateDirectory (Path.Combine (directory2.FullName, "Directory3 ü"));
+      var directory3 = Directory.CreateDirectory (Path.Combine (directory2.FullName, "Directory3 ï¿½"));
 
       var commonRoot = directory1.Parent.Parent;
       var file1NewLocation = Path.Combine (rootPath, Path.GetFileName (file1.FileName));
@@ -433,7 +413,6 @@ namespace Remotion.IO.Archive.Zip.UnitTests
     }
 
     [Test]
-    [ExpectedException (typeof (AbortException))]
     public void BuildThrowsAbortExceptionUponCancel ()
     {
       var zipBuilder = new ZipFileBuilder();
@@ -442,9 +421,7 @@ namespace Remotion.IO.Archive.Zip.UnitTests
 
       var zipFileName = Path.GetTempFileName();
 
-      using (zipBuilder.Build (zipFileName))
-      {
-      }
+      Assert.That (() => zipBuilder.Build (zipFileName), Throws.InstanceOf<AbortException>());
     }
 
     [Test]

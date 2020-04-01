@@ -25,10 +25,10 @@ namespace Remotion.IO.UnitTests
   public class FileSizeTest
   {
     [Test]
-    [ExpectedException (typeof (ArgumentOutOfRangeException))]
     public void ValueSmallerZero ()
     {
-      new FileSize (-1);
+      ;
+      Assert.That (() => new FileSize (-1), Throws.InstanceOf<ArgumentOutOfRangeException>());
     }
 
     [Test]

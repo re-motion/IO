@@ -122,7 +122,7 @@ namespace Remotion.IO.UnitTests
       }
       string actual = _fileNameFactory.MakeUniqueAndValidFilePath (_tempFolder, Path.GetFileNameWithoutExtension (shortFileName) + "MoreText.txt");
       Assert.That (actual.Length, Is.LessThan (260));
-      Assert.That (actual, Is.StringEnding (" (1).txt"));
+      Assert.That (actual, Does.EndWith (" (1).txt"));
     }
 
     [Test]
@@ -152,8 +152,8 @@ namespace Remotion.IO.UnitTests
     {
       string actual = _fileNameFactory.MakeValidFilePath (
           _tempFolder,
-          @"\ab!c:d<e>f§.txt");
-      Assert.That (Path.GetFileName (actual), Is.EqualTo ("ab!cdef§.txt"));
+          @"\ab!c:d<e>fï¿½.txt");
+      Assert.That (Path.GetFileName (actual), Is.EqualTo ("ab!cdefï¿½.txt"));
     }
   }
 }
