@@ -25,12 +25,16 @@
     <ExtensionTasksPath>$(MSBuildExtensionPackPath)</ExtensionTasksPath>
     <DependDBBuildProcessorToolPath Condition="'$(NuGetToolPath)' == ''">$(PackagesDirectory)DependDB.BuildProcessor.1.8.1\tools\</DependDBBuildProcessorToolPath>
     <DependDBNuGetPreProcessorToolPath Condition="'$(NuGetToolPath)' == ''">$(PackagesDirectory)DependDB.BuildProcessor.NuGetPreProcessor.1.8.1\tools\</DependDBNuGetPreProcessorToolPath>
-    <NUnitToolPath Condition="'$(NUnitToolPath)' == ''">$(PackagesDirectory)NUnit.Runners.2.6.3\tools\</NUnitToolPath>
+    <NUnitToolPath Condition="'$(NUnitToolPath)' == ''">$(PackagesDirectory)NUnit.ConsoleRunner.3.11.1\tools\</NUnitToolPath>
     <NuGetToolPath Condition="'$(NuGetToolPath)' == ''">$(PackagesDirectory)NuGet.CommandLine.3.5.0\tools\</NuGetToolPath>
     <NuGetForMSBuildPath Condition="'$(NuGetForMSBuildPath)' == ''">$(PackagesDirectory)NuGet.for.MSBuild.1.4.3\build\</NuGetForMSBuildPath>
     <RemotionBuildTasksPath Condition="'$(RemotionBuildTasksPath)' == ''">$(PackagesDirectory)Remotion.BuildTools.MSBuildTasks.1.0.6180.28602\tools\</RemotionBuildTasksPath>
     <RemotionBuildScriptPath Condition="'$(RemotionBuildScriptPath)' == ''">$(PackagesDirectory)Remotion.BuildScript.2.0.0-alpha099\BuildTargets\</RemotionBuildScriptPath>
   </PropertyGroup>
+
+  <ItemGroup>
+    <NUnitExtensionsPaths Include="$(PackagesDirectory)NUnit.Extension.NUnitV2Driver.3.8.0\"/>
+  </ItemGroup>
 
   <Import Project="$(RemotionBuildScriptPath)*.targets" />
   <Import Project="$(MSBuildExtensionPackPath)MSBuild.ExtensionPack.tasks" />
