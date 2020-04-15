@@ -307,7 +307,7 @@ namespace Remotion.IO.UnitTests
       byte[] buffer = new byte[10];
 
       var waitHandle = new Mock<WaitHandle> (MockBehavior.Strict);
-      waitHandle.Setup (w => w.WaitOne (TimeSpan.FromMilliseconds (123))).Returns (false).Verifiable();
+      waitHandle.Setup (w => w.WaitOne (TimeSpan.FromMilliseconds (123))).Returns (false);
 
       var asyncResultMock = new Mock<IAsyncResult>();
       asyncResultMock.SetupGet (r => r.AsyncWaitHandle).Returns (waitHandle.Object);
@@ -331,7 +331,7 @@ namespace Remotion.IO.UnitTests
       byte[] buffer = new byte[10];
 
       var waitHandle = new Mock<WaitHandle> (MockBehavior.Strict);
-      waitHandle.Setup (w => w.WaitOne (TimeSpan.FromMilliseconds (123))).Returns (true).Verifiable();
+      waitHandle.Setup (w => w.WaitOne (TimeSpan.FromMilliseconds (123))).Returns (true);
 
       var asyncResultMock = new Mock<IAsyncResult>();
       asyncResultMock.SetupGet (r => r.AsyncWaitHandle).Returns (waitHandle.Object);
@@ -362,17 +362,17 @@ namespace Remotion.IO.UnitTests
     [Test]
     public void Read_UnderlyingStreamTimesOut_ThrowsTimeoutException ()
     {
-      _innerStreamMock.SetupGet (s => s.CanTimeout).Returns (true);
+      _innerStreamMock.SetupGet (s => s.CanTimeout).Returns (true).Verifiable();
       byte[] buffer = new byte[10];
 
       var waitHandle = new Mock<WaitHandle> (MockBehavior.Strict);
-      waitHandle.Setup (w => w.WaitOne (TimeSpan.FromMilliseconds (123))).Returns (false).Verifiable();
+      waitHandle.Setup (w => w.WaitOne (TimeSpan.FromMilliseconds (123))).Returns (false);
 
       var asyncResultMock = new Mock<IAsyncResult>();
       asyncResultMock.SetupGet (r => r.AsyncWaitHandle).Returns (waitHandle.Object);
 
       _innerStreamMock.Setup (s => s.BeginRead (buffer, 22, 33, null, null)).Returns (asyncResultMock.Object).Verifiable();
-      _innerStreamMock.SetupGet (s => s.ReadTimeout).Returns (123).Verifiable();
+      _innerStreamMock.SetupGet (s => s.ReadTimeout).Returns (123);
 
 
       Assert.That (
@@ -390,7 +390,7 @@ namespace Remotion.IO.UnitTests
       byte[] buffer = new byte[10];
 
       var waitHandle = new Mock<WaitHandle>(MockBehavior.Strict);
-      waitHandle.Setup (w => w.WaitOne (TimeSpan.FromMilliseconds (123))).Returns (true).Verifiable();
+      waitHandle.Setup (w => w.WaitOne (TimeSpan.FromMilliseconds (123))).Returns (true);
 
       var asyncResultMock = new Mock<IAsyncResult>();
       asyncResultMock.SetupGet (r => r.AsyncWaitHandle).Returns (waitHandle.Object);
