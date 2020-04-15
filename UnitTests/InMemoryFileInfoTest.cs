@@ -17,8 +17,8 @@
 
 using System;
 using System.IO;
+using Moq;
 using NUnit.Framework;
-using Rhino.Mocks;
 
 namespace Remotion.IO.UnitTests
 {
@@ -38,7 +38,7 @@ namespace Remotion.IO.UnitTests
     {
       _fileName=  "Directory\\File.ext";
       _stream = new MemoryStream(new byte[10]);
-      _directory = MockRepository.GenerateStub<IDirectoryInfo>();
+      _directory = new Mock<IDirectoryInfo>().Object;
       _creationTime = new DateTime (2009, 10, 1);
       _lastAccessTime = new DateTime (2009, 10, 2);
       _lastWriteTime = new DateTime (2009, 10, 3);
