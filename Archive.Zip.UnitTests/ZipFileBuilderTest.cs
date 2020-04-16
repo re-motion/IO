@@ -216,7 +216,7 @@ namespace Remotion.IO.Archive.Zip.UnitTests
 
       var fileInfoStub = new Mock<IFileInfo>();
       fileInfoStub.SetupGet (mock => mock.FullName).Returns (@"C:\fileName");
-      fileInfoStub.SetupGet (mock => mock.Open (FileMode.Open, FileAccess.Read, FileShare.Read)).Returns (streamStub.Object);
+      fileInfoStub.Setup (mock => mock.Open (FileMode.Open, FileAccess.Read, FileShare.Read)).Returns (streamStub.Object);
       fileInfoStub.SetupGet (mock => mock.Parent).Returns (new DirectoryInfoWrapper (new DirectoryInfo (@"C:\")));
 
       zipBuilder.AddFile (fileInfoStub.Object);
