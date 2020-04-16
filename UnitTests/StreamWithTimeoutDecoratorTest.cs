@@ -134,7 +134,7 @@ namespace Remotion.IO.UnitTests
     [Test]
     public void ReadTimeout_Get ()
     {
-      _innerStreamMock.Setup (s => s.ReadTimeout).Returns (7777).Verifiable();
+      _innerStreamMock.SetupGet (s => s.ReadTimeout).Returns (7777).Verifiable();
       Assert.That (_decorator.ReadTimeout, Is.EqualTo (7777));
       _innerStreamMock.Verify();
     }
@@ -313,7 +313,7 @@ namespace Remotion.IO.UnitTests
       asyncResultMock.SetupGet (r => r.AsyncWaitHandle).Returns (waitHandle.Object);
 
       _innerStreamMock.Setup (s => s.BeginWrite (buffer, 22, 33, null, null)).Returns (asyncResultMock.Object).Verifiable();
-      _innerStreamMock.SetupGet (s => s.WriteTimeout).Returns (123).Verifiable();
+      _innerStreamMock.SetupGet (s => s.WriteTimeout).Returns (123);
 
 
       Assert.That (
@@ -395,7 +395,7 @@ namespace Remotion.IO.UnitTests
       var asyncResultMock = new Mock<IAsyncResult>();
       asyncResultMock.SetupGet (r => r.AsyncWaitHandle).Returns (waitHandle.Object);
 
-      _innerStreamMock.Setup (s => s.BeginRead (buffer, 22, 33, null, null)).Returns (asyncResultMock.Object);
+      _innerStreamMock.Setup (s => s.BeginRead (buffer, 22, 33, null, null)).Returns (asyncResultMock.Object).Verifiable();
       _innerStreamMock.SetupGet (s => s.ReadTimeout).Returns (123).Verifiable();
       _innerStreamMock.Setup (s => s.EndRead (asyncResultMock.Object)).Returns (999).Verifiable();
 
@@ -409,7 +409,7 @@ namespace Remotion.IO.UnitTests
     {
       _innerStreamMock.SetupGet (s => s.CanTimeout).Returns (false).Verifiable();
       byte[] buffer = new byte[10];
-      _innerStreamMock.Setup (s => s.Read (buffer, 22, 33)).Returns (444);
+      _innerStreamMock.Setup (s => s.Read (buffer, 22, 33)).Returns (444).Verifiable();
 
       Assert.That (_decorator.Read (buffer, 22, 33), Is.EqualTo (444));
       _innerStreamMock.Verify();
