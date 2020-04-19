@@ -152,7 +152,7 @@ namespace Remotion.IO.Archive.Zip.UnitTests
     [Test]
     public void BuildReturnsZipFileWithFileWithUmlaut ()
     {
-      string fileWithUmlautInName = Path.Combine (Path.GetTempPath(), "NameWith�.txt");
+      string fileWithUmlautInName = Path.Combine (Path.GetTempPath(), "NameWithÄ.txt");
       File.WriteAllText (fileWithUmlautInName, "Hello World!");
 
       try
@@ -248,9 +248,9 @@ namespace Remotion.IO.Archive.Zip.UnitTests
       zipBuilder.Progress += ((sender, e) => { });
 
       var fileInfoMock = new Mock<IFileInfo>();
-      fileInfoMock.SetupGet (mock => mock.FullName).Returns (@"C:\fileName");
-      fileInfoMock.Setup (mock => mock.Open (FileMode.Open, FileAccess.Read, FileShare.Read)).Throws (new IOException());
-      fileInfoMock.Setup (mock => mock.Parent).Returns (new DirectoryInfoWrapper (new DirectoryInfo (@"C:\")));
+      fileInfoMock.SetupGet (mock => mock.FullName).Returns (@"C:\fileName").Verifiable();
+      fileInfoMock.Setup (mock => mock.Open (FileMode.Open, FileAccess.Read, FileShare.Read)).Throws (new IOException()).Verifiable();
+      fileInfoMock.SetupGet (mock => mock.Parent).Returns (new DirectoryInfoWrapper (new DirectoryInfo (@"C:\")));
 
       zipBuilder.AddFile (fileInfoMock.Object);
 
@@ -279,7 +279,7 @@ namespace Remotion.IO.Archive.Zip.UnitTests
 
       fileInfoMock.SetupGet (mock => mock.FullName).Returns (@"C:\fileName").Verifiable();
       fileInfoMock.Setup (mock => mock.Open (FileMode.Open, FileAccess.Read, FileShare.Read)).Throws (new IOException()).Verifiable();
-      fileInfoMock.Setup (mock => mock.Parent).Returns (new DirectoryInfoWrapper (new DirectoryInfo (@"C:\")));
+      fileInfoMock.SetupGet (mock => mock.Parent).Returns (new DirectoryInfoWrapper (new DirectoryInfo (@"C:\")));
 
       zipBuilder.AddFile (new FileInfoWrapper (new FileInfo (_file1.FileName)));
       zipBuilder.AddFile (fileInfoMock.Object);
@@ -351,7 +351,7 @@ namespace Remotion.IO.Archive.Zip.UnitTests
       //--file2
       //--file3
       //-Directory2
-      //--Directory3 �
+      //--Directory3 ü
       //---file4
       //---file5
       //--file6
@@ -378,7 +378,7 @@ namespace Remotion.IO.Archive.Zip.UnitTests
 
       var directory1 = Directory.CreateDirectory (Path.Combine (rootPath, "Directory1"));
       var directory2 = Directory.CreateDirectory (Path.Combine (rootPath, "Directory2"));
-      var directory3 = Directory.CreateDirectory (Path.Combine (directory2.FullName, "Directory3 �"));
+      var directory3 = Directory.CreateDirectory (Path.Combine (directory2.FullName, "Directory3 ü"));
 
       var commonRoot = directory1.Parent.Parent;
       var file1NewLocation = Path.Combine (rootPath, Path.GetFileName (file1.FileName));

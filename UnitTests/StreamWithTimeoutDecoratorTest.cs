@@ -67,7 +67,7 @@ namespace Remotion.IO.UnitTests
     [SetUp]
     public void SetUp ()
     {
-      _innerStreamMock = new Mock<Stream>(MockBehavior.Strict);
+      _innerStreamMock = new Mock<Stream> (MockBehavior.Strict);
       _decorator = new StreamWithTimeoutDecorator (_innerStreamMock.Object);
     }
 
@@ -307,10 +307,10 @@ namespace Remotion.IO.UnitTests
       byte[] buffer = new byte[10];
 
       var waitHandle = new Mock<WaitHandle> (MockBehavior.Strict);
-      waitHandle.Setup (w => w.WaitOne (TimeSpan.FromMilliseconds (123))).Returns (false);
+      waitHandle.Setup (w => w.WaitOne (TimeSpan.FromMilliseconds (123))).Returns (false).Verifiable();
 
       var asyncResultMock = new Mock<IAsyncResult>();
-      asyncResultMock.SetupGet (r => r.AsyncWaitHandle).Returns (waitHandle.Object);
+      asyncResultMock.SetupGet (r => r.AsyncWaitHandle).Returns (waitHandle.Object).Verifiable();
 
       _innerStreamMock.Setup (s => s.BeginWrite (buffer, 22, 33, null, null)).Returns (asyncResultMock.Object).Verifiable();
       _innerStreamMock.SetupGet (s => s.WriteTimeout).Returns (123);
@@ -334,7 +334,7 @@ namespace Remotion.IO.UnitTests
       waitHandle.Setup (w => w.WaitOne (TimeSpan.FromMilliseconds (123))).Returns (true);
 
       var asyncResultMock = new Mock<IAsyncResult>();
-      asyncResultMock.SetupGet (r => r.AsyncWaitHandle).Returns (waitHandle.Object);
+      asyncResultMock.SetupGet (r => r.AsyncWaitHandle).Returns (waitHandle.Object).Verifiable();
 
       _innerStreamMock.Setup (s => s.BeginWrite (buffer, 22, 33, null, null)).Returns (asyncResultMock.Object).Verifiable();
       _innerStreamMock.SetupGet (s => s.WriteTimeout).Returns (123).Verifiable();
@@ -366,10 +366,10 @@ namespace Remotion.IO.UnitTests
       byte[] buffer = new byte[10];
 
       var waitHandle = new Mock<WaitHandle> (MockBehavior.Strict);
-      waitHandle.Setup (w => w.WaitOne (TimeSpan.FromMilliseconds (123))).Returns (false);
+      waitHandle.Setup (w => w.WaitOne (TimeSpan.FromMilliseconds (123))).Returns (false).Verifiable();
 
       var asyncResultMock = new Mock<IAsyncResult>();
-      asyncResultMock.SetupGet (r => r.AsyncWaitHandle).Returns (waitHandle.Object);
+      asyncResultMock.SetupGet (r => r.AsyncWaitHandle).Returns (waitHandle.Object).Verifiable();
 
       _innerStreamMock.Setup (s => s.BeginRead (buffer, 22, 33, null, null)).Returns (asyncResultMock.Object).Verifiable();
       _innerStreamMock.SetupGet (s => s.ReadTimeout).Returns (123);
@@ -389,11 +389,11 @@ namespace Remotion.IO.UnitTests
       _innerStreamMock.SetupGet (s => s.CanTimeout).Returns (true).Verifiable();
       byte[] buffer = new byte[10];
 
-      var waitHandle = new Mock<WaitHandle>(MockBehavior.Strict);
-      waitHandle.Setup (w => w.WaitOne (TimeSpan.FromMilliseconds (123))).Returns (true);
+      var waitHandle = new Mock<WaitHandle> (MockBehavior.Strict);
+      waitHandle.Setup (w => w.WaitOne (TimeSpan.FromMilliseconds (123))).Returns (true).Verifiable();
 
       var asyncResultMock = new Mock<IAsyncResult>();
-      asyncResultMock.SetupGet (r => r.AsyncWaitHandle).Returns (waitHandle.Object);
+      asyncResultMock.SetupGet (r => r.AsyncWaitHandle).Returns (waitHandle.Object).Verifiable();
 
       _innerStreamMock.Setup (s => s.BeginRead (buffer, 22, 33, null, null)).Returns (asyncResultMock.Object).Verifiable();
       _innerStreamMock.SetupGet (s => s.ReadTimeout).Returns (123).Verifiable();

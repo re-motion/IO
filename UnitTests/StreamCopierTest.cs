@@ -40,7 +40,7 @@ namespace Remotion.IO.UnitTests
     [TestCase (20)]
     public void CopyStream_WriteAllAtOnce (int? maxLength)
     {
-      var inputMock = new Mock<Stream>(MockBehavior.Strict);
+      var inputMock = new Mock<Stream> (MockBehavior.Strict);
       inputMock.SetupGet (s => s.CanSeek).Returns (false);
 
       var sequence = new MockSequence();
@@ -59,14 +59,14 @@ namespace Remotion.IO.UnitTests
     [TestCase (10)]
     public void CopyStream_WriteInSteps_ReturnsTrue (int? maxLength)
     {
-      var inputMock = new Mock<Stream>(MockBehavior.Strict);
+      var inputMock = new Mock<Stream> (MockBehavior.Strict);
 
       inputMock.SetupGet (s => s.CanSeek).Returns (false);
       var sequence = new MockSequence();
       SetupReadExpectation (inputMock, sequence, Enumerable.Range (0, 5).Select (i => (byte) i));
-      SetupReadExpectation (inputMock, sequence,Enumerable.Range (10, 3).Select (i => (byte) i));
-      SetupReadExpectation (inputMock, sequence,Enumerable.Range (20, 2).Select (i => (byte) i));
-      SetupReadExpectation (inputMock, sequence,new byte[] { });
+      SetupReadExpectation (inputMock, sequence, Enumerable.Range (10, 3).Select (i => (byte) i));
+      SetupReadExpectation (inputMock, sequence, Enumerable.Range (20, 2).Select (i => (byte) i));
+      SetupReadExpectation (inputMock, sequence, new byte[] { });
 
       MemoryStream outputStream = new MemoryStream();
 
@@ -92,8 +92,8 @@ namespace Remotion.IO.UnitTests
       var sequence = new MockSequence();
       inputMock.SetupGet (s => s.Length).Returns (streamLength);
       inputMock.SetupGet (s => s.CanSeek).Returns (true);
-      SetupReadExpectation (inputMock, sequence,Enumerable.Range (0, contentLength).Select (i => (byte) i));
-      SetupReadExpectation (inputMock, sequence,new byte[] { });
+      SetupReadExpectation (inputMock, sequence, Enumerable.Range (0, contentLength).Select (i => (byte) i));
+      SetupReadExpectation (inputMock, sequence, new byte[] { });
 
       MemoryStream outputStream = new MemoryStream();
 
@@ -112,8 +112,8 @@ namespace Remotion.IO.UnitTests
       var sequence = new MockSequence();
       inputMock.SetupGet (s => s.Length).Returns (streamLength);
       inputMock.SetupGet (s => s.CanSeek).Returns (true);
-      SetupReadExpectation (inputMock, sequence,Enumerable.Range (0, contentLength).Select (i => (byte) i));
-      SetupReadExpectation (inputMock, sequence,new byte[] { });
+      SetupReadExpectation (inputMock, sequence, Enumerable.Range (0, contentLength).Select (i => (byte) i));
+      SetupReadExpectation (inputMock, sequence, new byte[] { });
 
       MemoryStream outputStream = new MemoryStream();
 
@@ -133,18 +133,17 @@ namespace Remotion.IO.UnitTests
 
       var sequence = new MockSequence();
       for (int i = 0; i < numberOfNotificationsToWait; i++)
-      {
         inputMock.InSequence (sequence).Setup (s => s.Read (It.IsAny<Byte[]>(), It.IsAny<int>(), It.IsAny<int>())).Returns (1).Verifiable();
-      }
+
       inputMock.SetupGet (s => s.Length).Returns (10);
 
       var transferProgressNotificationCount = 0;
       _streamCopier.TransferProgress += (sender, e) =>
-      {
-        transferProgressNotificationCount++;
-        if (transferProgressNotificationCount == numberOfNotificationsToWait)
-          e.Cancel = true;
-      };
+                                        {
+                                          transferProgressNotificationCount++;
+                                          if (transferProgressNotificationCount == numberOfNotificationsToWait)
+                                            e.Cancel = true;
+                                        };
 
       Assert.That (_streamCopier.CopyStream (inputMock.Object, new MemoryStream()), Is.False);
 
@@ -181,7 +180,7 @@ namespace Remotion.IO.UnitTests
     {
       var inputStub = new Mock<Stream>();
       inputStub.SetupGet (_ => _.CanSeek).Returns (false);
-      inputStub.Setup (_ => _.Read (It.IsAny<Byte[]>(), It.IsAny<int>(), It.IsAny<int>())).Returns (13);
+      inputStub.Setup (_ => _.Read (It.IsAny<Byte[]>(), It.IsAny<int>(), It.IsAny<int>())).Returns (13).Verifiable();
 
       Assert.That (
           () => _streamCopier.CopyStream (inputStub.Object, new MemoryStream(), 12),
@@ -194,9 +193,9 @@ namespace Remotion.IO.UnitTests
       var inputStub = new Mock<Stream>();
       inputStub.SetupGet (_ => _.CanSeek).Returns (true);
       inputStub.SetupGet (_ => _.Length).Returns (11);
-      var sequence = new MockSequence();
-      inputStub.InSequence (sequence).Setup (_ => _.Read (It.IsAny<Byte[]>(), It.IsAny<int>(), It.IsAny<int>())).Returns (13);
-      inputStub.InSequence (sequence).Setup (_ => _.Read (It.IsAny<Byte[]>(), It.IsAny<int>(), It.IsAny<int>())).Returns (0);
+      inputStub.SetupSequence (_ => _.Read (It.IsAny<Byte[]>(), It.IsAny<int>(), It.IsAny<int>()))
+               .Returns (13)
+               .Returns (0);
 
       Assert.That (
           () => _streamCopier.CopyStream (inputStub.Object, new MemoryStream()),
@@ -224,11 +223,8 @@ namespace Remotion.IO.UnitTests
          .InSequence (mockSequence)
          .Setup (s => s.Read (It.IsAny<byte[]>(), It.IsAny<int>(), It.IsAny<int>()))
          .Callback (
-              (byte[] bufferA, int offsetA, int _) =>
+              (byte[] buffer, int offset, int _) =>
               {
-                var buffer = bufferA; //REVIEW Parameters are no longer passed by an Array -> remove variables and directly access parameters?
-                var offset = offsetA;
-
                 for (int i = 0; i < byteArray.Length; ++i)
                   buffer[offset + i] = byteArray[i];
               })
