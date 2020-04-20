@@ -139,11 +139,11 @@ namespace Remotion.IO.UnitTests
 
       var transferProgressNotificationCount = 0;
       _streamCopier.TransferProgress += (sender, e) =>
-                                        {
-                                          transferProgressNotificationCount++;
-                                          if (transferProgressNotificationCount == numberOfNotificationsToWait)
-                                            e.Cancel = true;
-                                        };
+      {
+        transferProgressNotificationCount++;
+        if (transferProgressNotificationCount == numberOfNotificationsToWait)
+          e.Cancel = true;
+      };
 
       Assert.That (_streamCopier.CopyStream (inputMock.Object, new MemoryStream()), Is.False);
 
