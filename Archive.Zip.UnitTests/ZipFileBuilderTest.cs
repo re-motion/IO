@@ -177,7 +177,6 @@ namespace Remotion.IO.Archive.Zip.UnitTests
     }
 
     [Test]
-    [ExpectedException (typeof (IOException))]
     public void NoHandlerForArchiveError_ThrowsException ()
     {
       var zipBuilder = new ZipFileBuilder();
@@ -190,18 +189,22 @@ namespace Remotion.IO.Archive.Zip.UnitTests
 
       zipBuilder.AddFile (fileInfoMock.Object);
       var zipFileName = Path.GetTempFileName();
-      try
-      {
-        using (zipBuilder.Build (zipFileName))
-        {
-        }
-      }
-      finally
-      {
-        FileUtility.DeleteAndWaitForCompletion (zipFileName);
-      }
 
-      fileInfoMock.Verify();
+      Assert.That (
+          () =>
+          {
+            try
+            {
+              using (zipBuilder.Build (zipFileName))
+              {
+              }
+            }
+            finally
+            {
+              FileUtility.DeleteAndWaitForCompletion (zipFileName);
+            }
+          },
+          Throws.InstanceOf<IOException>());
     }
 
     [Test]
@@ -241,7 +244,6 @@ namespace Remotion.IO.Archive.Zip.UnitTests
     }
 
     [Test]
-    [ExpectedException (typeof (AbortException))]
     public void SetFileProcessingRecoveryAction_Abort ()
     {
       var zipBuilder = new ZipFileBuilder();
@@ -257,16 +259,21 @@ namespace Remotion.IO.Archive.Zip.UnitTests
       zipBuilder.Error += ((sender, e) => zipBuilder.FileProcessingRecoveryAction = FileProcessingRecoveryAction.Abort);
 
       var zipFileName = Path.GetTempFileName();
-      try
-      {
-        using (zipBuilder.Build (zipFileName))
-        {
-        }
-      }
-      finally
-      {
-        FileUtility.DeleteAndWaitForCompletion (zipFileName);
-      }
+      Assert.That (
+          () =>
+          {
+            try
+            {
+              using (zipBuilder.Build (zipFileName))
+              {
+              }
+            }
+            finally
+            {
+              FileUtility.DeleteAndWaitForCompletion (zipFileName);
+            }
+          },
+          Throws.InstanceOf<AbortException>());
     }
 
     [Test]
@@ -421,7 +428,7 @@ namespace Remotion.IO.Archive.Zip.UnitTests
 
       var expectedRelativePaths = new List<string>
                                   {
-                                      file1NewLocation.Substring (commonRoot.FullName.Length + 1).Replace("\\", "/"),
+                                      file1NewLocation.Substring (commonRoot.FullName.Length + 1).Replace ("\\", "/"),
                                       file2NewLocation.Substring (commonRoot.FullName.Length + 1).Replace ("\\", "/"),
                                       file3NewLocation.Substring (commonRoot.FullName.Length + 1).Replace ("\\", "/"),
                                       file4NewLocation.Substring (commonRoot.FullName.Length + 1).Replace ("\\", "/"),
@@ -441,7 +448,6 @@ namespace Remotion.IO.Archive.Zip.UnitTests
     }
 
     [Test]
-    [ExpectedException (typeof (AbortException))]
     public void BuildThrowsAbortExceptionUponCancel ()
     {
       var zipBuilder = new ZipFileBuilder();
@@ -450,9 +456,14 @@ namespace Remotion.IO.Archive.Zip.UnitTests
 
       var zipFileName = Path.GetTempFileName();
 
-      using (zipBuilder.Build (zipFileName))
-      {
-      }
+      Assert.That (
+          () =>
+          {
+            using (zipBuilder.Build (zipFileName))
+            {
+            }
+          },
+          Throws.InstanceOf<AbortException>());
     }
 
     [Test]
