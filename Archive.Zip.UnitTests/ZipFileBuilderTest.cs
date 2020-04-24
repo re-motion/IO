@@ -205,7 +205,7 @@ namespace Remotion.IO.Archive.Zip.UnitTests
             }
           },
           Throws.InstanceOf<IOException>());
-      fileInfoMock.Verify();
+      fileInfoMock.VerifyAllExpectations();
     }
 
     [Test]
