@@ -193,8 +193,12 @@ namespace Remotion.IO.UnitTests
       var inputStub = new Mock<Stream>();
       inputStub.SetupGet (_ => _.CanSeek).Returns (true);
       inputStub.SetupGet (_ => _.Length).Returns (11);
-      inputStub.SetupSequence (_ => _.Read (It.IsAny<Byte[]>(), It.IsAny<int>(), It.IsAny<int>()))
-               .Returns (13)
+      var sequence = new MockSequence();
+      inputStub.InSequence (sequence)
+               .Setup (_ => _.Read (It.IsAny<Byte[]>(), It.IsAny<int>(), It.IsAny<int>()))
+               .Returns (13);
+      inputStub.InSequence (sequence)
+               .Setup (_ => _.Read (It.IsAny<Byte[]>(), It.IsAny<int>(), It.IsAny<int>()))
                .Returns (0);
 
       Assert.That (

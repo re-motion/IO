@@ -312,8 +312,12 @@ namespace Remotion.IO.Archive.Zip.UnitTests
 
       var fileInfo = new FileInfoWrapper (new FileInfo (_file2.FileName));
       var stream = fileInfo.Open (FileMode.Open, FileAccess.Read, FileShare.Read);
-      fileInfoStub.SetupSequence (mock => mock.Open (FileMode.Open, FileAccess.Read, FileShare.Read))
-                  .Throws (new IOException())
+      var sequence = new MockSequence();
+      fileInfoStub.InSequence (sequence)
+                  .Setup (mock => mock.Open (FileMode.Open, FileAccess.Read, FileShare.Read))
+                  .Throws (new IOException());
+      fileInfoStub.InSequence (sequence)
+                  .Setup (mock => mock.Open (FileMode.Open, FileAccess.Read, FileShare.Read))
                   .Returns (stream);
 
       fileInfoStub.SetupGet (mock => mock.Parent).Returns (new DirectoryInfoWrapper (new DirectoryInfo (Path.GetDirectoryName (_file2.FileName))));
