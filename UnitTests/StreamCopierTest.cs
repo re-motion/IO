@@ -224,16 +224,16 @@ namespace Remotion.IO.UnitTests
       var byteArray = bytes.ToArray();
 
       streamMock
-         .InSequence (mockSequence)
-         .Setup (s => s.Read (It.IsAny<byte[]>(), It.IsAny<int>(), It.IsAny<int>()))
-         .Callback (
+          .InSequence (mockSequence)
+          .Setup (s => s.Read (It.IsAny<byte[]>(), It.IsAny<int>(), It.IsAny<int>()))
+          .Callback (
               (byte[] buffer, int offset, int _) =>
               {
                 for (int i = 0; i < byteArray.Length; ++i)
                   buffer[offset + i] = byteArray[i];
               })
-         .Returns (byteArray.Length)
-         .Verifiable();
+          .Returns (byteArray.Length)
+          .Verifiable();
     }
   }
 }
