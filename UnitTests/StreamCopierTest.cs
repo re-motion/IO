@@ -153,7 +153,7 @@ namespace Remotion.IO.UnitTests
     [Test]
     public void CopyStream_StreamCannotRead_DoesntCallLength ()
     {
-      var inputMock = new Mock<Stream>(MockBehavior.Strict);
+      var inputMock = new Mock<Stream> (MockBehavior.Strict);
       inputMock.Setup (s => s.Read (It.IsAny<Byte[]>(), It.IsAny<int>(), It.IsAny<int>())).Returns (0).Verifiable();
       inputMock.SetupGet (s => s.CanSeek).Returns (false);
       inputMock.SetupGet (s => s.Length).Throws (new AssertionException ("Length should not be called, when CanSeek returns false."));
@@ -166,7 +166,7 @@ namespace Remotion.IO.UnitTests
     [Test]
     public void CopyStream_PassesCorrectBufferLength ()
     {
-      var inputMock = new Mock<Stream>(MockBehavior.Strict);
+      var inputMock = new Mock<Stream> (MockBehavior.Strict);
       inputMock.Setup (s => s.Read (new byte[_streamCopier.BufferSize], 0, _streamCopier.BufferSize)).Returns (0).Verifiable();
       inputMock.SetupGet (s => s.CanSeek).Returns (false);
 
