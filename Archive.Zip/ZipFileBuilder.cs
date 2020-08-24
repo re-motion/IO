@@ -104,11 +104,11 @@ namespace Remotion.IO.Archive.Zip
     private void AddFileToZipFile (IFileInfo fileInfo, ZipOutputStream zipOutputStream, ZipNameTransform nameTransform)
     {
       var fileStream = GetFileStream (fileInfo);
-      var fileLength = fileInfo.Length;
 
       if (fileStream == null)
         return;
 
+      var fileLength = fileInfo.Length;
       var zipEntry = CreateZipFileEntry (fileInfo, nameTransform);
       zipOutputStream.PutNextEntry (zipEntry);
 

@@ -280,6 +280,7 @@ namespace Remotion.IO.Archive.Zip.UnitTests
       fileInfoMock.SetupGet (mock => mock.FullName).Returns (@"C:\fileName").Verifiable();
       fileInfoMock.Setup (mock => mock.Open (FileMode.Open, FileAccess.Read, FileShare.Read)).Throws (new IOException()).Verifiable();
       fileInfoMock.SetupGet (mock => mock.Parent).Returns (new DirectoryInfoWrapper (new DirectoryInfo (@"C:\")));
+      fileInfoMock.SetupGet (mock => mock.Length).Throws (new AssertionException ("Should never be called"));
 
       zipBuilder.AddFile (new FileInfoWrapper (new FileInfo (_file1.FileName)));
       zipBuilder.AddFile (fileInfoMock.Object);
