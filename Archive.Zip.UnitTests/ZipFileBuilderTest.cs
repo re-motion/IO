@@ -205,7 +205,7 @@ namespace Remotion.IO.Archive.Zip.UnitTests
     }
 
     [Test]
-    public void Build_IOExceptionDuringCopyingOccurs_ThrowsAbortExceptionWithIOExceptionAsInner ()
+    public void Build_IOExceptionDuringCopyingOccurs_ThrowsIOExceptionWithOriginalIOExceptionAsInner ()
     {
       var zipBuilder = new ZipFileBuilder();
       zipBuilder.Progress += ((sender, e) => { });
@@ -230,7 +230,7 @@ namespace Remotion.IO.Archive.Zip.UnitTests
               {
               }
             },
-            Throws.InstanceOf<AbortException>()
+            Throws.InstanceOf<IOException>()
                 .With.Message.EqualTo (@"Error while copying the data from the file 'C:\fileName' to the archive.")
                 .And.InnerException.SameAs (ioException));
       }
