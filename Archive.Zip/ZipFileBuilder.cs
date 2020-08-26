@@ -128,7 +128,7 @@ namespace Remotion.IO.Archive.Zip
         }
         catch (IOException ex)
         {
-          throw new AbortException (
+          throw new IOException (
               string.Format ("Error while copying the data from the file '{0}' to the archive.", fileInfo.FullName),
               ex);
         }
