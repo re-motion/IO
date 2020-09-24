@@ -205,6 +205,8 @@ namespace Remotion.IO.Archive.Zip.UnitTests
       {
         FileUtility.DeleteAndWaitForCompletion (zipFileName);
       }
+
+      fileInfoMock.Verify();
     }
 
     [Test]
