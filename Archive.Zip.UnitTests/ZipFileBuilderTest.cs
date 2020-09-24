@@ -190,21 +190,21 @@ namespace Remotion.IO.Archive.Zip.UnitTests
       zipBuilder.AddFile (fileInfoMock.Object);
       var zipFileName = Path.GetTempFileName();
 
-      Assert.That (
-          () =>
-          {
-            try
+      try
+      {
+        Assert.That (
+            () =>
             {
               using (zipBuilder.Build (zipFileName))
               {
               }
-            }
-            finally
-            {
-              FileUtility.DeleteAndWaitForCompletion (zipFileName);
-            }
-          },
-          Throws.InstanceOf<IOException>());
+            },
+            Throws.InstanceOf<IOException>());
+      }
+      finally
+      {
+        FileUtility.DeleteAndWaitForCompletion (zipFileName);
+      }
     }
 
     [Test]
@@ -259,21 +259,22 @@ namespace Remotion.IO.Archive.Zip.UnitTests
       zipBuilder.Error += ((sender, e) => zipBuilder.FileProcessingRecoveryAction = FileProcessingRecoveryAction.Abort);
 
       var zipFileName = Path.GetTempFileName();
-      Assert.That (
-          () =>
-          {
-            try
+
+      try
+      {
+        Assert.That (
+            () =>
             {
               using (zipBuilder.Build (zipFileName))
               {
               }
-            }
-            finally
-            {
-              FileUtility.DeleteAndWaitForCompletion (zipFileName);
-            }
-          },
-          Throws.InstanceOf<AbortException>());
+            },
+            Throws.InstanceOf<AbortException>());
+      }
+      finally
+      {
+        FileUtility.DeleteAndWaitForCompletion (zipFileName);
+      }
     }
 
     [Test]
