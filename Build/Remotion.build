@@ -33,10 +33,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-      <NUnitExtensionsPaths Include="$(PackagesDirectory)NUnit.Extension.NUnitV2Driver.3.8.0\"/>
-  </ItemGroup>
-
-  <ItemGroup>
       <SupportedBrowsers Remove="@(SupportedBrowsers)"/>
       <SupportedPlatforms Include="x86;x64"/>
       <SupportedDatabaseSystems Remove="@(SupportedDatabaseSystems)"/>
