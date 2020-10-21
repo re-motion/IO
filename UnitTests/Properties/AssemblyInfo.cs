@@ -17,5 +17,4 @@
 using System;
 using System.Reflection;
 
-[assembly: AssemblyTitle ("Remotion IO Library Unit Tests")]
 [assembly: AssemblyCulture ("")]

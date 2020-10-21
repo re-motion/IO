@@ -17,7 +17,5 @@
 using System;
 using System.Reflection;
 
-[assembly: AssemblyTitle ("re-motion IO ZIP Archive Library")]
-[assembly: AssemblyDescription ("Library for building and extracting ZIP archives.")]
 [assembly: AssemblyCulture ("")]
 [assembly: CLSCompliant (true)]

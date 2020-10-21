@@ -17,5 +17,4 @@
 using System;
 using System.Reflection;
 
-[assembly: AssemblyTitle ("Remotion IO ZIP Archive Library Unit Tests")]
 [assembly: AssemblyCulture ("")]
