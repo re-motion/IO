@@ -1,0 +1,63 @@
+<Project>
+
+  <Import Project="$(MSBuildThisFileDirectory)Build\Customizations\Properties.props" />
+  <Import Project="$(MSBuildThisFileDirectory)Build\Customizations\Version.props" Condition="'$(Version)' == ''" />
+
+  <PropertyGroup>
+    <Product>$(ProductName)</Product>
+    <Company>$(CompanyName)</Company>
+    <Copyright>$(Copyright)</Copyright>
+    <Authors>$(Company)</Authors>
+    <PackageLicenseExpression>LGPL-2.1-or-later</PackageLicenseExpression>
+    <PackageProjectUrl>http://www.re-motion.org</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/re-motion/IO/</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <LangVersion>7.2</LangVersion>
+    <SignAssembly>True</SignAssembly>
+    <AssemblyOriginatorKeyFile>$(MSBuildThisFileDirectory)remotion.snk</AssemblyOriginatorKeyFile>
+    <RestoreProjectStyle>PackageReference</RestoreProjectStyle>
+    <AllowedOutputExtensionsInPackageBuildOutputFolder Condition="'$(IncludeSymbols)' != 'True'">$(AllowedOutputExtensionsInPackageBuildOutputFolder);.pdb</AllowedOutputExtensionsInPackageBuildOutputFolder>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(ProjectType)' == 'Library'">
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <NoWarn>1591;0419</NoWarn>
+    <GenerateDocumentationFile>True</GenerateDocumentationFile>
+    <IsPackable>True</IsPackable>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(ProjectType)' == 'Test'">
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <NoWarn></NoWarn>
+    <GenerateDocumentationFile>False</GenerateDocumentationFile>
+    <IsPackable>False</IsPackable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="$(MSBuildThisFileDirectory)LGPL.licenseheader" Link="LGPL.licenseheader" />
+    <None Include="$(MSBuildThisFileDirectory)remotion.snk" Link="remotion.snk" />
+    <Content Include="$(MSBuildProjectDirectory)\FacetManifest.xml" Condition="'$(IsPackable)' == 'True'">
+      <Pack>true</Pack>
+      <PackagePath>.</PackagePath>
+    </Content>
+  </ItemGroup>
+
+  <PropertyGroup>
+    <_version>$(Version.Split('-')[0])</_version>
+
+    <AssemblyVersion Condition="'$(AssemblyVersion)' == ''">$(_version).0</AssemblyVersion>
+    <AssemblyVersion Condition="'$(AssemblyVersion)' != ''">$(AssemblyVersion)</AssemblyVersion>
+
+    <FileVersion Condition="'$(AssemblyFileVersion)' == ''">$(_version).24009</FileVersion>
+    <FileVersion Condition="'$(AssemblyFileVersion)' != ''">$(AssemblyFileVersion)</FileVersion>
+
+    <InformationalVersion Condition="'$(AssemblyInformationalVersion)' == ''">$(_version)-x.9+$(Configuration)</InformationalVersion>
+    <InformationalVersion Condition="'$(AssemblyInformationalVersion)' != ''">$(AssemblyInformationalVersion)</InformationalVersion>
+
+    <PackageVersion Condition="'$(AssemblyNuGetVersion)' == ''">$(_version)-x.9</PackageVersion>
+    <PackageVersion Condition="'$(AssemblyNuGetVersion)' != ''">$(AssemblyNuGetVersion)</PackageVersion>
+  </PropertyGroup>
+</Project>
