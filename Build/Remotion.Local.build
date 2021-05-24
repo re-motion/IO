@@ -83,6 +83,7 @@
     <PropertyGroup>
       <Configurations>Debug+Release</Configurations>
       <SkipNuGet>False</SkipNuGet>
+      <SkipNuGetOrg>False</SkipNuGetOrg>
     </PropertyGroup>
   </Target>
 

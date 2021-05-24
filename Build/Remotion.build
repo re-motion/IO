@@ -20,6 +20,11 @@
 <Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
 
   <PropertyGroup>
+    <RemotionBuildScriptPath>C:\Development\Remotion\SharedSource-Build\BuildScript\BuildTargets\</RemotionBuildScriptPath>
+    <RemotionBuildScriptTasksPath>C:\Development\Remotion\SharedSource-Build\BuildScript\bin\Debug\</RemotionBuildScriptTasksPath>
+  </PropertyGroup>
+
+  <PropertyGroup>
     <PackagesDirectory Condition="'$(PackagesDirectory)' == ''">$(MSBuildProjectDirectory)\..\packages\</PackagesDirectory>
     <MSBuildExtensionPackPath Condition="'$(MSBuildExtensionPackPath)' == ''">$(PackagesDirectory)MSBuild.Extension.Pack.1.5.0\tools\net40\</MSBuildExtensionPackPath>
     <ExtensionTasksPath>$(MSBuildExtensionPackPath)</ExtensionTasksPath>
@@ -129,9 +134,9 @@
         BuildTestProjects;
         $(RunTestsTarget);
         $(GenerateDocumentationTarget);
-        $(PackageNuGetOrgTarget);
         $(SourceLinkTarget);
         $(PackageNuGetTarget);
+        $(PackageNuGetOrgTarget);
         $(DependDBTarget);
         RestoreBackupFiles;
       </BuildTargets>

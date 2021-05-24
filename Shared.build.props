@@ -49,12 +49,18 @@
     <_version>$(Version.Split('-')[0])</_version>
 
     <AssemblyVersion Condition="'$(AssemblyVersion)' == ''">$(_version).0</AssemblyVersion>
+    <!-- TEST: Proof that AssemblyVersion is piped into project file during offical build. -->
+    <AssemblyVersion Condition="'$(AssemblyVersion)' == ''">$(_version).9</AssemblyVersion>
     <AssemblyVersion Condition="'$(AssemblyVersion)' != ''">$(AssemblyVersion)</AssemblyVersion>
 
     <FileVersion Condition="'$(AssemblyFileVersion)' == ''">$(_version).24009</FileVersion>
+    <!-- TEST: Proof that AssemblyFileVersion is piped into project file during offical build. -->
+    <FileVersion Condition="'$(AssemblyFileVersion)' == ''">$(_version).54009</FileVersion>
     <FileVersion Condition="'$(AssemblyFileVersion)' != ''">$(AssemblyFileVersion)</FileVersion>
 
     <InformationalVersion Condition="'$(AssemblyInformationalVersion)' == ''">$(_version)-x.9+$(Configuration)</InformationalVersion>
+    <!-- TEST: Proof that AssemblyInformationalVersion is piped into project file during offical build. -->
+    <InformationalVersion Condition="'$(AssemblyInformationalVersion)' == ''">$(_version)-z.9+$(Configuration)</InformationalVersion>
     <InformationalVersion Condition="'$(AssemblyInformationalVersion)' != ''">$(AssemblyInformationalVersion)</InformationalVersion>
 
     <PackageVersion Condition="'$(AssemblyNuGetVersion)' == ''">$(_version)-x.9</PackageVersion>

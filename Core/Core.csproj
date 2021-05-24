@@ -11,7 +11,7 @@
     <Description>Object-oriented wrapper for System.IO and associated utilities.</Description>
     <AssemblyName>Remotion.IO</AssemblyName>
     <RootNamespace>$(AssemblyName)</RootNamespace>
-    <TargetFramework>net45</TargetFramework>
+    <TargetFrameworks>net45;netstandard2.0</TargetFrameworks>
   </PropertyGroup>
 
   <ItemGroup>
@@ -20,5 +20,14 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
   </ItemGroup>
+
+  <Target Name="VersionLog" BeforeTargets="Compile">
+    <Message Importance="High" Text="AssemblyInformationalVersion @Compile: '$(AssemblyInformationalVersion)'" />
+    <Message Importance="High" Text="AssemblyNuGetVersion @Compile: '$(AssemblyNuGetVersion)'" />
+  </Target>
+
+<Target Name="PackLog" BeforeTargets="Pack">
+  <Message Importance="High" Text="Pack: '$(IncludeSymbols)'" />
+</Target>
 
 </Project>

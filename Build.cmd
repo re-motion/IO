@@ -49,7 +49,7 @@ mkdir %log-dir%
 mkdir %nuget-bin%
 %nuget-download%
 %nuget% restore %solutionFile% -NonInteractive
-%msbuild% build\Remotion.Local.build /t:TestBuild /maxcpucount /verbosity:normal /flp:verbosity=normal;logfile=build\BuildOutput\log\build.log
+%msbuild% build\Remotion.Local.build /t:TestBuild /maxcpucount /verbosity:normal /flp:verbosity=normal;logfile=build\BuildOutput\log\build.log /flp1:verbosity=diag;logfile=build\BuildOutput\log\build.diag.log
 if not %ERRORLEVEL%==0 goto build_failed
 goto build_succeeded
 
@@ -85,7 +85,7 @@ mkdir %log-dir%
 mkdir %nuget-bin%
 %nuget-download%
 %nuget% restore %solutionFile% -NonInteractive
-%msbuild% build\Remotion.Local.build /t:PackageBuild /maxcpucount /verbosity:minimal /flp:verbosity=normal;logfile=build\BuildOutput\log\build.log
+%msbuild% build\Remotion.Local.build /t:PackageBuild /maxcpucount /verbosity:minimal /flp:verbosity=normal;logfile=build\BuildOutput\log\build.log /flp1:verbosity=diag;logfile=build\BuildOutput\log\build.diag.log
 if not %ERRORLEVEL%==0 goto build_failed
 goto build_succeeded
 
