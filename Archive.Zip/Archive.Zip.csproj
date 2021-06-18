@@ -11,7 +11,6 @@
     <Description>Library for building and extracting ZIP archives.</Description>
     <AssemblyName>Remotion.IO.Archive.Zip</AssemblyName>
     <RootNamespace>$(AssemblyName)</RootNamespace>
-    <TargetFrameworks>netstandard2.0;net45</TargetFrameworks>
   </PropertyGroup>
 
   <ItemGroup>

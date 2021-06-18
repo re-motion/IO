@@ -10,7 +10,6 @@
     <AssemblyTitle>Remotion IO Library Unit Tests</AssemblyTitle>
     <AssemblyName>Remotion.IO.UnitTests</AssemblyName>
     <RootNamespace>$(AssemblyName)</RootNamespace>
-    <TargetFrameworks>net5.0;net45</TargetFrameworks>
   </PropertyGroup>
 
   <ItemGroup>

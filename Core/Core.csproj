@@ -11,7 +11,6 @@
     <Description>Object-oriented wrapper for System.IO and associated utilities.</Description>
     <AssemblyName>Remotion.IO</AssemblyName>
     <RootNamespace>$(AssemblyName)</RootNamespace>
-    <TargetFrameworks>netstandard2.0;net45</TargetFrameworks>
   </PropertyGroup>
 
   <ItemGroup>
