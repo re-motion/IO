@@ -11,7 +11,7 @@
     <Description>Library for building and extracting ZIP archives.</Description>
     <AssemblyName>Remotion.IO.Archive.Zip</AssemblyName>
     <RootNamespace>$(AssemblyName)</RootNamespace>
-    <TargetFramework>net45</TargetFramework>
+    <TargetFrameworks>netstandard2.0;net45</TargetFrameworks>
   </PropertyGroup>
 
   <ItemGroup>
@@ -19,7 +19,7 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
-    <PackageReference Include="SharpZipLib" Version="0.86.0" />
+    <PackageReference Include="SharpZipLib" Version="1.0.0" />
   </ItemGroup>
 
   <ItemGroup>

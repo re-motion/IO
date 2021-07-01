@@ -43,5 +43,11 @@
       <ExecutionRuntime>net-4.5</ExecutionRuntime>
     </IntegrationTestProjectFiles>
     -->
+    <ReleaseProjectFiles Include="$(SolutionDirectory)WebLibrary\WebLibrary.csproj">
+      <CreateDocumentationFile>False</CreateDocumentationFile>
+    </ReleaseProjectFiles>
+    <ReleaseProjectFiles Include="$(SolutionDirectory)WebApplication1\WebApplication1.csproj">
+      <CreateDocumentationFile>False</CreateDocumentationFile>
+    </ReleaseProjectFiles>
   </ItemGroup>
 </Project>
