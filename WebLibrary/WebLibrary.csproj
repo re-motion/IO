@@ -11,7 +11,6 @@
     <Description>A web libray.</Description>
     <AssemblyName>My.WebLibrary</AssemblyName>
     <RootNamespace>$(AssemblyName)</RootNamespace>
-    <TargetFrameworks>net45;net5.0</TargetFrameworks>
   </PropertyGroup>
 
 </Project>
