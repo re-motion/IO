@@ -6,14 +6,17 @@
     <CompanyUrl>http://www.rubicon.eu</CompanyUrl>
     <Copyright>Copyright (c) rubicon IT GmbH, www.rubicon.eu - Licensed under GNU LGPL 2.1 (or later)</Copyright>
     <ProductName>re-motion Framework (www.re-motion.org)</ProductName>
+    <DocumentationFileName>Remotion.IO</DocumentationFileName>
     <DocumentationRootPage>$(SolutionDirectory)Core\Doc\include\GettingStarted.aml</DocumentationRootPage>
     <DocumentationNamespaceSummaryFiles>$(SolutionDirectory)**\Doc\include\NamespaceDoc.xml</DocumentationNamespaceSummaryFiles>
     <DependDBProjectName>re-motion IO</DependDBProjectName>
     <DependDBRetentionTime>30</DependDBRetentionTime>
     <DependDBProjectBranch>Main</DependDBProjectBranch>
     <!-- Required, but can be supplied via commandline parameter in server build and uses a fallback in local build -->
-    <DependDBProjectImportNotificationMailAddress></DependDBProjectImportNotificationMailAddress>
+    <DependDBProjectImportNotificationMailAddress>
+    </DependDBProjectImportNotificationMailAddress>
     <DependDBTrackedReferences>Remotion;Remotion.*</DependDBTrackedReferences>
     <DependDBNuGetSources>$(SolutionDirectory)packages</DependDBNuGetSources>
+    <DependDBTargetFramework>net45</DependDBTargetFramework>
   </PropertyGroup>
 </Project>
