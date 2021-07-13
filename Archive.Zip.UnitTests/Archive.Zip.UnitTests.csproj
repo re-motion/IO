@@ -14,7 +14,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="SharpZipLib" Version="0.86.0" />
+    <PackageReference Include="SharpZipLib" Version="1.0.0" />
   </ItemGroup>
 
   <ItemGroup>
