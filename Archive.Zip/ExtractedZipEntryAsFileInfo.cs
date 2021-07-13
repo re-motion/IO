@@ -37,6 +37,7 @@ namespace Remotion.IO.Archive.Zip
     [CanBeNull]
     private readonly IDirectoryInfo _directory;
 
+    [CLSCompliant (false)]
     public ExtractedZipEntryAsFileInfo (
         [NotNull] ZipFile zipFile,
         [NotNull] ZipEntry zipEntry,

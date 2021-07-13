@@ -73,13 +73,13 @@ namespace Remotion.IO.Archive.Zip.UnitTests
       File.Copy (_file1.FileName, Path.Combine (directory.FullName, Path.GetFileName (_file1.FileName)), true);
       File.Copy (_file2.FileName, Path.Combine (directory.FullName, Path.GetFileName (_file2.FileName)), true);
 
-      ZipConstants.DefaultCodePage = Encoding.ASCII.CodePage;
+      ZipStrings.CodePage = Encoding.ASCII.CodePage;
     }
 
     [TearDown]
     public void TearDown ()
     {
-      ZipConstants.DefaultCodePage = 0;
+      ZipStrings.CodePage = 0;
 
       _file1.Dispose();
       _file2.Dispose();
