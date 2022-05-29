@@ -22,10 +22,10 @@ using System.Linq;
 using System.Text;
 using ICSharpCode.SharpZipLib.Zip;
 using JetBrains.Annotations;
+using Moq;
 using NUnit.Framework;
 using Remotion.Development.UnitTesting.IO;
 using Remotion.Utilities;
-using Rhino.Mocks;
 
 namespace Remotion.IO.Archive.Zip.UnitTests
 {
@@ -73,13 +73,13 @@ namespace Remotion.IO.Archive.Zip.UnitTests
       File.Copy (_file1.FileName, Path.Combine (directory.FullName, Path.GetFileName (_file1.FileName)), true);
       File.Copy (_file2.FileName, Path.Combine (directory.FullName, Path.GetFileName (_file2.FileName)), true);
 
-      ZipConstants.DefaultCodePage = Encoding.ASCII.CodePage;
+      ZipStrings.CodePage = Encoding.ASCII.CodePage;
     }
 
     [TearDown]
     public void TearDown ()
     {
-      ZipConstants.DefaultCodePage = 0;
+      ZipStrings.CodePage = 0;
 
       _file1.Dispose();
       _file2.Dispose();
@@ -115,7 +115,7 @@ namespace Remotion.IO.Archive.Zip.UnitTests
     [Test]
     public void BuildReturnsZipFileWithEmptyFile_WithDiskFile ()
     {
-      using (var fileEmpty = new TempFile ())
+      using (var fileEmpty = new TempFile())
       {
         var zipBuilder = new ZipFileBuilder();
         zipBuilder.Progress += ((sender, e) => { });
@@ -152,7 +152,7 @@ namespace Remotion.IO.Archive.Zip.UnitTests
     [Test]
     public void BuildReturnsZipFileWithFileWithUmlaut ()
     {
-      string fileWithUmlautInName = Path.Combine (Path.GetTempPath(), "NameWithÄ.txt");
+      string fileWithUmlautInName = Path.Combine (Path.GetTempPath(), "NameWithÃ„.txt");
       File.WriteAllText (fileWithUmlautInName, "Hello World!");
 
       try
@@ -177,47 +177,54 @@ namespace Remotion.IO.Archive.Zip.UnitTests
     }
 
     [Test]
-    [ExpectedException (typeof (IOException))]
     public void NoHandlerForArchiveError_ThrowsException ()
     {
       var zipBuilder = new ZipFileBuilder();
       zipBuilder.Progress += ((sender, e) => { });
 
-      var fileInfoMock = MockRepository.GenerateMock<IFileInfo>();
-      fileInfoMock.Expect (mock => mock.FullName).Return (@"C:\fileName");
-      fileInfoMock.Expect (mock => mock.Open (FileMode.Open, FileAccess.Read, FileShare.Read)).Throw (new IOException ("ioexception"));
-      fileInfoMock.Stub (mock => mock.Parent).Return (new DirectoryInfoWrapper (new DirectoryInfo (@"C:\")));
+      var fileInfoMock = new Mock<IFileInfo>();
+      fileInfoMock.SetupGet (mock => mock.FullName).Returns (@"C:\fileName").Verifiable();
+      fileInfoMock.Setup (mock => mock.Open (FileMode.Open, FileAccess.Read, FileShare.Read)).Throws (new IOException ("ioexception")).Verifiable();
+      fileInfoMock.SetupGet (mock => mock.Parent).Returns (new DirectoryInfoWrapper (new DirectoryInfo (@"C:\")));
 
-      zipBuilder.AddFile (fileInfoMock);
+      zipBuilder.AddFile (fileInfoMock.Object);
       var zipFileName = Path.GetTempFileName();
+
       try
       {
-        using (zipBuilder.Build (zipFileName))
-        {
-        }
+        Assert.That (
+            () =>
+            {
+              using (zipBuilder.Build (zipFileName))
+              {
+              }
+            },
+            Throws.InstanceOf<IOException>());
       }
       finally
       {
         FileUtility.DeleteAndWaitForCompletion (zipFileName);
       }
+
+      fileInfoMock.Verify();
     }
 
     [Test]
-    public void Build_IOExceptionDuringCopyingOccurs_ThrowsAbortExceptionWithIOExceptionAsInner ()
+    public void Build_IOExceptionDuringCopyingOccurs_ThrowsIOExceptionWithOriginalIOExceptionAsInner ()
     {
       var zipBuilder = new ZipFileBuilder();
       zipBuilder.Progress += ((sender, e) => { });
 
-      var streamStub = MockRepository.GenerateStub<Stream>();
+      var streamStub = new Mock<Stream>();
       var ioException = new IOException();
-      streamStub.Stub (_ => _.Read (null, 0, 0)).IgnoreArguments().Throw (ioException);
+      streamStub.Setup (_ => _.Read (It.IsAny<byte[]>(), It.IsAny<int>(), It.IsAny<int>())).Throws (ioException);
 
-      var fileInfoStub = MockRepository.GenerateStub<IFileInfo>();
-      fileInfoStub.Stub (mock => mock.FullName).Return (@"C:\fileName");
-      fileInfoStub.Stub (mock => mock.Open (FileMode.Open, FileAccess.Read, FileShare.Read)).Return (streamStub);
-      fileInfoStub.Stub (mock => mock.Parent).Return (new DirectoryInfoWrapper (new DirectoryInfo (@"C:\")));
+      var fileInfoStub = new Mock<IFileInfo>();
+      fileInfoStub.SetupGet (mock => mock.FullName).Returns (@"C:\fileName");
+      fileInfoStub.Setup (mock => mock.Open (FileMode.Open, FileAccess.Read, FileShare.Read)).Returns (streamStub.Object);
+      fileInfoStub.SetupGet (mock => mock.Parent).Returns (new DirectoryInfoWrapper (new DirectoryInfo (@"C:\")));
 
-      zipBuilder.AddFile (fileInfoStub);
+      zipBuilder.AddFile (fileInfoStub.Object);
       var zipFileName = Path.GetTempFileName();
       try
       {
@@ -228,7 +235,7 @@ namespace Remotion.IO.Archive.Zip.UnitTests
               {
               }
             },
-            Throws.InstanceOf<AbortException>()
+            Throws.InstanceOf<IOException>()
                 .With.Message.EqualTo (@"Error while copying the data from the file 'C:\fileName' to the archive.")
                 .And.InnerException.SameAs (ioException));
       }
@@ -239,27 +246,32 @@ namespace Remotion.IO.Archive.Zip.UnitTests
     }
 
     [Test]
-    [ExpectedException (typeof (AbortException))]
     public void SetFileProcessingRecoveryAction_Abort ()
     {
       var zipBuilder = new ZipFileBuilder();
       zipBuilder.Progress += ((sender, e) => { });
 
-      var fileInfoMock = MockRepository.GenerateMock<IFileInfo>();
-      fileInfoMock.Expect (mock => mock.FullName).Return (@"C:\fileName");
-      fileInfoMock.Expect (mock => mock.Open (FileMode.Open, FileAccess.Read, FileShare.Read)).Throw (new IOException());
-      fileInfoMock.Stub (mock => mock.Parent).Return (new DirectoryInfoWrapper (new DirectoryInfo (@"C:\")));
+      var fileInfoMock = new Mock<IFileInfo>();
+      fileInfoMock.SetupGet (mock => mock.FullName).Returns (@"C:\fileName").Verifiable();
+      fileInfoMock.Setup (mock => mock.Open (FileMode.Open, FileAccess.Read, FileShare.Read)).Throws (new IOException()).Verifiable();
+      fileInfoMock.SetupGet (mock => mock.Parent).Returns (new DirectoryInfoWrapper (new DirectoryInfo (@"C:\")));
 
-      zipBuilder.AddFile (fileInfoMock);
+      zipBuilder.AddFile (fileInfoMock.Object);
 
       zipBuilder.Error += ((sender, e) => zipBuilder.FileProcessingRecoveryAction = FileProcessingRecoveryAction.Abort);
 
       var zipFileName = Path.GetTempFileName();
+
       try
       {
-        using (zipBuilder.Build (zipFileName))
-        {
-        }
+        Assert.That (
+            () =>
+            {
+              using (zipBuilder.Build (zipFileName))
+              {
+              }
+            },
+            Throws.InstanceOf<AbortException>());
       }
       finally
       {
@@ -273,14 +285,15 @@ namespace Remotion.IO.Archive.Zip.UnitTests
       var zipBuilder = new ZipFileBuilder();
       zipBuilder.Progress += ((sender, e) => { });
 
-      var fileInfoMock = MockRepository.GenerateMock<IFileInfo>();
+      var fileInfoMock = new Mock<IFileInfo>();
 
-      fileInfoMock.Expect (mock => mock.FullName).Return (@"C:\fileName");
-      fileInfoMock.Expect (mock => mock.Open (FileMode.Open, FileAccess.Read, FileShare.Read)).Throw (new IOException());
-      fileInfoMock.Stub (mock => mock.Parent).Return (new DirectoryInfoWrapper (new DirectoryInfo (@"C:\")));
+      fileInfoMock.SetupGet (mock => mock.FullName).Returns (@"C:\fileName").Verifiable();
+      fileInfoMock.Setup (mock => mock.Open (FileMode.Open, FileAccess.Read, FileShare.Read)).Throws (new IOException()).Verifiable();
+      fileInfoMock.SetupGet (mock => mock.Parent).Returns (new DirectoryInfoWrapper (new DirectoryInfo (@"C:\")));
+      fileInfoMock.SetupGet (mock => mock.Length).Throws (new AssertionException ("Should never be called"));
 
       zipBuilder.AddFile (new FileInfoWrapper (new FileInfo (_file1.FileName)));
-      zipBuilder.AddFile (fileInfoMock);
+      zipBuilder.AddFile (fileInfoMock.Object);
 
       zipBuilder.Error += ((sender, e) => zipBuilder.FileProcessingRecoveryAction = FileProcessingRecoveryAction.Ignore);
       var zipFileName = Path.GetTempFileName();
@@ -290,6 +303,7 @@ namespace Remotion.IO.Archive.Zip.UnitTests
 
       var expectedFiles = new List<string> { Path.GetFileName (_file1.FileName) };
       CheckUnzippedFiles (zipFileName, expectedFiles);
+      fileInfoMock.Verify();
     }
 
     [Test]
@@ -299,21 +313,25 @@ namespace Remotion.IO.Archive.Zip.UnitTests
       zipBuilder.Progress += ((sender, e) => { });
       zipBuilder.Error += ((sender, e) => zipBuilder.FileProcessingRecoveryAction = FileProcessingRecoveryAction.Retry);
 
-      var fileInfoStub = MockRepository.GenerateStub<IFileInfo>();
+      var fileInfoStub = new Mock<IFileInfo>();
 
       zipBuilder.AddFile (new FileInfoWrapper (new FileInfo (_file1.FileName)));
-      fileInfoStub.Stub (stub => stub.FullName).Return (_file2.FileName);
-      fileInfoStub.Stub (stub => stub.Name).Return (Path.GetFileName (_file2.FileName));
-      fileInfoStub.Stub (stub => stub.Length).Return (_file2.Length);
-      zipBuilder.AddFile (fileInfoStub);
-
-      fileInfoStub.Expect (mock => mock.Open (FileMode.Open, FileAccess.Read, FileShare.Read)).Throw (new IOException()).Repeat.Once();
+      fileInfoStub.SetupGet (stub => stub.FullName).Returns (_file2.FileName);
+      fileInfoStub.SetupGet (stub => stub.Name).Returns (Path.GetFileName (_file2.FileName));
+      fileInfoStub.SetupGet (stub => stub.Length).Returns (_file2.Length);
+      zipBuilder.AddFile (fileInfoStub.Object);
 
       var fileInfo = new FileInfoWrapper (new FileInfo (_file2.FileName));
       var stream = fileInfo.Open (FileMode.Open, FileAccess.Read, FileShare.Read);
-      fileInfoStub.Expect (mock => mock.Open (FileMode.Open, FileAccess.Read, FileShare.Read)).Return (stream);
+      var sequence = new MockSequence();
+      fileInfoStub.InSequence (sequence)
+          .Setup (mock => mock.Open (FileMode.Open, FileAccess.Read, FileShare.Read))
+          .Throws (new IOException());
+      fileInfoStub.InSequence (sequence)
+          .Setup (mock => mock.Open (FileMode.Open, FileAccess.Read, FileShare.Read))
+          .Returns (stream);
 
-      fileInfoStub.Stub (mock => mock.Parent).Return (new DirectoryInfoWrapper (new DirectoryInfo (Path.GetDirectoryName (_file2.FileName))));
+      fileInfoStub.SetupGet (mock => mock.Parent).Returns (new DirectoryInfoWrapper (new DirectoryInfo (Path.GetDirectoryName (_file2.FileName))));
 
       var zipFileName = Path.GetTempFileName();
       using (zipBuilder.Build (zipFileName))
@@ -348,7 +366,7 @@ namespace Remotion.IO.Archive.Zip.UnitTests
       //--file2
       //--file3
       //-Directory2
-      //--Directory3 ü
+      //--Directory3 Ã¼
       //---file4
       //---file5
       //--file6
@@ -375,14 +393,22 @@ namespace Remotion.IO.Archive.Zip.UnitTests
 
       var directory1 = Directory.CreateDirectory (Path.Combine (rootPath, "Directory1"));
       var directory2 = Directory.CreateDirectory (Path.Combine (rootPath, "Directory2"));
-      var directory3 = Directory.CreateDirectory (Path.Combine (directory2.FullName, "Directory3 ü"));
+      var directory3 = Directory.CreateDirectory (Path.Combine (directory2.FullName, "Directory3 Ã¼"));
 
-      File.Move (file1.FileName, Path.Combine (rootPath, Path.GetFileName (file1.FileName)));
-      File.Move (file2.FileName, Path.Combine (directory1.FullName, Path.GetFileName (file2.FileName)));
-      File.Move (file3.FileName, Path.Combine (directory1.FullName, Path.GetFileName (file3.FileName)));
-      File.Move (file4.FileName, Path.Combine (directory3.FullName, Path.GetFileName (file4.FileName)));
-      File.Move (file5.FileName, Path.Combine (directory3.FullName, Path.GetFileName (file5.FileName)));
-      File.Move (file6.FileName, Path.Combine (directory2.FullName, Path.GetFileName (file6.FileName)));
+      var commonRoot = directory1.Parent.Parent;
+      var file1NewLocation = Path.Combine (rootPath, Path.GetFileName (file1.FileName));
+      var file2NewLocation = Path.Combine (directory1.FullName, Path.GetFileName (file2.FileName));
+      var file3NewLocation = Path.Combine (directory1.FullName, Path.GetFileName (file3.FileName));
+      var file4NewLocation = Path.Combine (directory3.FullName, Path.GetFileName (file4.FileName));
+      var file5NewLocation = Path.Combine (directory3.FullName, Path.GetFileName (file5.FileName));
+      var file6NewLocation = Path.Combine (directory2.FullName, Path.GetFileName (file6.FileName));
+
+      File.Move (file1.FileName, file1NewLocation);
+      File.Move (file2.FileName, file2NewLocation);
+      File.Move (file3.FileName, file3NewLocation);
+      File.Move (file4.FileName, file4NewLocation);
+      File.Move (file5.FileName, file5NewLocation);
+      File.Move (file6.FileName, file6NewLocation);
 
       var zipFileName = Path.GetTempFileName();
 
@@ -403,8 +429,19 @@ namespace Remotion.IO.Archive.Zip.UnitTests
                               Path.GetFileName (file6.FileName)
                           };
 
+      var expectedRelativePaths = new List<string>
+                                  {
+                                      file1NewLocation.Substring (commonRoot.FullName.Length + 1).Replace ("\\", "/"),
+                                      file2NewLocation.Substring (commonRoot.FullName.Length + 1).Replace ("\\", "/"),
+                                      file3NewLocation.Substring (commonRoot.FullName.Length + 1).Replace ("\\", "/"),
+                                      file4NewLocation.Substring (commonRoot.FullName.Length + 1).Replace ("\\", "/"),
+                                      file5NewLocation.Substring (commonRoot.FullName.Length + 1).Replace ("\\", "/"),
+                                      file6NewLocation.Substring (commonRoot.FullName.Length + 1).Replace ("\\", "/")
+                                  };
+
       try
       {
+        AssertZipFileEntriesHaveFileNamesTransformed (zipFileName, expectedRelativePaths);
         CheckUnzippedFiles (zipFileName, expectedFiles);
       }
       finally
@@ -414,18 +451,22 @@ namespace Remotion.IO.Archive.Zip.UnitTests
     }
 
     [Test]
-    [ExpectedException (typeof (AbortException))]
     public void BuildThrowsAbortExceptionUponCancel ()
     {
-      var zipBuilder = new ZipFileBuilder ();
+      var zipBuilder = new ZipFileBuilder();
       zipBuilder.Progress += ((sender, e) => { e.Cancel = e.CurrentFileValue > 1000; });
       zipBuilder.AddFile (new FileInfoWrapper (new FileInfo (_file1.FileName)));
 
-      var zipFileName = Path.GetTempFileName ();
+      var zipFileName = Path.GetTempFileName();
 
-      using (zipBuilder.Build (zipFileName))
-      {
-      }
+      Assert.That (
+          () =>
+          {
+            using (zipBuilder.Build (zipFileName))
+            {
+            }
+          },
+          Throws.InstanceOf<AbortException>());
     }
 
     [Test]
@@ -615,12 +656,12 @@ namespace Remotion.IO.Archive.Zip.UnitTests
       var zipBuilder = new ZipFileBuilder (specifiedAdditionFileShare);
       zipBuilder.Progress += ((sender, e) => { });
 
-      var fileInfoMock = MockRepository.GenerateMock<IFileInfo>();
-      fileInfoMock.Stub (mock => mock.FullName).Return (@"C:\fileName");
-      fileInfoMock.Stub (mock => mock.Parent).Return (new DirectoryInfoWrapper (new DirectoryInfo (@"C:\")));
-      fileInfoMock.Expect (mock => mock.Open (FileMode.Open, FileAccess.Read, expectedFileShareWhichIsUsedToOpenTheFile)).Return (new MemoryStream());
+      var fileInfoMock = new Mock<IFileInfo>();
+      fileInfoMock.SetupGet (mock => mock.FullName).Returns (@"C:\fileName");
+      fileInfoMock.SetupGet (mock => mock.Parent).Returns (new DirectoryInfoWrapper (new DirectoryInfo (@"C:\")));
+      fileInfoMock.Setup (mock => mock.Open (FileMode.Open, FileAccess.Read, expectedFileShareWhichIsUsedToOpenTheFile)).Returns (new MemoryStream()).Verifiable();
 
-      zipBuilder.AddFile (fileInfoMock);
+      zipBuilder.AddFile (fileInfoMock.Object);
       var zipFileName = Path.GetTempFileName();
       try
       {
@@ -633,7 +674,7 @@ namespace Remotion.IO.Archive.Zip.UnitTests
         FileUtility.DeleteAndWaitForCompletion (zipFileName);
       }
 
-      fileInfoMock.VerifyAllExpectations();
+      fileInfoMock.Verify();
     }
 
     private void AssertBuildProgress (
@@ -733,6 +774,17 @@ namespace Remotion.IO.Archive.Zip.UnitTests
       foreach (var file in files)
         reducedFile.Add (file, Path.GetFileName (file));
       return reducedFile;
+    }
+
+    private void AssertZipFileEntriesHaveFileNamesTransformed (string zipFileName, List<string> expectedFiles)
+    {
+      using (var zipFile = new ZipFile (zipFileName))
+      {
+        foreach (ZipEntry file in zipFile)
+          expectedFiles.Remove (file.Name);
+      }
+
+      Assert.That (expectedFiles, Is.Empty);
     }
   }
 }

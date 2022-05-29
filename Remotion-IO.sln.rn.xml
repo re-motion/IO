@@ -1,0 +1,8 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<CustomizeVSWindowTitle>
+  <SettingsSet
+    AppendedString=" "
+    PatternIfRunningMode="RM-IO - [gitBranchName] (Running)"
+    PatternIfBreakMode="RM-IO - [gitBranchName] (Debugging)"
+    PatternIfDesignMode="RM-IO - [gitBranchName]" />
+</CustomizeVSWindowTitle>

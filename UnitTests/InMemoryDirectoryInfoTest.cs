@@ -17,8 +17,8 @@
 
 using System;
 using System.IO;
+using Moq;
 using NUnit.Framework;
-using Rhino.Mocks;
 
 namespace Remotion.IO.UnitTests
 {
@@ -36,7 +36,7 @@ namespace Remotion.IO.UnitTests
     public void SetUp ()
     {
       _directoryName = "Parent\\Directory";
-      _parentDirectory = MockRepository.GenerateStub<IDirectoryInfo>();
+      _parentDirectory = new Mock<IDirectoryInfo>().Object;
       _creationTime = new DateTime (2009, 10, 1);
       _lastAccessTime = new DateTime (2009, 10, 2);
       _lastWriteTime = new DateTime (2009, 10, 3);
@@ -112,7 +112,7 @@ namespace Remotion.IO.UnitTests
     [Test]
     public void GetFiles ()
     {
-      var files = new[] { MockRepository.GenerateStub<IFileInfo>(), MockRepository.GenerateStub<IFileInfo>() };
+      var files = new[] { new Mock<IFileInfo>().Object, new Mock<IFileInfo>().Object };
       _inMemoryDirectoryInfo.Files.AddRange (files);
 
       Assert.That (_inMemoryDirectoryInfo.GetFiles(), Is.EquivalentTo (files));
@@ -121,7 +121,7 @@ namespace Remotion.IO.UnitTests
     [Test]
     public void GetDirectories ()
     {
-      var directory = new[] { MockRepository.GenerateStub<IDirectoryInfo> (), MockRepository.GenerateStub<IDirectoryInfo> () };
+      var directory = new[] { new Mock<IDirectoryInfo>().Object, new Mock<IDirectoryInfo>().Object };
       _inMemoryDirectoryInfo.Directories.AddRange (directory);
 
       Assert.That (_inMemoryDirectoryInfo.GetDirectories(), Is.EquivalentTo (directory));
