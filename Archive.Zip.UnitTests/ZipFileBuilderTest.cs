@@ -72,15 +72,11 @@ namespace Remotion.IO.Archive.Zip.UnitTests
 
       File.Copy (_file1.FileName, Path.Combine (directory.FullName, Path.GetFileName (_file1.FileName)), true);
       File.Copy (_file2.FileName, Path.Combine (directory.FullName, Path.GetFileName (_file2.FileName)), true);
-
-      ZipStrings.CodePage = Encoding.ASCII.CodePage;
     }
 
     [TearDown]
     public void TearDown ()
     {
-      ZipStrings.CodePage = 0;
-
       _file1.Dispose();
       _file2.Dispose();
       Directory.Delete (_path, true);
@@ -101,7 +97,6 @@ namespace Remotion.IO.Archive.Zip.UnitTests
       zipBuilder.Progress += ((sender, e) => { });
       zipBuilder.AddFile (new FileInfoWrapper (new FileInfo (_file1.FileName)));
       zipBuilder.AddFile (new FileInfoWrapper (new FileInfo (_file2.FileName)));
-
       var zipFileName = Path.GetTempFileName();
 
       using (zipBuilder.Build (zipFileName))
