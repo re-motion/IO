@@ -22,4 +22,21 @@
     <PropertyGroup>
     </PropertyGroup>
   </Target>
+
+  <Target Name="CleanProjects">
+    <Message Text="Cleaning projects, ConfigurationID=$(ConfigurationID)" Importance="High"/>
+    <Error Text="The property 'ConfigurationID' is not set." Condition="'$(ConfigurationID)' == ''" />
+
+    <MSBuild Projects="@(ReleaseProjectFiles)"
+             Targets="Clean"
+             Properties="Configuration=$(ConfigurationID);"
+             ToolsVersion="%(ReleaseProjectFiles.MSBuildToolsVersion)"/>
+    
+    <MSBuild Projects="@(UnitTestProjectFiles)"
+             Targets="Clean"
+             Properties="Configuration=$(ConfigurationID);"
+             ToolsVersion="%(UnitTestProjectFiles.MSBuildToolsVersion)"/>
+
+    <Message Text="Done cleaning projects, ConfigurationID=$(ConfigurationID)" Importance="High"/>
+  </Target>
 </Project>
