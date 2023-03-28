@@ -135,8 +135,10 @@
   </Target>
   -->
   <Target Name="DebugMSBuild"
-          BeforeTargets="_CheckForInvalidConfigurationAndPlatform"
-          Condition="$([MSBuild]::VersionLessThan($(VisualStudioVersion), '17.0')) and '$(TargetFrameworkIdentifier)' == '.NETCoreApp' and $([MSBuild]::VersionGreaterThanOrEquals($(_TargetFrameworkVersionWithoutV), '6.0'))">
+          BeforeTargets="Clean"
+  >
+          <!--Condition="$([MSBuild]::VersionLessThan($(VisualStudioVersion), '17.0')) and '$(TargetFrameworkIdentifier)' == '.NETCoreApp' and $([MSBuild]::VersionGreaterThanOrEquals($(_TargetFrameworkVersionWithoutV), '6.0'))"-->
+    
     <Message Importance="high" Text="([MSBuild]::VersionLessThan((VisualStudioVersion), '17.0')): $([MSBuild]::VersionLessThan($(VisualStudioVersion), '17.0'))" />
     <Message Importance="high" Text="'(TargetFrameworkIdentifier)' == '.NETCoreApp': '$(TargetFrameworkIdentifier)' == '.NETCoreApp'" />
     <Message Importance="high" Text="([MSBuild]::VersionGreaterThanOrEquals((_TargetFrameworkVersionWithoutV), '6.0')): $([MSBuild]::VersionGreaterThanOrEquals($(_TargetFrameworkVersionWithoutV), '6.0'))" />
