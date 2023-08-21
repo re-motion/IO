@@ -21,7 +21,7 @@
     <RestoreProjectStyle>PackageReference</RestoreProjectStyle>
     <AllowedOutputExtensionsInPackageBuildOutputFolder Condition="'$(IncludeSymbols)' != 'True'">$(AllowedOutputExtensionsInPackageBuildOutputFolder);.pdb</AllowedOutputExtensionsInPackageBuildOutputFolder>
     <DebugType>Portable</DebugType>
-    <DebugType Condition="'$(TargetFramework)' == 'net45'">Full</DebugType>
+    <DebugType Condition="'$(TargetFramework)' == 'net462'">Full</DebugType>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(ProjectType)' == 'Library'">
@@ -29,7 +29,7 @@
     <NoWarn>1591;0419</NoWarn>
     <GenerateDocumentationFile>True</GenerateDocumentationFile>
     <IsPackable>True</IsPackable>
-    <TargetFrameworks>net6.0;net45</TargetFrameworks>
+    <TargetFrameworks>net6.0;net7.0;net8.0;net462</TargetFrameworks>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(ProjectType)' == 'Test'">
@@ -37,7 +37,7 @@
     <NoWarn></NoWarn>
     <GenerateDocumentationFile>False</GenerateDocumentationFile>
     <IsPackable>False</IsPackable>
-    <TargetFrameworks>net6.0;net45</TargetFrameworks>
+    <TargetFrameworks>net6.0;net7.0;net8.0;net462</TargetFrameworks>
   </PropertyGroup>
 
   <ItemGroup>
