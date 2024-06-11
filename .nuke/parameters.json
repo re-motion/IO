@@ -1,4 +1,5 @@
 {
   "$schema": "./build.schema.json",
-  "Solution": "Remotion-IO.sln"
+  "Solution": "Remotion-IO.sln",
+  "BuildType": "Local"
 }

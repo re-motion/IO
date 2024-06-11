@@ -1,0 +1,10 @@
+{
+  "$schema": "./build.schema.json",
+  "Solution": "Remotion-IO.sln",
+  "BuildType": "CI",
+  "Target": [ "CIBuild" ],
+  "TestConfigurations": [ "Debug" ],
+  "TestExecutionRuntimes": [ "Docker_Win_NET48", "Docker_Win_NET8_0", "EnforcedLocalMachine" ],
+  "TestPlatforms": [ "x64" ],
+  "TestTargetRuntimes": [ "NET462", "NET8_0" ]
+}
