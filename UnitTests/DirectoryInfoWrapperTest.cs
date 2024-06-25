@@ -17,6 +17,7 @@
 
 using System;
 using System.IO;
+using System.Linq;
 using NUnit.Framework;
 using Remotion.Development.UnitTesting.IO;
 
@@ -128,8 +129,9 @@ namespace Remotion.IO.UnitTests
 
       var files = _directoryInfoWrapper.GetFiles();
 
-      Assert.That (files[0].Name, Is.EqualTo (Path.GetFileName(_tempFile1.FileName)));
-      Assert.That (files[1].Name, Is.EqualTo (Path.GetFileName(_tempFile2.FileName)));
+      Assert.That (
+          files.Select (e => e.Name),
+          Is.EquivalentTo (new[] { Path.GetFileName (_tempFile1.FileName), Path.GetFileName(_tempFile2.FileName) }));
     }
 
     [Test]
