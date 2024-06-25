@@ -355,7 +355,7 @@ namespace Remotion.IO.UnitTests
       var decoratedStream = new StreamWithTimeoutDecorator (stream);
 
       Assert.That (
-          () => decoratedStream.Write (new byte[10], 22, 33),
+          () => decoratedStream.Write (new byte[10], 0, 10),
           Throws.InstanceOf<TimeoutException>());
     }
 
@@ -425,7 +425,7 @@ namespace Remotion.IO.UnitTests
       var decoratedStream = new StreamWithTimeoutDecorator (stream);
 
       Assert.That (
-          () => decoratedStream.Read (new byte[10], 22, 33),
+          () => decoratedStream.Read (new byte[10], 0, 10),
           Throws.InstanceOf<TimeoutException>());
     }
   }
