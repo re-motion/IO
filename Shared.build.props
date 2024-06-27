@@ -20,8 +20,7 @@
     <AssemblyOriginatorKeyFile>$(MSBuildThisFileDirectory)remotion.snk</AssemblyOriginatorKeyFile>
     <RestoreProjectStyle>PackageReference</RestoreProjectStyle>
     <AllowedOutputExtensionsInPackageBuildOutputFolder Condition="'$(IncludeSymbols)' != 'True'">$(AllowedOutputExtensionsInPackageBuildOutputFolder);.pdb</AllowedOutputExtensionsInPackageBuildOutputFolder>
-    <DebugType>Portable</DebugType>
-    <DebugType Condition="'$(TargetFramework)' == 'net462'">Full</DebugType>
+    <DebugType>embedded</DebugType>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(ProjectType)' == 'Library'">
@@ -37,7 +36,8 @@
     <NoWarn></NoWarn>
     <GenerateDocumentationFile>False</GenerateDocumentationFile>
     <IsPackable>False</IsPackable>
-    <TargetFrameworks>net6.0;net7.0;net8.0;net462</TargetFrameworks>
+    <TargetFrameworks>net6.0;net7.0;net8.0;net462;net472;net48</TargetFrameworks>
+    <IsTestProject>true</IsTestProject>
   </PropertyGroup>
 
   <ItemGroup>
