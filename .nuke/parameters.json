@@ -4,8 +4,10 @@
   "DependDBProjectName": "re-motion Framework (www.re-motion.org)",
   "DependDBRetentionTime": "30",
   "DependDBProjectBranch": "Main",
+  "DependDBProjectImportNotificationMailAddress": "nonexistent@nonexistent.nonexistent",
   "DependDBProjectImportNotificationMailAddressCc": "nonexistent@nonexistent.nonexistent",
   "DependDBTrackedReferences": "Remotion.*",
   "DependDBNugetConfig": "~/nuget.config",
-  "DependDBTargetFramework": "net45"
+  "DependDBTargetFramework": "net45",
+  "VcsUrlTemplate": "example.com"
 }
