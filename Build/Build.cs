@@ -91,7 +91,7 @@ class Build : RemotionBuild, IDependDB, ITest
   {
     supportedTestDimensions.AddOperatingSystemsDimension();
     supportedTestDimensions.AddSupportedDimension<ExecutionRuntimes>(LocalMachine, EnforcedLocalMachine, Docker_Win_NET48, Docker_Win_NET472, Docker_Win_NET462);
-    supportedTestDimensions.AddSupportedDimension<TargetFrameworks>(NET48, NET472, NET462);
+    supportedTestDimensions.AddSupportedDimension<TargetFrameworks>(NET472, NET462);
     supportedTestDimensions.AddSupportedDimension<Configurations>(Debug, Release);
     supportedTestDimensions.AddSupportedDimension<Platforms>(x64, x86);
     supportedTestDimensions.AddSupportedDimension<Databases>(NoDB);
@@ -127,21 +127,19 @@ class Build : RemotionBuild, IDependDB, ITest
         "NormalTestMatrix",
         new TestDimension[,]
         {
-            { Windows, Docker_Win_NET48, NET48, NoDB, Debug, x86 },
-            { Windows, Docker_Win_NET48, NET48, NoDB, Release, x86 },
-            { Windows, Docker_Win_NET48, NET48, NoDB, Debug, x64 },
-            { Windows, Docker_Win_NET48, NET48, NoDB, Release, x64 },
+            { Windows, Docker_Win_NET48, NET462, NoDB, Debug, x86 },
+            { Windows, Docker_Win_NET48, NET462, NoDB, Release, x86 },
+            { Windows, Docker_Win_NET48, NET462, NoDB, Debug, x64 },
+            { Windows, Docker_Win_NET48, NET462, NoDB, Release, x64 },
 
             //  Local-->
-            { Windows, LocalMachine, NET48, NoDB, Debug, x86 },
-            { Windows, LocalMachine, NET48, NoDB, Release, x86 },
-            { Windows, LocalMachine, NET48, NoDB, Debug, x64 },
-            { Windows, LocalMachine, NET48, NoDB, Release, x64 },
+            { Windows, LocalMachine, NET462, NoDB, Debug, x86 },
+            { Windows, LocalMachine, NET462, NoDB, Release, x86 },
+            { Windows, LocalMachine, NET462, NoDB, Debug, x64 },
+            { Windows, LocalMachine, NET462, NoDB, Release, x64 },
             
             // Exercise compatibility between installed .NET version, target framework and SQL Server
-            { Windows, Docker_Win_NET48, NET472, NoDB, Release, x64 },
             { Windows, Docker_Win_NET48, NET462, NoDB, Release, x64 },
-            { Windows, Docker_Win_NET472, NET472, NoDB, Release, x64 },
             { Windows, Docker_Win_NET472, NET462, NoDB, Release, x64 },
             { Windows, Docker_Win_NET462, NET462, NoDB, Release, x64 },
         },
